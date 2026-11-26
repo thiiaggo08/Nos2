@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-page="espero">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nós 2">
+<meta name="theme-color" content="#5a0b1c">
+<meta name="robots" content="noindex,nofollow">
+<title>Nós 2</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script src="js/core.js"></script>
+<style>
+/* VOICE: íntimo, divertido, discreto — um jogo a dois, não um painel
+   COLOUR/TYPE: vinho profundo dominante, rosa-blush de apoio, coral de acento; serifas do sistema */
+:root{color-scheme:light dark;
+--bg:light-dark(#f7e4e6,#1d0a10);--card:light-dark(#fff,#2b111a);--ink:light-dark(#2a0a13,#f7e4e6);
+--mute:light-dark(#7b5560,#c79aa6);--wine:#5a0b1c;--wine2:light-dark(#7d1430,#a31d40);--acc:#ff5a4e;--line:light-dark(#ecc9ce,#43202b);
+--l1:#e6a23c;--l2:#e07a5f;--l3:#d1495b;--l4:#a4133c;--l5:#3d0613}
+*{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow-x:clip;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+header{background:var(--wine);color:#fde9ec;padding:calc(14px + env(safe-area-inset-top)) 18px 20px}
+.hbar{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hbar a,.hbar button{color:#fde9ec;background:none;border:0;font:600 15px -apple-system,system-ui,sans-serif;min-height:44px;padding:0;text-decoration:none;display:inline-flex;align-items:center}
+h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;line-height:1.05;margin:0}
+h1{font-size:34px}h2{font-size:26px;margin:4px 0 12px}
+h3{font-size:17px;margin:16px 0 6px}
+.clock{margin-top:14px;font-variant-numeric:tabular-nums}
+.clock b{display:block;font-size:clamp(30px,9vw,48px);font-family:Georgia,serif;font-weight:400;line-height:1}
+.clock small{opacity:.8;font-size:14px}
+main{max-width:640px;margin:0 auto;padding:18px 16px}
+section{display:none}section.on{display:block}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:14px;color:var(--mute);margin:10px 0 4px}
+input,select,textarea{width:100%;font:16px -apple-system,system-ui,sans-serif;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
+textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 120px}
+button,.btn{font:600 15px -apple-system,system-ui,sans-serif;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button.pri,.btn.pri{background:var(--wine2);border-color:var(--wine2);color:#fff}
+button.sel{background:var(--wine2);color:#fff;border-color:var(--wine2)}
+button:disabled{opacity:.4}
+button:focus-visible,input:focus-visible,select:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.full{width:100%;margin-top:8px}
+.hint{font-size:14px;color:var(--mute);margin:8px 0 0}
+.msg{font-size:14px;color:var(--acc);min-height:20px;margin-top:8px}
+.mcard{border-radius:16px;overflow:hidden;margin-bottom:14px;background:var(--card);border:1px solid var(--line)}
+.mhead{color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px;gap:8px}
+.mbody{padding:14px}
+.mbody p{margin:0 0 8px}.win{font-size:14px;color:var(--mute)}
+.when{font-size:14px;padding:8px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.when b{font-variant-numeric:tabular-nums}
+.seal{display:flex;align-items:center;justify-content:center;min-height:96px;font-family:Georgia,serif;font-size:20px;color:var(--mute);cursor:pointer;width:100%;border:0;border-radius:0;background:repeating-linear-gradient(45deg,transparent 0 10px,color-mix(in srgb,var(--line) 60%,transparent) 10px 20px)}
+.st{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.st button{flex:1 1 90px;font-size:14px;padding:8px}
+.step{display:flex;align-items:center;gap:10px}.step b{min-width:2ch;text-align:center;font-size:20px}
+.step button{width:44px;padding:0}
+.score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;gap:8px}
+.score b{font-family:Georgia,serif;font-size:46px;font-weight:400;display:block;line-height:1}
+.score span{font-size:14px;color:var(--mute)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--wine);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{background:none;border:0;border-radius:0;color:#f3c9d0;font-size:12px;flex-direction:column;gap:2px;min-height:60px;padding:6px 2px}
+nav button.on{color:#fff;box-shadow:inset 0 3px 0 var(--acc)}
+nav svg{width:22px;height:22px}
+.rules ol,.rules ul{padding-left:20px;margin:0}.rules li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.q{padding:10px 12px;border-left:4px solid var(--acc);background:var(--bg);border-radius:6px;margin-bottom:8px}
+.lv{display:inline-block;padding:2px 8px;border-radius:99px;color:#fff;font-size:12px;font-weight:700}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:24px;letter-spacing:1px;text-align:center;padding:12px;border:1px dashed var(--wine2);border-radius:12px;margin:8px 0;word-break:break-all}
+.conf{font-family:ui-monospace,Menlo,monospace;font-size:20px;font-weight:700;color:var(--wine2)}
+.bingo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}
+.bingo button{min-height:96px;font-size:13px;font-weight:600;line-height:1.25;padding:8px 6px;border-radius:10px;align-items:center}
+.bingo button.on{background:var(--wine2);color:#fff;border-color:var(--wine2)}
+.bingo .free{display:flex;align-items:center;justify-content:center;border-radius:10px;background:var(--wine);color:#fde9ec;font-family:Georgia,serif;font-size:15px;text-align:center;min-height:96px;padding:6px}
+.timer{display:flex;align-items:center;gap:8px;margin:10px 0 4px;flex-wrap:wrap}.timer b{font-family:ui-monospace,Menlo,monospace;font-size:26px;min-width:5ch}
+.steps{display:flex;gap:4px;margin:0 0 12px}.steps i{flex:1;height:4px;border-radius:2px;background:var(--line)}.steps i.d{background:var(--wine2)}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--line);color:var(--mute)}
+@media (prefers-reduced-motion:no-preference){.mbody{animation:in .25s ease}@keyframes in{from{opacity:0;transform:translateY(4px)}}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar"><a href="index.html">‹ Nós 2</a><button id="lockBtn">Trancar</button></div>
+  <h1>Espero Você</h1><div style="opacity:.85;font-size:15px;margin-top:4px">missões secretas para casais</div>
+  <div class="clock" id="clock"></div>
+</header>
+<main>
+  <section id="t-partida"></section>
+  <section id="t-cartas"></section>
+  <section id="t-revelar"></section>
+  <section id="t-ranking"></section>
+  <section id="t-regras" class="rules"></section>
+</main>
+<nav id="nav"></nav>
+<script src="js/espero-data.js"></script>
+<script>
+{
+const {store,settings,esc,hash,rng,seededShuffle,randInt,copyText,encrypt,decrypt,lock}=Nos2;
+const CARDS=window.EV_CARDS, WORDS=window.EV_WORDS, BINGO=window.EV_BINGO, FECHO=window.EV_FECHO;
+const LV=["","Carinho","Cumplicidade","Provocação","Sedução","Espero Você"];
+/* Ponte com o Nós Dois: carta -> itens do catálogo (basta um com match). "*" = qualquer match da Interseção. */
+const BRIDGE={60:["ol3"],64:["lug6"],65:"*",66:["ol2"],68:["br1","br2","br4"],70:["pd3"]};
+/* Cartas com cronômetro (segundos) */
+const TIMED={27:300,51:300,57:600,78:300,87:120,92:120};
+const PRIZES=[["Vitória por 1 a 3 pontos","café na cama, escolher o filme da semana, uma tarefa de casa, uma playlist."],["Por 4 a 7 pontos","massagem de 20 minutos, uma manhã livre, jantar preparado pelo perdedor, um banho preparado."],["Por 8 ou mais","encontro planejado pelo perdedor, um pedido íntimo realizado, um “vale-sim”, uma noite fora."],["Empate","escolham juntos um prêmio da faixa do meio e façam um para o outro."]];
+const LINES=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const $=id=>document.getElementById(id);
+const DEF=()=>({tab:"partida",partida:null,history:[],used:{cards:[],bingo:[]},favs:[],proxima:""});
+let S=Object.assign(DEF(),store.get("espero",{}));
+const save=()=>store.set("espero",S);
+const cfg=()=>settings.get();
+const me=()=>cfg().me;
+const name=p=>settings.name(p);
+let shown={}, timers={};
+
+/* ---------- código da partida ---------- */
+const EPOCH=new Date(2020,0,1);
+function dayStart(n){ return new Date(2020,0,1+n).getTime(); }
+function makeCode(mode,dur,startMs,seed){
+  const t=mode==="R"?Math.round(startMs/60000).toString(36):Math.round((new Date(startMs).setHours(0,0,0,0)-EPOCH.getTime())/864e5).toString(36);
+  return `${mode}${dur}-${t.toUpperCase()}-${seed}`;
+}
+function parseCode(c){
+  c=String(c||"").trim().toUpperCase().replace(/\s+/g,"");
+  const m=c.match(/^([RS])(\d{1,2})-([0-9A-Z]+)-(\d{4})$/); if(!m) return null;
+  const mode=m[1], dur=+m[2], seed=m[4]; let start;
+  if(mode==="R"){ if(dur!==24&&dur!==48) return null; start=parseInt(m[3],36)*60000; }
+  else { if(dur<3||dur>7) return null; start=dayStart(parseInt(m[3],36)); }
+  if(!isFinite(start)) return null;
+  return {code:c,mode,dur,start,seed};
+}
+
+/* ---------- matches do Nós Dois (ponte) ---------- */
+function ndMatches(){
+  const nd=store.get("nd",null); if(!nd||!nd.par||!nd.par.a) return new Set();
+  const out=new Set();
+  Object.entries(nd.resp||{}).forEach(([id,m])=>{
+    const p=nd.par.a[id]; if(!m||m.n<1||!p||/^c/.test(id)) return;
+    const a=m.r==null?2:m.r, b=p[1]==null?2:p[1];
+    if(a===2||b===2||a!==b) out.add(id);
+  });
+  return out;
+}
+function bridgeAllowed(){
+  const ms=ndMatches(), ok=[];
+  Object.entries(BRIDGE).forEach(([n,ids])=>{ if(ids==="*"?ms.size>0:ids.some(i=>ms.has(i))) ok.push(+n); });
+  return ok;
+}
+
+/* ---------- sorteio sincronizado ---------- */
+const lvl=i=>CARDS[i][0];
+function deal(pc){
+  const s=cfg(), base=pc.code+"|"+s.pass, bridge=bridgeAllowed();
+  const excluded=new Set(Object.keys(BRIDGE).map(Number).filter(n=>!bridge.includes(n)).map(n=>n-1));
+  const nHigh=pc.mode==="R"?1:Math.max(1,Math.round(pc.dur*2/7)), nLow=pc.mode==="R"?3:pc.dur-nHigh;
+  const used=new Set(S.used.cards);
+  let reset=false;
+  const pool=(f)=>{ let a=[...CARDS.keys()].filter(i=>f(i)&&!excluded.has(i)&&!used.has(i)); return a; };
+  let low=pool(i=>lvl(i)<5), high=pool(i=>lvl(i)===5);
+  if(low.length<2*(nLow+1)){ low=[...CARDS.keys()].filter(i=>lvl(i)<5&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>lvl(i)===5); }
+  if(high.length<2*(nHigh+1)){ high=[...CARDS.keys()].filter(i=>lvl(i)===5&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>lvl(i)<5); }
+  const confBase=base+"|"+[...S.used.cards].sort((a,b)=>a-b).join(",")+"|"+bridge.join(",")+"|"+[...S.used.bingo].sort((a,b)=>a-b).join(",");
+  const lo=seededShuffle(low,"lo:"+base), hi=seededShuffle(high,"hi:"+base);
+  const hands={}, spares={};
+  ["A","B"].forEach((p,k)=>{
+    const L=lo.slice(k*nLow,(k+1)*nLow), H=hi.slice(k*nHigh,(k+1)*nHigh);
+    spares[p]={lo:lo[2*nLow+k],hi:hi[2*nHigh+k]};
+    if(pc.mode==="R") hands[p]=[...L,...H];
+    else { const days=seededShuffle([...Array(pc.dur).keys()],"pos:"+base+p), hd=new Set(days.slice(0,nHigh)); let li=0,hi2=0; hands[p]=[...Array(pc.dur).keys()].map(d=>hd.has(d)?H[hi2++]:L[li++]); }
+  });
+  let bingo=null;
+  if(pc.mode==="S"){
+    let avail=[...BINGO.keys()].filter(i=>!S.used.bingo.includes(i));
+    if(avail.length<8){ avail=[...BINGO.keys()]; S.used.bingo=[]; }
+    bingo=seededShuffle(avail,"bingo:"+base).slice(0,8);
+  }
+  const conf=(hash(confBase).toString(36).toUpperCase()+"0000").slice(0,4);
+  const added=[...hands.A,...hands.B];
+  S.used.cards=[...new Set([...S.used.cards,...added])];
+  if(bingo) S.used.bingo=[...new Set([...S.used.bingo,...bingo])];
+  return Object.assign({},pc,{hands,spares,bingo,bridge,conf,reset,added,addedBingo:bingo||[],
+    my:{st:[],at:[],veto:-1,wrong:0},marks:Array(9).fill(false).map((v,i)=>i===4),reveal:null,done:false,joined:Date.now()});
+}
+function handOf(p,veto){ const P=S.partida,h=P.hands[p].slice(); if(veto>=0&&veto<h.length) h[veto]=lvl(h[veto])===5?P.spares[p].hi:P.spares[p].lo; return h; }
+function windowFor(p,d,card,vetoed){
+  const P=S.partida, r=rng(hash("w:"+P.code+"|"+cfg().pass+p+d+(vetoed?"v":""))), l=lvl(card);
+  let h,len; if(l<=2){ h=6+Math.floor(r()*13); len=3; } else if(l<=4){ h=17+Math.floor(r()*4); len=3; } else { h=21+Math.floor(r()*2); len=2; }
+  const st=new Date(P.start); const ws=new Date(st.getFullYear(),st.getMonth(),st.getDate()+d,h).getTime();
+  return [ws,ws+len*3600000];
+}
+function windowsOf(p,veto){ return handOf(p,veto).map((c,d)=>windowFor(p,d,c,d===veto)); }
+function refreshMine(){ const P=S.partida; if(!P||P.mode!=="S"){ if(P) P.mine=null; return; } const h=handOf(me(),P.my.veto), w=windowsOf(me(),P.my.veto); P.mine=h.map((c,d)=>({ws:w[d][0],we:w[d][1]})); }
+
+const endT=()=>{ const P=S.partida; if(!P) return 0; return P.mode==="R"?P.start+P.dur*3600000:new Date(new Date(P.start).setDate(new Date(P.start).getDate()+P.dur)).getTime(); };
+const ended=()=>S.partida&&(Date.now()>=endT()||(S.partida.reveal&&S.partida.reveal.forced));
+const started=()=>S.partida&&Date.now()>=S.partida.start;
+const fmt=ms=>{ms=Math.max(0,ms);const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);return `${d?d+"d ":""}${h}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`};
+const hm=ms=>new Date(ms).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+const dmy=ms=>new Date(ms).toLocaleDateString("pt-BR",{weekday:"short",day:"numeric",month:"numeric"});
+const dtl=ms=>new Date(ms).toLocaleString("pt-BR",{weekday:"short",day:"numeric",month:"numeric",hour:"2-digit",minute:"2-digit"});
+
+function clock(){
+  const c=$("clock"),P=S.partida;
+  if(!P){c.innerHTML="<small>Crie ou entre numa partida para começar</small>";return}
+  const now=Date.now(),lab=P.mode==="R"?"Partida rápida":"Semana";
+  if(P.done) c.innerHTML=`<small>${lab} ${esc(P.code)}</small><b>Partida encerrada</b>`;
+  else if(now<P.start)c.innerHTML=`<small>${lab} ${esc(P.code)} começa em</small><b>${fmt(P.start-now)}</b>`;
+  else if(!ended())c.innerHTML=`<small>${lab} ${esc(P.code)} · tempo restante</small><b>${fmt(endT()-now)}</b>`;
+  else c.innerHTML=`<small>${lab} ${esc(P.code)}</small><b>Hora da revelação</b>`;
+}
+function confirm2(btn,fn){if(btn.dataset.arm){fn();return}btn.dataset.arm=1;const t=btn.textContent;btn.textContent="Toque de novo para confirmar";setTimeout(()=>{btn.textContent=t;delete btn.dataset.arm},3000)}
+const word=p=>WORDS[hash("w:"+S.partida.code+"|"+cfg().pass+p)%WORDS.length];
+
+function cardHTML(idx,open,p,extra){const[l,t,w]=CARDS[idx],n=idx+1;
+  return `<div class="mcard"><div class="mhead" style="background:var(--l${l})"><span>${l===5?"Carta Espero Você · "+String(n).padStart(2,"0"):"Missão "+String(n).padStart(2,"0")+" · "+LV[l]}</span><span>${l} ${l>1?"pontos":"ponto"}</span></div>${extra||""}
+  ${open?`<div class="mbody"><p>${esc(t)}</p>${n===17&&p?`<p><b>Sua palavra:</b> ${esc(word(p))}</p>`:""}<p class="win"><b>Para vencer:</b> ${esc(w)}</p>${TIMED[n]&&p?timerHTML(n):""}</div>`:""}`}
+function timerHTML(n){ const t=timers[n]; const left=t?Math.max(0,t.left-(t.run?(Date.now()-t.t0)/1000:0)):TIMED[n];
+  return `<div class="timer"><b id="tm${n}">${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,"0")}</b><button data-tm="${n}">${t&&t.run?"Pausar":"Iniciar cronômetro"}</button><button data-tr="${n}">Zerar</button></div>`; }
+function tickTimers(){ Object.entries(timers).forEach(([n,t])=>{ if(!t.run) return; const left=Math.max(0,t.left-(Date.now()-t.t0)/1000); const e=$("tm"+n); if(e) e.textContent=`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,"0")}`; if(left<=0){ t.run=false; t.left=0; try{navigator.vibrate&&navigator.vibrate(400)}catch(e){} if(e) e.textContent="Tempo!"; } }); }
+function bindTimers(root){
+  root.querySelectorAll("[data-tm]").forEach(b=>b.onclick=()=>{ const n=b.dataset.tm; let t=timers[n]; if(!t) t=timers[n]={left:TIMED[n],run:false,t0:0};
+    if(t.run){ t.left=Math.max(0,t.left-(Date.now()-t.t0)/1000); t.run=false; } else { if(t.left<=0) t.left=TIMED[n]; t.t0=Date.now(); t.run=true; } renderTab(); });
+  root.querySelectorAll("[data-tr]").forEach(b=>b.onclick=()=>{ delete timers[b.dataset.tr]; renderTab(); });
+}
+
+/* ---------- aba Partida ---------- */
+let newForm={mode:"R",dur:24,start:"",day:""};
+function pad(n){return String(n).padStart(2,"0")}
+function localDT(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`}
+function localD(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function rPartida(){
+  const el=$("t-partida"), s=cfg();
+  if(!settings.ready()){ el.innerHTML=`<h2>Partida</h2><div class="box">Antes de jogar, defina em <a href="index.html#cfg">Configurações</a> se este celular é o Jogador A ou B e a senha do casal.</div>`; return; }
+  const P=S.partida;
+  if(P){
+    const lab=P.mode==="R"?`Partida rápida · ${P.dur} horas`:`Semana · ${P.dur} dias`;
+    el.innerHTML=`<h2>Partida</h2><div class="box"><div class="tag">${lab}</div>
+      <label>Código da partida</label><div class="code">${esc(P.code)}</div>
+      <div class="row"><button id="cpCode">Copiar código</button></div>
+      <p class="hint">Início: <b>${dtl(P.start)}</b> · Fim: <b>${dtl(endT())}</b></p>
+      <p style="margin:12px 0 0">Conferência: <span class="conf">${esc(P.conf)}</span></p>
+      <p class="hint">Os dois celulares devem mostrar a mesma conferência. Se for diferente, confiram a senha do casal, troquem de novo os códigos do Nós Dois ou importem o último código do placar (aba Ranking) e entrem de novo na partida.</p>
+      ${P.reset?`<p class="hint">O baralho tinha acabado e foi embaralhado de novo.</p>`:""}
+      <div class="msg" id="pmsg"></div></div>
+      <div class="box"><p style="margin:0">Neste celular: <b>${esc(name(me()))}</b> (Jogador ${me()}). Par: <b>${esc(name(settings.other()))}</b>.</p></div>
+      <button id="cancel" class="full">${P.done?"Fechar esta partida":"Cancelar partida"}</button>
+      <p class="hint">${P.done?"Libera para criar uma nova partida.":"Cancelem nos dois celulares. As cartas sorteadas voltam para o baralho."}</p>`;
+    $("cpCode").onclick=async()=>{ $("pmsg").textContent=(await copyText(P.code))?"Código copiado.":"Não foi possível copiar."; };
+    $("cancel").onclick=e=>confirm2(e.target,()=>{ if(!P.done){ S.used.cards=S.used.cards.filter(i=>!P.added.includes(i)); S.used.bingo=S.used.bingo.filter(i=>!(P.addedBingo||[]).includes(i)); } S.partida=null; shown={}; timers={}; save(); renderAll(); });
+    return;
+  }
+  const f=newForm; if(!f.start) f.start=localDT(new Date()); if(!f.day){ const t=new Date(); t.setDate(t.getDate()+1); f.day=localD(t); }
+  el.innerHTML=`<h2>Nova partida</h2>
+  <div class="box"><label>Modo</label><div class="row"><button id="mR" class="${f.mode==="R"?"sel":""}">Partida rápida</button><button id="mS" class="${f.mode==="S"?"sel":""}">Semana</button></div>
+  ${f.mode==="R"?`<p class="hint">4 cartas para cada um: 3 dos níveis 1 a 4 e 1 Carta Espero Você.</p>
+   <label for="dur">Duração</label><select id="dur"><option value="24"${f.dur==24?" selected":""}>24 horas</option><option value="48"${f.dur==48?" selected":""}>48 horas</option></select>
+   <label for="ini">Início</label><div class="row"><input id="ini" type="datetime-local" value="${esc(f.start)}"><button id="now">Agora</button></div>`
+  :`<p class="hint">Uma missão por dia para cada um, com janela de horário, e o Bingo do casal. Comecem quando os dois puderem.</p>
+   <label for="dur">Duração</label><select id="dur">${[3,4,5,6,7].map(d=>`<option value="${d}"${f.dur==d?" selected":""}>${d} dias</option>`).join("")}</select>
+   <label for="ini">Primeiro dia</label><input id="ini" type="date" value="${esc(f.day)}">`}
+  <button id="create" class="pri full">Criar partida</button></div>
+  <div class="box"><label for="jc">Ou entre com o código que seu par criou</label><input id="jc" autocapitalize="characters" autocomplete="off" placeholder="ex.: R24-K3P9QX-4827"><button id="join" class="full">Entrar na partida</button><div class="msg" id="pmsg"></div></div>`;
+  $("mR").onclick=()=>{f.mode="R";f.dur=24;rPartida()}; $("mS").onclick=()=>{f.mode="S";f.dur=7;rPartida()};
+  $("dur").onchange=e=>{f.dur=+e.target.value};
+  $("ini").onchange=e=>{ if(f.mode==="R") f.start=e.target.value; else f.day=e.target.value; };
+  if($("now")) $("now").onclick=()=>{ f.start=localDT(new Date()); rPartida(); };
+  $("create").onclick=()=>{ let st; if(f.mode==="R"){ st=new Date(f.start).getTime(); } else { const [y,m,d]=f.day.split("-").map(Number); st=new Date(y,m-1,d).getTime(); }
+    if(!isFinite(st)){ $("pmsg").textContent="Escolha o início."; return; }
+    join(makeCode(f.mode,f.dur,st,String(1000+randInt(9000)))); };
+  $("join").onclick=()=>join($("jc").value);
+}
+function join(code){
+  const pc=parseCode(code); if(!pc){ $("pmsg").textContent="Código inválido. Ele tem o formato R24-XXXXXX-1234 ou S7-XXX-1234."; return; }
+  S.partida=deal(pc); refreshMine(); shown={}; timers={}; save(); renderAll();
+}
+
+/* ---------- aba Cartas ---------- */
+function rCartas(){
+  const el=$("t-cartas"),P=S.partida;
+  if(!P){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">Na aba Partida, crie uma partida ou entre com o código do seu par.</div>`;return}
+  if(!started()){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">As cartas aparecem quando a partida começar.</div>`;return}
+  const p=me(),my=P.my,h=handOf(p,my.veto),now=Date.now(),isS=P.mode==="S";
+  const win=isS?windowsOf(p,my.veto):null;
+  const lab={ok:"Cumpri",pego:"Fui descoberto(a)",no:"Não fiz"};
+  let html=`<h2>Minhas cartas · ${esc(name(p))}</h2><p class="hint" style="margin:-6px 0 12px">${isS?"Sua agenda é só sua: as janelas do seu par ficam escondidas até a revelação. ":""}Toque numa carta lacrada para ver. Ela fecha de novo ao sair da aba.</p>`;
+  h.forEach((idx,i)=>{
+    let extra="",canOpen=true,canOk=!ended();
+    if(isS){ const [ws,we]=win[i], dayS=new Date(ws).setHours(0,0,0,0);
+      canOpen=now>=dayS;
+      const state=my.st[i]==="ok"?"cumprida":now<ws?"abre às "+hm(ws):now<we?"<b style='color:var(--acc)'>janela aberta agora</b>":my.st[i]?"":"janela encerrada";
+      extra=`<div class="when"><span>Dia ${i+1} · ${dmy(ws)}</span><span>Janela <b>${hm(ws)}–${hm(we)}</b> · ${state}</span></div>`;
+      canOk=canOk&&now>=ws&&now<we+30*60000; }
+    const open=shown[i]&&canOpen;
+    html+=cardHTML(idx,open,p,extra);
+    if(open){ html+=`<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-i="${i}" data-s="${k}" class="${my.st[i]===k?"sel":""}" ${k==="ok"&&!canOk&&my.st[i]!=="ok"?"disabled":""}>${lab[k]}</button>`).join("")}</div>
+      ${isS&&!canOk&&my.st[i]!=="ok"&&now<win[i][0]?`<p class="hint">“Cumpri” libera quando a janela abrir.</p>`:""}
+      ${my.veto<0&&!ended()?`<button data-v="${i}" style="width:100%;margin-top:8px">Usar meu veto nesta carta</button>`:""}</div>`; }
+    else html+=`<button class="seal" data-o="${i}" ${canOpen?"":"disabled"}>${lvl(idx)===5?"Carta Espero Você":"Missão"} lacrada · ${canOpen?"toque para abrir":"abre no dia"}</button>`;
+    html+="</div>";
+  });
+  html+=`<div class="box"><label>Acusei e errei (cada erro tira 1 ponto)</label><div class="step"><button id="wm" aria-label="Menos">−</button><b>${my.wrong}</b><button id="wp" aria-label="Mais">+</button></div>
+  <p class="hint">${my.veto>=0?"Veto já usado nesta partida.":"Você tem 1 veto: troca uma carta sem explicar. A nova vem da mesma faixa."} Anote aqui para lembrar na revelação.</p></div>`;
+  if(isS) html+=bingoHTML(P.marks,true);
+  el.innerHTML=html;
+  el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{shown[+b.dataset.o]=true;rCartas()});
+  el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;my.st[i]=my.st[i]===b.dataset.s?"":b.dataset.s;my.at[i]=Date.now();save();rCartas()});
+  el.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>confirm2(b,()=>{const i=+b.dataset.v;my.veto=i;my.st[i]="";delete timers[h[i]+1];refreshMine();save();rCartas()}));
+  $("wm").onclick=()=>{my.wrong=Math.max(0,my.wrong-1);save();rCartas()};$("wp").onclick=()=>{my.wrong++;save();rCartas()};
+  bindBingo(el,P.marks,rCartas); bindTimers(el);
+}
+function bingoLines(m){ return LINES.filter(l=>l.every(i=>m[i])).length; }
+function bingoHTML(m,editable){ const P=S.partida; let k=0;
+  return `<div class="box"><h3 style="margin-top:0">Bingo do casal</h3><p class="hint" style="margin-top:0">Qualquer um marca quando a situação acontece; toque de novo para desmarcar. Cada linha completa vale +1 para cada um. Cartela cheia até o fim da Semana: prêmio do casal.</p>
+  <div class="bingo">${[...Array(9).keys()].map(i=>{ if(i===4) return `<div class="free">Centro livre</div>`; const s=P.bingo[k++]; return `<button data-b="${i}" class="${m[i]?"on":""}" ${editable?"":"disabled"}>${esc(BINGO[s])}</button>`; }).join("")}</div>
+  <p class="hint">${bingoLines(m)} ${bingoLines(m)===1?"linha completa":"linhas completas"}${m.every(Boolean)?" · cartela cheia!":""}</p>
+  ${editable&&S.tab==="cartas"?`<p class="hint">As marcações ficam neste celular. Na revelação, conferem juntos a cartela final.</p>`:""}</div>`; }
+function bindBingo(root,m,re){ root.querySelectorAll("[data-b]").forEach(b=>b.onclick=()=>{const i=+b.dataset.b;m[i]=!m[i];save();re()}); }
+
+/* ---------- aba Revelar ---------- */
+const STEPS=["Revelação","Placar","Perguntas","Rodada final","Favoritas","Próxima"];
+function blankReveal(){ const P=S.partida,p=me(),r={A:{veto:-1,res:[]},B:{veto:-1,res:[]},wrongA:0,wrongB:0,forced:false,step:0,marks:P.marks.slice(),fav:{A:null,B:null},favTurn:"A",proxima:"",init:true};
+  r[p].veto=P.my.veto; r[p].res=P.my.st.slice(); r["wrong"+p]=P.my.wrong; return r; }
+function score(){ const P=S.partida,r=P.reveal,hA=handOf("A",r.A.veto),hB=handOf("B",r.B.veto);let a=0,b=0;
+  r.A.res.forEach((x,i)=>{if(x==="ok")a+=lvl(hA[i]);if(x==="pego")b++});
+  r.B.res.forEach((x,i)=>{if(x==="ok")b+=lvl(hB[i]);if(x==="pego")a++});
+  const lines=P.mode==="S"?bingoLines(r.marks):0, full=P.mode==="S"&&r.marks.every(Boolean);
+  return{a:a-r.wrongA+lines,b:b-r.wrongB+lines,hA,hB,lines,full}}
+function prizeText(sc){ const d=Math.abs(sc.a-sc.b); const t=d===0?PRIZES[3]:d<=3?PRIZES[0]:d<=7?PRIZES[1]:PRIZES[2]; return t; }
+function rRevelar(){
+  const el=$("t-revelar"),P=S.partida;
+  if(!P){el.innerHTML=`<h2>Revelação</h2><div class="box">Crie ou entre numa partida primeiro.</div>`;return}
+  if(P.done){ el.innerHTML=`<h2>Revelação</h2><div class="box">Esta partida já foi encerrada e está no ranking.</div>`+(P.placarCode?placarBox(P.placarCode):""); bindPlacar(el,P.placarCode); return; }
+  if(!ended()){el.innerHTML=`<h2>Revelação</h2><div class="box">As missões continuam secretas até o tempo acabar. Façam a revelação juntos, em um celular só.<br><br><button id="force">Encerrar a partida agora</button></div>`;
+    $("force").onclick=e=>confirm2(e.target,()=>{P.reveal=P.reveal||blankReveal();P.reveal.forced=true;save();renderAll()});return}
+  if(!P.reveal||!P.reveal.init) P.reveal=Object.assign(blankReveal(),P.reveal?{forced:P.reveal.forced}:{});
+  const r=P.reveal, st=r.step;
+  let h=`<h2>Fechamento</h2><div class="steps">${STEPS.map((_,i)=>`<i class="${i<=st?"d":""}"></i>`).join("")}</div><p class="hint" style="margin:-4px 0 12px">${st+1}. ${STEPS[st]}</p>`;
+  if(st===0) h+=revealStep();
+  else if(st===1) h+=placarStep();
+  else if(st===2) h+=`<div class="box"><h3 style="margin-top:0">Duas perguntas</h3><p class="hint" style="margin-top:0">Cada um responde as duas, sem ser interrompido.</p>${FECHO.map(q=>`<div class="q">${esc(q)}</div>`).join("")}<a class="btn full" href="conversa.html">Abrir uma Conversa</a></div>`;
+  else if(st===3) h+=`<div class="box"><h3 style="margin-top:0">Rodada final</h3><p>Que tal encerrar com uma massagem guiada do Nós Dois?</p><a class="btn pri full" href="nosdois.html#massagem">Abrir a Massagem guiada</a><p class="hint">Os rituais do casal entram numa próxima atualização.</p></div>`;
+  else if(st===4) h+=favStep();
+  else h+=nextStep();
+  h+=`<div class="row" style="margin-top:4px">${st>0?`<button id="prev">Voltar</button>`:""}${st<5?`<button id="next" class="pri" ${st===4&&!(r.fav.A&&r.fav.B)?"disabled":""}>Continuar</button>`:""}</div>`;
+  el.innerHTML=h;
+  if($("prev")) $("prev").onclick=()=>{r.step--;save();rRevelar();scrollTo(0,0)};
+  if($("next")) $("next").onclick=()=>{r.step++;save();rRevelar();scrollTo(0,0)};
+  bindReveal(el);
+}
+function revealStep(){ const P=S.partida,r=P.reveal,sc=score(),isS=P.mode==="S",lab={ok:isS?"Cumprida na janela":"Cumprida",pego:"Descoberta",no:"Não fez"};
+  const block=p=>{const h=p==="A"?sc.hA:sc.hB, w=isS?windowsOf(p,r[p].veto):null;return `<div class="box"><h2 style="font-size:22px">${esc(name(p))}</h2>
+    <label for="v${p}">Veto usado</label><select id="v${p}"><option value="-1">Não usou</option>${h.map((_,i)=>`<option value="${i}"${r[p].veto===i?" selected":""}>Na carta ${i+1}</option>`).join("")}</select>
+    ${h.map((idx,i)=>`<div style="margin-top:12px">${cardHTML(idx,true,p,isS?`<div class="when"><span>Dia ${i+1} · ${dmy(w[i][0])}</span><span>Janela <b>${hm(w[i][0])}–${hm(w[i][1])}</b></span></div>`:"")}<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-p="${p}" data-i="${i}" data-s="${k}" class="${r[p].res[i]===k?"sel":""}">${lab[k]}</button>`).join("")}</div></div></div></div>`).join("")}
+    <label>Acusações erradas de ${esc(name(p))}</label><div class="step"><button data-w="${p}" data-d="-1">−</button><b>${r["wrong"+p]}</b><button data-w="${p}" data-d="1">+</button></div></div>`};
+  return `<p class="hint" style="margin:0 0 10px">Num celular só, revelem as missões dos dois e marquem cada uma. ${isS?"Janela perdida vale zero: marque “Não fez”.":""}</p>${block("A")}${block("B")}${isS?bingoHTML(r.marks,true).replace("Qualquer um marca","Conferiram juntos? Marque a cartela final. Qualquer um marca"):""}`; }
+function placarStep(){ const P=S.partida,sc=score(),pr=prizeText(sc),win=sc.a===sc.b?null:sc.a>sc.b?"A":"B";
+  return `<div class="box score"><div><b>${sc.a}</b><span>${esc(name("A"))}</span></div><span>x</span><div><b>${sc.b}</b><span>${esc(name("B"))}</span></div></div>
+  <div class="box"><h3 style="margin-top:0">Placar individual</h3><p style="margin:0">${win?`<b>${esc(name(win))}</b> venceu e escolhe um prêmio.`:"Empate."}</p><p class="hint"><b>${pr[0]}:</b> ${pr[1]}</p>
+  ${P.mode==="S"?`<h3>Placar do casal (Bingo)</h3><p style="margin:0">${sc.lines} ${sc.lines===1?"linha completa":"linhas completas"}: +${sc.lines} para cada um (já somado acima).</p>${sc.full?`<p><b>Cartela cheia!</b> Vocês ganharam um prêmio do casal.</p>`:`<p class="hint">Cartela cheia daria um prêmio do casal.</p>`}`:""}</div>`; }
+function favStep(){ const P=S.partida,r=P.reveal,sc=score(),all=[...sc.hA,...sc.hB];
+  if(r.fav.A&&r.fav.B){ const both=all.filter(i=>r.fav.A.includes(i)&&r.fav.B.includes(i));
+    return `<div class="box"><h3 style="margin-top:0">Favoritas dos dois</h3>${both.length?both.map(i=>cardHTML(i,true)+"</div>").join(""):`<p class="hint">Nenhuma missão foi marcada pelos dois. O que só um marcou não aparece.</p>`}<button id="favRedo" class="full">Refazer avaliação</button></div>`; }
+  const p=r.favTurn, cur=r._sel||[];
+  if(r._hidden) return `<div class="box" style="text-align:center"><p>Passe o celular para <b>${esc(name(p))}</b>.</p><button id="favReady" class="pri full">Sou ${esc(name(p))}, pode mostrar</button></div>`;
+  return `<div class="box"><h3 style="margin-top:0">Avaliação em segredo · ${esc(name(p))}</h3><p class="hint" style="margin-top:0">Marque as missões que você quer repetir. Só vira favorita a missão que os dois marcarem.</p>
+  ${all.map(i=>`<button data-f="${i}" class="full ${cur.includes(i)?"sel":""}" style="justify-content:flex-start;text-align:left">${cur.includes(i)?"✓ ":""}${String(i+1).padStart(2,"0")} · ${esc(CARDS[i][1])}</button>`).join("")}
+  <button id="favDone" class="pri full">Terminei${p==="A"?", passar o celular":""}</button></div>`; }
+function nextStep(){ const P=S.partida,r=P.reveal;
+  return `<div class="box"><h3 style="margin-top:0">Próxima partida</h3><p class="hint" style="margin-top:0">Uma sugestão de data, sem compromisso. Ela aparece na página principal.</p><input id="prox" type="date" value="${esc(r.proxima)}">
+  <button id="finish" class="pri full">Concluir e salvar no ranking</button><p class="hint">Depois de concluir, este celular gera o código do placar para o outro colar.</p></div>`; }
+function bindReveal(el){
+  const P=S.partida,r=P.reveal;
+  ["A","B"].forEach(p=>{const s=$("v"+p); if(s) s.onchange=e=>{r[p].veto=+e.target.value;r[p].res=[];save();rRevelar()}});
+  el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const p=b.dataset.p,i=+b.dataset.i;r[p].res[i]=r[p].res[i]===b.dataset.s?"":b.dataset.s;save();rRevelar()});
+  el.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const k="wrong"+b.dataset.w;r[k]=Math.max(0,r[k]+ +b.dataset.d);save();rRevelar()});
+  bindBingo(el,r.marks,rRevelar); bindTimers(el);
+  el.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{const i=+b.dataset.f;r._sel=r._sel||[];const k=r._sel.indexOf(i);if(k>=0)r._sel.splice(k,1);else r._sel.push(i);save();rRevelar()});
+  if($("favDone")) $("favDone").onclick=()=>{ r.fav[r.favTurn]=(r._sel||[]).slice(); r._sel=[]; if(r.favTurn==="A"){ r.favTurn="B"; r._hidden=true; } save(); rRevelar(); scrollTo(0,0); };
+  if($("favReady")) $("favReady").onclick=()=>{ r._hidden=false; save(); rRevelar(); };
+  if($("favRedo")) $("favRedo").onclick=()=>{ r.fav={A:null,B:null}; r.favTurn="A"; r._sel=[]; r._hidden=false; save(); rRevelar(); };
+  if($("prox")) $("prox").onchange=e=>{r.proxima=e.target.value;save()};
+  if($("finish")) $("finish").onclick=finish;
+}
+function summary(e){ const ic={ok:"✅",pego:"🕵️",no:"⏸️","":"⏸️"};
+  const lines=[`💌 Espero Você · ${e.mode==="S"?"Semana":"Partida rápida"} ${e.code}`,"",`🏆 ${e.nameA} ${e.a} x ${e.b} ${e.nameB}`,""];
+  [["A",e.cardsA,e.resA,e.nameA],["B",e.cardsB,e.resB,e.nameB]].forEach(([p,cs,rs,n])=>{lines.push(`Missões de ${n}:`);cs.forEach((idx,i)=>lines.push(`${ic[rs[i]||""]} [N${CARDS[idx][0]}] ${CARDS[idx][1]}`));lines.push("")});
+  if(e.mode==="S"){ lines.push(`🎯 Bingo do casal: ${e.lines} ${e.lines===1?"linha":"linhas"}${e.full?" · cartela cheia!":""}`); lines.push(""); }
+  if(e.fav&&e.fav.length){ lines.push("❤️ Favoritas dos dois:"); e.fav.forEach(i=>lines.push(`• ${CARDS[i][1]}`)); lines.push(""); }
+  lines.push("✅ cumprida · 🕵️ descoberta · ⏸️ não feita"); return lines.join("\n"); }
+async function finish(){
+  const P=S.partida,r=P.reveal,sc=score(),all=[...sc.hA,...sc.hB];
+  const fav=all.filter(i=>(r.fav.A||[]).includes(i)&&(r.fav.B||[]).includes(i));
+  const e={code:P.code,mode:P.mode,date:new Date().toISOString(),nameA:name("A"),nameB:name("B"),a:sc.a,b:sc.b,lines:sc.lines,full:sc.full,cardsA:sc.hA,cardsB:sc.hB,resA:r.A.res,resB:r.B.res,fav,bingo:P.bingo,marks:r.marks};
+  upsertHistory(e); S.favs=[...new Set([...S.favs,...fav])]; S.proxima=r.proxima||S.proxima;
+  P.done=true;
+  try{ P.placarCode=await encrypt({v:1,e,used:S.used,proxima:r.proxima||""},cfg().pass,"EVP-"); }catch(err){ P.placarCode=""; }
+  save(); renderAll();
+}
+function upsertHistory(e){ const i=S.history.findIndex(x=>x.code===e.code); if(i>=0) S.history[i]=e; else S.history.unshift(e); }
+function placarBox(code){ const e=S.history.find(x=>x.code===S.partida.code);
+  return `<div class="box"><h3 style="margin-top:0">Código do placar</h3><p class="hint" style="margin-top:0">Copie e cole no outro celular, na aba Ranking. Assim os dois veem o mesmo ranking.</p><textarea readonly id="plc">${esc(code)}</textarea>
+  <div class="row"><button id="cpPlc" class="pri">Copiar código do placar</button>${e?`<button id="cpTxt">Copiar texto</button>`:""}</div><div class="msg" id="plcMsg"></div></div>`; }
+function bindPlacar(el,code){ if($("cpPlc")) $("cpPlc").onclick=async()=>{$("plcMsg").textContent=(await copyText(code))?"Código copiado.":"Não foi possível copiar."};
+  if($("cpTxt")) $("cpTxt").onclick=async()=>{const e=S.history.find(x=>x.code===S.partida.code);$("plcMsg").textContent=(await copyText(summary(e)))?"Texto copiado. Cole onde quiser.":"Não foi possível copiar."}; }
+
+/* ---------- aba Ranking ---------- */
+function rRanking(){
+  const el=$("t-ranking"),tot={};
+  S.history.forEach(h=>{[[h.nameA,h.a,h.b],[h.nameB,h.b,h.a]].forEach(([n,m,o])=>{tot[n]=tot[n]||{p:0,w:0,j:0};tot[n].p+=m;tot[n].j++;if(m>o)tot[n].w++})});
+  const rows=Object.entries(tot).sort((x,y)=>y[1].w-x[1].w||y[1].p-x[1].p);
+  const txt=()=>["💌 Espero Você · ranking geral",""].concat(rows.map(([n,t],i)=>`${i+1}º ${n}: ${t.w} vitórias · ${t.p} pontos em ${t.j} partidas`)).join("\n");
+  el.innerHTML=`<h2>Ranking</h2>${rows.length?`<div class="box"><table><thead><tr><th>Jogador</th><th class="n">Vitórias</th><th class="n">Pontos</th></tr></thead><tbody>${rows.map(([n,t])=>`<tr><td>${esc(n)}</td><td class="n">${t.w}</td><td class="n">${t.p}</td></tr>`).join("")}</tbody></table></div>
+  <div class="box"><label>Partidas</label><table><tbody>${S.history.map(h=>`<tr><td>${new Date(h.date).toLocaleDateString("pt-BR")} · ${h.mode==="S"?"Semana":"Rápida"}</td><td class="n">${esc(h.nameA)} ${h.a} x ${h.b} ${esc(h.nameB)}${h.full?" · bingo cheio":""}</td></tr>`).join("")}</tbody></table></div>`
+  :`<div class="box">Nenhuma partida salva ainda. Depois da revelação, concluam o fechamento ou colem aqui o código do placar.</div>`}
+  ${S.favs.length?`<div class="box"><h3 style="margin-top:0">Favoritas do casal</h3>${S.favs.map(i=>cardHTML(i,true)+"</div>").join("")}</div>`:""}
+  <div class="box"><label for="imp">Colar o código do placar do outro celular</label><textarea id="imp" placeholder="EVP-…"></textarea><button id="impBtn" class="pri full">Importar placar</button><div class="msg" id="rmsg"></div></div>
+  ${rows.length?`<div class="row"><button id="cpr">Copiar texto do ranking</button><button id="clr">Apagar histórico</button></div>`:""}`;
+  $("impBtn").onclick=async()=>{ try{ const o=await decrypt($("imp").value,cfg().pass,"EVP-"); if(!o||!o.e) throw "formato";
+      upsertHistory(o.e); if(o.used) S.used={cards:o.used.cards||[],bingo:o.used.bingo||[]}; S.favs=[...new Set([...S.favs,...(o.e.fav||[])])]; if(o.proxima) S.proxima=o.proxima;
+      if(S.partida&&S.partida.code===o.e.code){ S.partida.done=true; S.partida.placarCode=$("imp").value.trim(); }
+      save(); rRanking(); $("rmsg").textContent="Placar importado. Os dois celulares agora mostram o mesmo ranking."; }
+    catch(e){ $("rmsg").textContent=e==="senha"?"Senha do casal diferente.":"Código inválido."; } };
+  if(rows.length){ $("cpr").onclick=async()=>{$("rmsg").textContent=(await copyText(txt()))?"Texto copiado.":"Não foi possível copiar."}; $("clr").onclick=e=>confirm2(e.target,()=>{S.history=[];save();rRanking()}); }
+}
+
+/* ---------- aba Regras ---------- */
+function rRegras(){
+  $("t-regras").innerHTML=`<h2>Como funciona</h2>
+  <div class="box"><p style="margin:0">Cada pessoa recebe missões secretas para cumprir sem o par perceber. No fim, quem somar mais pontos vence e escolhe um prêmio.</p>
+  <table style="margin-top:12px"><tbody>${[1,2,3,4,5].map(l=>`<tr><td><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]}</td><td class="n">${l} ${l>1?"pontos":"ponto"}</td></tr>`).join("")}</tbody></table></div>
+  <div class="box"><h3 style="margin-top:0">Dois modos</h3><ul>
+  <li><b>Partida rápida:</b> 24 ou 48 horas. Cada um recebe 4 cartas: 3 dos níveis 1 a 4 e 1 Carta Espero Você, sempre na 4ª posição.</li>
+  <li><b>Semana:</b> de 3 a 7 dias, começando quando os dois decidirem. Uma missão por dia para cada um, com uma janela de horário: níveis 1 e 2 entre 6h e 21h; níveis 3 e 4 entre 17h e 23h; nível 5 só depois das 21h. Cada um vê só a própria agenda. Missão cumprida dentro da janela soma pontos; janela perdida, zero.</li>
+  <li><b>Bingo do casal</b> (na Semana): cartela 3x3 com o centro livre. Cada linha completa vale +1 para os dois. Cartela cheia até o fim da Semana dá um prêmio do casal.</li></ul>
+  <h3>Passo a passo</h3><ol>
+  <li>Um de vocês cria a partida na aba Partida e copia o código. O outro cola o código em “Entrar na partida”.</li>
+  <li>Confiram se a “Conferência” é igual nos dois celulares. Assim os dois sorteiam as mesmas cartas, sem internet.</li>
+  <li>Em Cartas, abra suas missões. Ninguém vê as do outro.</li>
+  <li>Durante o jogo, quem desconfiar diz “Te peguei!” e descreve a missão.</li>
+  <li>Quando o relógio zerar, sentem juntos e usem a aba Revelar em um celular só.</li>
+  <li>Sigam o fechamento: revelação, placar, duas perguntas, rodada final, favoritas e próxima partida. No fim, o celular da revelação gera o código do placar para o outro colar na aba Ranking.</li></ol>
+  <h3>Pontuação</h3><ul>
+  <li>Missão cumprida sem ser descoberta: pontos do nível (1 a 5).</li>
+  <li>“Te peguei!” certo: a missão do par falha e quem acusou ganha 1 ponto.</li>
+  <li>“Te peguei!” errado: quem acusou perde 1 ponto.</li>
+  <li>Cada jogador tem 1 veto por partida para trocar uma carta sem explicar. A nova carta vem da mesma faixa.</li>
+  <li>As cartas não se repetem até o baralho inteiro ser usado.</li>
+  <li>As cartas 60, 64, 65, 66, 68 e 70 só entram no sorteio quando houver match no Nós Dois para o item correspondente.</li></ul>
+  <h3>Regras de cuidado</h3><ul>
+  <li>“Não” encerra qualquer missão na hora, sem perda de pontos.</li>
+  <li>Nada com terceiros, ciúme, humilhação ou exposição em público.</li>
+  <li>Nível 5: combinem antes uma palavra de segurança, que interrompe tudo.</li>
+  <li>Níveis 4 e 5 só quando estiverem a sós.</li>
+  <li>Fotos, vídeos e provas ficam fora do app. Fotos íntimas só entre vocês, em pasta protegida e fora de backup compartilhado.</li>
+  <li>Briga durante a rodada pausa o jogo. Retomem quando os dois quiserem.</li></ul>
+  <h3>Prêmios</h3><ul>${PRIZES.map(([a,b])=>`<li>${a}: ${b}</li>`).join("")}</ul>
+  <p class="hint">O app não usa internet. Para levar o resumo para outro lugar, use “Copiar texto”.</p></div>
+  <div class="box"><h3 style="margin-top:0">Perguntas de fechamento</h3><ol>${FECHO.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>
+  <div class="box"><h3 style="margin-top:0">Baralho completo (${CARDS.length} cartas)</h3><p class="hint" style="margin-top:0">Ver o baralho não revela quais cartas cada um sorteou.</p>
+  ${[1,2,3,4,5].map(l=>`<details style="margin-top:10px"><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px"><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]} · ${CARDS.filter(c=>c[0]===l).length} cartas</summary>
+  ${CARDS.map((c,idx)=>c[0]===l?cardHTML(idx,true)+"</div>":"").join("")}</details>`).join("")}</div>`;
+}
+
+const TABS=[["partida","Partida",'<path d="M4 6h16M4 12h16M4 18h10"/>'],["cartas","Cartas",'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/>'],["revelar","Revelar",'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'],["ranking","Ranking",'<path d="M6 20V10M12 20V4M18 20v-7"/>'],["regras","Regras",'<circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/>']];
+function rNav(){$("nav").innerHTML=TABS.map(([k,l,p])=>`<button data-t="${k}" class="${S.tab===k?"on":""}" aria-label="${l}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>${l}</button>`).join("");
+  $("nav").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(S.tab==="cartas"&&b.dataset.t!=="cartas"){shown={}}S.tab=b.dataset.t;save();renderAll();scrollTo(0,0)})}
+function renderTab(){ ({partida:rPartida,cartas:rCartas,revelar:rRevelar,ranking:rRanking,regras:rRegras})[S.tab](); }
+function renderAll(){rNav();document.querySelectorAll("main section").forEach(s=>s.classList.toggle("on",s.id==="t-"+S.tab));renderTab();clock()}
+$("lockBtn").onclick=()=>lock.lock();
+if(S.tab==="cartas")S.tab="partida";
+if(S.partida){ refreshMine(); save(); }
+renderAll();
+let wasEnded=ended(), wasStarted=started();
+setInterval(()=>{clock();tickTimers();const e=ended(),s=started();if(e!==wasEnded||s!==wasStarted){wasEnded=e;wasStarted=s;if(S.tab!=="partida")renderAll()}},1000);
+document.addEventListener("visibilitychange",()=>{if(document.hidden){shown={};if(S.tab==="cartas")rCartas()}});
+window.EV_TEST={get S(){return S},deal,parseCode,makeCode,handOf,windowsOf,bridgeAllowed};
+}
+</script>
+</body>
+</html>
