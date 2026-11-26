@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-page="index">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nós 2">
+<meta name="theme-color" content="#121014">
+<meta name="robots" content="noindex,nofollow">
+<title>Nós 2</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<script src="js/core.js"></script>
+<style>
+:root{--bg:#121014;--card:#1c181d;--line:#2e2830;--ink:#efe8e4;--mute:#a59ba0;--acc:#c9a26a;--wine:#8e2a3e;--ok:#5f9f7a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;min-width:0}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);overflow-x:hidden}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 40px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;margin:0}
+h1{font-size:30px}h2{font-size:22px;margin:22px 0 8px}h3{font-size:18px;margin:16px 0 6px}
+p{margin:6px 0 10px;color:var(--mute)}
+.view{display:none}.view.on{display:block}
+button,.btn{font:600 15px -apple-system,system-ui,sans-serif;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;text-align:center}
+button.pri{background:var(--wine);border-color:var(--wine);color:#fff}
+button.sel{border-color:var(--acc);background:#2a2216}
+button.warn{border-color:#7a2a2a;color:#ffb4b4}
+button:disabled{opacity:.4}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.full{width:100%;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 120px}
+label{display:block;font-size:14px;color:var(--mute);margin:14px 0 6px}
+input,textarea{width:100%;font:16px -apple-system,system-ui,sans-serif;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-height:44px}
+textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.hint{font-size:14px;color:var(--mute);margin:8px 0 0}
+.msg{min-height:22px;font-size:14px;color:var(--acc);margin-top:8px}
+/* PIN */
+#v-pin{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
+#v-pin.on{display:flex}
+#pinTitle{font-size:16px;color:var(--mute);text-align:center;min-height:24px}
+.dots{display:flex;justify-content:center;gap:16px;margin:18px 0}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--mute)}.dots i.f{background:var(--ink);border-color:var(--ink)}
+.pad{display:grid;grid-template-columns:repeat(3,72px);gap:14px;justify-content:center}
+.pad button{width:72px;height:72px;border-radius:50%;font-size:26px;font-weight:400;padding:0}
+.pad span{display:block}
+.pinlinks{margin-top:22px;text-align:center}
+.pinlinks button{background:none;border:0;color:var(--mute);font-weight:400;font-size:14px}
+/* home */
+.top{display:flex;justify-content:space-between;align-items:center}
+.menu{display:grid;gap:10px;margin-top:16px}
+.menu a{display:block;text-decoration:none;color:var(--ink);background:linear-gradient(160deg,#221b20,#17141a);border:1px solid #3a2f36;border-radius:16px;padding:18px 16px;min-height:72px}
+.menu a b{display:block;font-family:Georgia,serif;font-weight:400;font-size:22px}
+.menu a span{display:block;color:var(--mute);font-size:14px;margin-top:2px}
+.small{display:flex;gap:8px;margin-top:18px}.small>*{flex:1}
+.aviso{border-left:3px solid var(--acc);background:#1f1a17;border-radius:10px;padding:12px;margin-top:12px;font-size:15px}
+.aviso a{color:var(--acc)}
+.back{background:none;border:0;color:var(--acc);padding:4px 0;font-weight:600}
+.como li{margin-bottom:6px;color:var(--mute)}
+.como b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- PIN: tela neutra -->
+<section class="view" id="v-pin">
+  <div id="pinTitle">Digite o PIN</div>
+  <div class="dots" id="pinDots"><i></i><i></i><i></i><i></i></div>
+  <div class="msg" id="pinMsg" style="text-align:center"></div>
+  <div class="pad" id="pad"></div>
+  <div class="pinlinks" id="pinLinks"></div>
+</section>
+
+<div class="wrap">
+<!-- HOME -->
+<section class="view" id="v-home">
+  <div class="top"><h1>Nós 2</h1><button id="btnLock" aria-label="Trancar">Trancar</button></div>
+  <div id="avisos"></div>
+  <nav class="menu">
+    <a href="espero.html"><b>Espero Você</b><span>missões secretas</span></a>
+    <a href="nosdois.html"><b>Nós Dois</b><span>desejos em comum e plano da noite</span></a>
+    <a href="nosdois.html#jogar"><b>Jogar agora</b><span>atalho para os jogos do Nós Dois</span></a>
+    <a href="conversa.html"><b>Conversa</b><span>para conversar com calma</span></a>
+    <a href="#" id="lnkRituais"><b>Rituais</b><span>momentos guiados do casal</span></a>
+  </nav>
+  <div class="small"><button id="btnComo">Como funciona</button><button id="btnCfg">Configurações</button></div>
+</section>
+
+<!-- CONFIGURAÇÕES -->
+<section class="view" id="v-cfg">
+  <button class="back" data-go="home">‹ Início</button>
+  <h1>Configurações</h1>
+  <div class="box">
+    <label>Neste celular, eu sou</label>
+    <div class="row"><button id="meA">Jogador A</button><button id="meB">Jogador B</button></div>
+    <p class="hint">Um celular é A e o outro é B.</p>
+    <div class="row"><div><label for="nA">Nome do Jogador A</label><input id="nA" autocomplete="off" placeholder="Jogador A"></div><div><label for="nB">Nome do Jogador B</label><input id="nB" autocomplete="off" placeholder="Jogador B"></div></div>
+    <label>Meu par é</label>
+    <div class="row"><button id="prEla">Ela</button><button id="prEle">Ele</button></div>
+    <label for="pass">Senha do casal (igual nos dois celulares)</label>
+    <div class="row"><input id="pass" type="password" autocomplete="off" placeholder="Combinem pessoalmente"><button id="passShow" style="flex:0 0 auto">Mostrar</button></div>
+    <p class="hint">Mínimo de 6 caracteres. Ela cifra os códigos que vocês trocam (AES-GCM) e o backup. Quem tiver um código e a senha consegue abri-lo, então combinem a senha pessoalmente, não por mensagem.</p>
+    <button class="pri full" id="cfgSave">Salvar</button>
+    <div class="msg" id="cfgMsg"></div>
+  </div>
+  <div class="box">
+    <h3 style="margin-top:0">Trocar PIN</h3>
+    <p class="hint">O PIN é só deste celular. Cada um tem o seu.</p>
+    <button class="full" id="pinChange">Trocar PIN</button>
+  </div>
+  <div class="box">
+    <h3 style="margin-top:0">Backup</h3>
+    <p class="hint">Um arquivo cifrado com a senha do casal, com todos os dados do app neste celular (menos o PIN).</p>
+    <button class="full" id="bkExport">Exportar backup</button>
+    <button class="full" id="bkCopy">Copiar backup como texto</button>
+    <label for="bkFile">Importar backup</label>
+    <input type="file" id="bkFile" accept=".nos2,.txt,text/plain,application/octet-stream">
+    <label for="bkText">ou cole o texto do backup</label>
+    <textarea id="bkText" placeholder="NOS2BK-…"></textarea>
+    <label for="bkPass">Senha do casal usada no backup</label>
+    <input id="bkPass" type="password" autocomplete="off" placeholder="Deixe vazio para usar a atual">
+    <button class="full" id="bkImport">Importar</button>
+    <div class="msg" id="bkMsg"></div>
+  </div>
+  <div class="box">
+    <h3 style="margin-top:0">Apagar todos os dados</h3>
+    <p class="hint">Apaga respostas, partidas, conversas, configurações e o PIN deste celular. Não tem volta.</p>
+    <button class="warn full" id="wipeBtn">Apagar tudo</button>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="view como" id="v-como">
+  <button class="back" data-go="home">‹ Início</button>
+  <h1>Como funciona</h1>
+  <div class="box">
+    <h3 style="margin-top:0">O app</h3>
+    <ul>
+      <li><b>Sem internet:</b> depois da primeira abertura, tudo funciona em modo avião. Não há servidor nem conta.</li>
+      <li><b>Dados só no aparelho:</b> tudo fica guardado neste celular. Para levar para outro, use o backup em Configurações.</li>
+      <li><b>PIN:</b> cada celular tem o seu. O app pede o PIN ao abrir, depois de 2 minutos fora da tela e no botão Trancar.</li>
+      <li><b>Senha do casal:</b> igual nos dois celulares. Ela sincroniza os sorteios e cifra os códigos que vocês trocam.</li>
+      <li><b>Códigos:</b> para comparar respostas ou placares, um celular gera um código e o outro cola. Use “Copiar texto” e cole onde quiser.</li>
+    </ul>
+    <h3>Os modos</h3>
+    <ul>
+      <li><b>Espero Você:</b> missões secretas, em Partida rápida (24 ou 48 horas) ou Semana (3 a 7 dias, com Bingo do casal).</li>
+      <li><b>Nós Dois:</b> cada um responde sozinho, vocês trocam códigos e o app mostra só o que coincide.</li>
+      <li><b>Jogar agora:</b> vai direto para os jogos do Nós Dois.</li>
+      <li><b>Conversa:</b> uma sessão de 30 a 45 minutos para abrir, escutar e combinar.</li>
+      <li><b>Rituais:</b> momentos guiados do casal.</li>
+    </ul>
+    <h3>O que o app protege (e o que não protege)</h3>
+    <ul>
+      <li>O PIN impede que alguém abra o app no seu celular. Os dados guardados no aparelho não são cifrados pelo PIN.</li>
+      <li>Os códigos são cifrados com a senha do casal. Quem tiver o código e a senha consegue ler o que ele leva.</li>
+      <li>Esqueceu o PIN? Só dá para apagar tudo e recomeçar. Exporte um backup antes, enquanto lembra.</li>
+    </ul>
+    <h3>Instalar no iPhone</h3>
+    <ul>
+      <li>Abra o link no Safari, toque em Compartilhar e depois em “Adicionar à Tela de Início”.</li>
+      <li>Para atualizar, abra o app com internet, feche (arraste para cima) e abra de novo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- RITUAIS -->
+<section class="view" id="v-rituais">
+  <button class="back" data-go="home">‹ Início</button>
+  <h1>Rituais</h1>
+  <div class="box">
+    <p style="margin-top:0">O passo a passo dos rituais ainda está sendo escrito e entra numa próxima atualização:</p>
+    <ul class="como">
+      <li><b>Ritual de entrada</b> (10 min)</li>
+      <li><b>Ritual de depois</b> (5 min)</li>
+      <li><b>Ritual de fim de dia</b> (15 min)</li>
+      <li><b>Beijo de 6 segundos</b></li>
+      <li><b>Ritual de despedida</b></li>
+      <li><b>Ritual de reencontro</b></li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+const {store,settings,esc,pin,lock,encrypt,decrypt,copyText}=Nos2;
+const $=id=>document.getElementById(id);
+function show(v){ document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v)); scrollTo(0,0); if(v==="home") renderHome(); if(v==="cfg") renderCfg(); }
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+
+/* ---------- PIN ---------- */
+let mode="enter", buf="", first="", busy=false, afterPin=null, tick=null;
+function setPinMode(m,title){ mode=m; buf=""; first=""; $("pinTitle").textContent=title; $("pinMsg").textContent=""; drawDots(); drawLinks(); }
+function drawDots(){ $("pinDots").innerHTML=[0,1,2,3].map(i=>`<i class="${i<buf.length?"f":""}"></i>`).join(""); }
+function drawLinks(){
+  const L=$("pinLinks");
+  if(mode==="enter") L.innerHTML=`<button id="forgot">Esqueci o PIN</button>`;
+  else if(mode==="change-old"||mode==="change-new"||mode==="change-confirm") L.innerHTML=`<button id="pinCancel">Cancelar</button>`;
+  else L.innerHTML="";
+  const f=$("forgot"); if(f) f.onclick=forgot;
+  const c=$("pinCancel"); if(c) c.onclick=()=>show("cfg");
+}
+$("pad").innerHTML=[1,2,3,4,5,6,7,8,9,"",0,"⌫"].map(k=>k===""?"<span></span>":`<button data-k="${k}" aria-label="${k==="⌫"?"Apagar":k}">${k}</button>`).join("");
+$("pad").querySelectorAll("button").forEach(b=>b.onclick=()=>press(b.dataset.k));
+document.addEventListener("keydown",e=>{ if(!$("v-pin").classList.contains("on")) return; if(/^[0-9]$/.test(e.key)) press(e.key); else if(e.key==="Backspace") press("⌫"); });
+function waiting(){ const f=pin.fails(); return f.until>Date.now()?Math.ceil((f.until-Date.now())/1000):0; }
+function runWait(){
+  clearInterval(tick);
+  const upd=()=>{ const w=waiting(); if(w>0){ $("pinMsg").textContent=`Muitas tentativas. Aguarde ${w} s.`; } else { $("pinMsg").textContent=""; clearInterval(tick); } };
+  upd(); tick=setInterval(upd,500);
+}
+async function press(k){
+  if(busy) return;
+  if(mode==="enter"&&waiting()) return runWait();
+  if(k==="⌫"){ buf=buf.slice(0,-1); drawDots(); return; }
+  if(buf.length>=4) return;
+  buf+=k; drawDots();
+  if(buf.length<4) return;
+  busy=true; const v=buf;
+  try{
+    if(mode==="enter"||mode==="change-old"){
+      if(await pin.check(v)){ pin.ok(); if(mode==="enter"){ lock.unlock(); afterUnlock(); } else setPinMode("change-new","Digite o novo PIN"); }
+      else { buf=""; drawDots(); if(mode==="enter"){ const f=pin.fail(); if(f.until>Date.now()) runWait(); else $("pinMsg").textContent="PIN errado."; } else $("pinMsg").textContent="PIN errado."; }
+    } else if(mode==="create"||mode==="change-new"){
+      first=v; buf=""; mode=mode==="create"?"create-confirm":"change-confirm"; $("pinTitle").textContent="Digite o PIN de novo para confirmar"; $("pinMsg").textContent=""; drawDots();
+    } else if(mode==="create-confirm"||mode==="change-confirm"){
+      if(v===first){ const wasChange=mode==="change-confirm"; await pin.set(v); lock.unlock(); if(wasChange){ show("cfg"); $("cfgMsg").textContent="PIN trocado."; } else afterUnlock(); }
+      else { const back=mode==="create-confirm"?"create":"change-new"; setPinMode(back,"Os PINs não conferem. Crie de novo"); }
+    }
+  } finally { busy=false; }
+}
+function afterUnlock(){ if(!settings.ready()){ show("cfg"); $("cfgMsg").textContent="Configure o app para começar."; } else show("home"); }
+let wipeArm=0;
+function forgot(){
+  const L=$("pinLinks");
+  L.innerHTML=`<p style="max-width:300px;margin:0 auto 10px">Não há como recuperar o PIN. A única saída é apagar tudo deste celular e recomeçar.</p><button id="w1" class="warn" style="color:#ffb4b4;font-weight:600">Apagar tudo e recomeçar</button><br><button id="wc">Cancelar</button>`;
+  $("wc").onclick=drawLinks;
+  $("w1").onclick=()=>{ L.innerHTML=`<p style="max-width:300px;margin:0 auto 10px"><b style="color:var(--ink)">Tem certeza?</b> Respostas, partidas, conversas e configurações deste celular serão apagadas.</p><button id="w2" class="warn" style="color:#ffb4b4;font-weight:600">Sim, apagar tudo</button><br><button id="wc2">Cancelar</button>`;
+    $("wc2").onclick=drawLinks; $("w2").onclick=()=>{ store.wipe(); try{ caches&&0; }catch(e){} location.replace("./index.html"); }; };
+}
+function start(){
+  if(!pin.exists()){ show("pin"); setPinMode("create","Crie um PIN de 4 dígitos"); return; }
+  if(lock.isUnlocked()){ const h=location.hash.slice(1); show(["cfg","como","rituais"].includes(h)?h:"home"); return; }
+  show("pin"); setPinMode("enter","Digite o PIN"); if(waiting()) runWait();
+}
+window.Nos2Index={recheck(){ if(!$("v-pin").classList.contains("on")&&!lock.isUnlocked()){ show("pin"); setPinMode("enter","Digite o PIN"); } }};
+$("btnLock").onclick=()=>{ lock.lock(false); show("pin"); setPinMode("enter","Digite o PIN"); };
+
+/* ---------- HOME ---------- */
+function fmtD(iso){ return new Date(iso+"T12:00").toLocaleDateString("pt-BR"); }
+function hhmm(ms){ return new Date(ms).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }
+function renderHome(){
+  const out=[], today=new Date().toISOString().slice(0,10), now=Date.now();
+  const cv=store.get("conversa",{}); const due=(cv.combinados||[]).filter(c=>c.ativo!==false&&c.revisao&&c.revisao<=today);
+  if(due.length) out.push(`<div class="aviso">${due.length===1?"Um combinado chegou":"Combinados chegaram"} na data de revisão. <a href="conversa.html#revisao">Revisar agora</a></div>`);
+  const ev=store.get("espero",{}); const p=ev.partida;
+  if(p&&p.mine&&p.mode==="S"){
+    const w=p.mine.find(m=>now>=m.ws&&now<m.we);
+    if(w) out.push(`<div class="aviso">Sua missão de hoje está na janela agora, até ${hhmm(w.we)}. <a href="espero.html">Abrir</a></div>`);
+    else { const nx=p.mine.find(m=>m.ws>now&&new Date(m.ws).toDateString()===new Date().toDateString()); if(nx) out.push(`<div class="aviso">Hoje sua janela de missão abre às ${hhmm(nx.ws)}.</div>`); }
+  }
+  if(ev.proxima&&ev.proxima>=today&&!(p&&!p.done)) out.push(`<div class="aviso">Próxima partida do Espero Você sugerida para ${fmtD(ev.proxima)}.</div>`);
+  $("avisos").innerHTML=out.join("");
+}
+$("btnComo").onclick=()=>show("como");
+$("btnCfg").onclick=()=>show("cfg");
+$("lnkRituais").onclick=e=>{ e.preventDefault(); show("rituais"); };
+
+/* ---------- CONFIGURAÇÕES ---------- */
+let draft;
+function renderCfg(){
+  draft=settings.get();
+  $("nA").value=draft.nameA; $("nB").value=draft.nameB; $("pass").value=draft.pass;
+  paintCfg();
+}
+function paintCfg(){ $("meA").classList.toggle("sel",draft.me==="A"); $("meB").classList.toggle("sel",draft.me==="B"); $("prEla").classList.toggle("sel",draft.pron==="Ela"); $("prEle").classList.toggle("sel",draft.pron==="Ele"); }
+$("meA").onclick=()=>{draft.me="A";paintCfg()}; $("meB").onclick=()=>{draft.me="B";paintCfg()};
+$("prEla").onclick=()=>{draft.pron="Ela";paintCfg()}; $("prEle").onclick=()=>{draft.pron="Ele";paintCfg()};
+$("passShow").onclick=()=>{ const i=$("pass"); i.type=i.type==="password"?"text":"password"; $("passShow").textContent=i.type==="password"?"Mostrar":"Ocultar"; };
+$("cfgSave").onclick=()=>{
+  draft.nameA=$("nA").value.trim(); draft.nameB=$("nB").value.trim(); draft.pass=$("pass").value;
+  if(!draft.me){ $("cfgMsg").textContent="Escolha se este celular é o Jogador A ou B."; return; }
+  if(draft.pass.length<6){ $("cfgMsg").textContent="A senha do casal precisa ter pelo menos 6 caracteres."; return; }
+  settings.save(draft); $("cfgMsg").textContent="Salvo.";
+  setTimeout(()=>show("home"),600);
+};
+$("pinChange").onclick=()=>{ show("pin"); setPinMode("change-old","Digite o PIN atual"); };
+
+/* backup */
+function backupData(){ const data={}; store.keys().forEach(k=>{ if(k==="nos2.pin"||k==="nos2.pinfail") return; data[k]=localStorage.getItem(k); }); return {app:"nos2",v:Nos2.SCHEMA_VERSION,date:new Date().toISOString(),data}; }
+async function makeBackup(){ const s=settings.get(); if(!s.pass||s.pass.length<6) throw "Defina a senha do casal antes de exportar."; return encrypt(backupData(),s.pass,"NOS2BK-"); }
+$("bkExport").onclick=async()=>{
+  try{ const txt=await makeBackup(); const blob=new Blob([txt],{type:"application/octet-stream"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="nos2-backup-"+new Date().toISOString().slice(0,10)+".nos2"; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000); $("bkMsg").textContent="Backup gerado. Guarde o arquivo num lugar seguro."; }
+  catch(e){ $("bkMsg").textContent=typeof e==="string"?e:"Não foi possível gerar o backup."; }
+};
+$("bkCopy").onclick=async()=>{ try{ const txt=await makeBackup(); $("bkMsg").textContent=(await copyText(txt))?"Backup copiado. Cole num lugar seguro.":"Não foi possível copiar neste aparelho."; }catch(e){ $("bkMsg").textContent=typeof e==="string"?e:"Não foi possível gerar o backup."; } };
+$("bkFile").onchange=async e=>{ const f=e.target.files&&e.target.files[0]; if(f) $("bkText").value=(await f.text()).trim(); };
+let impArm=0;
+$("bkImport").onclick=async()=>{
+  const txt=$("bkText").value.trim(); if(!txt){ $("bkMsg").textContent="Escolha o arquivo ou cole o texto do backup."; return; }
+  const pass=$("bkPass").value||settings.get().pass;
+  if(!pass){ $("bkMsg").textContent="Digite a senha do casal usada no backup."; return; }
+  if(Date.now()-impArm>4000){ impArm=Date.now(); $("bkMsg").textContent="Importar substitui os dados deste celular (o PIN continua o mesmo). Toque de novo em Importar para confirmar."; return; }
+  $("bkMsg").textContent="Abrindo…";
+  try{
+    const obj=await decrypt(txt,pass,"NOS2BK-");
+    if(!obj||obj.app!=="nos2"||!obj.data) throw "formato";
+    store.keys().forEach(k=>{ if(k!=="nos2.pin"&&k!=="nos2.pinfail") localStorage.removeItem(k); });
+    Object.entries(obj.data).forEach(([k,v])=>{ if(k.startsWith("nos2.")&&k!=="nos2.pin"&&k!=="nos2.pinfail") localStorage.setItem(k,v); });
+    $("bkMsg").textContent="Backup restaurado."; setTimeout(()=>{ renderCfg(); show("home"); },800);
+  }catch(e){ $("bkMsg").textContent=e==="senha"?"Senha do casal diferente da usada no backup.":"Backup inválido."; }
+};
+let wipeTs=0;
+$("wipeBtn").onclick=()=>{
+  if(Date.now()-wipeTs>4000){ wipeTs=Date.now(); $("wipeBtn").textContent="Toque de novo para apagar tudo"; setTimeout(()=>$("wipeBtn").textContent="Apagar tudo",4000); return; }
+  if(!confirm("Apagar todos os dados deste celular? Não tem volta.")) return;
+  store.wipe(); location.replace("./index.html");
+};
+
+start();
+})();
+</script>
+</body>
+</html>

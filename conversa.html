@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-page="conversa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nós 2">
+<meta name="theme-color" content="#1f3236">
+<meta name="robots" content="noindex,nofollow">
+<title>Nós 2</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script src="js/core.js"></script>
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#f3efe7,#141c1e);--card:light-dark(#fffdf8,#1d282b);--ink:light-dark(#1f2a2c,#ece6dc);--mute:light-dark(#62706f,#9fb0ad);--line:light-dark(#ded6c8,#2c3b3e);--acc:light-dark(#2f6f6a,#7cc0b6);--head:#1f3236;--warn:#b24a3a}
+*{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(70px + env(safe-area-inset-bottom));overflow-x:hidden}
+header{background:var(--head);color:#e9f1ef;padding:calc(14px + env(safe-area-inset-top)) 16px 18px}
+.hbar{display:flex;justify-content:space-between;align-items:center}
+.hbar a,.hbar button{color:#e9f1ef;background:none;border:0;font:600 15px -apple-system,system-ui,sans-serif;min-height:44px;padding:0;text-decoration:none;display:inline-flex;align-items:center}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;margin:0;line-height:1.15}
+h1{font-size:32px;margin-top:4px}h2{font-size:24px;margin:4px 0 10px}h3{font-size:18px;margin:14px 0 6px}
+main{max-width:600px;margin:0 auto;padding:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+p{margin:6px 0 10px}.mute{color:var(--mute)}
+ul,ol{padding-left:20px;margin:6px 0}li{margin-bottom:6px}
+button,.btn{font:600 15px -apple-system,system-ui,sans-serif;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none}
+button.pri{background:var(--acc);border-color:var(--acc);color:light-dark(#fff,#0f1a1b)}
+button.sel{border-color:var(--acc);box-shadow:inset 0 0 0 2px var(--acc)}
+button:disabled{opacity:.4}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.full{width:100%;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 120px}
+label{display:block;font-size:14px;color:var(--mute);margin:12px 0 4px}
+input,textarea,select{width:100%;font:16px -apple-system,system-ui,sans-serif;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
+textarea{min-height:70px}
+.q{font-family:Georgia,serif;font-size:22px;line-height:1.35;padding:18px 4px}
+.tag{display:inline-block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acc)}
+.timer{font-family:ui-monospace,Menlo,monospace;font-size:46px;text-align:center;color:var(--acc);margin:6px 0}
+.model{border-left:4px solid var(--acc);padding:10px 12px;background:var(--bg);border-radius:6px;font-size:17px}
+.prog{display:flex;gap:4px;margin:0 0 12px}.prog i{flex:1;height:4px;border-radius:2px;background:var(--line)}.prog i.d{background:var(--acc)}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;z-index:5}
+.foot button{flex:1}
+.view{display:none}.view.on{display:block}
+.overlay{position:fixed;inset:0;background:var(--bg);z-index:20;overflow:auto;padding:calc(20px + env(safe-area-inset-top)) 16px 30px;display:none}
+.overlay.on{display:block}
+.help b{color:var(--ink)}
+.cb{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
+.small{font-size:14px}
+.msg{color:var(--acc);font-size:14px;min-height:20px;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar"><a href="index.html">‹ Nós 2</a><button id="lockBtn">Trancar</button></div>
+  <h1>Conversa</h1><div style="opacity:.85;font-size:15px">para conversar com calma</div>
+</header>
+<main id="main"></main>
+<div class="foot"><button id="fHome">Início</button><button id="fLeit">Leituras</button><button id="fAjuda">Quando procurar ajuda</button></div>
+<div class="overlay" id="ov"></div>
+<script src="js/conversa-data.js"></script>
+<script>
+{
+const {store,settings,esc,deck,randInt}=Nos2;
+const CV=window.CV;
+const $=id=>document.getElementById(id);
+const D=Object.assign({combinados:[],sessoes:[]},store.get("conversa",{}));
+const save=()=>store.set("conversa",D);
+const nm=p=>settings.name(p);
+const today=()=>{ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
+const addDays=(iso,n)=>{ const d=new Date(iso+"T12:00"); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
+const fmtD=iso=>iso?new Date(iso+"T12:00").toLocaleDateString("pt-BR"):"";
+let S=null; // sessão em andamento (só na memória)
+
+/* ---------- cronômetro ---------- */
+let T=null;
+function stopT(){ if(T){ clearInterval(T.id); T=null; } }
+function startT(sec,onEnd){ stopT(); T={end:Date.now()+sec*1000,left:sec,run:true,onEnd};
+  const draw=()=>{ const e=$("tmr"); if(!e) return; const l=Math.max(0,Math.ceil(T.left)); e.textContent=`${Math.floor(l/60)}:${String(l%60).padStart(2,"0")}`; };
+  draw(); T.id=setInterval(()=>{ if(!T.run) return; T.left=(T.end-Date.now())/1000; draw(); if(T.left<=0){ const f=T.onEnd; stopT(); try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){} const e=$("tmr"); if(e) e.textContent="Tempo!"; f&&f(); } },250); }
+function pauseT(){ if(!T) return; if(T.run){ T.run=false; T.left=(T.end-Date.now())/1000; } else { T.end=Date.now()+T.left*1000; T.run=true; } const b=$("tPause"); if(b) b.textContent=T.run?"Pausar":"Continuar"; }
+const timerBox=(label)=>`<div class="timer" id="tmr" aria-live="polite"></div><div class="row"><button id="tPause">Pausar</button>${label?`<button id="tSkip">${label}</button>`:""}</div>`;
+
+/* ---------- navegação ---------- */
+function view(html){ stopT(); $("main").innerHTML=html; scrollTo(0,0); }
+function home(){
+  S=null;
+  const due=D.combinados.filter(c=>c.ativo!==false&&c.revisao&&c.revisao<=today());
+  const act=D.combinados.filter(c=>c.ativo!==false);
+  view(`${due.length?`<div class="box" style="border-color:var(--acc)"><b>${due.length===1?"Um combinado chegou":"Combinados chegaram"} na data de revisão.</b><button class="pri full" id="goRev">Revisar agora</button></div>`:""}
+  <div class="box"><p style="margin-top:0">Uma sessão dura de 30 a 45 minutos:</p><ol>${CV.fases.map(f=>`<li>${f}</li>`).join("")}</ol>
+  <button class="pri full" id="start">Começar uma conversa</button></div>
+  <div class="box"><h3 style="margin-top:0">Combinados</h3>${act.length?act.map(c=>combView(c)).join(""):`<p class="mute">Nenhum combinado ativo.</p>`}${act.length?`<button class="full" id="goRev2">Revisar combinados</button>`:""}</div>`);
+  if($("goRev")) $("goRev").onclick=()=>revisao(false); if($("goRev2")) $("goRev2").onclick=()=>revisao(true);
+  $("start").onclick=regras;
+}
+function combView(c){ return `<div class="cb"><b>${esc(c.texto)}</b><div class="small mute">Quem: ${esc(c.quem)} · a partir de ${fmtD(c.inicio)} · revisão em ${fmtD(c.revisao)}</div>${c.como?`<div class="small">Como vamos saber: ${esc(c.como)}</div>`:""}</div>`; }
+const prog=i=>`<div class="prog">${[0,1,2,3].map(k=>`<i class="${k<=i?"d":""}"></i>`).join("")}</div>`;
+const pausaBtn=`<button class="full" id="pausa">Pedir pausa</button>`;
+function bindPausa(){ const b=$("pausa"); if(b) b.onclick=pausa; }
+
+/* ---------- 0. regras ---------- */
+function regras(){
+  S={step:0,abertas:[],vez:"A",combs:[]};
+  view(`${prog(0)}<h2>Antes de começar</h2><div class="box"><ul>${CV.regras.map(r=>`<li>${r}</li>`).join("")}</ul></div>
+  <button class="pri full" id="go">Estamos prontos</button>`);
+  $("go").onclick=abrir;
+}
+/* ---------- 1. abrir ---------- */
+function abrir(){
+  view(`${prog(1)}<span class="tag">1 · Abrir · 10 min</span><h2>Perguntas de abertura</h2><div class="box"><p style="margin-top:0">${esc(CV.temas_intro)}</p>
+  <button class="pri full" id="geral">Perguntas gerais</button>${CV.temas.map((t,i)=>`<button class="full" data-t="${i}">${esc(t.nome)}</button>`).join("")}</div>${pausaBtn}`);
+  bindPausa();
+  $("geral").onclick=()=>{ const n=4+randInt(3), per=[1,1,1]; let extra=n-3; while(extra>0){ const b=randInt(3); if(per[b]<2){ per[b]++; extra--; } }
+    const qs=[]; CV.blocos.forEach((b,i)=>{ for(let k=0;k<per[i];k++){ const id=deck.draw("cv.bloco"+i,b.q.map((_,j)=>j),j=>!qs.some(x=>x.b===i&&x.j===+j)); qs.push({b:i,j:+id,t:b.q[+id],tag:b.nome}); } });
+    S.abertas=qs; S.i=0; S.tema=null; S.t0=Date.now(); pergunta(); };
+  document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{ const t=CV.temas[+b.dataset.t], qs=[];
+    for(let k=0;k<4;k++){ const id=deck.draw("cv.tema"+b.dataset.t,t.q.map((_,j)=>j),j=>!qs.some(x=>x.j===+j)); qs.push({j:+id,t:t.q[+id],tag:t.nome}); }
+    S.abertas=qs; S.i=0; S.tema=t.nome; S.t0=Date.now(); pergunta(); });
+}
+function pergunta(){
+  if(S.i>=S.abertas.length) return escutar();
+  const q=S.abertas[S.i], quem=S.i%2===0?"A":"B";
+  const mins=Math.floor((Date.now()-S.t0)/60000);
+  view(`${prog(1)}<span class="tag">1 · Abrir · pergunta ${S.i+1} de ${S.abertas.length}</span>
+  <div class="box"><span class="tag">${esc(q.tag)}</span><div class="q">${esc(q.t)}</div>
+  <p class="mute small">Lê em voz alta e responde primeiro: <b>${esc(nm(quem))}</b>. Quem ouve não comenta, só agradece.</p></div>
+  <div class="row"><button id="pular">Pular</button><button class="pri" id="prox">Próxima</button></div>
+  <p class="mute small">${CV.intro_ab}</p><p class="mute small">${mins} min nesta etapa (sugestão: 10).</p>
+  <button class="full" id="toEsc">Ir para a escuta</button>${pausaBtn}`);
+  bindPausa();
+  $("pular").onclick=$("prox").onclick=()=>{ S.i++; pergunta(); };
+  $("toEsc").onclick=escutar;
+}
+/* ---------- 2. escutar ---------- */
+function escutar(){
+  view(`${prog(2)}<span class="tag">2 · Escutar · 15 a 20 min</span><h2>Escuta em turnos</h2>
+  <div class="box"><ol>${CV.passos.map(p=>`<li>${p}</li>`).join("")}</ol></div>
+  <div class="box"><label for="ass">O assunto (opcional, só para lembrar)</label><input id="ass" value="${esc(S.assunto||"")}" placeholder="Um assunto pequeno">
+  <label>Quem fala primeiro?</label><div class="row"><button id="fA">${esc(nm("A"))}</button><button id="fB">${esc(nm("B"))}</button></div></div>
+  <button class="full" id="toComb">Pular para os combinados</button>${pausaBtn}`);
+  bindPausa();
+  const go=p=>{ S.assunto=$("ass").value; S.fala=p; S.turno=0; falar(); };
+  $("fA").onclick=()=>go("A"); $("fB").onclick=()=>go("B"); $("toComb").onclick=combinar;
+}
+const outro=p=>p==="A"?"B":"A";
+function travar(){ return `<details class="box"><summary style="min-height:44px;display:flex;align-items:center;cursor:pointer"><b>Frases para quando travar</b></summary><ul>${CV.frases.map(f=>`<li>${esc(f)}</li>`).join("")}</ul></details>`; }
+function falar(){
+  const p=S.fala;
+  view(`${prog(2)}<span class="tag">Turno ${S.turno+1} de 2 · fala</span><h2>${esc(nm(p))} fala · 3 min</h2>
+  <div class="box"><p class="mute" style="margin-top:0">Quem fala segura o celular. Conta o fato, o que sentiu e do que precisa.</p><div class="model">“Quando ___, eu me senti ___, e eu preciso de ___.”</div>
+  <p class="mute small"><b>${esc(nm(outro(p)))}</b> ouve, sem responder nem se defender.</p>${timerBox("Terminei de falar")}</div>${travar()}${pausaBtn}`);
+  bindPausa(); startT(180,()=>{}); $("tPause").onclick=pauseT; $("tSkip").onclick=repetir;
+}
+function repetir(){
+  const p=S.fala, o=outro(p);
+  view(`${prog(2)}<span class="tag">Turno ${S.turno+1} de 2 · repetir</span><h2>${esc(nm(o))} repete · 1 min</h2>
+  <div class="box"><p class="mute" style="margin-top:0">Com as próprias palavras:</p><div class="model">“Entendi que, quando ___, você se sentiu ___ e precisa de ___. É isso?”</div>${timerBox("")}</div>
+  <div class="box"><p style="margin-top:0"><b>${esc(nm(p))}</b>, é isso?</p><div class="row"><button id="corr">Quase: corrigir</button><button class="pri" id="isso">É isso</button></div></div>${travar()}${pausaBtn}`);
+  bindPausa(); startT(60,()=>{}); $("tPause").onclick=pauseT;
+  $("corr").onclick=repetir;
+  $("isso").onclick=()=>{ if(S.turno===0){ S.turno=1; S.fala=o; falar(); } else solucao(); };
+}
+function solucao(){
+  view(`${prog(2)}<span class="tag">Juntos · 5 min</span><h2>Procurem uma solução</h2><div class="box"><p class="mute" style="margin-top:0">Agora, juntos, procurem uma solução.</p>${timerBox("Ir para os combinados")}</div>${travar()}${pausaBtn}`);
+  bindPausa(); startT(300,()=>{}); $("tPause").onclick=pauseT; $("tSkip").onclick=combinar;
+}
+/* ---------- 3. combinar ---------- */
+function combinar(){
+  const n=S.combs.length;
+  view(`${prog(3)}<span class="tag">3 · Combinar · 10 min</span><h2>Folha de combinados</h2>
+  <div class="box"><ul>${CV.comb_regras.map(r=>`<li>${r}</li>`).join("")}</ul></div>
+  ${S.combs.map(c=>combView(c)).join("")}
+  ${n<2?`<div class="box">${combForm({})}<button class="pri full" id="add">Salvar combinado</button><div class="msg" id="cmsg"></div></div>`:`<p class="mute">Vocês já fizeram 2 combinados nesta conversa.</p>`}
+  <button class="full ${n?"pri":""}" id="fech">Ir para o fechamento</button>${pausaBtn}`);
+  bindPausa();
+  if($("add")) $("add").onclick=()=>{ const c=readForm(); if(!c){ $("cmsg").textContent="Escreva o combinado como uma ação concreta."; return; }
+    c.id=Date.now().toString(36); c.criado=today(); c.ativo=true; D.combinados.push(c); S.combs.push(c); save(); combinar(); };
+  $("fech").onclick=fechamento;
+}
+function combForm(c){ const quem=c.quem||nm("A");
+  return `<label for="cTx">Combinado (uma ação concreta)</label><textarea id="cTx" placeholder="“Eu dou banho nas crianças às segundas e quartas.”">${esc(c.texto||"")}</textarea>
+  <label for="cQm">Quem</label><select id="cQm">${[nm("A"),nm("B"),"Os dois"].map(o=>`<option${o===quem?" selected":""}>${esc(o)}</option>`).join("")}</select>
+  <label for="cIn">A partir de</label><input id="cIn" type="date" value="${esc(c.inicio||today())}">
+  <label for="cCo">Como vamos saber que está funcionando</label><textarea id="cCo" placeholder="“Ela consegue 30 minutos livres nesses dias.”">${esc(c.como||"")}</textarea>
+  <label for="cRv">Revisão em (1 a 2 semanas depois)</label><input id="cRv" type="date" value="${esc(c.revisao||addDays(today(),14))}">`; }
+function readForm(){ const t=$("cTx").value.trim(); if(!t) return null; return {texto:t,quem:$("cQm").value,inicio:$("cIn").value,como:$("cCo").value.trim(),revisao:$("cRv").value||addDays(today(),14)}; }
+function fechamento(){
+  view(`${prog(3)}<span class="tag">Fechamento · 2 min</span><h2>Para terminar</h2><div class="box"><p style="margin-top:0">${CV.fechamento}</p>${timerBox("")}</div><button class="pri full" id="fim">Concluir a conversa</button>`);
+  startT(120,()=>{}); $("tPause").onclick=pauseT;
+  $("fim").onclick=()=>{ D.sessoes.push({data:today(),tema:S.tema||"Perguntas gerais",combinados:S.combs.length}); save(); home(); };
+}
+/* ---------- pausa ---------- */
+function pausa(){
+  const wasT=T&&T.run; if(wasT) pauseT();
+  const back=new Date(Date.now()+20*60000), hh=`${String(back.getHours()).padStart(2,"0")}:${String(back.getMinutes()).padStart(2,"0")}`, t0=Date.now();
+  const ov=$("ov"); ov.classList.add("on");
+  ov.innerHTML=`<div style="max-width:560px;margin:0 auto"><h2>Pausa</h2><div class="box"><p style="margin-top:0">A pausa dura pelo menos 20 minutos, cada um fazendo outra coisa. Marquem a hora de voltar.</p>
+  <label for="pv">Voltamos às</label><input id="pv" type="time" value="${hh}"><p class="mute small" id="pleft"></p>
+  <button class="pri full" id="pback" disabled>Voltar à conversa</button><button class="full" id="pend">Encerrar por hoje</button></div></div>`;
+  const iv=setInterval(()=>{ const left=20*60000-(Date.now()-t0); const b=$("pback"); if(!b){ clearInterval(iv); return; } if(left<=0){ b.disabled=false; $("pleft").textContent="Já passaram 20 minutos."; } else $("pleft").textContent=`Mínimo de 20 minutos: faltam ${Math.ceil(left/60000)} min.`; },1000);
+  $("pback").onclick=()=>{ clearInterval(iv); ov.classList.remove("on"); ov.innerHTML=""; if(T&&!T.run) pauseT(); };
+  $("pend").onclick=()=>{ clearInterval(iv); ov.classList.remove("on"); ov.innerHTML=""; home(); };
+}
+/* ---------- revisão ---------- */
+function revisao(todos){
+  const list=D.combinados.filter(c=>c.ativo!==false&&(todos||c.revisao<=today()));
+  view(`<h2>Revisão dos combinados</h2><p class="mute">Para cada um, escolham: manter, ajustar ou tirar.</p>
+  ${list.length?list.map(c=>`<div class="box" data-c="${c.id}">${combView(c)}<div class="row" style="margin-top:10px"><button data-a="manter">Manter</button><button data-a="ajustar">Ajustar</button><button data-a="tirar">Tirar</button></div></div>`).join(""):`<div class="box">Nada para revisar agora.</div>`}
+  <button class="full" id="vb">Voltar</button>`);
+  $("vb").onclick=home;
+  document.querySelectorAll("[data-c]").forEach(box=>{ const c=D.combinados.find(x=>x.id===box.dataset.c);
+    box.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{
+      if(b.dataset.a==="manter"){ c.revisao=addDays(today(),14); save(); revisao(todos); }
+      else if(b.dataset.a==="tirar"){ c.ativo=false; c.tirado=today(); save(); revisao(todos); }
+      else { box.innerHTML=combForm(Object.assign({},c,{revisao:addDays(today(),14)}))+`<button class="pri full" id="sv">Salvar ajuste</button>`;
+        $("sv").onclick=()=>{ const n=readForm(); if(!n) return; Object.assign(c,n); save(); revisao(todos); }; }
+    }); });
+}
+/* ---------- leituras e ajuda ---------- */
+function leituras(){ view(`<h2>Leituras curtas</h2>${CV.leituras.map((l,i)=>`<div class="box"><h3 style="margin-top:0">${i+1}. ${esc(l.t)}</h3><p style="margin-bottom:0">${esc(l.x)}</p></div>`).join("")}`); }
+$("fHome").onclick=()=>{ if(S&&!confirm("Sair da conversa em andamento?")) return; home(); };
+$("fLeit").onclick=()=>{ if(S&&!confirm("Sair da conversa em andamento?")) return; S=null; leituras(); };
+$("fAjuda").onclick=()=>{ const ov=$("ov"); ov.classList.add("on");
+  ov.innerHTML=`<div style="max-width:560px;margin:0 auto"><div id="ajx"></div><button class="pri full" id="ajClose">Fechar</button></div>`;
+  ajudaHTML($("ajx"));
+  $("ajClose").onclick=()=>{ ov.classList.remove("on"); ov.innerHTML=""; }; };
+function ajudaHTML(el){ el.innerHTML=`<h2>Quando procurar ajuda profissional</h2><div class="box help"><p style="margin-top:0">${esc(CV.ajuda.intro)}</p><ul>${CV.ajuda.itens.map(i=>`<li>${esc(i)}</li>`).join("")}</ul></div>
+  <div class="box" style="border-color:var(--warn)"><p style="margin:0">${CV.ajuda.final}</p><div class="row" style="margin-top:12px"><a class="btn" href="tel:180">Ligar 180</a><a class="btn" href="tel:190">Ligar 190</a></div></div>`; }
+$("lockBtn").onclick=()=>Nos2.lock.lock();
+if(location.hash==="#revisao") revisao(false); else home();
+}
+</script>
+</body>
+</html>
