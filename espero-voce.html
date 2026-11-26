@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Espero Você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: íntimo, divertido, discreto — um jogo a dois, não um painel
+   IDEA: um envelope de missões secretas; cada carta é um cartão lacrado
+   PICTURE: o próprio jogo — relógio da partida grande e as cartas lacradas
+   COLOUR/TYPE: vinho profundo dominante, rosa-blush de apoio, coral de acento; DM Serif Display + Inter
+   LAYOUT: coluna única de celular, cabeçalho vinho com relógio, abas fixas embaixo */
+:root{color-scheme:light dark;
+--bg:light-dark(#f7e4e6,#1d0a10);--card:light-dark(#fff,#2b111a);--ink:light-dark(#2a0a13,#f7e4e6);
+--mute:light-dark(#7b5560,#c79aa6);--wine:#5a0b1c;--wine2:light-dark(#7d1430,#a31d40);--acc:#ff5a4e;--line:light-dark(#ecc9ce,#43202b);
+--l1:#e6a23c;--l2:#e07a5f;--l3:#d1495b;--l4:#a4133c;--l5:#3d0613}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,sans-serif;overflow-x:clip;padding-bottom:84px}
+header{background:var(--wine);color:#fde9ec;padding:22px 18px 20px}
+h1,h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;line-height:1.05;margin:0}
+h1{font-size:34px}h2{font-size:26px;margin:4px 0 12px}
+.clock{margin-top:14px;font-variant-numeric:tabular-nums}
+.clock b{display:block;font-size:clamp(34px,10vw,52px);font-family:"DM Serif Display",Georgia,serif;font-weight:400;line-height:1}
+.clock small{opacity:.8;font-size:14px}
+main{max-width:640px;margin:0 auto;padding:18px 16px}
+section{display:none}section.on{display:block}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:14px;color:var(--mute);margin:10px 0 4px}
+input,select{width:100%;font:16px Inter,system-ui,sans-serif;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 120px}
+button,.btn{font:600 15px Inter,system-ui,sans-serif;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button.pri,.btn.pri{background:var(--wine2);border-color:var(--wine2);color:#fff}
+button.sel{background:var(--wine2);color:#fff;border-color:var(--wine2)}
+button:focus-visible,input:focus-visible,select:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hint{font-size:14px;color:var(--mute);margin:8px 0 0}
+.mcard{border-radius:16px;overflow:hidden;margin-bottom:14px;background:var(--card);border:1px solid var(--line)}
+.mhead{color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px}
+.mbody{padding:14px}
+.mbody p{margin:0 0 8px}.win{font-size:14px;color:var(--mute)}
+.seal{display:flex;align-items:center;justify-content:center;min-height:96px;font-family:"DM Serif Display",Georgia,serif;font-size:20px;color:var(--mute);cursor:pointer;width:100%;border:0;background:repeating-linear-gradient(45deg,transparent 0 10px,color-mix(in srgb,var(--line) 60%,transparent) 10px 20px)}
+.st{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.st button{flex:1 1 90px;font-size:14px;padding:8px}
+.step{display:flex;align-items:center;gap:10px}.step b{min-width:2ch;text-align:center;font-size:20px}
+.step button{width:44px;padding:0}
+.score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;gap:8px}
+.score b{font-family:"DM Serif Display",Georgia,serif;font-size:46px;font-weight:400;display:block;line-height:1}
+.score span{font-size:14px;color:var(--mute)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--wine);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{background:none;border:0;border-radius:0;color:#f3c9d0;font-size:12px;flex-direction:column;gap:2px;min-height:60px;padding:6px 2px}
+nav button.on{color:#fff;box-shadow:inset 0 3px 0 var(--acc)}
+nav svg{width:22px;height:22px}
+.pin{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:280px;margin:12px auto 0}
+.pin button{font-size:22px;min-height:56px}
+.dots{display:flex;justify-content:center;gap:12px;margin:10px 0}.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--wine2)}.dots i.f{background:var(--wine2)}
+.rules h3{font-size:17px;margin:16px 0 6px}.rules ol,.rules ul{padding-left:20px;margin:0}.rules li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.q{padding:10px 12px;border-left:4px solid var(--acc);background:var(--bg);border-radius:6px;margin-bottom:8px}
+.lv{display:inline-block;padding:2px 8px;border-radius:99px;color:#fff;font-size:12px;font-weight:700}
+@media (prefers-reduced-motion:no-preference){.mbody{animation:in .25s ease}@keyframes in{from{opacity:0;transform:translateY(4px)}}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Espero Você</h1><div style="opacity:.85;font-size:15px;margin-top:4px">missões secretas para casais</div>
+  <div class="clock" id="clock"></div>
+</header>
+<main>
+  <section id="t-partida"></section>
+  <section id="t-cartas"></section>
+  <section id="t-revelar"></section>
+  <section id="t-ranking"></section>
+  <section id="t-regras" class="rules"></section>
+</main>
+<nav id="nav"></nav>
+<script>
+{
+const CARDS=[
+[1,"Esconda 3 bilhetes com uma palavra cada, em lugares diferentes. Juntas, as palavras formam uma frase.","O par acha os 3 e monta a frase."],
+[1,"Descubra, sem perguntar diretamente, o que mais incomodou o par hoje e resolva uma coisa pequena sobre isso.","O par percebe a ajuda e não desconfia que foi missão."],
+[1,"Coloque como papel de parede do seu celular uma foto antiga de vocês.","O par nota sozinho e comenta."],
+[1,"Deixe no bolso de uma roupa que o par vai usar um papel escrito “lembrei de você aqui”.","O par encontra durante o dia."],
+[1,"Faça o par contar uma história da infância que você nunca ouviu.","O par confirma, na revelação, que nunca tinha contado."],
+[1,"Aprenda a fazer algo exatamente do jeito do par (o café, a cama, a mala) e faça igual.","O par diz que ficou “do jeito dele(a)”."],
+[1,"Coloque na fila do streaming algo que o par comentou querer ver há tempo.","Vocês assistem pelo menos o começo."],
+[1,"Conte ao par, com detalhes, um momento em que você sentiu orgulho dele(a).","O par se emociona ou agradece."],
+[1,"Resolva sem avisar uma pendência que o par vem adiando há semanas (conserto, conta, ligação).","O par descobre sozinho que está resolvido."],
+[1,"Faça o par escolher o destino da viagem dos sonhos de vocês, sem perguntar diretamente.","O par cita um destino concreto."],
+[1,"Coloque na carteira ou na bolsa do par uma lembrança pequena de vocês (ingresso, foto, bilhete antigo).","O par encontra."],
+[1,"Faça o par contar o que estaria fazendo hoje se não tivesse nenhuma obrigação.","O par responde com algo concreto."],
+[1,"Repita discretamente, ao longo do dia, 3 gestos de carinho que o par costuma fazer com você.","O par não percebe a “imitação”."],
+[1,"Assuma uma obrigação do par e dê a ele(a) 1 hora livre, sem explicar o motivo.","O par aceita e usa a hora."],
+[1,"Faça a casa ter o cheiro de uma lembrança de vocês (uma comida, um perfume, uma flor).","O par lembra do momento pelo cheiro."],
+[1,"Grave um áudio contando o que mais gostou no par hoje e mande só na manhã seguinte.","O par ouve e responde."],
+[2,"Faça o par dizer a palavra sorteada para você (ela aparece abaixo).","O par diz a palavra sem você dizê-la antes."],
+[2,"Faça o par cantar um trecho de música, sem pedir.","O par canta pelo menos um verso."],
+[2,"Mande um áudio de 10 segundos só rindo, sem explicar nada.","O par responde perguntando o que foi."],
+[2,"Invente um “fato” absurdo sobre algum animal e faça o par acreditar.","O par acredita por pelo menos 1 hora."],
+[2,"Faça o par imitar alguém (um parente, um famoso, um personagem).","O par imita."],
+[2,"Use uma peça de roupa do par sem ele(a) perceber.","O par passa 1 hora sem notar."],
+[2,"Invente um nome para algo da casa que não tem nome (o controle que some, a cadeira torta) e use como se sempre tivesse existido.","O par passa a usar o nome."],
+[2,"Troque 3 objetos de lugar na casa, discretamente.","O par não nota a troca em 6 horas."],
+[2,"Faça o par dar uma nota de 0 a 10 para 3 coisas aleatórias do dia.","O par dá as 3 notas sem estranhar."],
+[2,"Invente um toque secreto (um aperto de mão, um gesto) e faça o par repetir.","O par repete o toque 2 vezes no dia."],
+[2,"Faça o par te ensinar algo que ele(a) sabe e você não.","A aula dura pelo menos 5 minutos."],
+[2,"Coloque um objeto inusitado (um pato de borracha, um desenho seu) num lugar que o par usa todo dia.","O par encontra e ri."],
+[2,"Faça o par contar a maior vergonha que já passou na vida.","O par conta."],
+[2,"Desafie o par para uma competição boba e perca de propósito.","O par ganha e não desconfia."],
+[3,"Mude um detalhe seu (cabelo, barba, unha, um perfume novo).","O par nota sozinho antes da noite."],
+[3,"Numa conversa comum, encaixe 3 frases de duplo sentido sem rir.","As 3 frases passam sem você rir."],
+[3,"Mande uma foto de um lugar da casa com a legenda “mais tarde, aqui”.","O par responde no clima."],
+[3,"Escreva com o dedo uma palavra provocante nas costas do par e faça ele(a) adivinhar.","O par adivinha a palavra."],
+[3,"Na frente de outras pessoas, diga uma frase que só o par entenda como provocação.","O par entende e ninguém mais percebe."],
+[3,"Esconda uma peça íntima sua num lugar que o par vai mexer (gaveta, mochila, porta-luvas).","O par encontra."],
+[3,"Deixe o par te pegar “no flagra” se trocando, como se fosse sem querer.","O par para o que está fazendo para olhar."],
+[3,"Durante um filme, faça um carinho que vai subindo devagar e pare de repente.","O par pede para continuar."],
+[3,"Mande uma mensagem que resuma uma lembrança quente de vocês em só 3 palavras.","O par entende qual é a lembrança."],
+[3,"Beije o par de um jeito diferente do habitual (mais lento, segurando o rosto, no pescoço).","O par comenta a diferença."],
+[3,"Durante um dia inteiro, em toda conversa, encoste em alguma parte do corpo do par.","O par não pergunta o motivo até a noite."],
+[3,"Ligue para o par só para dizer, em voz baixa, uma coisa que quer fazer com ele(a).","O par responde à altura."],
+[4,"Esconda um convite com hora marcada dentro de algo que o par vai abrir (carteira, pote de café, capinha do celular).","O par aparece na hora."],
+[4,"Mande uma foto sensual em 3 partes, uma por hora, cada uma mostrando um pouco mais.","O par pede a próxima."],
+[4,"Grave um áudio lendo, em voz baixa, uma frase provocante escrita por você.","O par ouve e responde."],
+[4,"Faça uma massagem usando só a boca e a respiração, sem as mãos.","O par pede para continuar."],
+[4,"Transforme o quarto num cenário (luz, cheiro, música) e chame o par com uma desculpa banal.","O par entra e entende o recado."],
+[4,"Conte ao par, com detalhes, o dia em que você mais sentiu desejo por ele(a).","O par pede mais detalhes."],
+[4,"Proponha um jogo: cada pergunta respondida dá direito a tirar uma peça de roupa do outro.","Os dois terminam sem roupa."],
+[4,"Vende os olhos do par e faça ele(a) adivinhar 3 coisas pelo toque ou pelo sabor.","O par aceita e participa até o fim."],
+[4,"Nas preliminares, imponha uma regra: por 5 minutos, só vale beijar, nada de mãos.","A regra dura os 5 minutos."],
+[4,"Deixe para o par 5 “cupons” quentes, cada um com uma regra escrita por você.","O par usa um cupom ainda nesta rodada."],
+[5,"Entregue ao par, de manhã, um envelope lacrado com o que vai acontecer às 22h. Ele(a) só pode abrir às 21h.","O par respeita o lacre e acontece."],
+[5,"Proponha uma noite em silêncio total: ninguém fala do começo ao fim.","Ninguém quebra o silêncio."],
+[5,"Inverta o roteiro de vocês: faça o oposto do habitual na ordem, no lugar e no ritmo.","O par percebe a inversão."],
+[5,"Acorde o par de um jeito que termine em sexo.","Acontece antes de saírem da cama."],
+[5,"Provoque uma rapidinha de no máximo 10 minutos num horário improvável.","Acontece dentro do tempo."],
+[5,"Descubra durante o dia, sem levantar suspeita, a música favorita do momento do par. À noite, faça um striptease com ela.","O par reconhece a música."],
+[5,"Passe o dia sem roupa íntima e conte ao par só à noite.","O par não percebe antes."],
+[5,"Um se toca enquanto o outro só assiste, sem poder encostar.","Ninguém encosta até o fim."],
+[5,"Durante o sexo, diga em voz baixa o que vai fazer antes de fazer.","Pelo menos 3 vezes na mesma noite."],
+[5,"Brinque com temperatura no corpo do par: gelo, algo morno e a sua respiração.","O par pede mais."],
+[5,"Escreva 3 desejos em papéis dobrados. O par sorteia um sem ler os outros.","O sorteado acontece nesta rodada."],
+[5,"Transem em frente a um espelho.","Os dois se olham no espelho."],
+[5,"Realize uma fantasia que o par contou um dia, sem lembrá-lo(a) antes.","O par reconhece a fantasia."],
+[5,"Façam um ensaio de fotos íntimas a dois. Combinem antes onde as fotos ficam e quando serão apagadas.","O ensaio acontece."],
+[5,"Dedique uma noite só ao prazer do par, sem receber nada em troca.","O par chega ao prazer e você não pede nada."],
+[5,"Esconda um acessório novo dentro de um presente comum (caixa de bombom, embrulho de livro).","O par abre e topa usar."],
+[5,"Faça sexting com uma regra: cada mensagem precisa ser mais ousada que a anterior.","10 mensagens antes da noite."],
+[5,"Controle o ritmo da noite: o par só pode chegar ao clímax quando você disser.","Você adia pelo menos 2 vezes."]];
+const WORDS=["guarda-chuva","pinguim","berinjela","hipopótamo","astronauta","cebolinha","trampolim","jacaré","paralelepípedo","marshmallow","fondue","girafa","submarino","chinelo","abacaxi","tamanduá","pipoca","bumerangue","cogumelo","saxofone","flamingo","lasanha","dinossauro","origami","sereia","pudim","escafandro","canguru","mexerica","telescópio"];
+const LV=["","Carinho","Cumplicidade","Provocação","Sedução","Espero Você"];
+const QS=["Qual missão minha você quase descobriu, e o que te deu a pista?","Que gesto meu nesta rodada você gostaria que virasse hábito?","Qual momento da rodada te fez sentir mais desejado(a)?","Teve alguma missão que te deixou desconfortável? O que mudaria nela?","O que eu fiz que te surpreendeu de verdade?","O que você admira em mim e acha que nunca me disse?","Quando você se sente mais perto de mim no dia a dia?","Qual pequena coisa eu poderia fazer esta semana para facilitar o seu dia?","Qual lembrança nossa você gostaria de reviver?","Que sonho você quer que a gente realize nos próximos 12 meses?","Tem algo que você deseja e nunca pediu?","O que te deixa no clima e eu talvez não saiba?","Existe algo que você gostaria que a gente fizesse com mais calma?","Que fantasia você toparia que entrasse na próxima rodada?","Qual é o seu “não” que eu preciso conhecer?"];
+const KEY="missao-a-dois-v1";
+const blankReveal=()=>({A:{veto:-1,res:["","",""]},B:{veto:-1,res:["","",""]},wrongA:0,wrongB:0,forced:false});
+const def=()=>({tab:"partida",setup:{nameA:"Jogador A",nameB:"Jogador B",code:"",start:"",hours:24},me:"",pin:"",my:{st:["","",""],veto:-1,wrong:0},reveal:blankReveal(),questions:[],history:[]});
+let S=def();
+try{const raw=localStorage.getItem(KEY);if(raw)S=Object.assign(def(),JSON.parse(raw))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $=id=>document.getElementById(id);
+let unlocked=false,pinBuf="",shown=[false,false,false];
+
+function hash(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return h>>>0}
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(arr,seed){const r=rng(hash(seed));const d=arr.slice();for(let i=d.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[d[i],d[j]]=[d[j],d[i]]}return d}
+const LOW=[...CARDS.keys()].filter(i=>CARDS[i][0]<5),HIGH=[...CARDS.keys()].filter(i=>CARDS[i][0]===5);
+function hand(p,veto){const lo=shuf(LOW,"lo:"+S.setup.code),hi=shuf(HIGH,"hi:"+S.setup.code),a=p==="A";
+  const h=a?[lo[0],lo[1],hi[0]]:[lo[2],lo[3],hi[1]];
+  if(veto===0||veto===1)h[veto]=a?lo[4]:lo[5];if(veto===2)h[2]=a?hi[2]:hi[3];return h}
+const word=p=>WORDS[hash("w:"+S.setup.code+p)%WORDS.length];
+const name=p=>p==="A"?S.setup.nameA||"Jogador A":S.setup.nameB||"Jogador B";
+const ready=()=>S.setup.code&&S.setup.start;
+const endT=()=>new Date(S.setup.start).getTime()+S.setup.hours*3600000;
+const ended=()=>ready()&&(Date.now()>=endT()||S.reveal.forced);
+const fmt=ms=>{ms=Math.max(0,ms);const h=Math.floor(ms/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);return `${h}h ${String(m).padStart(2,"0")}m ${String(s).padStart(2,"0")}s`};
+
+function clock(){
+  const c=$("clock");
+  if(!ready()){c.innerHTML="<small>Configure a partida para começar</small>";return}
+  const st=new Date(S.setup.start).getTime(),now=Date.now();
+  if(now<st)c.innerHTML=`<small>Partida ${esc(S.setup.code)} começa em</small><b>${fmt(st-now)}</b>`;
+  else if(!ended())c.innerHTML=`<small>Partida ${esc(S.setup.code)} · tempo restante</small><b>${fmt(endT()-now)}</b>`;
+  else c.innerHTML=`<small>Partida ${esc(S.setup.code)}</small><b>Hora da revelação</b>`;
+}
+
+function confirm2(btn,fn){if(btn.dataset.arm){fn();return}btn.dataset.arm=1;const t=btn.textContent;btn.textContent="Toque de novo para confirmar";setTimeout(()=>{btn.textContent=t;delete btn.dataset.arm},3000)}
+
+function cardHTML(i,idx,open,p){const[l,t,w]=CARDS[idx];
+  return `<div class="mcard"><div class="mhead" style="background:var(--l${l})"><span>${l===5?"Carta Espero Você":"Missão "+String(idx+1).padStart(2,"0")+" · "+LV[l]}</span><span>${l} ${l>1?"pontos":"ponto"}</span></div>
+  ${open?`<div class="mbody"><p>${esc(t)}</p>${idx===16&&p?`<p><b>Sua palavra:</b> ${esc(word(p))}</p>`:""}<p class="win"><b>Para vencer:</b> ${esc(w)}</p></div>`:""}`}
+
+function rPartida(){
+  const s=S.setup;
+  $("t-partida").innerHTML=`<h2>Partida</h2>
+  <div class="box"><div class="row"><div><label for="nA">Jogador A</label><input id="nA" value="${esc(s.nameA)}"></div><div><label for="nB">Jogador B</label><input id="nB" value="${esc(s.nameB)}"></div></div>
+  <label for="cd">Código da partida</label><div class="row"><input id="cd" inputmode="numeric" maxlength="6" value="${esc(s.code)}" placeholder="ex.: 4827"><button id="gen">Gerar código</button></div>
+  <label for="ini">Início</label><div class="row"><input id="ini" type="datetime-local" value="${esc(s.start)}"><button id="now">Agora</button></div>
+  <label for="hr">Duração</label><select id="hr"><option value="24"${s.hours==24?" selected":""}>24 horas</option><option value="48"${s.hours==48?" selected":""}>48 horas</option></select>
+  <p class="hint">Os dois celulares precisam ter o mesmo código, início e duração. Assim os dois sorteiam as mesmas cartas, sem internet.</p></div>
+  <div class="box"><label>Neste celular, eu sou</label><div class="row"><button id="meA" class="${S.me==="A"?"sel":""}">${esc(name("A"))}</button><button id="meB" class="${S.me==="B"?"sel":""}">${esc(name("B"))}</button></div>
+  <label for="pn">Código de segurança (PIN de 4 dígitos para abrir suas cartas)</label><input id="pn" type="password" inputmode="numeric" maxlength="4" placeholder="${S.pin?"PIN definido — digite outro para trocar":"Opcional"}">
+  <p class="hint">O PIN impede que o par espie suas cartas no seu celular. Fotos e provas ficam fora do app.</p></div>
+  <button id="nova" class="pri" style="width:100%">Nova partida (zera cartas e revelação)</button>`;
+  const upd=()=>{s.nameA=$("nA").value;s.nameB=$("nB").value;s.code=$("cd").value.replace(/\D/g,"");s.start=$("ini").value;s.hours=+$("hr").value;save();clock()};
+  ["nA","nB","cd","ini","hr"].forEach(i=>$(i).addEventListener("change",()=>{upd();rPartida()}));
+  $("gen").onclick=()=>{$("cd").value=String(1000+Math.floor(Math.random()*9000));upd();rPartida()};
+  $("now").onclick=()=>{const d=new Date();d.setSeconds(0,0);const p=n=>String(n).padStart(2,"0");$("ini").value=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;upd()};
+  $("meA").onclick=()=>{S.me="A";save();rPartida()};$("meB").onclick=()=>{S.me="B";save();rPartida()};
+  $("pn").addEventListener("change",e=>{const v=e.target.value.replace(/\D/g,"");if(v.length===4){S.pin=String(hash("pin:"+v));unlocked=false;save();rPartida()}else if(v===""){}else{e.target.value="";e.target.placeholder="Use exatamente 4 números"}});
+  $("nova").onclick=e=>confirm2(e.target,()=>{S.my={st:["","",""],veto:-1,wrong:0};S.reveal=blankReveal();S.questions=[];S.setup.code="";S.setup.start="";unlocked=false;shown=[false,false,false];save();rPartida();clock()});
+}
+
+function rCartas(){
+  const el=$("t-cartas");
+  if(!ready()||!S.me){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">Na aba Partida, preencha o código, o início e escolha quem você é neste celular.</div>`;return}
+  if(S.pin&&!unlocked){
+    el.innerHTML=`<h2>Minhas cartas</h2><div class="box" style="text-align:center">Digite seu código de segurança<div class="dots">${[0,1,2,3].map(i=>`<i class="${i<pinBuf.length?"f":""}"></i>`).join("")}</div><div id="pmsg" class="hint"></div>
+    <div class="pin">${[1,2,3,4,5,6,7,8,9,"",0,"⌫"].map(k=>k===""?"<span></span>":`<button data-k="${k}">${k}</button>`).join("")}</div></div>`;
+    el.querySelectorAll(".pin button").forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k==="⌫")pinBuf=pinBuf.slice(0,-1);else if(pinBuf.length<4)pinBuf+=k;
+      if(pinBuf.length===4){if(String(hash("pin:"+pinBuf))===S.pin){unlocked=true;pinBuf=""}else{pinBuf="";rCartas();$("pmsg").textContent="PIN errado. Tente de novo.";return}}rCartas()});
+    return}
+  const h=hand(S.me,S.my.veto),now=Date.now(),st=new Date(S.setup.start).getTime();
+  if(now<st){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">As cartas aparecem quando a partida começar.</div>`;return}
+  const lab={ok:"Cumpri",pego:"Fui descoberto(a)",no:"Não fiz"};
+  el.innerHTML=`<h2>Minhas cartas · ${esc(name(S.me))}</h2><p class="hint" style="margin:-6px 0 12px">Toque numa carta lacrada para ver. Ela fecha de novo ao sair da aba.</p>`+
+  h.map((idx,i)=>cardHTML(i,idx,shown[i],S.me)+(shown[i]?`<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-i="${i}" data-s="${k}" class="${S.my.st[i]===k?"sel":""}">${lab[k]}</button>`).join("")}</div>
+   ${S.my.veto<0&&!ended()?`<button data-v="${i}" style="width:100%;margin-top:8px">Usar meu veto nesta carta</button>`:""}</div>`:`<button class="seal" data-o="${i}">${i===2?"Carta Espero Você":"Missão"} lacrada · toque para abrir</button>`)+"</div>").join("")+
+  `<div class="box"><label>Acusei e errei (cada erro tira 1 ponto)</label><div class="step"><button id="wm">−</button><b>${S.my.wrong}</b><button id="wp">+</button></div>
+  <p class="hint">${S.my.veto>=0?"Veto já usado nesta partida.":"Você tem 1 veto: troca uma carta sem explicar."} Anote aqui para lembrar na revelação.</p></div>`;
+  el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{shown[+b.dataset.o]=true;rCartas()});
+  el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;S.my.st[i]=S.my.st[i]===b.dataset.s?"":b.dataset.s;save();rCartas()});
+  el.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>confirm2(b,()=>{const i=+b.dataset.v;S.my.veto=i;S.my.st[i]="";save();rCartas()}));
+  $("wm").onclick=()=>{S.my.wrong=Math.max(0,S.my.wrong-1);save();rCartas()};$("wp").onclick=()=>{S.my.wrong++;save();rCartas()};
+}
+
+function score(){const r=S.reveal,hA=hand("A",r.A.veto),hB=hand("B",r.B.veto);let a=0,b=0;
+  r.A.res.forEach((x,i)=>{if(x==="ok")a+=CARDS[hA[i]][0];if(x==="pego")b++});
+  r.B.res.forEach((x,i)=>{if(x==="ok")b+=CARDS[hB[i]][0];if(x==="pego")a++});
+  return{a:a-r.wrongA,b:b-r.wrongB,hA,hB}}
+
+function shareText(){const r=S.reveal,sc=score(),ic={ok:"✅",pego:"🕵️",no:"⏸️","":"⏸️"};
+  const lines=[`💌 Espero Você · partida ${S.setup.code}`,"",`🏆 ${name("A")} ${sc.a} x ${sc.b} ${name("B")}`,""];
+  ["A","B"].forEach(p=>{const h=p==="A"?sc.hA:sc.hB;lines.push(`Missões de ${name(p)}:`);h.forEach((idx,i)=>lines.push(`${ic[r[p].res[i]]} [N${CARDS[idx][0]}] ${CARDS[idx][1]}`));lines.push("")});
+  if(S.questions.length){lines.push("💬 Perguntas da rodada:");S.questions.forEach((q,i)=>lines.push(`${i+1}. ${QS[q]}`));lines.push("")}
+  lines.push("✅ cumprida · 🕵️ descoberta · ⏸️ não feita");return lines.join("\n")}
+
+function rRevelar(){
+  const el=$("t-revelar");
+  if(!ready()){el.innerHTML=`<h2>Revelação</h2><div class="box">Configure a partida primeiro.</div>`;return}
+  if(!ended()){el.innerHTML=`<h2>Revelação</h2><div class="box">As missões continuam secretas até o tempo acabar. Façam a revelação juntos, em um celular só.<br><br><button id="force">Encerrar a partida agora</button></div>`;
+    $("force").onclick=e=>confirm2(e.target,()=>{S.reveal.forced=true;save();renderAll()});return}
+  const r=S.reveal,sc=score(),lab={ok:"Cumprida",pego:"Descoberta",no:"Não fez"};
+  const block=p=>{const h=p==="A"?sc.hA:sc.hB;return `<div class="box"><h2 style="font-size:22px">${esc(name(p))}</h2>
+    <label for="v${p}">Veto usado</label><select id="v${p}"><option value="-1">Não usou</option>${[0,1,2].map(i=>`<option value="${i}"${r[p].veto===i?" selected":""}>Na carta ${i+1}</option>`).join("")}</select>
+    ${h.map((idx,i)=>`<div style="margin-top:12px">${cardHTML(i,idx,true,p)}<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-p="${p}" data-i="${i}" data-s="${k}" class="${r[p].res[i]===k?"sel":""}">${lab[k]}</button>`).join("")}</div></div></div></div>`).join("")}
+    <label>Acusações erradas de ${esc(name(p))}</label><div class="step"><button data-w="${p}" data-d="-1">−</button><b>${r["wrong"+p]}</b><button data-w="${p}" data-d="1">+</button></div></div>`};
+  el.innerHTML=`<h2>Revelação</h2><div class="box score"><div><b>${sc.a}</b><span>${esc(name("A"))}</span></div><span>x</span><div><b>${sc.b}</b><span>${esc(name("B"))}</span></div></div>
+  ${block("A")}${block("B")}
+  <div class="box"><h2 style="font-size:22px">Perguntas da rodada</h2>${S.questions.map(q=>`<div class="q">${esc(QS[q])}</div>`).join("")||'<p class="hint">Sorteie 3 perguntas para conversar. Não valem pontos.</p>'}
+  <button id="drawq" style="width:100%;margin-top:8px">${S.questions.length?"Sortear outras":"Sortear 3 perguntas"}</button></div>
+  <div class="row"><button id="savr" class="pri">Salvar no ranking</button><a id="wa" class="btn pri" href="#" target="_blank" rel="noopener">Enviar no WhatsApp</a></div>
+  <div class="row" style="margin-top:8px"><button id="cp">Copiar texto</button></div><p id="msg" class="hint"></p>`;
+  ["A","B"].forEach(p=>$("v"+p).onchange=e=>{r[p].veto=+e.target.value;r[p].res=["","",""];save();rRevelar()});
+  el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const p=b.dataset.p,i=+b.dataset.i;r[p].res[i]=r[p].res[i]===b.dataset.s?"":b.dataset.s;save();rRevelar()});
+  el.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const k="wrong"+b.dataset.w;r[k]=Math.max(0,r[k]+ +b.dataset.d);save();rRevelar()});
+  $("drawq").onclick=()=>{const pool=[...QS.keys()];S.questions=[];for(let i=0;i<3;i++)S.questions.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);save();rRevelar()};
+  $("savr").onclick=()=>{const sc2=score(),e={date:new Date().toISOString(),code:S.setup.code,nameA:name("A"),nameB:name("B"),a:sc2.a,b:sc2.b};
+    const i=S.history.findIndex(x=>x.code===e.code&&x.start===S.setup.start);e.start=S.setup.start;if(i>=0)S.history[i]=e;else S.history.unshift(e);save();$("msg").textContent="Partida salva no ranking."};
+  $("wa").onclick=e=>{e.currentTarget.href="https://wa.me/?text="+encodeURIComponent(shareText())};
+  $("cp").onclick=async()=>{try{await navigator.clipboard.writeText(shareText());$("msg").textContent="Texto copiado. Cole no WhatsApp."}catch(err){$("msg").textContent="Não foi possível copiar neste aparelho."}};
+}
+
+function rRanking(){
+  const el=$("t-ranking"),tot={};
+  S.history.forEach(h=>{[[h.nameA,h.a,h.b],[h.nameB,h.b,h.a]].forEach(([n,m,o])=>{tot[n]=tot[n]||{p:0,w:0,j:0};tot[n].p+=m;tot[n].j++;if(m>o)tot[n].w++})});
+  const rows=Object.entries(tot).sort((x,y)=>y[1].w-x[1].w||y[1].p-x[1].p);
+  const txt=()=>["💌 Espero Você · ranking geral",""].concat(rows.map(([n,t],i)=>`${i+1}º ${n}: ${t.w} vitórias · ${t.p} pontos em ${t.j} partidas`)).join("\n");
+  el.innerHTML=`<h2>Ranking</h2>${rows.length?`<div class="box"><table><thead><tr><th>Jogador</th><th class="n">Vitórias</th><th class="n">Pontos</th></tr></thead><tbody>${rows.map(([n,t])=>`<tr><td>${esc(n)}</td><td class="n">${t.w}</td><td class="n">${t.p}</td></tr>`).join("")}</tbody></table></div>
+  <div class="box"><label>Partidas</label><table><tbody>${S.history.map(h=>`<tr><td>${new Date(h.date).toLocaleDateString("pt-BR")} · ${esc(h.code)}</td><td class="n">${esc(h.nameA)} ${h.a} x ${h.b} ${esc(h.nameB)}</td></tr>`).join("")}</tbody></table></div>
+  <div class="row"><a id="wr" class="btn pri" href="#" target="_blank" rel="noopener">Enviar ranking no WhatsApp</a><button id="clr">Apagar histórico</button></div>`
+  :`<div class="box">Nenhuma partida salva ainda. Depois da revelação, toque em “Salvar no ranking”.</div>`}`;
+  if(rows.length){$("wr").onclick=e=>{e.currentTarget.href="https://wa.me/?text="+encodeURIComponent(txt())};$("clr").onclick=e=>confirm2(e.target,()=>{S.history=[];save();rRanking()})}
+}
+
+function rRegras(){
+  $("t-regras").innerHTML=`<h2>Como funciona</h2>
+  <div class="box"><p style="margin:0">Cada pessoa recebe 3 missões secretas: 2 sorteadas dos níveis 1 a 4 e 1 Carta Espero Você, sempre do nível 5. Vocês têm 24 ou 48 horas para cumpri-las sem o par perceber. No fim, quem somar mais pontos vence e escolhe um prêmio.</p>
+  <table style="margin-top:12px"><tbody>${[1,2,3,4,5].map(l=>`<tr><td><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]}</td><td class="n">${l} ${l>1?"pontos":"ponto"}</td></tr>`).join("")}</tbody></table></div>
+  <div class="box"><h3>Passo a passo</h3><ol>
+  <li>Na aba Partida, gerem um código, definam o início e a duração. Os dois digitam os mesmos dados no próprio celular.</li>
+  <li>Cada um escolhe quem é (A ou B) e, se quiser, cria um PIN de 4 dígitos para proteger as cartas.</li>
+  <li>Em Cartas, abra suas 3 missões. Ninguém vê as do outro.</li>
+  <li>Durante o jogo, quem desconfiar diz “Te peguei!” e descreve a missão.</li>
+  <li>Quando o relógio zerar, sentem juntos e usem a aba Revelação em um celular só.</li>
+  <li>Marquem cada missão, sorteiem as perguntas, salvem no ranking e, se quiserem, enviem o resumo no WhatsApp.</li></ol>
+  <h3>Pontuação</h3><ul>
+  <li>Missão cumprida sem ser descoberta: pontos do nível (1 a 5).</li>
+  <li>“Te peguei!” certo: a missão do par falha e quem acusou ganha 1 ponto.</li>
+  <li>“Te peguei!” errado: quem acusou perde 1 ponto.</li>
+  <li>Cada jogador tem 1 veto por partida para trocar uma carta sem explicar. A nova carta vem da mesma faixa.</li></ul>
+  <h3>Regras de cuidado</h3><ul>
+  <li>“Não” encerra qualquer missão na hora, sem perda de pontos.</li>
+  <li>Nada com terceiros, ciúme, humilhação ou exposição em público.</li>
+  <li>Nível 5: combinem antes uma palavra de segurança, que interrompe tudo.</li>
+  <li>Níveis 4 e 5 só quando estiverem a sós.</li>
+  <li>Fotos, vídeos e provas ficam fora do app. Fotos íntimas só entre vocês, em pasta protegida e fora de backup compartilhado.</li>
+  <li>Briga durante a rodada pausa o jogo. Retomem quando os dois quiserem.</li></ul>
+  <h3>Prêmios</h3><ul>
+  <li>Vitória por 1 a 3 pontos: café na cama, escolher o filme da semana, uma tarefa de casa, uma playlist.</li>
+  <li>Por 4 a 7 pontos: massagem de 20 minutos, uma manhã livre, jantar preparado pelo perdedor, um banho preparado.</li>
+  <li>Por 8 ou mais: encontro planejado pelo perdedor, um pedido íntimo realizado, um “vale-sim”, uma noite fora.</li>
+  <li>Empate: escolham juntos um prêmio da faixa do meio e façam um para o outro.</li></ul>
+  <p class="hint">O PIN protege as cartas de olhadas rápidas, mas não é criptografia. O app não usa internet, só o botão do WhatsApp.</p></div>
+  <div class="box"><h3 style="margin-top:0">Perguntas pós-rodada</h3><p class="hint" style="margin-top:0">Na revelação, o app sorteia 3. Elas não valem pontos: cada um responde sem ser interrompido.</p><ol>${QS.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>
+  <div class="box"><h3 style="margin-top:0">Baralho completo (70 cartas)</h3><p class="hint" style="margin-top:0">Ver o baralho não revela quais cartas cada um sorteou.</p>
+  ${[1,2,3,4,5].map(l=>`<details style="margin-top:10px"><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px"><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]} · ${CARDS.filter(c=>c[0]===l).length} cartas</summary>
+  ${CARDS.map((c,idx)=>c[0]===l?cardHTML(0,idx,true)+"</div>":"").join("")}</details>`).join("")}</div>`;
+}
+
+const TABS=[["partida","Partida",'<path d="M4 6h16M4 12h16M4 18h10"/>'],["cartas","Cartas",'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/>'],["revelar","Revelar",'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'],["ranking","Ranking",'<path d="M6 20V10M12 20V4M18 20v-7"/>'],["regras","Regras",'<circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/>']];
+function rNav(){$("nav").innerHTML=TABS.map(([k,l,p])=>`<button data-t="${k}" class="${S.tab===k?"on":""}" aria-label="${l}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>${l}</button>`).join("");
+  $("nav").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(S.tab==="cartas"&&b.dataset.t!=="cartas"){unlocked=false;shown=[false,false,false];pinBuf=""}S.tab=b.dataset.t;save();renderAll();scrollTo(0,0)})}
+function renderAll(){rNav();document.querySelectorAll("main section").forEach(s=>s.classList.toggle("on",s.id==="t-"+S.tab));
+  ({partida:rPartida,cartas:rCartas,revelar:rRevelar,ranking:rRanking,regras:rRegras})[S.tab]();clock()}
+if(S.tab==="cartas")S.tab="partida";
+renderAll();
+let wasEnded=ended();
+const tick=setInterval(()=>{clock();const e=ended();if(e!==wasEnded){wasEnded=e;if(S.tab!=="partida")renderAll()}},1000);
+document.addEventListener("visibilitychange",()=>{if(document.hidden){unlocked=false;shown=[false,false,false];if(S.tab==="cartas")rCartas()}});
+}
+</script>
+</body>
