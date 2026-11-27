@@ -112,6 +112,10 @@
   .capa{text-align:center;padding:30px 20px 20px}
   .capa h1{font-size:36px;margin:0 0 10px;color:var(--txt)}
   .capa p{font-family:Georgia,serif;font-size:19px;line-height:1.45;color:var(--txt);margin:0 auto 22px;max-width:30ch;overflow-wrap:normal;hyphens:none}
+  .menu a.ritlink{display:block;text-decoration:none;text-align:left;background:linear-gradient(160deg,#1f1518,#141012);border:1px solid #3a2a2e;border-radius:14px;padding:16px;color:var(--txt)}
+  .menu a.ritlink small{display:block;color:var(--gold);letter-spacing:2px;font-size:10px;text-transform:uppercase;margin-bottom:5px}
+  .menu a.ritlink span{display:block;font-family:Georgia,serif;font-size:20px}
+  .menu a.ritlink em{display:block;font-style:normal;color:var(--mute);font-size:13px;margin-top:4px}
   .rotgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
   .rotgrid button{text-align:left;background:linear-gradient(160deg,#2b1015,#141012);border:1px solid #4a2a30;border-radius:14px;padding:16px 14px;color:var(--txt);font-family:inherit;min-height:96px}
   .rotgrid span{display:block;font-family:Georgia,serif;font-size:20px}
@@ -909,6 +913,7 @@ function renderPlano(){
     h+=`<div class="big">${dias>0?dias:dias===0?"Hoje":"—"}</div><div class="muted">${dias>0?(dias===1?"dia para o encontro":"dias para o encontro")+" · ":""}${dt}</div>`; }
   h+=esquentaHtml(diasAte(d));
   h+=`<h1 style="margin-top:10px">Plano da noite</h1><p>Montado com o que os dois marcaram. É um roteiro, não uma obrigação. Na hora, qualquer um pode mudar.</p>`;
+  h+=`<h2>Abertura</h2><div class="menu"><a class="ritlink" href="rituais.html?r=entrada&volta=nosdois.html%23matches"><small>Ritual · 10 min</small><span>Ritual de entrada</span><em>Para passar da rotina para um momento a dois.</em></a></div>`;
   const dos2 = ms.filter(m=>m.eu>=2&&m.ele>=2), cat = id => { const c=CATALOGO.find(c=>c.itens.some(i=>i.id===id)); return c?c.c:"Ideias"; };
   const princ = dos2.filter(m=>cat(m.it.id)!=="Com terceiros (fantasia)").slice(0,5);
   const aquec = ms.filter(m=>!princ.includes(m)&&["Clima e lugares","Toque e sentidos","Personagens e fetiches","Oral","Ideias"].includes(cat(m.it.id))).slice(0,3);
@@ -932,6 +937,7 @@ function renderPlano(){
     <button onclick="go('jogar');abrirJogo('dado')"><small>Jogo</small><span>Dado da Noite</span></button>
     <button onclick="go('jogar');abrirJogo('vd')"><small>Jogo</small><span>Verdade ou Desafio</span></button></div>
     <div class="note">O match mostra o que os dois querem. O consentimento continua sendo combinado na hora.</div>`;
+  h+=`<h2>Fechamento</h2><div class="menu"><a class="ritlink" href="rituais.html?r=depois&volta=nosdois.html%23matches"><small>Ritual · 5 min</small><span>Ritual de depois</span><em>Para ficar mais um pouquinho juntos no fim.</em></a></div><p class="muted">Se vocês encerrarem antes, tudo bem.</p>`;
   return h;
 }
 

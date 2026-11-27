@@ -84,7 +84,7 @@ textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:12px
     <a href="nosdois.html"><b>Nós Dois</b><span>desejos em comum e plano da noite</span></a>
     <a href="nosdois.html#jogar"><b>Jogar agora</b><span>atalho para os jogos do Nós Dois</span></a>
     <a href="conversa.html"><b>Conversa</b><span>para conversar com calma</span></a>
-    <a href="#" id="lnkRituais"><b>Rituais</b><span>momentos guiados do casal</span></a>
+    <a href="rituais.html"><b>Rituais</b><span>momentos guiados do casal</span></a>
   </nav>
   <div class="small"><button id="btnComo">Como funciona</button><button id="btnCfg">Configurações</button></div>
 </section>
@@ -167,22 +167,7 @@ textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:12px
   </div>
 </section>
 
-<!-- RITUAIS -->
-<section class="view" id="v-rituais">
-  <button class="back" data-go="home">‹ Início</button>
-  <h1>Rituais</h1>
-  <div class="box">
-    <p style="margin-top:0">O passo a passo dos rituais ainda está sendo escrito e entra numa próxima atualização:</p>
-    <ul class="como">
-      <li><b>Ritual de entrada</b> (10 min)</li>
-      <li><b>Ritual de depois</b> (5 min)</li>
-      <li><b>Ritual de fim de dia</b> (15 min)</li>
-      <li><b>Beijo de 6 segundos</b></li>
-      <li><b>Ritual de despedida</b></li>
-      <li><b>Ritual de reencontro</b></li>
-    </ul>
-  </div>
-</section>
+
 </div>
 
 <script>
@@ -233,7 +218,12 @@ async function press(k){
     }
   } finally { busy=false; }
 }
-function afterUnlock(){ if(!settings.ready()){ show("cfg"); $("cfgMsg").textContent="Configure o app para começar."; } else show("home"); }
+function afterUnlock(){
+  if(!settings.ready()){ show("cfg"); $("cfgMsg").textContent="Configure o app para começar."; return; }
+  let r=null; try{ r=sessionStorage.getItem("nos2.retorno"); sessionStorage.removeItem("nos2.retorno"); }catch(e){}
+  if(r&&/^[a-z]+\.html(\?[\w=&%.#-]*)?(#[a-z]+)?$/i.test(r)&&!/^index\.html/.test(r)){ location.replace("./"+r); return; } // volta para onde estava
+  show("home");
+}
 let wipeArm=0;
 function forgot(){
   const L=$("pinLinks");
@@ -244,7 +234,7 @@ function forgot(){
 }
 function start(){
   if(!pin.exists()){ show("pin"); setPinMode("create","Crie um PIN de 4 dígitos"); return; }
-  if(lock.isUnlocked()){ const h=location.hash.slice(1); show(["cfg","como","rituais"].includes(h)?h:"home"); return; }
+  if(lock.isUnlocked()){ const h=location.hash.slice(1); show(["cfg","como"].includes(h)?h:"home"); return; }
   show("pin"); setPinMode("enter","Digite o PIN"); if(waiting()) runWait();
 }
 window.Nos2Index={recheck(){ if(!$("v-pin").classList.contains("on")&&!lock.isUnlocked()){ show("pin"); setPinMode("enter","Digite o PIN"); } }};
@@ -255,6 +245,8 @@ function fmtD(iso){ return new Date(iso+"T12:00").toLocaleDateString("pt-BR"); }
 function hhmm(ms){ return new Date(ms).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }
 function renderHome(){
   const out=[], today=new Date().toISOString().slice(0,10), now=Date.now();
+  const rit=store.get("ritual.sessao",null);
+  if(rit&&rit.savedAt&&Date.now()-rit.savedAt<12*3600*1000&&(rit.fase==="pausa"||rit.fase==="passo")) out.push(`<div class="aviso">Um ritual ficou pausado. <a href="rituais.html">Continuar</a></div>`);
   const cv=store.get("conversa",{}); const due=(cv.combinados||[]).filter(c=>c.ativo!==false&&c.revisao&&c.revisao<=today);
   if(due.length) out.push(`<div class="aviso">${due.length===1?"Um combinado chegou":"Combinados chegaram"} na data de revisão. <a href="conversa.html#revisao">Revisar agora</a></div>`);
   const ev=store.get("espero",{}); const p=ev.partida;
@@ -268,7 +260,6 @@ function renderHome(){
 }
 $("btnComo").onclick=()=>show("como");
 $("btnCfg").onclick=()=>show("cfg");
-$("lnkRituais").onclick=e=>{ e.preventDefault(); show("rituais"); };
 
 /* ---------- CONFIGURAÇÕES ---------- */
 let draft;

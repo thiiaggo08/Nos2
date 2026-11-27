@@ -328,4 +328,4 @@ Escrito no chat e aprovado item por item antes de entrar aqui.
 - [ ] Esquenta: 2 dias novos (de 12 para 14)
 
 **Rituais**
-- [ ] Passo a passo de: entrada, depois, fim de dia, beijo de 6 segundos, despedida e reencontro
+- [x] APROVADO em 27/11/2026: ver CONTEUDO-RITUAIS.md

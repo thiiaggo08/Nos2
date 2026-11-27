@@ -1,8 +1,8 @@
 /* Nós 2 — service worker: põe tudo em cache na primeira abertura; depois funciona sem internet. */
-const VERSION = "nos2-v12";
+const VERSION = "nos2-v13";
 const FILES = [
-  "./", "./index.html", "./espero.html", "./nosdois.html", "./conversa.html",
-  "./js/core.js", "./js/espero-data.js", "./js/conversa-data.js",
+  "./", "./index.html", "./espero.html", "./nosdois.html", "./conversa.html", "./rituais.html",
+  "./js/core.js", "./js/espero-data.js", "./js/conversa-data.js", "./js/rituais-data.js",
   "./manifest.webmanifest", "./icons/apple-touch-icon.png", "./icons/icon-192.png", "./icons/icon-512.png"
 ];
 self.addEventListener("install", e => {

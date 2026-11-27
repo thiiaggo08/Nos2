@@ -337,7 +337,7 @@ function rRevelar(){
   if(st===0) h+=revealStep();
   else if(st===1) h+=placarStep();
   else if(st===2) h+=`<div class="box"><h3 style="margin-top:0">Duas perguntas</h3><p class="hint" style="margin-top:0">Cada um responde as duas, sem ser interrompido.</p>${FECHO.map(q=>`<div class="q">${esc(q)}</div>`).join("")}<a class="btn full" href="conversa.html">Abrir uma Conversa</a></div>`;
-  else if(st===3) h+=`<div class="box"><h3 style="margin-top:0">Rodada final</h3><p>Que tal encerrar com uma massagem guiada do Nós Dois?</p><a class="btn pri full" href="nosdois.html#massagem">Abrir a Massagem guiada</a><p class="hint">Os rituais do casal entram numa próxima atualização.</p></div>`;
+  else if(st===3) h+=`<div class="box"><h3 style="margin-top:0">Rodada final</h3><p>Que tal encerrar com uma massagem guiada do Nós Dois?</p><a class="btn pri full" href="nosdois.html#massagem">Abrir a Massagem guiada</a><p style="margin-top:14px">Ou encerrem com um ritual.</p><a class="btn full" href="rituais.html?volta=espero.html">Escolher um ritual</a></div>`;
   else if(st===4) h+=favStep();
   else h+=nextStep();
   h+=`<div class="row" style="margin-top:4px">${st>0?`<button id="prev">Voltar</button>`:""}${st<5?`<button id="next" class="pri" ${st===4&&!(r.fav.A&&r.fav.B)?"disabled":""}>Continuar</button>`:""}</div>`;

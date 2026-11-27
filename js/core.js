@@ -111,10 +111,11 @@ const lock={
   unlock(){ try{ sessionStorage.setItem("nos2.unlocked","1"); sessionStorage.removeItem("nos2.hiddenAt"); }catch(e){} },
   lock(go){ try{ sessionStorage.removeItem("nos2.unlocked"); sessionStorage.removeItem("nos2.hiddenAt"); }catch(e){} if(go!==false) location.replace("./index.html"); }
 };
+function irParaPIN(){ try{ sessionStorage.setItem("nos2.retorno",(location.pathname.split("/").pop()||"index.html")+location.search+location.hash); }catch(e){} document.documentElement.style.visibility="hidden"; location.replace("./index.html"); }
 function onHide(){ try{ if(sessionStorage.getItem("nos2.unlocked")==="1") sessionStorage.setItem("nos2.hiddenAt",String(Date.now())); }catch(e){} }
 function onShow(){
   if(PAGE==="index"){ if(window.Nos2Index) window.Nos2Index.recheck(); return; }
-  if(!lock.isUnlocked()){ document.documentElement.style.visibility="hidden"; location.replace("./index.html"); }
+  if(!lock.isUnlocked()) irParaPIN();
   else { try{ sessionStorage.removeItem("nos2.hiddenAt"); }catch(e){} }
 }
 document.addEventListener("visibilitychange",()=>{ if(document.hidden) onHide(); else onShow(); });
@@ -123,7 +124,7 @@ window.addEventListener("pageshow",e=>{ if(e.persisted) onShow(); });
 
 /* páginas de modo: nada aparece sem PIN */
 if(PAGE && PAGE!=="index"){
-  if(!lock.isUnlocked()||!pin.exists()){ document.documentElement.style.visibility="hidden"; location.replace("./index.html"); }
+  if(!lock.isUnlocked()||!pin.exists()) irParaPIN();
 }
 
 /* service worker */

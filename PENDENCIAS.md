@@ -33,7 +33,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 4. Ajustes técnicos recomendados
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | ✅ | Spec do usuário (27/11/2026): ao ir para segundo plano ou bloquear a tela, pausa o cronômetro, para a narração e salva sessão, etapa, tempo restante, vez e placar; tempo fora não é descontado. Volta < 2 min: atividade pausada; ≥ 2 min: PIN e depois atividade pausada. Tela “Querem continuar de onde pararam?” com “Retomar” (silêncio, tempo salvo) e “Encerrar por hoje” (não conclui a etapa). Botão “Ouvir instrução” relê só a etapa atual, sem sobrepor e sem mexer em tempo/etapa/vez/placar. Prazos das missões do Espero Você e contagem do encontro continuam correndo. |
+| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | ✅ (🚀 só nos Rituais) | Spec do usuário (27/11/2026): ao ir para segundo plano ou bloquear a tela, pausa o cronômetro, para a narração e salva sessão, etapa, tempo restante, vez e placar; tempo fora não é descontado. Volta < 2 min: atividade pausada; ≥ 2 min: PIN e depois atividade pausada. Tela “Querem continuar de onde pararam?” com “Retomar” (silêncio, tempo salvo) e “Encerrar por hoje” (não conclui a etapa). Botão “Ouvir instrução” relê só a etapa atual, sem sobrepor e sem mexer em tempo/etapa/vez/placar. Prazos das missões do Espero Você e contagem do encontro continuam correndo. |
 | 4.1a | Pausa de 20 min da Conversa | ✅ | Continua contando o tempo real fora do app. |
 | 4.1b | Narração depois de “Retomar” | ✅ | Etapas seguintes voltam a ser narradas; só a interrompida fica em silêncio (salvo “Ouvir instrução”). |
 | 4.1c | Validade da sessão pausada | ✅ | 12 horas; depois some sozinha. |
@@ -50,7 +50,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 5. Conteúdo a escrever (PENDENTE no CONTEUDO-FASE2.md)
 | # | Pendência | Status |
 |---|---|---|
-| 5.1 | Rituais (6) | ⏳ |
+| 5.1 | Rituais (6) | 🚀 | Aplicado em 27/11/2026 (rituais.html). Menu na página principal; Ritual de entrada abre e Ritual de depois fecha o Plano da noite; Rodada final do Espero Você abre a escolha dos rituais; pausa ao sair da tela, PIN a partir de 2 min, “Querem continuar de onde pararam?” com “Retomar” (silencioso) e “Encerrar por hoje”; sessão guardada por 12 h. Falta: teste no iPhone (ícone da Tela de Início, modo avião, trocar de app e bloquear a tela). |
 | 5.2 | Prêmios do Espero Você (~20, incluindo Semana e casal) | ⏳ |
 | 5.3 | Itens novos do Nós Dois (fantasias, Quem, posições, mapa, dado, V/D, preliminares, cartas, Isso ou aquilo, massagens, Esquenta) | ⏳ |
 
@@ -75,3 +75,11 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 8.2 | Código antigo e última troca | 🚀 | Identificação por aparelho, pareamento e revisão; aviso “Este código é de uma troca anterior. Peça um código novo.”; reimportar o mesmo código não muda nada; “Última troca neste iPhone” na tela. |
 | 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
 | 8.4 | Quem do casal só com concordâncias | 🚀 | Comparação pela identidade absoluta (A, B, os dois, nenhum). Discordâncias e respostas em branco ficam fora. A proteção durante a troca entra no 8.1B. |
+
+## 9. Testes no iPhone real (roteiro)
+| # | Teste | Status |
+|---|---|---|
+| 9.1 | Rituais: abrir pelo ícone da Tela de Início em modo avião; no meio de um passo, trocar de app por menos de 2 min e voltar (deve aparecer “Querem continuar…” com o tempo preservado) | ⏳ |
+| 9.2 | Rituais: bloquear a tela por mais de 2 min e voltar (deve pedir o PIN e depois mostrar o ritual pausado) | ⏳ |
+| 9.3 | Rituais: “Retomar” continua o tempo de onde parou, sem som | ⏳ |
+| 9.4 | Rituais: o sino e a vibração no fim do passo (a vibração não funciona no iPhone pelo navegador; o sino depende do modo silencioso) | ⏳ |
