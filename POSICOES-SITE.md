@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 sugeridas (lote 2, aguardam aprovação). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -69,56 +69,56 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 444 | Tábua | 🟢 Fácil | Cara a cara |
 | 443 | Atordoador | 🟠 Intermediário | Cara a cara |
 | 442 | Pônei selvagem | 🟢 Fácil | (a conferir) |
-| 441 | Virada | 🟢 Fácil | |
-| 440 | Martelo de Thor | 🔴 Difícil | |
-| 439 | Cowgirl na cadeira | 🟠 Intermediário | |
-| 438 | Tapete mágico | 🟠 Intermediário | |
-| 437 | Força G | 🔴 Difícil | |
-| 436 | Lanche | 🟠 Intermediário | |
-| 435 | Doce cona | 🟠 Intermediário | |
-| 434 | Titanic | 🟢 Fácil | |
-| 433 | Bung | 🟢 Fácil | |
-| 432 | Fogos de artifício | 🟠 Intermediário | |
-| 431 | Car mechanic | 🟢 Fácil | |
-| 430 | Catch | 🟠 Intermediário | |
-| 429 | Vara profunda | 🟠 Intermediário | |
-| 428 | Cavalo Marinho | 🔴 Difícil | |
-| 427 | Guerra das Estrelas | 🟠 Intermediário | |
-| 426 | Barbie | 🟠 Intermediário | |
-| 425 | Nariz | 🔴 Difícil | |
-| 424 | Rebocador | 🟠 Intermediário | |
-| 423 | Geme | 🟢 Fácil | |
-| 422 | Guardião | 🟢 Fácil | |
-| 421 | Pôr-do-sol espanhol | 🟠 Intermediário | |
-| 420 | Linha reta | 🟢 Fácil | |
-| 419 | Formação em V | 🟠 Intermediário | |
-| 418 | Delicadeza | 🟢 Fácil | |
-| 417 | Valedictorian ⟲ | 🟠 Intermediário | |
-| 416 | Equilíbrio | 🟠 Intermediário | |
-| 415 | Pinguim | 🟠 Intermediário | |
-| 414 | Estilo mexicano | 🟢 Fácil | |
-| 413 | Full nelson | 🔴 Difícil | |
-| 412 | Aventureiro | 🟠 Intermediário | |
-| 411 | Chili pimenta | 🟠 Intermediário | |
-| 410 | Costa | 🟢 Fácil | |
-| 409 | Punição | 🟠 Intermediário | |
-| 408 | Férias | 🟠 Intermediário | |
-| 407 | Amador | 🟢 Fácil | |
-| 406 | Oásis | 🟠 Intermediário | |
-| 405 | Inventivo 69 | 🟠 Intermediário | |
-| 404 | Respiração próxima | 🟢 Fácil | |
-| 403 | Truque raro | 🔴 Difícil | |
-| 402 | Beija-flor | 🟠 Intermediário | |
-| 401 | Titanic – 2 | 🟠 Intermediário | |
-| 400 | Gerador Orgazm | 🟠 Intermediário | |
-| 399 | Doce pecado | 🟢 Fácil | |
-| 398 | Borboleta noturna | 🟠 Intermediário | |
-| 397 | Abismo | 🟠 Intermediário | |
-| 396 | Mergulho | 🔴 Difícil | |
-| 395 | Sanchez sujo | 🟠 Intermediário | |
-| 394 | Cowgirl sobre a mesa | 🟠 Intermediário | |
-| 393 | Cartaz erótico | 🟢 Fácil | |
-| 392 | Mesa de centro | 🟢 Fácil | |
+| 441 | Virada | 🟢 Fácil | Ela por cima |
+| 440 | Martelo de Thor | 🔴 Difícil | Por trás |
+| 439 | Cowgirl na cadeira | 🟠 Intermediário | Sentados · também ela por cima |
+| 438 | Tapete mágico | 🟠 Intermediário | Por trás |
+| 437 | Força G | 🔴 Difícil | Cara a cara |
+| 436 | Lanche | 🟠 Intermediário | Sentados · também por trás |
+| 435 | Doce cona | 🟠 Intermediário | Sentados · também ela por cima (a conferir) |
+| 434 | Titanic | 🟢 Fácil | Ela por cima |
+| 433 | Bung | 🟢 Fácil | Cara a cara |
+| 432 | Fogos de artifício | 🟠 Intermediário | Oral (cunnilingus, a conferir) |
+| 431 | Car mechanic | 🟢 Fácil | Oral (a conferir) |
+| 430 | Catch | 🟠 Intermediário | Cara a cara (a conferir) |
+| 429 | Vara profunda | 🟠 Intermediário | Em pé · também cara a cara |
+| 428 | Cavalo Marinho | 🔴 Difícil | Por trás · também acrobática |
+| 427 | Guerra das Estrelas | 🟠 Intermediário | Cara a cara |
+| 426 | Barbie | 🟠 Intermediário | Oral (cunnilingus, a conferir) |
+| 425 | Nariz | 🔴 Difícil | Em pé · também cara a cara |
+| 424 | Rebocador | 🟠 Intermediário | Por trás |
+| 423 | Geme | 🟢 Fácil | Ela por cima |
+| 422 | Guardião | 🟢 Fácil | Em pé · também por trás |
+| 421 | Pôr-do-sol espanhol | 🟠 Intermediário | Sentados · também ela por cima |
+| 420 | Linha reta | 🟢 Fácil | Ela por cima |
+| 419 | Formação em V | 🟠 Intermediário | Cara a cara (a conferir) |
+| 418 | Delicadeza | 🟢 Fácil | (a conferir) |
+| 417 | Valedictorian ⟲ | 🟠 Intermediário | Ela por cima |
+| 416 | Equilíbrio | 🟠 Intermediário | Cara a cara |
+| 415 | Pinguim | 🟠 Intermediário | Em pé · também por trás |
+| 414 | Estilo mexicano | 🟢 Fácil | Cara a cara (a conferir) |
+| 413 | Full nelson | 🔴 Difícil | Sentados · também acrobática |
+| 412 | Aventureiro | 🟠 Intermediário | (a conferir) |
+| 411 | Chili pimenta | 🟠 Intermediário | Sentados · também por trás |
+| 410 | Costa | 🟢 Fácil | Cara a cara |
+| 409 | Punição | 🟠 Intermediário | Por trás |
+| 408 | Férias | 🟠 Intermediário | Em pé · também cara a cara |
+| 407 | Amador | 🟢 Fácil | (a conferir) |
+| 406 | Oásis | 🟠 Intermediário | Sentados · também cara a cara |
+| 405 | Inventivo 69 | 🟠 Intermediário | Oral (69) |
+| 404 | Respiração próxima | 🟢 Fácil | Sentados · também cara a cara |
+| 403 | Truque raro | 🔴 Difícil | Cara a cara · também acrobática |
+| 402 | Beija-flor | 🟠 Intermediário | Cara a cara |
+| 401 | Titanic – 2 | 🟠 Intermediário | Ela por cima · também sentados |
+| 400 | Gerador Orgazm | 🟠 Intermediário | Sentados · também ela por cima |
+| 399 | Doce pecado | 🟢 Fácil | Cara a cara |
+| 398 | Borboleta noturna | 🟠 Intermediário | Ela por cima |
+| 397 | Abismo | 🟠 Intermediário | Sentados · também acrobática |
+| 396 | Mergulho | 🔴 Difícil | Acrobáticas (invertida) |
+| 395 | Sanchez sujo | 🟠 Intermediário | Oral (cunnilingus) |
+| 394 | Cowgirl sobre a mesa | 🟠 Intermediário | Ela por cima · também sentados |
+| 393 | Cartaz erótico | 🟢 Fácil | (a conferir) |
+| 392 | Mesa de centro | 🟢 Fácil | Ela por cima (a conferir) |
 | 391 | Ebony | 🟠 Intermediário | |
 | 390 | Playboy | 🔴 Difícil | |
 | 389 | Fome | 🟢 Fácil | |
@@ -569,3 +569,53 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 444 | Tábua | Quem recebe deita de costas na beira do sofá; o outro fica por cima, apoiado nas mãos, como numa prancha. | Quem está por cima controla o ritmo; quem está embaixo só aproveita. |
 | 443 | Atordoador | Quem recebe deita de costas sobre uma bola de pilates; o outro fica em pé na frente, segurando o quadril. | Variação do papai e mamãe com balanço. Mantenham a bola firme. |
 | 442 | Pônei selvagem | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
+| 441 | Virada | Um deita de costas; o outro senta por cima, de costas para ele, e se inclina para a frente, apoiado nas pernas dele. | Quem está por cima controla tudo; quem está embaixo aproveita a vista. |
+| 440 | Martelo de Thor | Quem recebe ajoelha no sofá, com o tronco baixo; o outro fica de cócoras por cima, atrás. | Exige força nas pernas de quem está por cima. Sessões curtas. |
+| 439 | Cowgirl na cadeira | Um senta numa cadeira; o outro senta no colo dele, de frente, com os pés no chão. | Ótima para beijar e abraçar. A cadeira precisa ser firme e sem braços. |
+| 438 | Tapete mágico | Quem recebe deita de bruços na beira da cama; o outro fica por cima, atrás, apoiado nas mãos. | Uma almofada sob o quadril de quem está embaixo melhora o ângulo. |
+| 437 | Força G | Quem recebe deita de costas sobre uma bola de pilates, com as pernas para cima; o outro, em pé, segura as pernas. | A bola balança: segurem firme e vão devagar. |
+| 436 | Lanche | Um senta numa cadeira junto à mesa; o outro senta no colo dele, de costas, apoiando as mãos na mesa. | Bom aquecimento antes de mudar para outra posição. |
+| 435 | Doce cona | Um senta numa poltrona; o outro senta no colo dele, de frente, inclinando o corpo para trás. | — |
+| 434 | Titanic | Um deita de costas; o outro senta por cima, de frente, com o tronco ereto. | Clássica e confortável. Quem está por cima dita o ritmo. |
+| 433 | Bung | Quem recebe deita de costas no sofá, com o quadril elevado; o outro fica de joelhos no assento, segurando o quadril. | O apoio do sofá deixa tudo mais estável. |
+| 432 | Fogos de artifício | Quem recebe fica sentado no alto, numa mesa ou bancada; o outro, em pé ou de joelhos, faz sexo oral. | — |
+| 431 | Car mechanic | Quem recebe senta na beira de uma mesa baixa; o outro deita de costas no chão, por baixo, como um mecânico, e faz sexo oral. | — |
+| 430 | Catch | Quem recebe deita sobre uma bola de pilates; o outro fica em pé na frente, segurando o quadril. | — |
+| 429 | Vara profunda | Quem recebe fica em pé, de costas para uma mesa, com uma perna erguida; o outro fica em pé na frente. | A mesa serve de apoio para as costas. Penetração profunda: vão devagar. |
+| 428 | Cavalo Marinho | Quem recebe se inclina para a frente, com as mãos numa poltrona; o outro fica por cima, de cócoras sobre as costas dele. | Exige força, equilíbrio e boa forma dos dois. Tenham cuidado. |
+| 427 | Guerra das Estrelas | Quem recebe deita de costas e dobra as pernas sobre os ombros do outro, que deita por cima. | Bem profundo e íntimo. Ajustem a dobra das pernas para não incomodar. |
+| 426 | Barbie | Quem recebe fica de pé sobre o assento do sofá; o outro, sentado embaixo, faz sexo oral. | — |
+| 425 | Nariz | Quem recebe senta numa cadeira, inclinado para trás, com as pernas para o alto apoiadas no outro, que fica em pé. | Cadeira firme e encostada na parede. Parem se as pernas cansarem. |
+| 424 | Rebocador | Quem recebe fica de quatro na beira da cama; o outro fica em pé atrás. | Clássica e fácil, com boa altura para quem está em pé. |
+| 423 | Geme | Um deita de costas sobre uma bola de pilates; o outro deita por cima, também de costas. | Equilíbrio é tudo: pés firmes no chão. |
+| 422 | Guardião | Quem recebe ajoelha numa cadeira e apoia os braços no encosto; o outro fica em pé atrás. | A cadeira deve ser firme. Ótima para uma rapidinha. |
+| 421 | Pôr-do-sol espanhol | Um senta numa poltrona; o outro senta no colo dele, de costas, apoiando as mãos nos braços da poltrona. | Quem está por cima controla o ritmo com as mãos apoiadas. |
+| 420 | Linha reta | Um deita de costas; o outro deita por cima, de costas para ele, com os corpos alinhados. | Movimentos curtos: o encaixe sai fácil. |
+| 419 | Formação em V | Quem recebe deita de costas no sofá, com as pernas abertas em V; o outro fica de joelhos entre elas. | — |
+| 418 | Delicadeza | O desenho não ficou claro no PDF. Texto a completar. | — |
+| 417 | Valedictorian ⟲ | Um deita de costas na cama; o outro senta por cima, inclinando o tronco para trás. | Quem está por cima pode apoiar as mãos nas pernas do outro. |
+| 416 | Equilíbrio | Quem recebe deita de costas sobre uma bola de pilates; o outro fica de joelhos na frente, segurando o quadril. | A bola deixa o quadril na altura certa para quem está ajoelhado. |
+| 415 | Pinguim | Quem recebe fica em pé, debruçado sobre uma mesa; o outro fica em pé atrás. | Fácil e rápida de montar. |
+| 414 | Estilo mexicano | Quem recebe senta numa poltrona; o outro ajoelha na frente. | — |
+| 413 | Full nelson | Um senta inclinado para trás; o outro senta por cima, com as pernas dobradas sobre os ombros dele. | Exige flexibilidade de quem está por cima. Vão devagar. |
+| 412 | Aventureiro | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 411 | Chili pimenta | Um senta numa cadeira, reclinado; o outro fica de costas para ele, inclinado para a frente com as mãos no chão. | Quem está inclinado pode subir o tronco quando cansar. |
+| 410 | Costa | Quem recebe deita de costas na beira da cama, com uma perna no ombro do outro, que fica de joelhos no chão. | Boa para ajustar a profundidade pela perna erguida. |
+| 409 | Punição | Quem recebe deita de bruços sobre uma bola de pilates; o outro fica em pé atrás. | Mantenham a bola firme, encostada num móvel. |
+| 408 | Férias | Quem recebe senta na beira de uma mesa, inclinado para trás, com uma perna erguida; o outro fica em pé. | Altura de mesa costuma ser perfeita para quem está em pé. |
+| 407 | Amador | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 406 | Oásis | Um senta no chão, apoiado nas mãos; o outro senta no colo dele, de frente, envolvendo-o com as pernas. | Muito contato e olho no olho. |
+| 405 | Inventivo 69 | Os dois deitam no sofá, um sobre o outro em sentidos opostos, e fazem sexo oral ao mesmo tempo. | Deitados de lado fica mais confortável para os dois. |
+| 404 | Respiração próxima | Quem recebe senta numa cadeira e abraça o outro pelo pescoço; o outro fica em pé ou meio agachado na frente. | Bom para beijar e manter o olho no olho. |
+| 403 | Truque raro | Quem recebe deita de costas na beira da cama, com o tronco pendendo até o chão; o outro fica em pé, segurando o quadril. | Cabeça mais baixa: parem se vier tontura. |
+| 402 | Beija-flor | Quem recebe deita de costas sobre uma bola de pilates; o outro se ajoelha entre as pernas dele. | A bola balança: segurem firme. |
+| 401 | Titanic – 2 | Um senta na beira de uma mesa; o outro senta no colo dele, de costas, segurando o encosto de uma cadeira. | Mesa e cadeira precisam estar firmes. |
+| 400 | Gerador Orgazm | Um senta numa poltrona; o outro senta por cima, de frente. | Confortável e estável. Ótima para ir com calma. |
+| 399 | Doce pecado | Um senta no chão, apoiado nas mãos; o outro deita de costas e apoia as pernas nos ombros dele. | Quem está deitado só aproveita; quem está sentado controla o ritmo. |
+| 398 | Borboleta noturna | Um deita de costas no sofá; o outro fica de cócoras por cima, de frente. | Quem está por cima pode apoiar as mãos no peito do outro. |
+| 397 | Abismo | Um senta numa cadeira; o outro deita atravessado no colo dele, com a cabeça mais baixa. | Exige confiança: quem está sentado segura firme. Parem se vier tontura. |
+| 396 | Mergulho | Quem recebe fica de cabeça para baixo, com as costas apoiadas na beira da cama; o outro fica de joelhos por cima. | Muito difícil. Usem almofadas e parem ao menor desconforto. |
+| 395 | Sanchez sujo | Quem recebe deita de costas sobre uma bola de pilates; o outro ajoelha e faz sexo oral. | A bola relaxa as costas de quem recebe. |
+| 394 | Cowgirl sobre a mesa | Um senta na beira de uma mesa; o outro senta no colo dele, de costas. | Mesa firme e encostada na parede. |
+| 393 | Cartaz erótico | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 392 | Mesa de centro | Um senta no chão, apoiado nas mãos; o outro senta por cima, de costas, junto a uma mesa de centro. | — |
