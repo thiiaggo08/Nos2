@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -169,56 +169,56 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 344 | Recarga | 🟢 Fácil | Cara a cara |
 | 343 | Torta americana | 🟠 Intermediário | (a conferir) |
 | 342 | Silêncio | 🟠 Intermediário | Sentados · também cara a cara |
-| 341 | Garganta profunda | 🟢 Fácil | |
-| 340 | Chili cão | 🟠 Intermediário | |
-| 339 | Tentação | 🟢 Fácil | |
-| 338 | Contortionist | 🔴 Difícil | |
-| 337 | Forno holandês | 🟠 Intermediário | |
-| 336 | Porta traseira | 🟠 Intermediário | |
-| 335 | Rebocador de guerra | 🟢 Fácil | |
-| 334 | Fulcrum | 🔴 Difícil | |
-| 333 | Maravilhoso banquinho | 🟠 Intermediário | |
-| 332 | Astrologista | 🔴 Difícil | |
-| 331 | Cadeira macia | 🟠 Intermediário | |
-| 330 | Louise | 🟢 Fácil | |
-| 329 | Titular | 🟠 Intermediário | |
-| 328 | Cadeira de convés | 🟠 Intermediário | |
-| 327 | Dança lenta | 🟢 Fácil | |
-| 326 | Guerreiro caído | 🔴 Difícil | |
-| 325 | Zodiac | 🟢 Fácil | |
-| 324 | Super-mulher | 🔴 Difícil | |
-| 323 | Caminhão | 🟠 Intermediário | |
-| 322 | Canadian | 🟠 Intermediário | |
-| 321 | Cobra ⟲ | 🟢 Fácil | |
-| 320 | Cosmo tântrico | 🟠 Intermediário | |
-| 319 | Melancia | 🟠 Intermediário | |
-| 318 | Contra-almirante | 🟠 Intermediário | |
-| 317 | Fusão ⟲ | 🟢 Fácil | |
-| 316 | Cãozinho baixo | 🟢 Fácil | |
-| 315 | Soco de sucção | 🟠 Intermediário | |
-| 314 | Dia de São Valentim | 🔴 Difícil | |
-| 313 | Chef | 🟢 Fácil | |
-| 312 | Coquetel jamaicano | 🟠 Intermediário | |
-| 311 | Fantástico elevador | 🟠 Intermediário | |
-| 310 | Balançar – 2 | 🔴 Difícil | |
-| 309 | Gafanhoto | 🟢 Fácil | |
-| 308 | Barreira | 🔴 Difícil | |
-| 307 | Ilha do Deserto | 🟠 Intermediário | |
-| 306 | Começo baixo | 🟢 Fácil | |
-| 305 | Cowgirl dobrada | 🟠 Intermediário | |
-| 304 | Conexão reversa | 🔴 Difícil | |
-| 303 | Pokemon | 🟠 Intermediário | |
-| 302 | Rampa de lançamento íntima | 🟢 Fácil | |
-| 301 | Alimentador | 🔴 Difícil | |
-| 300 | Bíblia de Prazer | 🔴 Difícil | |
-| 299 | Bela conversa | 🟢 Fácil | |
-| 298 | Cadeira vulgar | 🟠 Intermediário | |
-| 297 | Apollo | 🔴 Difícil | |
-| 296 | Fantástica idéia | 🟢 Fácil | |
-| 295 | Trono de Ferro | 🔴 Difícil | |
-| 294 | Encanador ⟲ | 🟢 Fácil | |
-| 293 | Sem vergonha | 🟢 Fácil | |
-| 292 | Gravata | 🔴 Difícil | |
+| 341 | Garganta profunda | 🟢 Fácil | Oral (boquete) |
+| 340 | Chili cão | 🟠 Intermediário | Por trás |
+| 339 | Tentação | 🟢 Fácil | Em pé · também por trás (a conferir) |
+| 338 | Contortionist | 🔴 Difícil | Cara a cara · também acrobática |
+| 337 | Forno holandês | 🟠 Intermediário | Acrobáticas (invertida) |
+| 336 | Porta traseira | 🟠 Intermediário | Ela por cima |
+| 335 | Rebocador de guerra | 🟢 Fácil | Sentados · também cara a cara (a conferir) |
+| 334 | Fulcrum | 🔴 Difícil | Por trás · também acrobática |
+| 333 | Maravilhoso banquinho | 🟠 Intermediário | Sentados · também ela por cima |
+| 332 | Astrologista | 🔴 Difícil | Cara a cara · também acrobática |
+| 331 | Cadeira macia | 🟠 Intermediário | Ela por cima |
+| 330 | Louise | 🟢 Fácil | Sentados · também cara a cara |
+| 329 | Titular | 🟠 Intermediário | Sentados (a conferir) |
+| 328 | Cadeira de convés | 🟠 Intermediário | Cara a cara |
+| 327 | Dança lenta | 🟢 Fácil | Em pé (a conferir) |
+| 326 | Guerreiro caído | 🔴 Difícil | Ela por cima |
+| 325 | Zodiac | 🟢 Fácil | Em pé · também cara a cara |
+| 324 | Super-mulher | 🔴 Difícil | Por trás · também acrobática |
+| 323 | Caminhão | 🟠 Intermediário | Sentados · também por trás |
+| 322 | Canadian | 🟠 Intermediário | Por trás |
+| 321 | Cobra ⟲ | 🟢 Fácil | Por trás |
+| 320 | Cosmo tântrico | 🟠 Intermediário | Sentados · também cara a cara |
+| 319 | Melancia | 🟠 Intermediário | Em pé · também por trás |
+| 318 | Contra-almirante | 🟠 Intermediário | Cara a cara |
+| 317 | Fusão ⟲ | 🟢 Fácil | Sentados · também cara a cara |
+| 316 | Cãozinho baixo | 🟢 Fácil | Por trás |
+| 315 | Soco de sucção | 🟠 Intermediário | Cara a cara |
+| 314 | Dia de São Valentim | 🔴 Difícil | (a conferir) |
+| 313 | Chef | 🟢 Fácil | Cara a cara · também em pé |
+| 312 | Coquetel jamaicano | 🟠 Intermediário | Por trás |
+| 311 | Fantástico elevador | 🟠 Intermediário | Sentados · também ela por cima |
+| 310 | Balançar – 2 | 🔴 Difícil | Ela por cima |
+| 309 | Gafanhoto | 🟢 Fácil | Ela por cima |
+| 308 | Barreira | 🔴 Difícil | Ela por cima |
+| 307 | Ilha do Deserto | 🟠 Intermediário | Sentados · também cara a cara |
+| 306 | Começo baixo | 🟢 Fácil | Por trás |
+| 305 | Cowgirl dobrada | 🟠 Intermediário | Ela por cima |
+| 304 | Conexão reversa | 🔴 Difícil | Acrobáticas |
+| 303 | Pokemon | 🟠 Intermediário | Sentados · também ela por cima |
+| 302 | Rampa de lançamento íntima | 🟢 Fácil | Cara a cara |
+| 301 | Alimentador | 🔴 Difícil | Oral (cunnilingus) |
+| 300 | Bíblia de Prazer | 🔴 Difícil | Acrobáticas (a conferir) |
+| 299 | Bela conversa | 🟢 Fácil | Sentados · também cara a cara |
+| 298 | Cadeira vulgar | 🟠 Intermediário | Ela por cima |
+| 297 | Apollo | 🔴 Difícil | Em pé · também cara a cara |
+| 296 | Fantástica idéia | 🟢 Fácil | (a conferir) |
+| 295 | Trono de Ferro | 🔴 Difícil | (a conferir) |
+| 294 | Encanador ⟲ | 🟢 Fácil | (a conferir) |
+| 293 | Sem vergonha | 🟢 Fácil | Cara a cara |
+| 292 | Gravata | 🔴 Difícil | Em pé · também acrobática |
 | 291 | Holandês voador | 🔴 Difícil | |
 | 290 | Esfregaço na garganta | 🟠 Intermediário | |
 | 289 | Fator X | 🔴 Difícil | |
@@ -669,3 +669,53 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 344 | Recarga | Quem recebe deita de costas na beira da cama, com uma perna erguida; o outro fica com um joelho na cama. | Variação rápida do papai e mamãe. |
 | 343 | Torta americana | O desenho saiu cortado no PDF. Texto a completar. | — |
 | 342 | Silêncio | Um senta numa bola de pilates; o outro senta no colo dele, de frente. | A bola ajuda no movimento, mas exige equilíbrio. |
+| 341 | Garganta profunda | Quem faz o oral deita de costas numa poltrona, com a cabeça pendendo para fora; o outro fica em pé na frente. | Quem está deitado controla a profundidade com as mãos. Combinem um sinal para parar. |
+| 340 | Chili cão | Quem recebe fica de quatro no chão; o outro fica atrás, com um joelho no chão e o outro pé apoiado. | O "de quatro" clássico, com mais impulso para quem está atrás. |
+| 339 | Tentação | Quem recebe se debruça sobre uma mesa; o outro fica em pé atrás. | — |
+| 338 | Contortionist | Quem recebe faz uma ponte, com as costas arqueadas; o outro ajoelha entre as pernas, segurando o quadril. | Exige muita flexibilidade. Sessões curtas. |
+| 337 | Forno holandês | Quem recebe deita numa poltrona com a cabeça para baixo e as pernas para o alto; o outro fica em pé, por cima. | Cabeça mais baixa: parem se vier tontura. |
+| 336 | Porta traseira | Um deita de costas; o outro deita por cima, de costas para ele, reclinado. | Movimentos lentos; quem está embaixo abraça e acaricia. |
+| 335 | Rebocador de guerra | Os dois sentam frente a frente e se seguram pelas mãos, como num cabo de guerra. | — |
+| 334 | Fulcrum | Quem recebe fica de quatro; o outro deita por cima das costas dele, com as pernas para o alto. | Exige equilíbrio e força. Façam sobre um colchão. |
+| 333 | Maravilhoso banquinho | Um senta numa cadeira; o outro fica de cócoras no colo dele, de costas. | Cadeira bem firme. Quem está por cima se apoia nos joelhos do outro. |
+| 332 | Astrologista | Quem recebe deita de costas e leva as pernas por cima da cabeça; o outro fica de cócoras por cima. | Muito exigente para o pescoço. Usem travesseiros e vão devagar. |
+| 331 | Cadeira macia | Um deita de costas; o outro senta por cima, com o corpo inclinado para trás, apoiado nas mãos. | Fácil e íntima: não exige força nem agilidade. |
+| 330 | Louise | Um fica de joelhos sentado sobre os calcanhares; o outro senta no colo dele, de frente, abraçando com as pernas. | Muito abraço e olho no olho. |
+| 329 | Titular | Posição com bola de pilates. Texto a completar depois de conferir o desenho. | — |
+| 328 | Cadeira de convés | Quem recebe deita de costas e apoia as pernas no peito do outro, que fica de joelhos. | Penetração profunda: comecem devagar. |
+| 327 | Dança lenta | Posição em pé, junto a uma mesa. Texto a completar depois de conferir o desenho. | — |
+| 326 | Guerreiro caído | Um deita de bruços; o outro senta por cima dele, de costas para a cabeça dele. | Quem está por cima controla o ritmo com as pernas. |
+| 325 | Zodiac | Quem recebe senta no encosto ou no braço de uma poltrona; o outro fica em pé, abraçando-o. | Ótima altura e muito abraço. |
+| 324 | Super-mulher | Quem recebe deita de bruços com as pernas erguidas; o outro, atrás, segura as pernas. | Exige força de quem segura. Parem ao menor desconforto. |
+| 323 | Caminhão | Um senta numa cadeira; o outro deita de bruços atravessado no colo dele. | Quem está sentado tem as mãos livres. |
+| 322 | Canadian | Quem recebe fica de joelhos com o tronco erguido; o outro fica atrás, em pé e inclinado. | Exige força nas pernas de quem está atrás. |
+| 321 | Cobra ⟲ | Quem recebe deita de bruços sobre o braço do sofá, com a cabeça mais baixa; o outro fica em pé atrás. | O braço do sofá deixa o quadril na altura certa. |
+| 320 | Cosmo tântrico | Um senta no chão, de pernas cruzadas; o outro senta no colo dele, de frente, envolvendo-o com as pernas. | Respirem juntos e vão devagar: é a proposta tântrica. |
+| 319 | Melancia | Quem recebe se debruça sobre uma cadeira; o outro fica em pé atrás. | A cadeira deve estar firme, encostada na parede. |
+| 318 | Contra-almirante | Quem recebe deita de costas com as pernas para o alto; o outro fica de cócoras por cima, apoiando-se nas pernas dele. | Penetração profunda: combinem o ritmo. |
+| 317 | Fusão ⟲ | Um senta na beira do sofá; o outro senta no colo dele, de frente, com os joelhos no sofá. | Muito íntima, ótima para beijar. |
+| 316 | Cãozinho baixo | Quem recebe ajoelha e deita o tronco à frente, rente à cama; o outro fica atrás, deitado sobre ele. | Variação mais baixa e relaxada do "de quatro". |
+| 315 | Soco de sucção | Quem recebe deita de costas sobre uma bola de pilates; o outro ajoelha na frente, segurando as pernas. | A bola balança: segurem firme. |
+| 314 | Dia de São Valentim | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 313 | Chef | Quem recebe deita de costas numa mesa; o outro fica em pé na frente. | Mesa firme. Ótima para uma rapidinha. |
+| 312 | Coquetel jamaicano | Quem recebe fica com o tronco baixo e o quadril erguido; o outro fica atrás, segurando o quadril. | Ajustem a altura com uma almofada. |
+| 311 | Fantástico elevador | Um senta reclinado numa poltrona; o outro senta por cima, com as pernas abertas. | Quem está por cima dita o ritmo. |
+| 310 | Balançar – 2 | Um deita de costas; o outro senta por cima, inclinado para trás, apoiado nas mãos, e balança o quadril para cima e para baixo. | Movimentos amplos e ritmados. |
+| 309 | Gafanhoto | Um deita de costas no sofá; o outro deita por cima, de costas para ele. | Movimentos curtos e deslizantes. |
+| 308 | Barreira | Um deita de costas; o outro fica de joelhos por cima, no comando total. | Quem está por cima dita tudo; quem está embaixo só aproveita. |
+| 307 | Ilha do Deserto | Um senta numa cadeira; o outro senta no colo dele, de frente. | Cadeira sem braços é a mais confortável. |
+| 306 | Começo baixo | Quem recebe fica agachado, com o tronco baixo; o outro ajoelha atrás, com o tronco ereto. | Variação baixa do "de quatro". |
+| 305 | Cowgirl dobrada | Um deita de costas no sofá; o outro senta por cima e se inclina para a frente. | Inclinada, fica mais fácil beijar. |
+| 304 | Conexão reversa | Os dois ficam de joelhos, de costas um para o outro, com os quadris encaixados. | Exige flexibilidade e muita coordenação. Vão bem devagar. |
+| 303 | Pokemon | Um senta numa bola de pilates; o outro senta no colo dele, de frente. | A bola ajuda o movimento, mas exige equilíbrio. |
+| 302 | Rampa de lançamento íntima | Quem recebe deita de costas e dobra os joelhos; o outro ajoelha na frente, segurando as pernas. | Simples e com ótimo acesso para os dois. |
+| 301 | Alimentador | Quem recebe fica de pé ou ajoelhado sobre uma mesa; o outro senta numa cadeira na frente e faz sexo oral. | Mesa firme e encostada na parede. |
+| 300 | Bíblia de Prazer | Posição desafiadora, com o corpo invertido. Texto a completar depois de conferir o desenho. | — |
+| 299 | Bela conversa | Um senta numa poltrona; o outro senta no colo dele, de frente. | Confortável e com muito contato. |
+| 298 | Cadeira vulgar | Um deita de costas e ergue as pernas; o outro senta no quadril dele, apoiado nas pernas, como numa cadeira. | Quem está embaixo baixa as pernas quando cansar. |
+| 297 | Apollo | Um fica em pé e segura o outro no colo, que o envolve com braços e pernas. | Exige força de quem segura. Usem uma parede como apoio. |
+| 296 | Fantástica idéia | Posição no sofá. Texto a completar depois de conferir o desenho. | — |
+| 295 | Trono de Ferro | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 294 | Encanador ⟲ | Posição com cadeira. Texto a completar depois de conferir o desenho. | — |
+| 293 | Sem vergonha | Quem recebe deita de costas com uma perna erguida; o outro ajoelha na frente. | A perna erguida ajusta o ângulo. |
+| 292 | Gravata | Um fica em pé e segura o outro, que envolve o pescoço dele com as pernas. | Muita força e confiança. Façam perto da cama, para apoiar se precisar. |
