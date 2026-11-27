@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) **aprovadas**. 91 a 42 (lote 9) **aprovadas**. 41 a 1 (lote 10) **aprovadas**. Prints conferidos e aprovados: lotes 1 a 5, 9 e 10 completos; faltam 26 (lotes 6 e 7, e a 92). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) **aprovadas**. 91 a 42 (lote 9) **aprovadas**. 41 a 1 (lote 10) **aprovadas**. Prints conferidos e aprovados: lotes 1 a 5, 9 e 10 completos; faltam 25 (lotes 6 e 7). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -418,7 +418,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 95 | Flatiron | 🟢 Fácil | Por trás |
 | 94 | Narciso | 🔴 Difícil | Em pé · também por trás |
 | 93 | Diamante | 🟢 Fácil | Cara a cara |
-| 92 | Chave de fenda | 🔴 Difícil | (a conferir) |
+| 92 | Chave de fenda | 🔴 Difícil | Por trás |
 | 91 | Iris | 🟢 Fácil | Por trás |
 | 90 | Bancada | 🟠 Intermediário | Sentados · também ela por cima |
 | 89 | Dejavu | 🟢 Fácil | Sentados · também cara a cara |
@@ -918,7 +918,7 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 95 | Flatiron | Quem recebe deita de bruços na beira da cama; o outro fica de joelhos atrás, inclinado sobre ele. | Simples e muito eficaz. |
 | 94 | Narciso | Os dois em pé diante de um espelho; quem recebe se inclina um pouco e ergue uma perna; o outro fica atrás. | O espelho deixa os dois se verem: muito excitante. |
 | 93 | Diamante | Quem recebe deita de costas e dobra as pernas juntas sobre o ombro do outro, que fica sentado sobre os calcanhares, inclinado por cima. | Pernas juntas deixam o encaixe mais apertado. |
-| 92 | Chave de fenda | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
+| 92 | Chave de fenda | Quem recebe fica de quatro, com o peito encostado no chão e o quadril erguido; o outro fica de cócoras por cima, atrás, com as mãos no quadril e nas costas dele. | Sem pressa: exige força nas pernas de quem está por cima. |
 | 91 | Iris | Quem recebe deita de bruços sobre um travesseiro; o outro fica por cima, atrás. | Ótima para acelerar aos poucos e falar ao ouvido. |
 | 90 | Bancada | Um senta reclinado, apoiado numa mão; o outro senta no colo dele, de lado. | Tão confortável que dá até para ver um filme juntos. |
 | 89 | Dejavu | Os dois sentam frente a frente, com as pernas cruzadas uma sobre a outra. | Olho no olho: como se fosse a primeira vez. |
