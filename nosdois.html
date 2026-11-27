@@ -779,7 +779,7 @@ function renderRes(){
     const ms=calcMatches();
     if(!ms.length){ R.innerHTML=`<h1>Nenhum match ainda</h1><p>Tudo bem. Nada do que cada um marcou sozinho foi revelado.</p>${horaHtml()}`; return; }
     h=`<div class="big">${ms.length}</div><h1 style="margin-top:4px">fantasias em comum</h1><p>Match mostra que os dois querem. O consentimento continua sendo combinado na hora.</p>${legendaMatch}${horaHtml()}`;
-    ms.forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}<span class="pill g">${eu()}: ${NIVEIS[m.eu]}</span><span class="pill">${ele()}: ${NIVEIS[m.ele]}</span></div></div>`; });
+    ms.forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}<span class="pill g">${eu()}: ${NIVEIS[m.eu]}</span><span class="pill">${ele()}: ${NIVEIS[m.ele]}</span></div>${falaEntender(m)}</div>`; });
   } else if(mRes==="quem"){
     const pq=st.par.q||{}; const nomeP=v=>[eu(),ele(),"Os dois","Nenhum"][v]; const nomeE=v=>[ele(),eu(),"Os dois","Nenhum"][v];
     let n=0, quente=0;
@@ -804,7 +804,8 @@ function renderRes(){
 const TIPO_MATCH={total:["🔥","Total"],parcial:["🙂","Parcial"],alinhar:["🤝","Alinhar"],entender:["💬","Entender"]};
 function tipoMatch(m){ const a=Math.min(m.eu,m.ele), b=Math.max(m.eu,m.ele); return a>=2?"total":(a===1&&b===1)?"alinhar":(b-a>=2)?"entender":"parcial"; }
 function tagMatch(m){ const [e,t]=TIPO_MATCH[tipoMatch(m)]; return `<span class="pill ${tipoMatch(m)==="total"?"hot":"g"}">${e} ${t}</span>`; }
-const legendaMatch=`<div class="note">🔥 <b class="w">Total</b>: os dois querem. · 🙂 <b class="w">Parcial</b>: um quer, o outro toparia. · 🤝 <b class="w">Alinhar</b>: os dois toparam; falta combinar como. · 💬 <b class="w">Entender</b>: um quer muito, o outro só toparia. Vale conversar.</div>`;
+const falaEntender=m=>tipoMatch(m)==="entender"?`<div class="muted" style="margin-top:8px">💬 Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`:"";
+const legendaMatch=`<div class="note">🔥 <b class="w">Total</b>: os dois querem. · 🙂 <b class="w">Parcial</b>: um quer, o outro toparia. · 🤝 <b class="w">Alinhar</b>: os dois toparam; falta combinar como. · 💬 <b class="w">Entender</b>: um quer muito, o outro só toparia. Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`;
 function horaHtml(){ return (st.par&&st.par.hz!=null&&st.hora===st.par.hz)?`<div class="match"><div class="t">De manhã, à tarde ou à noite?</div><div class="m"><span class="pill hot">Os dois preferem: ${HORAS[st.hora].toLowerCase()}</span></div></div>`:""; }
 const AV_OP=["Repetiria","Foi bom","Não repetiria"];
 function renderDepois(){
@@ -861,7 +862,7 @@ function renderPlano(){
   const conversa = ms.filter(m=>cat(m.it.id)==="Com terceiros (fantasia)" || (m.eu===1&&m.ele===1)).filter(m=>!princ.includes(m)&&!aquec.includes(m)).slice(0,4);
   const bloco=(titulo,sub,lista,extra)=>{ let b=`<h2>${titulo}</h2><p style="margin-top:0">${sub}</p>`;
     if(!lista.length&&!extra) return b+`<p class="muted">Nada aqui ainda.</p>`;
-    lista.forEach(m=>b+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}</div></div>`);
+    lista.forEach(m=>b+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}</div>${falaEntender(m)}</div>`);
     return b+(extra||""); };
   h+=bloco("1 · Aquecimento","Para começar sem pressa.",aquec,`<button class="btn ghost" onclick="go('jogar');abrirJogo('prel')">Abrir Preliminares</button>`);
   h+=bloco("2 · O que os dois querem","Só fantasias que os dois marcaram como Quero ou Quero muito.",princ);

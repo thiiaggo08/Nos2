@@ -102,7 +102,7 @@ Cartas 1 a 70 vêm do protótipo; cartas 71 a 100 estão no CONTEUDO-FASE2.md.
 
 Mantém a mecânica do protótipo: cada um responde sozinho, vocês trocam códigos, e o app mostra só o que coincide.
 
-**Etiqueta dos matches** (decisão do usuário, 27/11/2026): cada match mostra 🔥 Total (os dois Quero ou Quero muito), 🙂 Parcial (um quer, o outro toparia), 🤝 Alinhar (os dois toparam) ou 💬 Entender (um quer muito, o outro só toparia).
+**Etiqueta dos matches** (decisão do usuário, 27/11/2026): cada match mostra 🔥 Total (os dois Quero ou Quero muito), 🙂 Parcial (um quer, o outro toparia), 🤝 Alinhar (os dois toparam) ou 💬 Entender (um quer muito, o outro só toparia), com a frase "Vamos sentar e cada um fala seu ponto. E tudo bem."
 
 **Mudanças:**
 - **Reflexão individual** antes de responder: 5 perguntas curtas, só para si, que não são compartilhadas.
