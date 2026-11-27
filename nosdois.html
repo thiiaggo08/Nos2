@@ -109,6 +109,10 @@
   .stepnav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--txt);font-size:22px}
   #dots{display:flex;gap:7px}#dots i{width:7px;height:7px;border-radius:50%;background:#3a3134}#dots i.on{background:var(--gold)}
   .topbar{display:flex;justify-content:space-between;align-items:center}.topbar a,.topbar button{color:var(--gold);background:none;border:0;font-size:15px;min-height:44px;text-decoration:none;font-family:inherit;padding:0;display:inline-flex;align-items:center}
+  .rotgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .rotgrid button{text-align:left;background:linear-gradient(160deg,#2b1015,#141012);border:1px solid #4a2a30;border-radius:14px;padding:16px 14px;color:var(--txt);font-family:inherit;min-height:96px}
+  .rotgrid span{display:block;font-family:Georgia,serif;font-size:20px}
+  .rotgrid em{display:block;font-style:normal;color:var(--mute);font-size:12px;margin-top:4px}
   .jgrp{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:18px 0 -4px}
   .check input{width:22px;height:22px;accent-color:var(--gold);flex:none;margin-top:1px}
 </style>
@@ -233,6 +237,13 @@
     <div class="eyebrow">Juntos · um celular só</div>
     <h1>Jogar</h1>
     <p>Esses jogos são para quando vocês estiverem juntos, num celular só. Qualquer um pode passar, pausar ou encerrar a qualquer momento.</p>
+    <h2>Quanto tempo vocês têm?</h2>
+    <div class="rotgrid">
+      <button onclick="rotIniciar('rap')"><span>Rapidinho</span><em>cerca de 10 min</em></button>
+      <button onclick="rotIniciar('nos')"><span>Nós 2</span><em>cerca de 40 min</em></button>
+      <button onclick="rotIniciar('tempo')"><span>Temos tempo</span><em>sem hora para acabar</em></button>
+      <button onclick="rotIniciar('sorte')"><span>Sorte de hoje</span><em>o app escolhe por vocês</em></button>
+    </div>
     <div class="menu">
       <div class="jgrp">Quebrar o gelo</div>
       <button class="thumb" data-thumb="vd" onclick="abrirJogo('vd')"><div><small>Jogo 2</small><span>Verdade ou Desafio</span><em>Três níveis. Subir de nível exige os dois; passar não tem castigo.</em></div></button>
@@ -596,6 +607,7 @@ function toast(m){ const e=$("toast"); e.textContent=m; e.classList.add("on"); c
 /* ======================= NAVEGAÇÃO ======================= */
 function lerInicio(){ syncCfg(); st.data=$("data").value; salvar(); }
 function go(t){
+  ROT=null;
   lerInicio(); pararTimer();
   if(t==="trocar" && !st.senha){ toast("Defina a senha do casal em Configurações"); t="inicio"; }
   document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on", s.id==="s-"+t));
@@ -881,7 +893,41 @@ function abrirJogo(j){
   ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,pos:posInit,roleta:roletaInit})[j]();
   window.scrollTo(0,0);
 }
-function sairJogo(){ pararTimer(); try{speechSynthesis.cancel();}catch(e){} $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
+function sairJogo(){ pararTimer(); try{speechSynthesis.cancel();}catch(e){} if(ROT){ ROT.i++; return rotTela(); } $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
+
+/* ---- Rapidinho, Nós 2, Temos tempo, Sorte de hoje: roteiros montados com os jogos existentes ---- */
+let ROT=null;
+const ROT_NOME={rap:"Rapidinho",nos:"Nós 2",tempo:"Temos tempo",sorte:"Sorte de hoje"};
+function rotPasso(k){ return {prel6:{k:"prel",n:6,t:"Preliminares · curta"},prel10:{k:"prel",n:10,t:"Preliminares · média"},prel15:{k:"prel",n:15,t:"Preliminares · longa"},
+  dado:{k:"dado",t:"Dado da Noite"},roleta:{k:"roleta",t:"Roleta dos matches"},sensual:{k:"mass",tipo:"sensual",t:"Massagem sensual"},tantrica:{k:"mass",tipo:"tantrica",t:"Massagem tântrica"}}[k]; }
+function rotMontar(tipo){
+  if(tipo==="rap") return [rotPasso(Nos2.deck.draw("nd.rot.rap",["prel6","dado"]))];
+  if(tipo==="nos") return ["prel10","dado","roleta"].map(rotPasso);
+  return [rotPasso(Nos2.deck.draw("nd.rot.mass",["sensual","tantrica"])),rotPasso("prel15")];
+}
+function rotIniciar(tipo){
+  lerInicio(); const real=tipo==="sorte"?Nos2.deck.draw("nd.rot.sorte",["rap","nos","tempo"]):tipo;
+  ROT={tipo,passos:rotMontar(real),i:0};
+  $("jogoMenu").style.display="none"; $("jogoArea").style.display=""; rotTela();
+}
+function rotTela(){
+  const A=$("jogoArea"), sorte=ROT.tipo==="sorte", n=ROT.passos.length;
+  if(ROT.i>=n){ A.innerHTML=`<div class="eyebrow" style="margin-top:8px">${ROT_NOME[ROT.tipo]}</div><h1>Fim do roteiro</h1><p>Daqui pra frente é com vocês.</p><button class="btn primary" onclick="rotSair()">Voltar aos jogos</button>`; window.scrollTo(0,0); return; }
+  const p=ROT.passos[ROT.i];
+  let acao;
+  if(p.k==="prel") acao=`<div class="muted" style="margin-top:6px">Primeiro a conduzir:</div><div class="two"><button class="btn gold" onclick="rotPrel(0)">${esc(eu())}</button><button class="btn gold" onclick="rotPrel(1)">${esc(ele())}</button></div>`;
+  else if(p.k==="mass") acao=`<div class="muted" style="margin-top:6px">Quem recebe primeiro:</div><div class="two"><button class="btn gold" onclick="rotMass(0)">${esc(eu())}</button><button class="btn gold" onclick="rotMass(1)">${esc(ele())}</button></div>`;
+  else acao=`<button class="btn primary" onclick="rotJogo()">Começar</button>`;
+  A.innerHTML=`<button class="back" onclick="rotSair()">‹ Jogos</button><div class="eyebrow" style="margin-top:8px">${ROT_NOME[ROT.tipo]}${sorte?"":` · etapa ${ROT.i+1} de ${n}`}</div><h1>${p.t}</h1>
+  ${sorte||n===1?"":`<div class="mbar">${ROT.passos.map((_,k)=>`<i class="${k<ROT.i?"d":k===ROT.i?"c":""}"></i>`).join("")}</div><p>${ROT.passos.map((x,k)=>k===ROT.i?`<b class="w">${x.t}</b>`:x.t).join(" → ")}</p>`}
+  <div class="game">${acao}<button class="btn ghost" onclick="ROT.i++;rotTela()">Pular esta etapa</button></div>`;
+  window.scrollTo(0,0);
+}
+function rotSair(){ ROT=null; sairJogo(); }
+function rotJogo(){ const p=ROT.passos[ROT.i]; (p.k==="dado"?dadoInit:roletaInit)(); window.scrollTo(0,0); }
+function rotPrel(quem){ const p=ROT.passos[ROT.i]; prelInit(); document.querySelectorAll("#prelDur .chip").forEach(c=>c.classList.toggle("on",+c.dataset.n===p.n)); $("pAuto").checked=true; prelComecar(quem); }
+function rotMass(quem){ massComecar(ROT.passos[ROT.i].tipo,quem,false); }
+const proxEtapa=()=>ROT?`<button class="btn primary" onclick="ROT.i++;rotTela()">Próxima etapa</button>`:"";
 const voltar = `<button class="back" onclick="sairJogo()">‹ Jogos</button>`;
 
 /* ---- Dado da Noite ---- */
@@ -1016,7 +1062,7 @@ function prelFim(){
   const f=P?P.fav:[];
   $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim das preliminares</h1><p>${P?P.feitas.length:0} cartas jogadas. Daqui pra frente é com vocês.</p>
   ${f.length?`<h2>Para repetir</h2>${f.map(c=>`<div class="match"><div class="t">${c.t}</div><div class="m">${dots(c.nivel)}</div></div>`).join("")}`:`<p class="muted">Dica: toque no ♡ das cartas que vocês mais gostarem, e elas aparecem aqui no final.</p>`}
-  <button class="btn primary" onclick="prelInit()">Jogar de novo</button>`;
+  ${ROT?proxEtapa():`<button class="btn primary" onclick="prelInit()">Jogar de novo</button>`}`;
 }
 
 /* ---- Massagem guiada ---- */
@@ -1159,7 +1205,7 @@ function massEtapa(){
   mostrar(0);
   iniciarTimer(e.s,()=>{ M.i++; sino(); massEtapa(); }, left=>{ const k=Math.min(n-1,Math.floor((e.s-left)/fatia)); mostrar(k); });
 }
-function massFim(){ pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p><button class="btn primary" onclick="massInit()">Outra massagem</button>`; }
+function massFim(){ pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p>${ROT?proxEtapa():`<button class="btn primary" onclick="massInit()">Outra massagem</button>`}`; }
 
 /* ---- Guia de posições ---- */
 const nivelTxt=l=>["","Leve","Quente","Ousada"][l];
