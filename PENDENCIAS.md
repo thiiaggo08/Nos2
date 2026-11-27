@@ -7,9 +7,10 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 1. Me Conta Mais
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 1.1 | Aprovar o baralho de 40 cartas (CONTEUDO-ME-CONTA-MAIS.md, v2) | ⏳ | |
-| 1.2 | As 40 novas substituem as 36 perguntas atuais? | ⏳ | |
-| 1.3 | Divisão do clima: ordem 1–4 leve, 5–8 pessoal | ⏳ | |
+| 1.1 | Baralho de 40 cartas | ✅ | Baralho escrito pelo usuário, APROVADO. Primeira partida abre com R03. |
+| 1.1a | 5 ajustes opcionais sugeridos (R01; M07; T05 no masculino; “a outra pessoa” → “seu par”; aspas «» → “ ”) | ⏳ | |
+| 1.2 | As 40 novas substituem as 36 perguntas atuais? | ✅ | Sim: o baralho do Me Conta Mais passa a ser o aprovado. (Confirmar se as 36 antigas somem ou ficam em outro lugar.) |
+| 1.3 | Divisão do clima | ✅ | 01–05 leves; 06–08 mais pessoais. |
 | 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | ⏳ | |
 | 1.5 | "Rapidinho" nomeando o roteiro e o modo do Me Conta Mais | ⏳ | |
 
