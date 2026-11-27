@@ -35,10 +35,10 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
 | 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | ✅ | Spec do usuário (27/11/2026): ao ir para segundo plano ou bloquear a tela, pausa o cronômetro, para a narração e salva sessão, etapa, tempo restante, vez e placar; tempo fora não é descontado. Volta < 2 min: atividade pausada; ≥ 2 min: PIN e depois atividade pausada. Tela “Querem continuar de onde pararam?” com “Retomar” (silêncio, tempo salvo) e “Encerrar por hoje” (não conclui a etapa). Botão “Ouvir instrução” relê só a etapa atual, sem sobrepor e sem mexer em tempo/etapa/vez/placar. Prazos das missões do Espero Você e contagem do encontro continuam correndo. |
-| 4.1a | Pausa de 20 min da Conversa: continua contando o tempo real fora do app? (sugestão: sim, porque é tempo para ficar longe) | ⏳ | |
-| 4.1b | Depois de “Retomar”, as etapas seguintes voltam a ser narradas normalmente? (sugestão: sim; só a etapa interrompida fica em silêncio) | ⏳ | |
-| 4.1c | Por quanto tempo uma sessão pausada fica guardada? (sugestão: 12 horas; depois, some sozinha) | ⏳ | |
-| 4.1d | Cronômetros dentro das cartas do Espero Você (ex.: cartas 51 e 57) também pausam? (sugestão: sim; o prazo da missão continua) | ⏳ | |
+| 4.1a | Pausa de 20 min da Conversa | ✅ | Continua contando o tempo real fora do app. |
+| 4.1b | Narração depois de “Retomar” | ✅ | Etapas seguintes voltam a ser narradas; só a interrompida fica em silêncio (salvo “Ouvir instrução”). |
+| 4.1c | Validade da sessão pausada | ✅ | 12 horas; depois some sozinha. |
+| 4.1d | Cronômetros das cartas do Espero Você | ✅ | Pausam; o prazo da missão continua correndo. |
 | 4.2 | Manter a tela acesa nas sessões guiadas | ⏳ | |
 | 4.3 | "Até que nível?" ao criar partida do Espero Você | ⏳ | |
 | 4.4 | "Esquentar sozinho" desligado por padrão | ⏳ | |
