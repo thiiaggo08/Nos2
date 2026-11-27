@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) **aprovadas**. 91 a 42 (lote 9) sugeridas, aguardam aprovação. Prints conferidos: lotes 1 a 5 completos. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) **aprovadas**. 91 a 42 (lote 9) **aprovadas**. 41 a 1 (lote 10) sugeridas, aguardam aprovação. Prints conferidos: lotes 1 a 5 completos. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -469,47 +469,47 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 44 | Caixão | 🔴 Difícil | Cara a cara |
 | 43 | Submisso | 🟠 Intermediário | Por trás |
 | 42 | Queda | 🟢 Fácil | (a conferir) |
-| 41 | Freira | 🟢 Fácil | |
-| 40 | Tigre | 🟢 Fácil | |
-| 39 | Conchinha | 🟢 Fácil | |
-| 38 | Soldado | 🟢 Fácil | |
-| 37 | Cleópatra | 🟢 Fácil | |
-| 36 | Idyll | 🟢 Fácil | |
-| 35 | Chama | 🔴 Difícil | |
-| 34 | Câncer | 🟠 Intermediário | |
-| 33 | Gancho | 🟠 Intermediário | |
-| 32 | Êxtase | 🟠 Intermediário | |
-| 31 | Clip ⟲ | 🟠 Intermediário | |
-| 30 | Escavações | 🟢 Fácil | |
-| 29 | Harmonia | 🟢 Fácil | |
-| 28 | Ape | 🟠 Intermediário | |
-| 27 | Cavaleiro ⟲ | 🟠 Intermediário | |
-| 26 | Encadernação | 🟢 Fácil | |
-| 25 | Escravo do sexo | 🟢 Fácil | |
-| 24 | Gorge | 🟠 Intermediário | |
-| 23 | Livro | 🟢 Fácil | |
-| 22 | Estilo indiano | 🟠 Intermediário | |
-| 21 | Gota de neve | 🟠 Intermediário | |
-| 20 | Parede | 🟠 Intermediário | |
-| 19 | Broto | 🟢 Fácil | |
-| 18 | Cachoeira | 🔴 Difícil | |
-| 17 | Basset Hound | 🟢 Fácil | |
-| 16 | Tornado | 🟢 Fácil | |
-| 15 | Balançar | 🟠 Intermediário | |
-| 14 | Tulipa ⟲ | 🟠 Intermediário | |
-| 13 | Colher | 🟢 Fácil | |
-| 12 | Sussurro | 🟢 Fácil | |
-| 11 | Inquisidor | 🟢 Fácil | |
-| 10 | Círculo | 🟢 Fácil | |
-| 9 | Disco | 🟠 Intermediário | |
-| 8 | Barco | 🟢 Fácil | |
-| 7 | Vela | 🟢 Fácil | |
-| 6 | Straddle | 🟢 Fácil | |
-| 5 | Aquarius ⟲ | 🟠 Intermediário | |
-| 4 | Claquete | 🟠 Intermediário | |
-| 3 | Gato | 🟢 Fácil | |
-| 2 | Sereia ⟲ | 🔴 Difícil | |
-| 1 | Ônibus | 🟢 Fácil | |
+| 41 | Freira | 🟢 Fácil | Ela por cima |
+| 40 | Tigre | 🟢 Fácil | Ela por cima |
+| 39 | Conchinha | 🟢 Fácil | De lado e conchinha |
+| 38 | Soldado | 🟢 Fácil | Por trás |
+| 37 | Cleópatra | 🟢 Fácil | Ela por cima |
+| 36 | Idyll | 🟢 Fácil | Oral (cunnilingus) |
+| 35 | Chama | 🔴 Difícil | Em pé · também acrobática |
+| 34 | Câncer | 🟠 Intermediário | Cara a cara |
+| 33 | Gancho | 🟠 Intermediário | Em pé · também por trás |
+| 32 | Êxtase | 🟠 Intermediário | (a conferir) |
+| 31 | Clip ⟲ | 🟠 Intermediário | Por trás |
+| 30 | Escavações | 🟢 Fácil | (a conferir) |
+| 29 | Harmonia | 🟢 Fácil | Cara a cara |
+| 28 | Ape | 🟠 Intermediário | Ela por cima |
+| 27 | Cavaleiro ⟲ | 🟠 Intermediário | Ela por cima |
+| 26 | Encadernação | 🟢 Fácil | (a conferir) |
+| 25 | Escravo do sexo | 🟢 Fácil | Oral (boquete) |
+| 24 | Gorge | 🟠 Intermediário | Cara a cara |
+| 23 | Livro | 🟢 Fácil | De lado e conchinha |
+| 22 | Estilo indiano | 🟠 Intermediário | Em pé · também cara a cara |
+| 21 | Gota de neve | 🟠 Intermediário | Por trás |
+| 20 | Parede | 🟠 Intermediário | Em pé · também por trás |
+| 19 | Broto | 🟢 Fácil | (a conferir) |
+| 18 | Cachoeira | 🔴 Difícil | Cara a cara · também acrobática |
+| 17 | Basset Hound | 🟢 Fácil | Por trás |
+| 16 | Tornado | 🟢 Fácil | Por trás |
+| 15 | Balançar | 🟠 Intermediário | Ela por cima |
+| 14 | Tulipa ⟲ | 🟠 Intermediário | (a conferir) |
+| 13 | Colher | 🟢 Fácil | De lado e conchinha |
+| 12 | Sussurro | 🟢 Fácil | Oral (boquete) |
+| 11 | Inquisidor | 🟢 Fácil | Ela por cima |
+| 10 | Círculo | 🟢 Fácil | (a conferir) |
+| 9 | Disco | 🟠 Intermediário | Em pé · também por trás |
+| 8 | Barco | 🟢 Fácil | Por trás |
+| 7 | Vela | 🟢 Fácil | Em pé · também cara a cara |
+| 6 | Straddle | 🟢 Fácil | Ela por cima |
+| 5 | Aquarius ⟲ | 🟠 Intermediário | Por trás |
+| 4 | Claquete | 🟠 Intermediário | Ela por cima · também acrobática |
+| 3 | Gato | 🟢 Fácil | Cara a cara |
+| 2 | Sereia ⟲ | 🔴 Difícil | Cara a cara · também acrobática |
+| 1 | Ônibus | 🟢 Fácil | Ela por cima |
 
 ⟲ = nome repetido no site com outro número.
 
@@ -969,3 +969,44 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 44 | Caixão | Quem recebe deita de costas com as pernas para o alto, apoiadas no outro, que fica de joelhos. | Penetração profunda e boa vista. Comecem devagar. |
 | 43 | Submisso | Quem recebe fica de quatro; o outro ajoelha atrás, inclinado sobre ele. | Alternem ternura e intensidade. |
 | 42 | Queda | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 41 | Freira | Um deita de costas; o outro fica de joelhos por cima, de frente, com as mãos no peito dele. | Quem está por cima pode se soltar e conduzir. |
+| 40 | Tigre | Um deita de costas; o outro senta por cima, inclinado para trás, apoiado nas mãos. | Quem está por cima controla o ritmo e a profundidade. |
+| 39 | Conchinha | Quem recebe deita de lado, com as pernas dobradas; o outro fica atrás, ajoelhado e abraçado. | Doce e aconchegante, ótima para o fim da noite. |
+| 38 | Soldado | Quem recebe deita de bruços; o outro deita por cima, atrás, apoiado num braço. | Para quando os dois estão cansados e querem relaxar. |
+| 37 | Cleópatra | Um deita de lado; o outro senta por cima, inclinado para trás. | Quem está por cima conduz tudo. |
+| 36 | Idyll | Quem recebe deita de costas e relaxa; o outro deita entre as pernas e faz sexo oral. | Sem pressa: deixem o momento render. |
+| 35 | Chama | Um fica em pé; o outro se inclina para trás, com as pernas na cintura dele e as mãos quase no chão. | Exige força de quem segura e confiança de quem se inclina. |
+| 34 | Câncer | Quem recebe deita de costas com as pernas dobradas; o outro fica de joelhos, inclinado para beijar. | Boa para quem gosta de beijar o tempo todo. |
+| 33 | Gancho | Os dois em pé diante de um espelho; o outro fica atrás. | O espelho deixa os dois se verem. |
+| 32 | Êxtase | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 31 | Clip ⟲ | Quem recebe fica de quatro; o outro ajoelha atrás. | O "de quatro" clássico. |
+| 30 | Escavações | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 29 | Harmonia | Quem recebe deita de costas sobre um travesseiro; o outro deita por cima. | Sem pensar em nada: só os dois juntos. |
+| 28 | Ape | Um deita de costas e ergue as pernas; o outro senta por cima, de frente, entre elas. | Quem está por cima comanda. |
+| 27 | Cavaleiro ⟲ | Um deita de costas; o outro fica de joelhos por cima, inclinado para a frente. | Quem está por cima dita o ritmo. |
+| 26 | Encadernação | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 25 | Escravo do sexo | Um deita de lado; o outro se curva sobre ele e faz sexo oral. | Deitados, os dois ficam confortáveis por mais tempo. |
+| 24 | Gorge | Quem recebe deita de costas sobre um travesseiro, com as pernas no ombro do outro, que fica de joelhos. | Ótimo para quem tem pernas flexíveis. |
+| 23 | Livro | Os dois deitam de lado, frente a frente, sobre um travesseiro. | Muito íntima e tranquila. |
+| 22 | Estilo indiano | Os dois em pé, frente a frente; quem recebe ergue uma perna e a apoia no outro. | Ótima para uma rapidinha em qualquer lugar. |
+| 21 | Gota de neve | Quem recebe deita de bruços, encolhido; o outro fica de joelhos por cima, envolvendo-o. | Muito acolhedora: quem está por cima abraça. |
+| 20 | Parede | Quem recebe fica em pé, com as mãos na parede; o outro fica atrás. | Rápida e boa para lugares diferentes. |
+| 19 | Broto | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 18 | Cachoeira | Quem recebe deita de costas com o quadril apoiado nas coxas do outro, que fica de joelhos, e as costas arqueadas até a cabeça tocar o chão. | A cabeça fica mais baixa: parem se vier tontura. |
+| 17 | Basset Hound | Quem recebe fica de quatro; o outro ajoelha atrás, inclinado. | Simples e fácil de ajustar. |
+| 16 | Tornado | Quem recebe deita de bruços; o outro fica de joelhos por cima, atrás. | Uma almofada sob o quadril melhora o ângulo. |
+| 15 | Balançar | Um deita de costas; o outro senta por cima, inclinado para trás, e balança. | Movimentos amplos e lentos. |
+| 14 | Tulipa ⟲ | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 13 | Colher | Os dois deitam de lado, um atrás do outro, encaixados como colheres. | Perfeita para a manhã, ainda na cama. |
+| 12 | Sussurro | Um deita de costas, recostado num travesseiro; o outro deita entre as pernas e faz sexo oral. | Com calma e carinho. |
+| 11 | Inquisidor | Um deita de costas; o outro deita por cima, de bruços, com as pernas para trás. | Quem está por cima conduz tudo. |
+| 10 | Círculo | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 9 | Disco | Os dois em pé; quem recebe se encosta no outro, que fica atrás, abraçando. | Como uma dança: movimentos lentos e juntos. |
+| 8 | Barco | Quem recebe deita de bruços; o outro fica por cima, apoiado nas mãos. | Sente-se tudo mais profundo; vão devagar. |
+| 7 | Vela | Os dois em pé, frente a frente, abraçados. | Para quando não dá para esperar. |
+| 6 | Straddle | Um deita de costas; o outro senta por cima, de frente, com as pernas abertas. | Quem está por cima conduz o ritmo. |
+| 5 | Aquarius ⟲ | Quem recebe deita de bruços com o tronco baixo; o outro fica de joelhos atrás, com o tronco ereto. | Cada um tem seu papel: quem está atrás conduz. |
+| 4 | Claquete | Um faz uma ponte, apoiado nas mãos e nos pés; o outro deita por cima. | Cansativa para quem faz a ponte. Sessões curtas. |
+| 3 | Gato | Quem recebe deita de costas; o outro deita por cima, com o corpo um pouco mais à frente. | Variação simples do papai e mamãe, com mais estímulo. |
+| 2 | Sereia ⟲ | Quem recebe deita de costas e leva as pernas para trás, por cima da cabeça; o outro fica de cócoras por cima. | Muito exigente para o pescoço. Usem travesseiros. |
+| 1 | Ônibus | Um deita de costas; o outro deita por cima, de bruços, com o corpo inclinado. | Simples e voluptuosa: ótima para variar sem pressa. |
