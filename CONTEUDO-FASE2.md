@@ -281,7 +281,7 @@ Este modo ajuda a conversar, mas não substitui terapia de casal. Vale procurar 
 
 ## 5. Nós Dois: categorias novas de fantasias (APROVADO)
 
-Substituem a categoria "Com terceiros", que sai do catálogo.
+Entram no catálogo. A categoria "Com terceiros" voltou por decisão do usuário (27/11/2026) e convive com estas três.
 
 **Palavras e voz**
 - Ler juntos um conto erótico
