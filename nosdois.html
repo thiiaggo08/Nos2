@@ -1270,11 +1270,24 @@ function sortearPos(){ const ok=new Set(window._posPool.map(x=>x.id)); const id=
 /* ---- Baralhos ---- */
 let K=null;
 /* ---- Me Conta Mais: tela de entrada (usa o baralho de perguntas já existente) ---- */
+const MCM_MODOS={rap:{nome:"Rapidinho",min:10,max:3},c20:{nome:"Partida completa",min:20,max:5},c30:{nome:"Partida completa",min:30,max:8},c40:{nome:"Partida completa",min:40,max:10}};
+/* categoria leve para abrir a partida: Risadas quando existir; senão, a primeira desta lista que houver no baralho */
+const MCM_LEVES=["Risadas","Nós"];
 function mcmInit(){
+  const op=k=>{ const m=MCM_MODOS[k]; return `${m.min} min · ${m.max} cartas`; };
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Quebrar o gelo</div>
-  <div class="game capa"><h1>Me Conta Mais</h1><p>Uma carta puxa outra. Uma resposta puxa conversa.</p>
-   <button class="btn gold" onclick="cartasComecar('conv',3)">Começar · ${CONVERSA.length} cartas</button></div>`;
+  <div class="game capa"><h1>Me Conta Mais</h1><p>Uma carta puxa outra. Uma resposta puxa conversa.</p></div>
+  <h2>Quanto tempo vocês têm?</h2>
+  <div class="game">
+   <div class="muted">Rapidinho</div>
+   <button class="btn gold" onclick="mcmComecar('rap')">Rapidinho · até 10 min · 3 cartas</button>
+   <div class="muted" style="margin-top:16px">Partida completa</div>
+   <button class="btn ghost" onclick="mcmComecar('c20')">${op("c20")}</button>
+   <button class="btn ghost" onclick="mcmComecar('c30')">${op("c30")}</button>
+   <button class="btn ghost" onclick="mcmComecar('c40')">${op("c40")}</button>
+  </div>`;
 }
+function mcmComecar(k){ cartasComecar("conv",3,k); }
 function cartasInit(){
   mcmFechar();
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Baralhos</div><h1>Cartas</h1>${comoHtml("cartas",true)}
@@ -1284,9 +1297,9 @@ function cartasInit(){
    <div class="two"><button class="btn ghost" onclick="cartasComecar('q',1)">Leve</button><button class="btn ghost" onclick="cartasComecar('q',2)">Quente</button><button class="btn primary" onclick="cartasComecar('q',3)">Ousado</button></div></div>`;
 }
 function cartasNivel(){ for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>c[0]===l?i:-1).filter(i=>i>=0); if(Nos2.deck.remaining("nd.q"+l,ids)>0) return [l,ids]; } return null; }
-function cartasComecar(deck,max){
+function cartasComecar(deck,max,modo){
   mcmFechar();
-  K={deck,max,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[]};
+  K={deck,max,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[],modo:modo||"c20",cats:[],t0:0,tid:null,tempoAcabou:false};
   if(deck==="conv"){ if(Nos2.deck.remaining("nd.conv",idx(CONVERSA))===0) Nos2.deck.reset("nd.conv"); }
   else if(!cartasNivel()) for(let l=1;l<=max;l++) Nos2.deck.reset("nd.q"+l);
   cartasTirar(); cartasRender();
@@ -1294,7 +1307,7 @@ function cartasComecar(deck,max){
 /* Cada baralho segue de onde parou: nenhuma carta se repete antes de o baralho acabar. As quentes começam leves e esquentam. */
 function cartasTirar(){
   if(K.deck==="conv"){ const ids=idx(CONVERSA); if(K.i>0&&Nos2.deck.remaining("nd.conv",ids)===0){ K.fim=true; Nos2.deck.reset("nd.conv"); return; }
-    const i=+Nos2.deck.draw("nd.conv",ids); K.c={n:i+1,t:CONVERSA[i][1],tag:CONVERSA[i][0]}; }
+    const i=+mcmSortear(ids); K.c={n:i+1,t:CONVERSA[i][1],tag:CONVERSA[i][0]}; K.cats.push(K.c.tag); }
   else { const nv=cartasNivel(); if(!nv){ K.fim=true; for(let l=1;l<=K.max;l++) Nos2.deck.reset("nd.q"+l); return; }
     const i=+Nos2.deck.draw("nd.q"+nv[0],nv[1]); K.c={n:i+1,t:QUENTES[i][1],l:QUENTES[i][0]}; }
   K.i++;
@@ -1313,30 +1326,53 @@ function cartasRender(){
    <p class="muted" style="text-align:center">Passar não tem castigo. A vez vai para ${esc(outro)}.</p>
    <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>`;
 }
-/* ---- Me Conta Mais: partida cooperativa (pontos juntos, vez, pular) ---- */
+/* ---- Me Conta Mais: partida cooperativa (pontos juntos, vez, pular, tempo) ---- */
+function mcmSortear(ids){
+  const cat=i=>CONVERSA[+i][0], tem=f=>Nos2.deck.remaining("nd.conv",ids,f)>0, ult=K.cats[K.cats.length-1];
+  const prefs=[];
+  if(!K.cats.length){ const leve=MCM_LEVES.find(c=>tem(i=>cat(i)===c)); if(leve) prefs.push(i=>cat(i)===leve); }
+  else if(K.modo==="rap") prefs.push(i=>cat(i)!==ult);
+  else { prefs.push(i=>!K.cats.includes(cat(i))); prefs.push(i=>cat(i)!==ult); }
+  const f=prefs.find(tem);
+  return Nos2.deck.draw("nd.conv",ids,f||null);
+}
+function mcmRestante(){ return K.modo&&K.t0?Math.max(0,MCM_MODOS[K.modo].min*60000-(Date.now()-K.t0)):0; }
+function mcmRelogio(){ const ms=mcmRestante(), s=Math.ceil(ms/1000); return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`; }
+function mcmTick(){
+  if(!K||K.deck!=="conv"||K.fim){ return; }
+  const e=$("mcmTempo"); if(e) e.textContent=mcmRelogio();
+  if(!K.tempoAcabou&&mcmRestante()<=0){ K.tempoAcabou=true; try{navigator.vibrate&&navigator.vibrate(300)}catch(x){} sino(); mcmRender(); }
+}
 function mcmRender(){
   if(K.fim) return mcmFim(true);
-  const c=K.c, quem=K.vez===0?eu():ele();
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Me Conta Mais</div>
-  <div id="mcmPts" style="margin-top:10px;font-size:16px;color:var(--gold)" aria-live="polite">Pontos juntos: ${K.pts}</div>
+  if(!K.t0){ K.t0=Date.now(); clearInterval(K.tid); K.tid=setInterval(mcmTick,500); } // a contagem começa com a primeira carta
+  const c=K.c, quem=K.vez===0?eu():ele(), m=MCM_MODOS[K.modo];
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Me Conta Mais · ${m.nome}</div>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;gap:10px">
+   <div id="mcmPts" style="font-size:16px;color:var(--gold)" aria-live="polite">Pontos juntos: ${K.pts}</div>
+   <div class="muted">⏱ <span id="mcmTempo">${mcmRelogio()}</span> · até ${m.max} cartas</div></div>
   <h1>Vez de ${esc(quem)}</h1>
+  ${K.tempoAcabou?`<div class="note" style="font-size:15px;color:var(--txt)">O tempo acabou. Podem terminar esta carta com calma.</div>`:""}
   <div class="game"><div class="gcard" style="min-height:220px;position:relative">
     <div class="k">${c.tag}</div><div class="v">${c.t}</div>
     <div style="position:absolute;left:14px;bottom:12px;background:var(--gold);color:#1a1208;font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div></div>
    <p class="muted" style="text-align:center">${esc(quem)} lê a carta e começa. O par também pode responder.</p>
-   <div class="two"><button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmPular(${c.n})">Pular carta</button></div>
+   ${K.tempoAcabou?`<button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`
+   :`<div class="two"><button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmPular(${c.n})">Pular carta</button></div>
    <p class="muted" style="text-align:center">Pular não tira ponto, e a vez continua com ${esc(quem)}.</p>
-   <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`;
+   <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`}`;
 }
 function mcmConcluir(n){
   if(!K||K.fim||!K.c||K.c.n!==n||K.feitas.has(n)) return; // toque duplo não conta duas vezes
-  K.feitas.add(n); K.pts++; K.vez=1-K.vez; cartasTirar(); mcmRender(); window.scrollTo(0,0);
+  K.feitas.add(n); K.pts++;
+  if(K.pts>=MCM_MODOS[K.modo].max||K.tempoAcabou) return mcmFim(false);
+  K.vez=1-K.vez; cartasTirar(); mcmRender(); window.scrollTo(0,0);
 }
 function mcmPular(n){
-  if(!K||K.fim||!K.c||K.c.n!==n) return;
+  if(!K||K.fim||K.tempoAcabou||!K.c||K.c.n!==n) return;
   K.puladas.push(n-1); cartasTirar(); mcmRender(); window.scrollTo(0,0);
 }
-function mcmFechar(){ if(!K||K.deck!=="conv"||K.fechado||!K.puladas) return;
+function mcmFechar(){ if(K&&K.tid){ clearInterval(K.tid); K.tid=null; } if(!K||K.deck!=="conv"||K.fechado||!K.puladas) return;
   const volta=K.puladas.slice(); if(K.c&&!K.fim&&!K.feitas.has(K.c.n)) volta.push(K.c.n-1); // carta na tela que ninguém jogou
   if(volta.length) Nos2.deck.putBack("nd.conv",volta); K.puladas=[]; K.fechado=true; }
 function mcmFim(acabou){
