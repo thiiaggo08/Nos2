@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -57,8 +57,8 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 456 | Espetos | 🟢 Fácil | Cara a cara |
 | 455 | Sela | 🟠 Intermediário | Ela por cima |
 | 454 | Adoração | 🟢 Fácil | Por trás · também em pé |
-| 453 | Emaranhado | 🔴 Difícil | Acrobáticas (a conferir) |
-| 452 | Triângulo das Bermudas | 🟠 Intermediário | Acrobáticas (a conferir) |
+| 453 | Emaranhado | 🔴 Difícil | Acrobáticas |
+| 452 | Triângulo das Bermudas | 🟠 Intermediário | Sentados · também acrobática |
 | 451 | Counterblow | 🟢 Fácil | Em pé · também cara a cara |
 | 450 | Lugar confortável | 🟢 Fácil | Sentados · também ela por cima |
 | 449 | Julia | 🟠 Intermediário | Cara a cara |
@@ -68,7 +68,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 445 | Meia-noite | 🟠 Intermediário | Em pé · também por trás |
 | 444 | Tábua | 🟢 Fácil | Cara a cara |
 | 443 | Atordoador | 🟠 Intermediário | Cara a cara |
-| 442 | Pônei selvagem | 🟢 Fácil | (a conferir) |
+| 442 | Pônei selvagem | 🟢 Fácil | Por trás · também em pé |
 | 441 | Virada | 🟢 Fácil | Ela por cima |
 | 440 | Martelo de Thor | 🔴 Difícil | Por trás |
 | 439 | Cowgirl na cadeira | 🟠 Intermediário | Sentados · também ela por cima |
@@ -557,8 +557,8 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 456 | Espetos | Quem recebe deita de costas na beira da cama, com o quadril elevado e as pernas para cima; o outro ajoelha no chão, ereto. | Um travesseiro sob o quadril ajuda a manter a altura. |
 | 455 | Sela | Um deita de costas sobre uma bola de pilates; o outro senta por cima, de frente. | A bola balança: mantenham os pés bem firmes no chão. |
 | 454 | Adoração | Quem recebe deita de bruços numa mesa; o outro fica em pé atrás. | A mesa dá apoio e a altura costuma ser certa para quem está em pé. |
-| 453 | Emaranhado | Posição no chão, com os corpos entrelaçados. Texto a completar depois de conferir o desenho. | — |
-| 452 | Triângulo das Bermudas | Posição no sofá, desafiadora. Texto a completar depois de conferir o desenho. | — |
+| 453 | Emaranhado | Um fica de barriga para cima, apoiado nas mãos e nos pés; o outro fica de quatro por cima, em sentido oposto, com as pernas entrelaçadas. | Exige força nos braços dos dois. Sessões curtas, sobre um tapete. |
+| 452 | Triângulo das Bermudas | Um senta na beira do sofá, com as pernas abertas; o outro fica de costas para ele e se dobra para a frente, com a cabeça baixa e as mãos nos joelhos dele. | Cabeça mais baixa: parem se vier tontura. |
 | 451 | Counterblow | Quem recebe senta na beira de uma cadeira e envolve o outro com as pernas; o outro fica em pé, segurando-o. | Bom contato visual e muito abraço. |
 | 450 | Lugar confortável | Um senta reclinado no sofá; o outro senta no colo dele, de costas. | Posição tranquila, boa para conversar e trocar carinho. |
 | 449 | Julia | Quem recebe deita de costas sobre uma bola de pilates; o outro fica por cima, de pé ou de joelhos. | A bola balança: segurem firme e vão devagar. |
@@ -568,7 +568,7 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 445 | Meia-noite | Quem recebe ajoelha numa cadeira, de costas, com uma perna erguida; o outro fica em pé atrás. | A cadeira deve estar firme. Segurem a perna erguida com cuidado. |
 | 444 | Tábua | Quem recebe deita de costas na beira do sofá; o outro fica por cima, apoiado nas mãos, como numa prancha. | Quem está por cima controla o ritmo; quem está embaixo só aproveita. |
 | 443 | Atordoador | Quem recebe deita de costas sobre uma bola de pilates; o outro fica em pé na frente, segurando o quadril. | Variação do papai e mamãe com balanço. Mantenham a bola firme. |
-| 442 | Pônei selvagem | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
+| 442 | Pônei selvagem | Quem recebe fica de joelhos sobre uma mesa, apoiado nas mãos; o outro fica em pé atrás, segurando o quadril. | A mesa precisa ser firme e ficar na altura do quadril de quem está em pé. |
 | 441 | Virada | Um deita de costas; o outro senta por cima, de costas para ele, e se inclina para a frente, apoiado nas pernas dele. | Quem está por cima controla tudo; quem está embaixo aproveita a vista. |
 | 440 | Martelo de Thor | Quem recebe ajoelha no sofá, com o tronco baixo; o outro fica de cócoras por cima, atrás. | Exige força nas pernas de quem está por cima. Sessões curtas. |
 | 439 | Cowgirl na cadeira | Um senta numa cadeira; o outro senta no colo dele, de frente, com os pés no chão. | Ótima para beijar e abraçar. A cadeira precisa ser firme e sem braços. |
