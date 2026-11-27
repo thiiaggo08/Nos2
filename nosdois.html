@@ -12,6 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <script src="js/core.js"></script>
 <script src="js/vendor/noble-psi.min.js"></script>
+<script src="js/mcm-data.js"></script>
 <style>
   :root{--bg:#0c0a0b;--card:#161214;--line:#2a2326;--txt:#efe6dc;--mute:#9d928a;--gold:#b8955a;--wine:#9e2a3c;--deep:#2b1015}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -248,10 +249,10 @@
     <div class="menu">
       <div class="jgrp">Quebrar o gelo</div>
       <button class="thumb" data-thumb="vd" onclick="abrirJogo('vd')"><div><small>Jogo 2</small><span>Verdade ou Desafio</span><em>Três níveis. Subir de nível exige os dois; passar não tem castigo.</em></div></button>
-      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('mcm')"><div><small>Baralho</small><span>Me Conta Mais</span><em>36 perguntas para se conhecerem melhor (Nós, Desejo e Fantasia).</em></div></button>
-      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('cartas')"><div><small>Baralhos</small><span>Cartas</span><em>Me Conta Mais (36 perguntas) e Cartas quentes (45, em 3 níveis).</em></div></button>
+      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('cartas')"><div><small>Baralhos</small><span>Cartas</span><em>Me Conta Mais e Cartas íntimas (+18).</em></div></button>
       <div class="jgrp">Esquentar</div>
       <button class="thumb" data-thumb="prel" onclick="abrirJogo('prel')"><div><small>Jogo 3</small><span>Preliminares</span><em>48 cartas em 3 níveis, com voz e tempo. Um conduz, o outro só recebe.</em></div></button>
+      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('quentes')"><div><small>Baralho</small><span>Cartas quentes</span><em>45 ações em 3 níveis: Leve, Quente e Ousado.</em></div></button>
       <button class="thumb" data-thumb="dado" onclick="abrirJogo('dado')"><div><small>Jogo 1</small><span>Dado da Noite</span><em>Dois toques às cegas sorteiam posição, jeito e lugar. 3 min por rodada, 2 passes.</em></div></button>
       <button class="thumb" data-thumb="pos" onclick="abrirJogo('pos')"><div><small>Guia</small><span>Posições</span><em>27 posições explicadas, com dicas e sorteio.</em></div></button>
       <div class="jgrp">Fantasias</div>
@@ -1127,7 +1128,7 @@ window.addEventListener("pagehide",pausarAtividade);
 function abrirJogo(j){
   ATIVO=null; PAUSADO=null; Nos2.store.del("pausa");
   lerInicio(); $("jogoMenu").style.display="none"; const A=$("jogoArea"); A.style.display="";
-  ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,mcm:mcmInit,pos:posInit,roleta:roletaInit})[j]();
+  ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,mcm:mcmInit,quentes:quentesInit,pos:posInit,roleta:roletaInit})[j]();
   window.scrollTo(0,0);
 }
 function sairJogo(){ Nos2.tela.encerrar(); ATIVO=null; PAUSADO=null; Nos2.store.del("pausa"); mcmFechar(); pararTimer(); try{speechSynthesis.cancel();}catch(e){} if(ROT){ ROT.i++; return rotTela(); } $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
@@ -1504,7 +1505,6 @@ let K=null;
 /* ---- Me Conta Mais: tela de entrada (usa o baralho de perguntas já existente) ---- */
 const MCM_MODOS={rap:{nome:"3 cartas",min:10,max:3},c20:{nome:"Partida completa",min:20,max:5},c30:{nome:"Partida completa",min:30,max:8},c40:{nome:"Partida completa",min:40,max:10}};
 /* categoria leve para abrir a partida: Risadas quando existir; senão, a primeira desta lista que houver no baralho */
-const MCM_LEVES=["Risadas","Nós"];
 function mcmInit(primeira){
   const visto=Nos2.store.get("mcm.exemplo",false);
   const op=k=>{ const m=MCM_MODOS[k]; return `${m.min} min · ${m.max} cartas`; };
@@ -1547,10 +1547,15 @@ function mcmExemplo(passo){
 function mcmComecar(k){ Nos2.tela.iniciarSessao(); cartasComecar("conv",3,k); }
 function cartasInit(){
   mcmFechar();
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Baralhos</div><h1>Cartas</h1>${comoHtml("cartas",true)}
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Quebrar o gelo</div><h1>Cartas</h1>${comoHtml("cartas",true)}
   <div class="game"><div class="muted">Escolham o baralho:</div>
-   <button class="btn gold" onclick="mcmInit()">Me Conta Mais · ${CONVERSA.length} cartas</button>
-   <div class="muted" style="margin-top:14px">Cartas quentes · até que nível?</div>
+   <button class="btn gold" onclick="mcmInit()">Me Conta Mais</button><div class="muted" style="text-align:center;margin-top:6px">${MCM_CARTAS.length} cartas de humor, conversa e carinho.</div>
+   <button class="btn ghost" style="margin-top:14px" onclick="cartasComecar('int',3)">Cartas íntimas (+18)</button><div class="muted" style="text-align:center;margin-top:6px">${CONVERSA.length} perguntas dos grupos Nós, Desejo e Fantasia.</div></div>`;
+}
+function quentesInit(){
+  mcmFechar();
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Esquentar</div><h1>Cartas quentes</h1>
+  <div class="game"><div class="muted">${QUENTES.length} ações · até que nível?</div>
    <div class="two"><button class="btn ghost" onclick="cartasComecar('q',1)">Leve</button><button class="btn ghost" onclick="cartasComecar('q',2)">Quente</button><button class="btn primary" onclick="cartasComecar('q',3)">Ousado</button></div></div>`;
 }
 function cartasNivel(){ for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>c[0]===l?i:-1).filter(i=>i>=0); if(Nos2.deck.remaining("nd.q"+l,ids)>0) return [l,ids]; } return null; }
@@ -1558,6 +1563,7 @@ function cartasComecar(deck,max,modo){
   mcmFechar();
   K={deck,max,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[],modo:modo||"c20",clima:"leve",climaPerguntado:false,escolhendo:false,ultima:null,cats:[],t0:0,tid:null,tempoAcabou:false};
   if(deck==="conv"){ K.mostradas=new Set(); }
+  else if(deck==="int"){ if(Nos2.deck.remaining("nd.conv",idx(CONVERSA))===0) Nos2.deck.reset("nd.conv"); } // mesmo histórico de antes
   else if(!cartasNivel()) for(let l=1;l<=max;l++) Nos2.deck.reset("nd.q"+l);
   cartasTirar(); cartasRender();
 }
@@ -1565,35 +1571,40 @@ function cartasComecar(deck,max,modo){
 function cartasTirar(){
   if(K.deck==="conv"){ const c=mcmSortear(); if(!c){ K.fim=true; return; }
     K.c={n:c.n,id:c.id,t:c.texto,tag:c.cat,titulo:c.titulo}; K.ultima=c; K.cats.push(c.cat); K.mostradas.add(c.id); mcmMarcarVista(c.id); }
+  else if(K.deck==="int"){ const ids=idx(CONVERSA); if(K.i>0&&Nos2.deck.remaining("nd.conv",ids)===0){ K.fim=true; Nos2.deck.reset("nd.conv"); return; }
+    const i=+Nos2.deck.draw("nd.conv",ids); K.c={n:i+1,t:CONVERSA[i][1],tag:CONVERSA[i][0]}; }
   else { const nv=cartasNivel(); if(!nv){ K.fim=true; for(let l=1;l<=K.max;l++) Nos2.deck.reset("nd.q"+l); return; }
     const i=+Nos2.deck.draw("nd.q"+nv[0],nv[1]); K.c={n:i+1,t:QUENTES[i][1],l:QUENTES[i][0]}; }
   K.i++;
 }
 function cartasRender(){
   if(K.deck==="conv") return mcmRender();
-  if(K.fim){ $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Acabaram as cartas</h1><p>Vocês passaram por todas. Na próxima vez, o baralho recomeça embaralhado.</p><button class="btn primary" onclick="${K.deck==="conv"?"mcmInit()":"cartasInit()"}">Jogar de novo</button>`; return; }
+  const int=K.deck==="int", volta=int?"cartasInit()":"quentesInit()";
+  if(K.fim){ $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Acabaram as cartas</h1><p>Vocês passaram por todas. Na próxima vez, o baralho recomeça embaralhado.</p><button class="btn primary" onclick="${volta}">Jogar de novo</button>`; return; }
   const c=K.c, quem=K.vez===0?eu():ele(), outro=K.vez===0?ele():eu();
-  const txt = K.deck==="q" ? c.t.replace(/seu par/g, esc(outro)) : c.t;
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${K.deck==="conv"?"Me Conta Mais":"Cartas quentes"} · carta ${K.i} desta rodada</div><h1>Vez de ${esc(quem)}</h1>
+  const txt = int ? c.t : c.t.replace(/seu par/g, esc(outro));
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${int?"Cartas íntimas (+18)":"Cartas quentes"} · carta ${K.i} desta rodada</div><h1>Vez de ${esc(quem)}</h1>
   <div class="game"><div class="gcard" style="min-height:220px;position:relative">
-    <div class="k">${K.deck==="conv"?c.tag:nivelTxt(c.l)}</div><div class="v">${txt}</div>
-    <div style="position:absolute;left:14px;bottom:12px;background:${K.deck==="conv"?"var(--gold)":"var(--wine)"};color:${K.deck==="conv"?"#1a1208":"#fff"};font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div>
-    ${K.deck==="q"?`<div style="position:absolute;right:14px;bottom:12px">${dots(c.l)}</div>`:""}</div>
-   <div class="two"><button class="btn gold" onclick="cartasProx()">${K.deck==="conv"?"Respondi":"Feito"}</button><button class="btn ghost" onclick="cartasProx()">Passo</button></div>
+    <div class="k">${int?c.tag:nivelTxt(c.l)}</div><div class="v">${txt}</div>
+    <div style="position:absolute;left:14px;bottom:12px;background:${int?"var(--gold)":"var(--wine)"};color:${int?"#1a1208":"#fff"};font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div>
+    ${!int?`<div style="position:absolute;right:14px;bottom:12px">${dots(c.l)}</div>`:""}</div>
+   <div class="two"><button class="btn gold" onclick="cartasProx()">${int?"Respondi":"Feito"}</button><button class="btn ghost" onclick="cartasProx()">Passo</button></div>
    <p class="muted" style="text-align:center">Passar não tem castigo. A vez vai para ${esc(outro)}.</p>
-   <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>`;
+   <button class="btn ghost" onclick="${volta}">Trocar de baralho</button><button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>`;
 }
 /* ---- Me Conta Mais: partida cooperativa (pontos juntos, vez, pular, tempo) ---- */
-/* Baralho do Me Conta Mais no formato {id, cat, titulo, texto, ordem}. Hoje: as 36 perguntas atuais (sem título nem ordem). */
-const MCM_CARTAS=CONVERSA.map(([cat,texto],i)=>({id:"conv-"+(i+1),n:i+1,cat,titulo:"",texto,ordem:null}));
+/* Baralho do Me Conta Mais: as 40 cartas aprovadas (js/mcm-data.js), no formato {id, cat, titulo, texto, ordem}. */
+const MCM_CARTAS=window.MCM_BARALHO.map(c=>Object.assign({n:c.id},c));
+const MCM_PRIMEIRA="R03"; // a primeira partida deste aparelho abre com “Entendi outra coisa”
 /* Histórico de cartas já exibidas em partidas anteriores, guardado no iPhone. Quando todas aparecerem, começa um novo ciclo. */
 function mcmVistas(){ return new Set(Nos2.store.get("mcm.vistas",[])); }
 function mcmMarcarVista(id){ const v=mcmVistas(); v.add(id); Nos2.store.set("mcm.vistas",MCM_CARTAS.every(c=>v.has(c.id))?[]:[...v]); }
-function mcmLeve(c){ if(MCM_CARTAS.some(x=>x.ordem!=null)) return c.ordem!=null&&c.ordem<=2; const cat=MCM_LEVES.find(k=>MCM_CARTAS.some(x=>x.cat===k)); return c.cat===cat; }
+function mcmLeve(c){ return c.ordem!=null&&c.ordem<=5; } // leves: 01 a 05 de cada categoria
 /* Clima: pela ordem dentro da categoria, 1–4 = leve e 5–8 = mais pessoal. Sem ordem (baralho atual): a categoria leve conta como leve. */
-function mcmPessoal(c){ if(MCM_CARTAS.some(x=>x.ordem!=null)) return c.ordem!=null&&c.ordem>4; return !mcmLeve(c); }
+function mcmPessoal(c){ return c.ordem!=null&&c.ordem>5; } // mais pessoais: 06 a 08
 function mcmSortear(){
   const livres=MCM_CARTAS.filter(c=>!K.mostradas.has(c.id)); if(!livres.length) return null; // na mesma partida, cada carta aparece uma vez
+  if(!K.cats.length&&!Nos2.store.get("mcm.jaJogou",false)){ const r=livres.find(c=>c.id===MCM_PRIMEIRA); Nos2.store.set("mcm.jaJogou",true); if(r) return r; }
   const vistas=mcmVistas(), ult=K.cats[K.cats.length-1], ultC=K.ultima;
   // nível: abre com as mais leves; o modo "3 cartas" e "Continuar de boa" ficam só nas leves; "Pode aprofundar" intercala
   const niveis=[];
@@ -1645,8 +1656,8 @@ function mcmRender(){
     <div class="k">${esc(c.tag)}</div>${c.titulo?`<div style="font-family:Georgia,serif;font-size:17px;color:var(--gold);margin-bottom:6px">${esc(c.titulo)}</div>`:""}<div class="v">${esc(c.t)}</div>
     <div style="position:absolute;left:14px;bottom:12px;background:var(--gold);color:#1a1208;font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div></div>
    <p class="muted" style="text-align:center">${esc(quem)} lê a carta e começa. O par também pode responder.</p>
-   ${K.tempoAcabou?`<button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`
-   :`<div class="two"><button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmPular(${c.n})">Pular carta</button></div>
+   ${K.tempoAcabou?`<button class="btn gold" onclick="mcmConcluir('${c.n}')">Concluir carta</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`
+   :`<div class="two"><button class="btn gold" onclick="mcmConcluir('${c.n}')">Concluir carta</button><button class="btn ghost" onclick="mcmPular('${c.n}')">Pular carta</button></div>
    <p class="muted" style="text-align:center">Pular não tira ponto, e a vez continua com ${esc(quem)}.</p>
    ${Nos2.tela.html()}<button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`}`;
 }
@@ -1759,7 +1770,7 @@ const COMO={
   ex:`Escolham o tipo: <b class="w">relaxante, sensual, tântrica ou erótica</b>. Cada um tem um “Como fazer” e um roteiro. <b class="w">Exemplo:</b> etapa 3, <b class="w">Pés</b>, 3 minutos, com a dica na tela. Quando o tempo acaba, o app passa sozinho para a próxima etapa. Dá para pausar ou pular. No modo “os dois recebem”, os papéis trocam depois da última etapa.`},
  cartas:{svg:`<g transform="translate(92,82) rotate(-8)"><rect x="-46" y="-60" width="92" height="120" rx="10" fill="#f3ece3"/><text x="0" y="-22" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>Qual lembrança</text><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>nossa você</text><text x="0" y="6" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>revive?</text><rect x="-38" y="38" width="22" height="14" rx="2" fill="${C_G}"/><text x="-27" y="49" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1208" ${fnt}>04</text></g>
    <g transform="translate(212,80) rotate(7)"><rect x="-46" y="-60" width="92" height="120" rx="10" fill="#f3ece3" stroke="${C_W}" stroke-width="2"/><text x="0" y="-22" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>Tire uma peça</text><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>do seu par só</text><text x="0" y="6" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>com a boca.</text><rect x="-38" y="38" width="22" height="14" rx="2" fill="${C_W}"/><text x="-27" y="49" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" ${fnt}>16</text>${[0,1,2].map(i=>`<circle cx="${18+i*9}" cy="45" r="3.2" fill="${i<2?C_W:"#d9cfc4"}"/>`).join("")}</g>`,
-  ex:`<b class="w">Me Conta Mais:</b> perguntas para se conhecerem melhor (Nós, Desejo e Fantasia). <b class="w">Cartas quentes:</b> ações em 3 níveis; vocês escolhem até onde ir, e o baralho começa leve e esquenta aos poucos. As cartas alternam a vez, e o nome do par aparece no texto. Passar não tem castigo.`},
+  ex:`<b class="w">Me Conta Mais:</b> 40 cartas de humor, conversa e carinho. <b class="w">Cartas íntimas (+18):</b> 36 perguntas dos grupos Nós, Desejo e Fantasia; a vez alterna e passar não tem castigo. As <b class="w">Cartas quentes</b> ficam em Esquentar.`},
  pos:{svg:`${[0,1,2].map(i=>`<rect x="24" y="${18+i*44}" width="200" height="36" rx="8" fill="#1a1416" stroke="#3a2a2e"/><rect x="36" y="${28+i*44}" width="${[90,120,70][i]}" height="7" rx="3" fill="${C_T}" opacity=".8"/><rect x="36" y="${40+i*44}" width="${[140,100,120][i]}" height="5" rx="2" fill="${C_M}" opacity=".6"/>${[0,1,2].map(k=>`<circle cx="${190+k*9}" cy="${32+i*44}" r="3" fill="${k<=i?C_G:"#3a3134"}"/>`).join("")}`).join("")}
    <rect x="240" y="44" width="62" height="28" rx="14" fill="#2a2015" stroke="${C_G}"/><text x="271" y="62" text-anchor="middle" font-size="10" fill="${C_T}" ${fnt}>✓ Quero</text>
    <circle cx="271" cy="112" r="20" fill="${C_W}"/><path d="M262,112 h18 M275,106 l6,6 l-6,6" stroke="#fff" stroke-width="2.5" fill="none"/>`,

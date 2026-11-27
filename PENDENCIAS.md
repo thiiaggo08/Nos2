@@ -7,12 +7,12 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 1. Me Conta Mais
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 1.1 | Baralho de 40 cartas | ✅ | Baralho escrito pelo usuário, APROVADO. Primeira partida abre com R03. |
-| 1.1a | 5 ajustes sugeridos (R01; M07; T05; “seu par”; aspas brasileiras) | ✅ | Todos aceitos. Já aplicados no texto do baralho em CONTEUDO-ME-CONTA-MAIS.md. |
-| 1.2 | As 40 novas substituem as 36 perguntas atuais? | ✅ | Me Conta Mais = só as 40 aprovadas. As 36 antigas ficam em “Cartas íntimas (+18)”, com textos, grupos (Nós, Desejo, Fantasia), regras antigas e histórico preservados. |
-| 1.2a | Organização de “Cartas” | ✅ | Nós Dois → Quebrar o gelo → Cartas mostra: “Me Conta Mais — 40 cartas de humor, conversa e carinho.” e “Cartas íntimas (+18) — 36 perguntas dos grupos Nós, Desejo e Fantasia.” Sai o botão direto do Me Conta Mais em Quebrar o gelo. Atalho específico (nosdois.html#mcm) abre o Me Conta Mais direto. |
-| 1.2b | Onde ficam as Cartas quentes | ✅ | Opção 2: mudam para Nós Dois → Esquentar, ao lado de Preliminares e Dado da Noite. Preservar as 45 ações, os níveis Leve/Quente/Ousado, as regras e os dados salvos; reutilizar a tela atual e atualizar atalhos. “Cartas” fica só com Me Conta Mais e Cartas íntimas (+18). |
-| 1.3 | Divisão do clima | ✅ | 01–05 leves; 06–08 mais pessoais. |
+| 1.1 | Baralho de 40 cartas | 🚀 | Baralho escrito pelo usuário, APROVADO. Primeira partida abre com R03. |
+| 1.1a | 5 ajustes sugeridos (R01; M07; T05; “seu par”; aspas brasileiras) | 🚀 | Todos aceitos. Já aplicados no texto do baralho em CONTEUDO-ME-CONTA-MAIS.md. |
+| 1.2 | As 40 novas substituem as 36 perguntas atuais? | 🚀 | Me Conta Mais = só as 40 aprovadas. As 36 antigas ficam em “Cartas íntimas (+18)”, com textos, grupos (Nós, Desejo, Fantasia), regras antigas e histórico preservados. |
+| 1.2a | Organização de “Cartas” | 🚀 | Nós Dois → Quebrar o gelo → Cartas mostra: “Me Conta Mais — 40 cartas de humor, conversa e carinho.” e “Cartas íntimas (+18) — 36 perguntas dos grupos Nós, Desejo e Fantasia.” Sai o botão direto do Me Conta Mais em Quebrar o gelo. Atalho específico (nosdois.html#mcm) abre o Me Conta Mais direto. |
+| 1.2b | Onde ficam as Cartas quentes | 🚀 | Opção 2: mudam para Nós Dois → Esquentar, ao lado de Preliminares e Dado da Noite. Preservar as 45 ações, os níveis Leve/Quente/Ousado, as regras e os dados salvos; reutilizar a tela atual e atualizar atalhos. “Cartas” fica só com Me Conta Mais e Cartas íntimas (+18). |
+| 1.3 | Divisão do clima | 🚀 | 01–05 leves; 06–08 mais pessoais. |
 | 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | ⏸ adiado | Decisão do usuário (27/11/2026): fica para depois. Os textos atuais continuam no app. |
 | 1.5 | Nome do modo curto do Me Conta Mais | 🚀 | “3 cartas”, com a legenda “Até 10 minutos de conversa.” O roteiro curto do Nós Dois continua “Rapidinho”. |
 

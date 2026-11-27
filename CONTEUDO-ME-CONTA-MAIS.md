@@ -1,6 +1,6 @@
 # Me Conta Mais — baralho de 40 cartas
 
-**Status: APROVADO pelo usuário em 27/11/2026** (texto do usuário). Ainda não aplicado no app: entra na próxima atualização em lote (ver PENDENCIAS.md).
+**Status: APROVADO pelo usuário em 27/11/2026** (texto do usuário). Aplicado no app em 27/11/2026 (js/mcm-data.js).
 
 - Ordem 01–05 de cada categoria = leves; 06–08 = mais pessoais.
 - A primeira partida abre com R03, “Entendi outra coisa”.
