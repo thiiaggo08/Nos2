@@ -43,7 +43,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 4.4 | "Esquentar sozinho" desligado por padrão | ⏳ | |
 | 4.5 | Dado e Cartas quentes respeitando "Passo" e "Hoje não" | ⏳ | |
 | 4.6 | Passes ilimitados no Dado e nas Preliminares | ⏳ | |
-| 4.7 | "Quem do casal" mostrando só concordâncias | ⏳ | |
+| 4.7 | "Quem do casal" mostrando só concordâncias | 🚀 | Aplicado junto com o 8.4. |
 | 4.8 | "+1 min" e regiões a evitar nas massagens | ⏳ | |
 | 4.9 | Roleta vazia como última etapa do roteiro "Nós 2" | ⏳ | |
 
@@ -67,10 +67,11 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 7.2 | Cápsula da escala | ⏳ |
 | 7.3 | Volta em camadas | ⏳ |
 
-## 8. Diagnóstico da troca de códigos do Nós Dois (27/11/2026)
+## 8. Troca de códigos do Nós Dois (diagnóstico e ajustes, 27/11/2026)
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 8.1 | O código leva todas as respostas “sim” (com grau e papel), inclusive as que não coincidem; quem tem o código e a senha consegue ler. A regra “só o que coincide” vale na tela e no que fica salvo, não na troca | ⏳ | |
-| 8.2 | Código antigo é aceito sem aviso e substitui uma troca mais nova | ⏳ | |
-| 8.3 | Respostas novas depois da troca não aparecem, e o app não avisa que é preciso trocar de novo | ⏳ | |
-| 8.4 | “Quem do casal” mostra também as discordâncias (ligado ao 4.7) | ⏳ | |
+| 8.1A | Avisos do formato atual (ND3): introdução, aviso junto do código e “O que vai no código?” | 🚀 | Aplicado. |
+| 8.1B | Troca privada de coincidências | ⏳ | Proposta técnica em PROPOSTA-TROCA-PRIVADA.md, aguardando aprovação e as 4 decisões de produto da seção 5. |
+| 8.2 | Código antigo e última troca | 🚀 | Identificação por aparelho, pareamento e revisão; aviso “Este código é de uma troca anterior. Peça um código novo.”; reimportar o mesmo código não muda nada; “Última troca neste iPhone” na tela. |
+| 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
+| 8.4 | Quem do casal só com concordâncias | 🚀 | Comparação pela identidade absoluta (A, B, os dois, nenhum). Discordâncias e respostas em branco ficam fora. A proteção durante a troca entra no 8.1B. |
