@@ -8,7 +8,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 
 ## Resumo
 
-- **490 de 491** posições lidas. **Falta a 242**: não veio nos PDFs nem na planilha.
+- **491 de 491** posições. A 242 (Gêmeos) veio por captura de tela da busca do site; o nível dela ainda não foi confirmado.
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 202 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
@@ -267,7 +267,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 245 | Capricórnio | 🔴 Difícil |
 | 244 | Libra | 🟠 Intermediário |
 | 243 | Arado | 🟢 Fácil |
-| 242 | *(falta)* | |
+| 242 | Gêmeos | *(nível a confirmar)* |
 | 241 | Carrinho de mão | 🔴 Difícil |
 | 240 | Flor de lótus | 🟢 Fácil |
 | 239 | Fusão ⟲ | 🔴 Difícil |
