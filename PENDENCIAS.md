@@ -26,8 +26,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 3. Decisões da avaliação crítica
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 3.1 | Espero Você: recusa do par | ✅ | Botão “Encerrar missão” na tela privada da carta: registra “Não concluída”, encerra a carta (sem motivo), vale 0 ponto, não mexe no placar de ninguém, não consome o veto e não pode depois virar “Cumpri”; toque duplo não duplica. Rótulo neutro na revelação e no histórico. Mantém −1 no “Te peguei!” errado. Vale para todos os níveis, offline. |
-| 3.1a | Manter “Não fiz” separado de “Não concluída”? (sugestão: sim; os dois valem 0) | ⏳ | |
+| 3.1 | Espero Você: recusa do par | ✅ | Decisão final (27/11/2026): fica como está hoje (Cumpri, Fui descoberto(a), Não fiz). Sem o botão “Encerrar missão”. Nada a aplicar. |
 | 3.2 | Trocar o prêmio "vale-sim" | ⏳ | |
 | 3.3 | Linha discreta com Ligue 180/190 em "Como funciona" | ⏳ | |
 
