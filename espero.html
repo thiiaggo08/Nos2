@@ -327,6 +327,26 @@ function bindBingo(root,m,re){ root.querySelectorAll("[data-b]").forEach(b=>b.on
 
 /* ---------- aba Revelar ---------- */
 const STEPS=["Revelação","Placar","Perguntas","Rodada final","Favoritas","Próxima"];
+/* "Guardar esse gesto": anotação só deste iPhone, ligada a um ritual. Não entra em códigos nem no placar. */
+const RIT_GESTO=[["despedida","Ritual de despedida"],["reencontro","Ritual de reencontro"],["fimdedia","Ritual de fim de dia"]];
+function gestoHTML(r){
+  if(!r.gestoForm) return `<div class="box"><div class="row"><button id="gGuardar">Guardar esse gesto</button><button id="gSeguir" class="pri">Seguir</button></div></div>`;
+  return `<div class="box"><label for="gTxt">Que gesto você quer lembrar de repetir?</label><textarea id="gTxt" style="font-family:inherit;font-size:16px;word-break:normal" placeholder="Ex.: Na véspera do embarque, sentar junto na cozinha enquanto a gente termina a mala.">${esc(r.gestoTxt||"")}</textarea>
+  <label>Em qual ritual você quer lembrar desse gesto?</label>
+  <div class="row" style="flex-direction:column">${RIT_GESTO.map(([id,n])=>`<button data-gr="${id}" class="${r.gestoRit===id?"sel":""}" style="justify-content:flex-start">${n}</button>`).join("")}</div>
+  <button id="gSalvar" class="pri full">Salvar gesto</button><button id="gCancelar" class="full">Seguir sem guardar</button><div class="msg" id="gMsg"></div></div>`;
+}
+function bindGesto(r){
+  const segue=()=>{ r.gestoForm=false; r.step=3; save(); rRevelar(); scrollTo(0,0); };
+  if($("gSeguir")) $("gSeguir").onclick=segue;
+  if($("gGuardar")) $("gGuardar").onclick=()=>{ r.gestoForm=true; save(); rRevelar(); };
+  if($("gCancelar")) $("gCancelar").onclick=segue;
+  document.querySelectorAll("[data-gr]").forEach(b=>b.onclick=()=>{ r.gestoTxt=$("gTxt").value; r.gestoRit=b.dataset.gr; save(); rRevelar(); });
+  if($("gSalvar")) $("gSalvar").onclick=()=>{ const t=$("gTxt").value.trim();
+    if(!t){ $("gMsg").textContent="Escreva o gesto."; return; } if(!r.gestoRit){ $("gMsg").textContent="Escolha o ritual."; return; }
+    const g=store.get("gestos",[]); g.push({id:Date.now().toString(36),texto:t,ritual:r.gestoRit,criado:new Date().toISOString()}); store.set("gestos",g);
+    r.gestoTxt=""; r.gestoRit=null; segue(); };
+}
 function blankReveal(){ const P=S.partida,p=me(),r={A:{veto:-1,res:[]},B:{veto:-1,res:[]},wrongA:0,wrongB:0,forced:false,step:0,marks:P.marks.slice(),fav:{A:null,B:null},favTurn:"A",proxima:"",init:true};
   r[p].veto=P.my.veto; r[p].res=P.my.st.slice(); r["wrong"+p]=P.my.wrong; return r; }
 function score(){ const P=S.partida,r=P.reveal,hA=handOf("A",r.A.veto),hB=handOf("B",r.B.veto);let a=0,b=0;
@@ -347,14 +367,15 @@ function rRevelar(){
   let h=`<h2>Fechamento</h2><div class="steps">${STEPS.map((_,i)=>`<i class="${i<=st?"d":""}"></i>`).join("")}</div><p class="hint" style="margin:-4px 0 12px">${st+1}. ${STEPS[st]}</p>`;
   if(st===0) h+=revealStep();
   else if(st===1) h+=placarStep();
-  else if(st===2) h+=`<div class="box"><h3 style="margin-top:0">Duas perguntas</h3><p class="hint" style="margin-top:0">Cada um responde as duas, sem ser interrompido.</p>${FECHO.map(q=>`<div class="q">${esc(q)}</div>`).join("")}<a class="btn full" href="conversa.html">Abrir uma Conversa</a></div>`;
+  else if(st===2) h+=`<div class="box"><h3 style="margin-top:0">Duas perguntas</h3><p class="hint" style="margin-top:0">Cada um responde as duas, sem ser interrompido.</p>${FECHO.map(q=>`<div class="q">${esc(q)}</div>`).join("")}<a class="btn full" href="conversa.html">Abrir uma Conversa</a></div>`+gestoHTML(r);
   else if(st===3) h+=`<div class="box"><h3 style="margin-top:0">Rodada final</h3><p>Que tal encerrar com uma massagem guiada do Nós Dois?</p><a class="btn pri full" href="nosdois.html#massagem">Abrir a Massagem guiada</a><p style="margin-top:14px">Ou encerrem com um ritual.</p><a class="btn full" href="rituais.html?volta=espero.html">Escolher um ritual</a></div>`;
   else if(st===4) h+=favStep();
   else h+=nextStep();
-  h+=`<div class="row" style="margin-top:4px">${st>0?`<button id="prev">Voltar</button>`:""}${st<5?`<button id="next" class="pri" ${st===4&&!(r.fav.A&&r.fav.B)?"disabled":""}>Continuar</button>`:""}</div>`;
+  h+=`<div class="row" style="margin-top:4px">${st>0?`<button id="prev">Voltar</button>`:""}${st<5&&st!==2?`<button id="next" class="pri" ${st===4&&!(r.fav.A&&r.fav.B)?"disabled":""}>Continuar</button>`:""}</div>`;
   el.innerHTML=h;
   if($("prev")) $("prev").onclick=()=>{r.step--;save();rRevelar();scrollTo(0,0)};
   if($("next")) $("next").onclick=()=>{r.step++;save();rRevelar();scrollTo(0,0)};
+  bindGesto(r);
   bindReveal(el);
 }
 function revealStep(){ const P=S.partida,r=P.reveal,sc=score(),isS=P.mode==="S",lab={ok:isS?"Cumprida na janela":"Cumprida",pego:"Descoberta",no:"Não fez"};

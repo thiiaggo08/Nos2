@@ -70,8 +70,36 @@ function sair(){ const v=S&&S.volta; parar(); S=null; salvar(); location.href=vo
 function lista(){
   parar(); S=null;
   $("area").innerHTML=`<h1>Rituais</h1><p class="mute">Momentos guiados do casal. Um passo por vez, com tempo.</p>`+
-  R.map(r=>`<div class="card"><div class="meta">${esc(r.dur)}</div><h2>${esc(r.nome)}</h2><p class="mute" style="margin:0">${esc(r.quando)}</p><button class="btn" data-r="${r.id}">Abrir</button></div>`).join("");
+  R.map(r=>`<div class="card"><div class="meta">${esc(r.dur)}</div><h2>${esc(r.nome)}</h2><p class="mute" style="margin:0">${esc(r.quando)}</p><button class="btn" data-r="${r.id}">Abrir</button></div>`).join("")+
+  `<button class="btn" id="gpv" style="margin-top:22px;border-style:dashed">Guarda pra volta${lembrancas().length?` · ${lembrancas().length}`:""}</button>`;
   document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>abrir(b.dataset.r,voltaSegura(qs.get("volta"))));
+  $("gpv").onclick=guardaTela;
+}
+/* ---------- anotações só deste iPhone (não entram nos códigos de troca nem no placar) ---------- */
+const gestos=id=>store.get("gestos",[]).filter(g=>g.ritual===id);
+const lembrancas=()=>store.get("guardaVolta",[]);
+const dataCurta=iso=>new Date(iso).toLocaleDateString("pt-BR",{day:"numeric",month:"short"});
+let escolhida=null, gestoOculto=false;
+function guardaTela(){
+  parar(); S=null; window.scrollTo(0,0);
+  const L=lembrancas();
+  $("area").innerHTML=`<h1>Guarda pra volta</h1>
+  <div class="card"><label for="gvTxt" style="display:block;font-size:16px;margin-bottom:8px">O que você quer me contar quando a gente se encontrar?</label>
+   <textarea id="gvTxt" style="width:100%;min-height:110px;font:16px -apple-system,system-ui,sans-serif;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)"></textarea>
+   <button class="btn pri" id="gvOk">Guardar pra volta</button></div>
+  ${L.length?`<h2 style="margin-top:22px">Guardadas neste iPhone</h2>`+L.slice().reverse().map(l=>`<div class="card"><div class="meta">${dataCurta(l.criado)}</div><p style="margin:6px 0 0;white-space:pre-wrap">${esc(l.texto)}</p><button class="btn" data-del="${l.id}">Apagar</button></div>`).join(""):""}
+  <button class="btn" id="gvVolta">Voltar aos rituais</button>`;
+  $("gvOk").onclick=()=>{ const t=$("gvTxt").value.trim(); if(!t) return; const a=lembrancas(); a.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),texto:t,criado:new Date().toISOString()}); store.set("guardaVolta",a); guardaTela(); };
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ store.set("guardaVolta",lembrancas().filter(x=>x.id!==b.dataset.del)); guardaTela(); });
+  $("gvVolta").onclick=lista;
+}
+function lembrancasTela(){
+  window.scrollTo(0,0); const L=lembrancas();
+  $("area").innerHTML=`<h1>O que guardei pra contar</h1>`+(L.length?L.slice().reverse().map(l=>`<div class="card"><div class="meta">${dataCurta(l.criado)}</div><p style="margin:6px 0 0;white-space:pre-wrap">${esc(l.texto)}</p><div class="row"><button class="btn pri" data-esc="${l.id}">Escolher</button><button class="btn" data-del="${l.id}">Apagar</button></div></div>`).join(""):`<p class="mute">Nada guardado neste iPhone.</p>`)+
+  `<button class="btn" id="lvVolta">Voltar ao ritual</button>`;
+  document.querySelectorAll("[data-esc]").forEach(b=>b.onclick=()=>{ escolhida=b.dataset.esc; render(); });
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ store.set("guardaVolta",lembrancas().filter(x=>x.id!==b.dataset.del)); if(escolhida===b.dataset.del) escolhida=null; lembrancasTela(); });
+  $("lvVolta").onclick=render;
 }
 function abrir(id,volta){ S={id,i:0,fase:"intro",left:porId(id).passos[0].s,acabou:false,volta:volta||""}; salvar(); render(); }
 function render(){
@@ -80,7 +108,12 @@ function render(){
     $("area").innerHTML=`<div class="meta mute" style="margin-top:8px">${esc(r.dur)} · ${r.passos.length} ${r.passos.length===1?"passo":"passos"}</div><h1>${esc(r.nome)}</h1><p class="mute">${esc(r.quando)}</p>
     ${r.abre?`<div class="card"><div class="frase">${esc(r.abre)}</div></div>`:""}
     ${r.obs?`<p class="obs">${esc(r.obs)}</p>`:""}
+    ${(()=>{ const G=gestos(r.id); if(!G.length||gestoOculto) return ""; return `<div class="card"><div class="meta">Gesto que quero repetir</div>${G.map(g=>`<p style="margin:8px 0 0;white-space:pre-wrap">${esc(g.texto)}</p><div class="row"><button class="btn" data-manter="1">Manter para outra ocasião</button><button class="btn" data-gdel="${g.id}">Apagar</button></div>`).join("")}</div>`; })()}
+    ${r.id==="reencontro"&&lembrancas().length?(()=>{ const l=lembrancas().find(x=>x.id===escolhida); return (l?`<div class="card"><div class="meta">Para contar</div><p style="margin:8px 0 0;white-space:pre-wrap">${esc(l.texto)}</p></div>`:"")+`<button class="btn" id="verLemb">Ver o que guardei pra contar</button>`; })():""}
     <button class="btn pri" id="go">Começar</button><button class="btn" id="enc">Voltar</button>`;
+    document.querySelectorAll("[data-manter]").forEach(b=>b.onclick=()=>{ gestoOculto=true; render(); });
+    document.querySelectorAll("[data-gdel]").forEach(b=>b.onclick=()=>{ store.set("gestos",store.get("gestos",[]).filter(g=>g.id!==b.dataset.gdel)); render(); });
+    if($("verLemb")) $("verLemb").onclick=lembrancasTela;
     $("go").onclick=()=>{ Nos2.tela.iniciarSessao(); S.fase="passo"; S.i=0; S.left=r.passos[0].s; S.acabou=false; render(); correr(); };
     $("enc").onclick=sair; return;
   }

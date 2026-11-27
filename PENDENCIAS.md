@@ -64,7 +64,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | # | Pendência | Status |
 |---|---|---|
 | 7.1 | Termômetro de hoje | ⏳ |
-| 7.2 | Cápsula da escala | ⏳ |
+| 7.2 | Cápsula da escala | ⏳ (parcialmente coberta pelo “Guarda pra volta”) |
 | 7.3 | Volta em camadas | ⏳ |
 
 ## 8. Troca de códigos do Nós Dois (diagnóstico e ajustes, 27/11/2026)
@@ -98,3 +98,11 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ⏳ |
 | 9.15 | Tela acesa: numa massagem pelo ícone da Tela de Início, a tela não apaga sozinha; ao pausar, volta a apagar no tempo normal (exige iOS 16.4; no app instalado, iOS 18.4 ou mais novo) | ✔ 27/11 | ⏳ |
 | 9.16 | Nível máximo: criar uma partida até o nível 3 num iPhone e entrar com o código no outro; conferências iguais e nenhuma missão acima do nível 3 | ✔ 27/11 | ⏳ |
+
+## 10. Gestos e lembranças (27/11/2026)
+| # | Item | Status | Detalhe |
+|---|---|---|---|
+| 10.1 | “Guardar esse gesto” no fechamento do Espero Você | 🚀 implementado · ⏳ validação no iPhone | Depois das duas perguntas: “Guardar esse gesto” ou “Seguir”. O gesto fica só neste iPhone, ligado ao Ritual de despedida, de reencontro ou de fim de dia, e aparece em “Gesto que quero repetir” na abertura do ritual (manter ou apagar). Fora dos códigos e do placar. |
+| 10.2 | “Guarda pra volta” | 🚀 implementado · ⏳ validação no iPhone | Acesso discreto na página Rituais. Cada lembrança é salva separadamente e pode ser apagada. Na abertura do Ritual de reencontro: “Ver o que guardei pra contar”. Fora dos códigos de troca. |
+| 9.17 | Guardar um gesto no Ritual de despedida, fechar o app e reabrir em modo avião: o texto aparece na abertura do ritual | ✔ 27/11 | ⏳ |
+| 9.18 | Guardar duas histórias em dias diferentes, reabrir em modo avião, ver as duas no reencontro, apagar uma | ✔ 27/11 | ⏳ |
