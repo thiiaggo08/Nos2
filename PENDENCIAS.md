@@ -33,31 +33,31 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 4. Ajustes técnicos recomendados
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | 🚀 implementado · ⏳ validação no iPhone | Implementado (27/11/2026) em Rituais, Massagem, Preliminares, Dado, Me Conta Mais e Conversa: ao sair ou bloquear, para o cronômetro e a voz e salva etapa, tempo restante, vez e placar; volta com “Querem continuar de onde pararam?” (Retomar silencioso, Ouvir instrução separado na Massagem e nas Preliminares, Encerrar por hoje); PIN a partir de 2 min e volta à atividade; sessão por 12 h; aviso na página principal. |
+| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Implementado (27/11/2026) em Rituais, Massagem, Preliminares, Dado, Me Conta Mais e Conversa: ao sair ou bloquear, para o cronômetro e a voz e salva etapa, tempo restante, vez e placar; volta com “Querem continuar de onde pararam?” (Retomar silencioso, Ouvir instrução separado na Massagem e nas Preliminares, Encerrar por hoje); PIN a partir de 2 min e volta à atividade; sessão por 12 h; aviso na página principal. |
 | 4.1a | Pausa de 20 min da Conversa | ✅ | Continua contando o tempo real fora do app. |
 | 4.1b | Narração depois de “Retomar” | ✅ | Etapas seguintes voltam a ser narradas; só a interrompida fica em silêncio (salvo “Ouvir instrução”). |
 | 4.1c | Validade da sessão pausada | ✅ | 12 horas; depois some sozinha. |
 | 4.1d | Cronômetros das cartas do Espero Você | ✅ | Pausam; o prazo da missão continua correndo. |
-| 4.2 | Manter a tela acesa nas sessões guiadas | 🚀 implementado · ⏳ validação no iPhone | Opção “Manter a tela acesa” ligada no início de Massagem, Preliminares, Dado, Me Conta Mais, Conversa e Rituais; pode desligar na sessão; ao pausar ou encerrar, volta o bloqueio automático normal. |
-| 4.3 | Nível máximo no Espero Você | 🚀 implementado · ⏳ validação no iPhone | “Até que nível vocês querem jogar hoje?” ao criar a partida (obrigatório, sem nível pré-marcado). O teto vai no código (ex.: R24N3-…) e vale para todas as missões e para o veto; o nível 5 só entra quando escolhido. Códigos antigos, sem nível, valem até o 5. |
-| 4.4 | "Esquentar sozinho" desligado por padrão | ⏳ | |
-| 4.5 | Dado e Cartas quentes respeitando "Passo" e "Hoje não" | ⏳ | |
-| 4.6 | Passes ilimitados no Dado e nas Preliminares | ⏳ | |
+| 4.2 | Manter a tela acesa nas sessões guiadas | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Opção “Manter a tela acesa” ligada no início de Massagem, Preliminares, Dado, Me Conta Mais, Conversa e Rituais; pode desligar na sessão; ao pausar ou encerrar, volta o bloqueio automático normal. |
+| 4.3 | Nível máximo no Espero Você | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | “Até que nível vocês querem jogar hoje?” ao criar a partida (obrigatório, sem nível pré-marcado). O teto vai no código (ex.: R24N3-…) e vale para todas as missões e para o veto; o nível 5 só entra quando escolhido. Códigos antigos, sem nível, valem até o 5. |
+| 4.4 | "Esquentar sozinho" desligado por padrão | ✅ aprovado, falta aplicar | Preliminares começam com a opção desligada; quem quiser liga. |
+| 4.5 | Dado e Cartas quentes respeitando o que foi marcado | ✅ aprovado, falta aplicar · ⏳ confirmar a regra | Proposta: cada ação ligada a um item do catálogo (brinquedo, vendar, mãos presas, segurar o clímax, oral, falar sacanagem etc.) só entra no sorteio quando esse item for coincidência dos dois, com a opção “Só o que os dois marcaram” ligada por padrão. O “Hoje não” é texto livre e não dá para filtrar automaticamente. |
+| 4.6 | Passes ilimitados no Dado e nas Preliminares | ✅ aprovado, falta aplicar | “Passar” (Dado) e “Trocar carta” (Preliminares) sem limite. |
 | 4.7 | "Quem do casal" | 🚀 | Substituído pela revisão do 8.4: todas as respostas lado a lado, com etiqueta. |
-| 4.8 | "+1 min" e regiões a evitar nas massagens | ⏳ | |
-| 4.9 | Roleta vazia como última etapa do roteiro "Nós 2" | ⏳ | |
+| 4.8 | "+1 min" e regiões a evitar nas massagens | ✅ aprovado, falta aplicar | Botão “+1 min” em cada etapa; antes de começar, marcar regiões a evitar: etapas só dessas regiões são puladas, e as mistas mostram “Evitar: …”. |
+| 4.9 | Roleta vazia no roteiro "Nós 2" | ✅ aprovado, falta aplicar | Sem coincidências, a etapa da Roleta é pulada sozinha. |
 
 ## 5. Conteúdo a escrever (PENDENTE no CONTEUDO-FASE2.md)
 | # | Pendência | Status |
 |---|---|---|
-| 5.1 | Rituais (6) | 🚀 implementado · ⏳ validação no iPhone | Aplicado em 27/11/2026 (rituais.html). Menu na página principal; Ritual de entrada abre e Ritual de depois fecha o Plano da noite; Rodada final do Espero Você abre a escolha dos rituais; pausa ao sair da tela, PIN a partir de 2 min, “Querem continuar de onde pararam?” com “Retomar” (silencioso) e “Encerrar por hoje”; sessão guardada por 12 h. Falta: teste no iPhone (ícone da Tela de Início, modo avião, trocar de app e bloquear a tela). |
-| 5.2 | Prêmios do Espero Você (~20, incluindo Semana e casal) | ⏳ |
-| 5.3 | Itens novos do Nós Dois (fantasias, Quem, posições, mapa, dado, V/D, preliminares, cartas, Isso ou aquilo, massagens, Esquenta) | ⏳ |
+| 5.1 | Rituais (6) | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Aplicado em 27/11/2026 (rituais.html). Menu na página principal; Ritual de entrada abre e Ritual de depois fecha o Plano da noite; Rodada final do Espero Você abre a escolha dos rituais; pausa ao sair da tela, PIN a partir de 2 min, “Querem continuar de onde pararam?” com “Retomar” (silencioso) e “Encerrar por hoje”; sessão guardada por 12 h. Falta: teste no iPhone (ícone da Tela de Início, modo avião, trocar de app e bloquear a tela). |
+| 5.2 | Prêmios do Espero Você (~20, incluindo Semana e casal) | ✍ proposta em CONTEUDO-PREMIOS.md, aguardando aprovação |
+| 5.3 | Itens novos do Nós Dois (✍ escrever por partes, depois dos prêmios) (fantasias, Quem, posições, mapa, dado, V/D, preliminares, cartas, Isso ou aquilo, massagens, Esquenta) | ⏳ |
 
 ## 6. Testes e revisões
 | # | Pendência | Status |
 |---|---|---|
-| 6.1 | Testes num iPhone real (ícone, tela apagando, voz offline, backup, troca de códigos, versão do iOS) | ⏳ |
+| 6.1 | Testes num iPhone real | ✔ 27/11/2026 — executados pelo usuário, tudo funcionando |
 | 6.2 | Revisão profissional das massagens | ⏳ |
 
 ## 7. Ideias propostas
@@ -71,7 +71,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
 | 8.1A | Avisos do formato atual (ND3): introdução, aviso junto do código e “O que vai no código?” | 🚀 | Aplicado. |
-| 8.1B | Troca privada de coincidências | 🚀 implementado · ⏳ validação no iPhone | Revisão do usuário (27/11/2026): opção 1 — só coincidências, agora com os graus de cada um e etiquetas. A troca passou a ter 4 códigos: coincidências no código 3, graus e etiquetas no código 4. Os graus vão só para as coincidências; o que só um marcou continua sem aparecer e sem ficar legível. |
+| 8.1B | Troca privada de coincidências | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Revisão do usuário (27/11/2026): opção 1 — só coincidências, agora com os graus de cada um e etiquetas. A troca passou a ter 4 códigos: coincidências no código 3, graus e etiquetas no código 4. Os graus vão só para as coincidências; o que só um marcou continua sem aparecer e sem ficar legível. |
 | 8.2 | Código antigo e última troca | 🚀 | Identificação por aparelho, pareamento e revisão; aviso “Este código é de uma troca anterior. Peça um código novo.”; reimportar o mesmo código não muda nada; “Última troca neste iPhone” na tela. |
 | 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
 | 8.4 | Quem do casal | 🚀 | Revisão do usuário (27/11/2026): as respostas dos dois voltam a aparecer lado a lado, com 🔥 Total (iguais) ou 💬 Entender (diferentes). As respostas do Quem vão como envio para o par ler, com prévia. |
@@ -82,35 +82,35 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 
 | # | Teste | Implementado (navegador simulando iPhone) | Validado no aparelho |
 |---|---|---|---|
-| 9.1 | Rituais: trocar de app por menos de 2 min no meio de um passo e voltar → “Querem continuar…”, tempo preservado | ✔ 27/11 | ⏳ |
-| 9.2 | Rituais: bloquear a tela por mais de 2 min → PIN, depois o ritual pausado | ✔ 27/11 | ⏳ |
-| 9.3 | Rituais: “Retomar” continua o tempo de onde parou, sem som | ✔ 27/11 | ⏳ |
-| 9.4 | Rituais: sino no fim do passo (não toca no modo silencioso) e aviso visual | ✔ 27/11 | ⏳ |
-| 9.5 | Massagem: sair com 1:15 restantes → a voz para; na volta, pausada com 1:15; Retomar sem voz; “Ouvir instrução” lê só a etapa atual; a etapa seguinte volta a ser narrada | ✔ 27/11 | ⏳ |
-| 9.6 | Preliminares: mesma carta, quem conduz e tempo restante; Retomar sem voz; “Ouvir instrução” separado | ✔ 27/11 | ⏳ |
-| 9.7 | Dado da Noite: mesma rodada e tempo restante | ✔ 27/11 | ⏳ |
-| 9.8 | Me Conta Mais: mesma carta, vez, placar e relógio da partida (o tempo fora não é descontado) | ✔ 27/11 | ⏳ |
-| 9.9 | Conversa: mesma etapa e tempo restante; a pausa de 20 min continua contando o tempo real | ✔ 27/11 | ⏳ |
-| 9.10 | Voz em português disponível em modo avião (Massagem e Preliminares) | — | ⏳ |
-| 9.11 | Troca privada: os quatro códigos (≈ 8,6 mil, 16,8 mil, 8,5 mil e poucos caracteres) chegam inteiros depois de copiados e colados num app de mensagens | ✔ 27/11 (tamanho medido) | ⏳ |
-| 9.12 | Troca privada: tempo para gerar e abrir os códigos no iPhone (no navegador: 0,2 s, 0,3 s e 0,65 s) | ✔ 27/11 | ⏳ |
-| 9.13 | Troca privada: quem começou vê as coincidências ao colar o código 2 e os graus ao colar o código 4; o par vê tudo ao colar o código 3 | ✔ 27/11 | ⏳ |
-| 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ⏳ |
-| 9.15 | Tela acesa: numa massagem pelo ícone da Tela de Início, a tela não apaga sozinha; ao pausar, volta a apagar no tempo normal (exige iOS 16.4; no app instalado, iOS 18.4 ou mais novo) | ✔ 27/11 | ⏳ |
-| 9.16 | Nível máximo: criar uma partida até o nível 3 num iPhone e entrar com o código no outro; conferências iguais e nenhuma missão acima do nível 3 | ✔ 27/11 | ⏳ |
+| 9.1 | Rituais: trocar de app por menos de 2 min no meio de um passo e voltar → “Querem continuar…”, tempo preservado | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.2 | Rituais: bloquear a tela por mais de 2 min → PIN, depois o ritual pausado | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.3 | Rituais: “Retomar” continua o tempo de onde parou, sem som | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.4 | Rituais: sino no fim do passo (não toca no modo silencioso) e aviso visual | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.5 | Massagem: sair com 1:15 restantes → a voz para; na volta, pausada com 1:15; Retomar sem voz; “Ouvir instrução” lê só a etapa atual; a etapa seguinte volta a ser narrada | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.6 | Preliminares: mesma carta, quem conduz e tempo restante; Retomar sem voz; “Ouvir instrução” separado | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.7 | Dado da Noite: mesma rodada e tempo restante | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.8 | Me Conta Mais: mesma carta, vez, placar e relógio da partida (o tempo fora não é descontado) | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.9 | Conversa: mesma etapa e tempo restante; a pausa de 20 min continua contando o tempo real | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.10 | Voz em português disponível em modo avião (Massagem e Preliminares) | — | ✔ 27/11/2026 (usuário) |
+| 9.11 | Troca privada: os quatro códigos (≈ 8,6 mil, 16,8 mil, 8,5 mil e poucos caracteres) chegam inteiros depois de copiados e colados num app de mensagens | ✔ 27/11 (tamanho medido) | ✔ 27/11/2026 (usuário) |
+| 9.12 | Troca privada: tempo para gerar e abrir os códigos no iPhone (no navegador: 0,2 s, 0,3 s e 0,65 s) | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.13 | Troca privada: quem começou vê as coincidências ao colar o código 2 e os graus ao colar o código 4; o par vê tudo ao colar o código 3 | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ✔ 27/11/2026 (usuário) |
+| 9.15 | Tela acesa: numa massagem pelo ícone da Tela de Início, a tela não apaga sozinha; ao pausar, volta a apagar no tempo normal (exige iOS 16.4; no app instalado, iOS 18.4 ou mais novo) | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.16 | Nível máximo: criar uma partida até o nível 3 num iPhone e entrar com o código no outro; conferências iguais e nenhuma missão acima do nível 3 | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
 
 ## 10. Gestos e lembranças (27/11/2026)
 | # | Item | Status | Detalhe |
 |---|---|---|---|
-| 10.1 | “Guardar esse gesto” no fechamento do Espero Você | 🚀 implementado · ⏳ validação no iPhone | Depois das duas perguntas: “Guardar esse gesto” ou “Seguir”. O gesto fica só neste iPhone, ligado ao Ritual de despedida, de reencontro ou de fim de dia, e aparece em “Gesto que quero repetir” na abertura do ritual (manter ou apagar). Fora dos códigos e do placar. |
-| 10.2 | “Guarda pra volta” | 🚀 implementado · ⏳ validação no iPhone | Acesso discreto na página Rituais. Cada lembrança é salva separadamente e pode ser apagada. Na abertura do Ritual de reencontro: “Ver o que guardei pra contar”. Fora dos códigos de troca. |
-| 9.17 | Guardar um gesto no Ritual de despedida, fechar o app e reabrir em modo avião: o texto aparece na abertura do ritual | ✔ 27/11 | ⏳ |
-| 9.18 | Guardar duas histórias em dias diferentes, reabrir em modo avião, ver as duas no reencontro, apagar uma | ✔ 27/11 | ⏳ |
+| 10.1 | “Guardar esse gesto” no fechamento do Espero Você | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Depois das duas perguntas: “Guardar esse gesto” ou “Seguir”. O gesto fica só neste iPhone, ligado ao Ritual de despedida, de reencontro ou de fim de dia, e aparece em “Gesto que quero repetir” na abertura do ritual (manter ou apagar). Fora dos códigos e do placar. |
+| 10.2 | “Guarda pra volta” | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Acesso discreto na página Rituais. Cada lembrança é salva separadamente e pode ser apagada. Na abertura do Ritual de reencontro: “Ver o que guardei pra contar”. Fora dos códigos de troca. |
+| 9.17 | Guardar um gesto no Ritual de despedida, fechar o app e reabrir em modo avião: o texto aparece na abertura do ritual | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
+| 9.18 | Guardar duas histórias em dias diferentes, reabrir em modo avião, ver as duas no reencontro, apagar uma | ✔ 27/11 | ✔ 27/11/2026 (usuário) |
 
 ## 11. Filtros (27/11/2026)
 | # | Item | Status | Detalhe |
 |---|---|---|---|
-| 11.1 | Filtros nas listas longas | 🚀 implementado · ⏳ validação no iPhone | Matches e Mapa por etiqueta; Quem do casal por Total/Entender; Depois por avaliadas/sem avaliação; Plano da noite → Posições por nível, com “Ver todas”; Responder → Fantasias e Quem por respondidas/sem resposta. Cada botão mostra a quantidade; o filtro só aparece quando há pelo menos duas opções; filtro que fica vazio volta para “Todas”; ao fechar o app, tudo volta para “Todas”. |
+| 11.1 | Filtros nas listas longas | 🚀 implementado · ✔ validado no iPhone (27/11/2026) | Matches e Mapa por etiqueta; Quem do casal por Total/Entender; Depois por avaliadas/sem avaliação; Plano da noite → Posições por nível, com “Ver todas”; Responder → Fantasias e Quem por respondidas/sem resposta. Cada botão mostra a quantidade; o filtro só aparece quando há pelo menos duas opções; filtro que fica vazio volta para “Todas”; ao fechar o app, tudo volta para “Todas”. |
 
 ## 12. Ideias para depois
 | # | Item | Status | Detalhe |
