@@ -107,7 +107,7 @@ Mantém a mecânica do protótipo: cada um responde sozinho, vocês trocam códi
 **Mudanças:**
 - **Reflexão individual** antes de responder: 5 perguntas curtas, só para si, que não são compartilhadas.
 - **Catálogo de fantasias:** a categoria "Com terceiros" ~~sai~~ **volta** (decisão do usuário, 27/11/2026). Entram 3 categorias novas, já aprovadas: Palavras e voz, Ritmo e tempo, Romance e ritual. O item "De manhã, à tarde ou à noite?" é respondido com o horário preferido, não com o nível de vontade.
-- **"Cartas de Conversa" passam a se chamar "Cartas de intimidade".**
+- ~~"Cartas de Conversa" passam a se chamar "Cartas de intimidade".~~ O baralho de perguntas se chama **"Me Conta Mais"** (decisão do usuário, 27/11/2026), com opção própria em Quebrar o gelo e a frase de capa "Uma carta puxa outra. Uma resposta puxa conversa."
 - **Jogos organizados por clima:** quebrar o gelo, esquentar, fantasias e relaxar.
 - **Isso ou aquilo:** novo aquecimento. Cada um responde 5 perguntas de duas opções em segredo, e o app mostra onde coincidem.
 - **Cartas de comando:** entram dentro das Cartas quentes.

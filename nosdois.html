@@ -109,6 +109,9 @@
   .stepnav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--txt);font-size:22px}
   #dots{display:flex;gap:7px}#dots i{width:7px;height:7px;border-radius:50%;background:#3a3134}#dots i.on{background:var(--gold)}
   .topbar{display:flex;justify-content:space-between;align-items:center}.topbar a,.topbar button{color:var(--gold);background:none;border:0;font-size:15px;min-height:44px;text-decoration:none;font-family:inherit;padding:0;display:inline-flex;align-items:center}
+  .capa{text-align:center;padding:30px 20px 20px}
+  .capa h1{font-size:36px;margin:0 0 10px;color:var(--txt)}
+  .capa p{font-family:Georgia,serif;font-size:19px;line-height:1.45;color:var(--txt);margin:0 auto 22px;max-width:30ch;overflow-wrap:normal;hyphens:none}
   .rotgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
   .rotgrid button{text-align:left;background:linear-gradient(160deg,#2b1015,#141012);border:1px solid #4a2a30;border-radius:14px;padding:16px 14px;color:var(--txt);font-family:inherit;min-height:96px}
   .rotgrid span{display:block;font-family:Georgia,serif;font-size:20px}
@@ -247,7 +250,8 @@
     <div class="menu">
       <div class="jgrp">Quebrar o gelo</div>
       <button class="thumb" data-thumb="vd" onclick="abrirJogo('vd')"><div><small>Jogo 2</small><span>Verdade ou Desafio</span><em>Três níveis. Subir de nível exige os dois; passar não tem castigo.</em></div></button>
-      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('cartas')"><div><small>Baralhos</small><span>Cartas</span><em>Cartas de intimidade (36 perguntas) e Cartas quentes (45, em 3 níveis).</em></div></button>
+      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('mcm')"><div><small>Baralho</small><span>Me Conta Mais</span><em>36 perguntas para se conhecerem melhor (Nós, Desejo e Fantasia).</em></div></button>
+      <button class="thumb" data-thumb="cartas" onclick="abrirJogo('cartas')"><div><small>Baralhos</small><span>Cartas</span><em>Me Conta Mais (36 perguntas) e Cartas quentes (45, em 3 níveis).</em></div></button>
       <div class="jgrp">Esquentar</div>
       <button class="thumb" data-thumb="prel" onclick="abrirJogo('prel')"><div><small>Jogo 3</small><span>Preliminares</span><em>48 cartas em 3 níveis, com voz e tempo. Um conduz, o outro só recebe.</em></div></button>
       <button class="thumb" data-thumb="dado" onclick="abrirJogo('dado')"><div><small>Jogo 1</small><span>Dado da Noite</span><em>Dois toques às cegas sorteiam posição, jeito e lugar. 3 min por rodada, 2 passes.</em></div></button>
@@ -902,7 +906,7 @@ function pausarTimer(){ if(!T) return; T.run=!T.run; try{ if(!T.run) speechSynth
 /* ======================= JOGOS ======================= */
 function abrirJogo(j){
   lerInicio(); $("jogoMenu").style.display="none"; const A=$("jogoArea"); A.style.display="";
-  ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,pos:posInit,roleta:roletaInit})[j]();
+  ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,mcm:mcmInit,pos:posInit,roleta:roletaInit})[j]();
   window.scrollTo(0,0);
 }
 function sairJogo(){ pararTimer(); try{speechSynthesis.cancel();}catch(e){} if(ROT){ ROT.i++; return rotTela(); } $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
@@ -1265,10 +1269,16 @@ function sortearPos(){ const ok=new Set(window._posPool.map(x=>x.id)); const id=
 
 /* ---- Baralhos ---- */
 let K;
+/* ---- Me Conta Mais: tela de entrada (usa o baralho de perguntas já existente) ---- */
+function mcmInit(){
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Quebrar o gelo</div>
+  <div class="game capa"><h1>Me Conta Mais</h1><p>Uma carta puxa outra. Uma resposta puxa conversa.</p>
+   <button class="btn gold" onclick="cartasComecar('conv',3)">Começar · ${CONVERSA.length} cartas</button></div>`;
+}
 function cartasInit(){
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Baralhos</div><h1>Cartas</h1>${comoHtml("cartas",true)}
   <div class="game"><div class="muted">Escolham o baralho:</div>
-   <button class="btn gold" onclick="cartasComecar('conv',3)">Cartas de intimidade · ${CONVERSA.length} cartas</button>
+   <button class="btn gold" onclick="mcmInit()">Me Conta Mais · ${CONVERSA.length} cartas</button>
    <div class="muted" style="margin-top:14px">Cartas quentes · até que nível?</div>
    <div class="two"><button class="btn ghost" onclick="cartasComecar('q',1)">Leve</button><button class="btn ghost" onclick="cartasComecar('q',2)">Quente</button><button class="btn primary" onclick="cartasComecar('q',3)">Ousado</button></div></div>`;
 }
@@ -1288,10 +1298,10 @@ function cartasTirar(){
   K.i++;
 }
 function cartasRender(){
-  if(K.fim){ $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Acabaram as cartas</h1><p>Vocês passaram por todas. Na próxima vez, o baralho recomeça embaralhado.</p><button class="btn primary" onclick="cartasInit()">Jogar de novo</button>`; return; }
+  if(K.fim){ $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Acabaram as cartas</h1><p>Vocês passaram por todas. Na próxima vez, o baralho recomeça embaralhado.</p><button class="btn primary" onclick="${K.deck==="conv"?"mcmInit()":"cartasInit()"}">Jogar de novo</button>`; return; }
   const c=K.c, quem=K.vez===0?eu():ele(), outro=K.vez===0?ele():eu();
   const txt = K.deck==="q" ? c.t.replace(/seu par/g, esc(outro)) : c.t;
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${K.deck==="conv"?"Cartas de intimidade":"Cartas quentes"} · carta ${K.i} desta rodada</div><h1>Vez de ${esc(quem)}</h1>
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${K.deck==="conv"?"Me Conta Mais":"Cartas quentes"} · carta ${K.i} desta rodada</div><h1>Vez de ${esc(quem)}</h1>
   <div class="game"><div class="gcard" style="min-height:220px;position:relative">
     <div class="k">${K.deck==="conv"?c.tag:nivelTxt(c.l)}</div><div class="v">${txt}</div>
     <div style="position:absolute;left:14px;bottom:12px;background:${K.deck==="conv"?"var(--gold)":"var(--wine)"};color:${K.deck==="conv"?"#1a1208":"#fff"};font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div>
@@ -1387,7 +1397,7 @@ const COMO={
   ex:`Escolham o tipo: <b class="w">relaxante, sensual, tântrica ou erótica</b>. Cada um tem um “Como fazer” e um roteiro. <b class="w">Exemplo:</b> etapa 3, <b class="w">Pés</b>, 3 minutos, com a dica na tela. Quando o tempo acaba, o app passa sozinho para a próxima etapa. Dá para pausar ou pular. No modo “os dois recebem”, os papéis trocam depois da última etapa.`},
  cartas:{svg:`<g transform="translate(92,82) rotate(-8)"><rect x="-46" y="-60" width="92" height="120" rx="10" fill="#f3ece3"/><text x="0" y="-22" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>Qual lembrança</text><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>nossa você</text><text x="0" y="6" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>revive?</text><rect x="-38" y="38" width="22" height="14" rx="2" fill="${C_G}"/><text x="-27" y="49" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1208" ${fnt}>04</text></g>
    <g transform="translate(212,80) rotate(7)"><rect x="-46" y="-60" width="92" height="120" rx="10" fill="#f3ece3" stroke="${C_W}" stroke-width="2"/><text x="0" y="-22" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>Tire uma peça</text><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>do seu par só</text><text x="0" y="6" text-anchor="middle" font-size="11" fill="#2a2326" ${fnt}>com a boca.</text><rect x="-38" y="38" width="22" height="14" rx="2" fill="${C_W}"/><text x="-27" y="49" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" ${fnt}>16</text>${[0,1,2].map(i=>`<circle cx="${18+i*9}" cy="45" r="3.2" fill="${i<2?C_W:"#d9cfc4"}"/>`).join("")}</g>`,
-  ex:`<b class="w">Cartas de intimidade:</b> perguntas para se conhecerem melhor (Nós, Desejo e Fantasia). <b class="w">Cartas quentes:</b> ações em 3 níveis; vocês escolhem até onde ir, e o baralho começa leve e esquenta aos poucos. As cartas alternam a vez, e o nome do par aparece no texto. Passar não tem castigo.`},
+  ex:`<b class="w">Me Conta Mais:</b> perguntas para se conhecerem melhor (Nós, Desejo e Fantasia). <b class="w">Cartas quentes:</b> ações em 3 níveis; vocês escolhem até onde ir, e o baralho começa leve e esquenta aos poucos. As cartas alternam a vez, e o nome do par aparece no texto. Passar não tem castigo.`},
  pos:{svg:`${[0,1,2].map(i=>`<rect x="24" y="${18+i*44}" width="200" height="36" rx="8" fill="#1a1416" stroke="#3a2a2e"/><rect x="36" y="${28+i*44}" width="${[90,120,70][i]}" height="7" rx="3" fill="${C_T}" opacity=".8"/><rect x="36" y="${40+i*44}" width="${[140,100,120][i]}" height="5" rx="2" fill="${C_M}" opacity=".6"/>${[0,1,2].map(k=>`<circle cx="${190+k*9}" cy="${32+i*44}" r="3" fill="${k<=i?C_G:"#3a3134"}"/>`).join("")}`).join("")}
    <rect x="240" y="44" width="62" height="28" rx="14" fill="#2a2015" stroke="${C_G}"/><text x="271" y="62" text-anchor="middle" font-size="10" fill="${C_T}" ${fnt}>✓ Quero</text>
    <circle cx="271" cy="112" r="20" fill="${C_W}"/><path d="M262,112 h18 M275,106 l6,6 l-6,6" stroke="#fff" stroke-width="2.5" fill="none"/>`,
