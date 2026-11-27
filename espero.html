@@ -131,8 +131,10 @@ function parseCode(c){
 
 /* ---------- matches do Nós Dois (ponte) ---------- */
 function ndMatches(){
-  const nd=store.get("nd",null); if(!nd||!nd.par||!nd.par.a) return new Set();
+  const nd=store.get("nd",null); if(!nd||!nd.par) return new Set();
   const out=new Set();
+  if(nd.par.f){ const f=new Set(nd.par.f); Object.entries(nd.resp||{}).forEach(([id,m])=>{ if(m&&m.n>=1&&f.has(id)&&!/^c/.test(id)) out.add(id); }); return out; }
+  if(!nd.par.a) return out;
   Object.entries(nd.resp||{}).forEach(([id,m])=>{
     const p=nd.par.a[id]; if(!m||m.n<1||!p||/^c/.test(id)) return;
     const a=m.r==null?2:m.r, b=p[1]==null?2:p[1];

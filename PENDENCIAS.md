@@ -71,7 +71,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
 | 8.1A | Avisos do formato atual (ND3): introdução, aviso junto do código e “O que vai no código?” | 🚀 | Aplicado. |
-| 8.1B | Troca privada de coincidências | ⏳ | Proposta técnica em PROPOSTA-TROCA-PRIVADA.md, aguardando aprovação e as 4 decisões de produto da seção 5. |
+| 8.1B | Troca privada de coincidências | 🚀 implementado · ⏳ validação no iPhone | Decisões do usuário (27/11/2026): opção B (3 códigos, graus privados, papéis só com combinação compatível); sem contador diário (só próximo passo e “Última troca neste iPhone”); Mapa comparado (só zonas dos dois); ideias com autor e prévia do envio. Implementado com DH-PSI em ristretto255 (noble-curves 1.9.7 empacotada em js/vendor). ND3 ainda é lido, mas não sobrescreve troca privada. Consequência da opção B: as etiquetas Total/Parcial/Alinhar/Entender deixam de aparecer. |
 | 8.2 | Código antigo e última troca | 🚀 | Identificação por aparelho, pareamento e revisão; aviso “Este código é de uma troca anterior. Peça um código novo.”; reimportar o mesmo código não muda nada; “Última troca neste iPhone” na tela. |
 | 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
 | 8.4 | Quem do casal só com concordâncias | 🚀 | Comparação pela identidade absoluta (A, B, os dois, nenhum). Discordâncias e respostas em branco ficam fora. A proteção durante a troca entra no 8.1B. |
@@ -92,3 +92,7 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | 9.8 | Me Conta Mais: mesma carta, vez, placar e relógio da partida (o tempo fora não é descontado) | ✔ 27/11 | ⏳ |
 | 9.9 | Conversa: mesma etapa e tempo restante; a pausa de 20 min continua contando o tempo real | ✔ 27/11 | ⏳ |
 | 9.10 | Voz em português disponível em modo avião (Massagem e Preliminares) | — | ⏳ |
+| 9.11 | Troca privada: os três códigos (≈ 8,6 mil, 16,8 mil e 8,4 mil caracteres) chegam inteiros depois de copiados e colados num app de mensagens | ✔ 27/11 (tamanho medido) | ⏳ |
+| 9.12 | Troca privada: tempo para gerar e abrir os códigos no iPhone (no navegador: 0,2 s, 0,3 s e 0,65 s) | ✔ 27/11 | ⏳ |
+| 9.13 | Troca privada: quem começou vê o resultado ao colar o código 2; o par, ao colar o código 3 | ✔ 27/11 | ⏳ |
+| 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ⏳ |
