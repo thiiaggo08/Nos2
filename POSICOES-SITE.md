@@ -512,3 +512,22 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 1 | Ônibus | 🟢 Fácil | |
 
 ⟲ = nome repetido no site com outro número.
+
+## Textos das posições (EM REVISÃO)
+
+Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito com palavras próprias**, a partir do desenho e da descrição do site (não é cópia). Segue o formato das posições que já estão no app: **Como** (uma frase, com linguagem neutra: "quem recebe", "o outro") e **Dica**.
+
+| Nº | Nome | Como | Dica |
+|---|---|---|---|
+| 491 | Tambor | Um senta na beira do sofá, com as costas retas; o outro deita de bruços atravessado no colo dele, com as mãos no chão, e a penetração é por trás. | Quem está sentado fica com as mãos livres para carinhos nas costas e no quadril. |
+| 490 | Encantador de serpentes | Um senta numa cadeira, reclinado; o outro ajoelha no chão entre as pernas dele e faz sexo oral. | Uma almofada sob os joelhos de quem está no chão deixa tudo mais confortável. |
+| 489 | Chibi | Quem recebe deita de bruços na beira do sofá ou da cama, com uma perna dobrada para fora; o outro fica em pé atrás. | Variação tranquila do "de quatro": quem está deitado só precisa aproveitar. |
+| 488 | Carl quente | Quem recebe faz uma ponte de costas sobre o sofá, com o quadril no alto; o outro ajoelha na frente e faz sexo oral. | Exige flexibilidade de quem faz a ponte. Mudem de posição assim que cansar. |
+| 487 | Ápice | Quem recebe fica em pé, inclinado para a frente, com as mãos apoiadas num banco alto; o outro, atrás, segura uma das pernas erguida. | O banco precisa ser firme. Combinem um sinal para parar se a perna cansar. |
+| 486 | Fonte | Um deita de costas; o outro fica de quatro entre as pernas dele e faz sexo oral. | Quem está de quatro controla o ritmo; quem está deitado pode guiar com as mãos, com delicadeza. |
+| 485 | Descida | Quem recebe deita de bruços no sofá, com o quadril sobre o braço do sofá e as pernas para o alto; o outro, em pé, segura as pernas. | Rápida de montar. Quem fica com a cabeça mais baixa deve parar se sentir tontura. |
+| 484 | O mestre lambedor | Quem recebe senta na beira de uma cadeira, inclinado para trás, com uma perna erguida; o outro ajoelha entre as pernas e faz sexo oral. | A perna erguida pode descansar nas costas de quem está ajoelhado, e as mãos ficam livres para ajudar. |
+| 483 | Catapult | Quem recebe deita de costas na beira da cama, com os joelhos junto ao peito e os pés nos ombros do outro, que fica em pé. | Ângulo profundo: comecem devagar e ajustem a altura com um travesseiro. |
+| 482 | Stickman | Quem recebe fica de joelhos e debruça o tronco sobre o braço do sofá; o outro fica em pé atrás. | O sofá sustenta o peso: boa para quando um dos dois está cansado. |
+| 481 | Novo 69 na cadeira | Um senta numa cadeira, inclinado para trás; o outro fica de cabeça para baixo apoiado no colo dele, e os dois fazem sexo oral ao mesmo tempo. | Exige força e equilíbrio de quem fica de cabeça para baixo. Façam devagar e parem ao primeiro desconforto. |
+| 480 | Cu suculento | Quem recebe fica em pé e dobra o corpo até apoiar as mãos no chão; o outro, em pé atrás, segura o quadril. | Cansa quem está dobrado: pausas curtas ajudam. |
