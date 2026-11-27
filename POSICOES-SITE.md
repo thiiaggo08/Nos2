@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -269,56 +269,56 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 244 | Libra | 🟠 Intermediário | Sentados · também cara a cara |
 | 243 | Arado | 🟢 Fácil | Em pé · também acrobática |
 | 242 | Gêmeos | 🟢 Fácil | Sentados · também cara a cara |
-| 241 | Carrinho de mão | 🔴 Difícil | |
-| 240 | Flor de lótus | 🟢 Fácil | |
-| 239 | Fusão ⟲ | 🔴 Difícil | |
-| 238 | Relógio ⟲ | 🔴 Difícil | |
-| 237 | Almoço quente | 🔴 Difícil | |
-| 236 | Concubina | 🟢 Fácil | |
-| 235 | Saltar | 🟢 Fácil | |
-| 234 | Tocha | 🟠 Intermediário | |
-| 233 | Centelha ⟲ | 🟢 Fácil | |
-| 232 | Hidrante | 🟢 Fácil | |
-| 231 | Renda | 🔴 Difícil | |
-| 230 | Cachorro para baixo | 🟢 Fácil | |
-| 229 | Torre Eiffel | 🟢 Fácil | |
-| 228 | Primavera | 🔴 Difícil | |
-| 227 | Homem-Aranha | 🟠 Intermediário | |
-| 226 | Ponte de Londres | 🟠 Intermediário | |
-| 225 | Elefante | 🟠 Intermediário | |
-| 224 | Tesoura | 🟢 Fácil | |
-| 223 | Zeus | 🟢 Fácil | |
-| 222 | Orquídea | 🔴 Difícil | |
-| 221 | Helicóptero | 🟠 Intermediário | |
-| 220 | Bicicleta | 🟠 Intermediário | |
-| 219 | T invertido | 🟠 Intermediário | |
-| 218 | Saca-rolhas | 🟠 Intermediário | |
-| 217 | Python | 🟠 Intermediário | |
-| 216 | Relógio ⟲ | 🔴 Difícil | |
-| 215 | Berço ⟲ | 🟢 Fácil | |
-| 214 | Unicórnio | 🟢 Fácil | |
-| 213 | Pessoal | 🔴 Difícil | |
-| 212 | Virgem | 🟢 Fácil | |
-| 211 | Imperador | 🟢 Fácil | |
-| 210 | Guarda Prisional | 🟢 Fácil | |
-| 209 | Capitão | 🟢 Fácil | |
-| 208 | Violoncelo | 🟠 Intermediário | |
-| 207 | Empilhador | 🔴 Difícil | |
-| 206 | Crucificação | 🟠 Intermediário | |
-| 205 | Quebra-cabeça | 🟢 Fácil | |
-| 204 | T Quadrado | 🟢 Fácil | |
-| 203 | Jackhammer | 🟠 Intermediário | |
-| 202 | Peixes | 🟠 Intermediário | |
-| 201 | Fã | 🟠 Intermediário | |
-| 200 | Taurus | 🟢 Fácil | |
-| 199 | Nirvana | 🟢 Fácil | |
-| 198 | Leopardo | 🟢 Fácil | |
-| 197 | Macaco-aranha | 🔴 Difícil | |
-| 196 | Avião | 🔴 Difícil | |
-| 195 | Ponte | 🔴 Difícil | |
-| 194 | Fita (colher invertida) | 🟠 Intermediário | |
-| 193 | Encanador ⟲ | 🟢 Fácil | |
-| 192 | Dragão | 🔴 Difícil | |
+| 241 | Carrinho de mão | 🔴 Difícil | Em pé · também acrobática |
+| 240 | Flor de lótus | 🟢 Fácil | Sentados · também cara a cara |
+| 239 | Fusão ⟲ | 🔴 Difícil | De lado e conchinha |
+| 238 | Relógio ⟲ | 🔴 Difícil | (a conferir) |
+| 237 | Almoço quente | 🔴 Difícil | Oral (cunnilingus) · também acrobática |
+| 236 | Concubina | 🟢 Fácil | Por trás |
+| 235 | Saltar | 🟢 Fácil | Em pé · também por trás |
+| 234 | Tocha | 🟠 Intermediário | Sentados · também cara a cara |
+| 233 | Centelha ⟲ | 🟢 Fácil | Cara a cara |
+| 232 | Hidrante | 🟢 Fácil | (a conferir) |
+| 231 | Renda | 🔴 Difícil | Em pé · também acrobática |
+| 230 | Cachorro para baixo | 🟢 Fácil | Por trás |
+| 229 | Torre Eiffel | 🟢 Fácil | Em pé · também por trás |
+| 228 | Primavera | 🔴 Difícil | Por trás |
+| 227 | Homem-Aranha | 🟠 Intermediário | Cara a cara |
+| 226 | Ponte de Londres | 🟠 Intermediário | (a conferir) |
+| 225 | Elefante | 🟠 Intermediário | Sentados · também cara a cara |
+| 224 | Tesoura | 🟢 Fácil | De lado e conchinha |
+| 223 | Zeus | 🟢 Fácil | Oral (boquete) |
+| 222 | Orquídea | 🔴 Difícil | Em pé (a conferir) |
+| 221 | Helicóptero | 🟠 Intermediário | Ela por cima (a conferir) |
+| 220 | Bicicleta | 🟠 Intermediário | Em pé · também por trás |
+| 219 | T invertido | 🟠 Intermediário | (a conferir) |
+| 218 | Saca-rolhas | 🟠 Intermediário | De lado e conchinha |
+| 217 | Python | 🟠 Intermediário | (a conferir) |
+| 216 | Relógio ⟲ | 🔴 Difícil | Ela por cima |
+| 215 | Berço ⟲ | 🟢 Fácil | Sentados · também cara a cara |
+| 214 | Unicórnio | 🟢 Fácil | (a conferir) |
+| 213 | Pessoal | 🔴 Difícil | Oral (boquete) · também acrobática |
+| 212 | Virgem | 🟢 Fácil | (a conferir) |
+| 211 | Imperador | 🟢 Fácil | Cara a cara |
+| 210 | Guarda Prisional | 🟢 Fácil | Em pé · também por trás |
+| 209 | Capitão | 🟢 Fácil | Cara a cara |
+| 208 | Violoncelo | 🟠 Intermediário | Cara a cara |
+| 207 | Empilhador | 🔴 Difícil | (a conferir) |
+| 206 | Crucificação | 🟠 Intermediário | (a conferir) |
+| 205 | Quebra-cabeça | 🟢 Fácil | Sentados · também cara a cara |
+| 204 | T Quadrado | 🟢 Fácil | De lado e conchinha |
+| 203 | Jackhammer | 🟠 Intermediário | (a conferir) |
+| 202 | Peixes | 🟠 Intermediário | Cara a cara |
+| 201 | Fã | 🟠 Intermediário | Cara a cara |
+| 200 | Taurus | 🟢 Fácil | Em pé · também por trás |
+| 199 | Nirvana | 🟢 Fácil | Cara a cara |
+| 198 | Leopardo | 🟢 Fácil | Por trás |
+| 197 | Macaco-aranha | 🔴 Difícil | Em pé · também acrobática |
+| 196 | Avião | 🔴 Difícil | Ela por cima · também acrobática |
+| 195 | Ponte | 🔴 Difícil | Ela por cima · também acrobática |
+| 194 | Fita (colher invertida) | 🟠 Intermediário | De lado e conchinha |
+| 193 | Encanador ⟲ | 🟢 Fácil | Por trás |
+| 192 | Dragão | 🔴 Difícil | (a conferir) |
 | 191 | Liana | 🟠 Intermediário | |
 | 190 | Cavaleiro ⟲ | 🟠 Intermediário | |
 | 189 | Juramento | 🟢 Fácil | |
@@ -769,3 +769,53 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 244 | Libra | Um senta no chão com as pernas abertas; o outro senta no colo dele, de frente, também com as pernas abertas. | Muito toque e olho no olho. |
 | 243 | Arado | Um fica em pé; o outro fica de cabeça para baixo, com as mãos no chão e as pernas envolvendo a cintura dele. | Exige força nos braços de quem está embaixo. Sessões curtas. |
 | 242 | Gêmeos | Os dois sentam frente a frente, com as pernas cruzadas uma sobre a outra, abraçados. | Abraços duplos e olho no olho: muito íntima. |
+| 241 | Carrinho de mão | Um fica em pé e segura as pernas do outro na cintura; o outro apoia as mãos no chão, como um carrinho de mão. | Exige força nos braços de quem está embaixo. Sessões curtas. |
+| 240 | Flor de lótus | Um senta de pernas cruzadas; o outro senta no colo dele, de frente, envolvendo-o com as pernas. | Clássica de ternura: abraço, beijo e respiração juntos. |
+| 239 | Fusão ⟲ | Quem recebe deita de costas; o outro deita de lado, atravessado, com as pernas entrelaçadas às dele. | Movimentos lentos. Ajustem as pernas até achar o encaixe. |
+| 238 | Relógio ⟲ | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 237 | Almoço quente | Um fica de joelhos e ergue o quadril do outro, que fica com as costas no chão e as pernas para o alto, para fazer sexo oral. | Exige força de quem segura. Uma almofada sob os ombros ajuda. |
+| 236 | Concubina | Quem recebe deita de bruços; o outro ajoelha atrás e ergue um pouco o quadril dele. | Simples e relaxada para quem está deitado. |
+| 235 | Saltar | Quem recebe se inclina para a frente, com as mãos no chão; o outro fica em pé atrás. | Cansa rápido: pausas curtas. |
+| 234 | Tocha | Um fica de joelhos; o outro senta no colo dele, de frente, com as pernas nos ombros, bem abraçados. | Muito íntima. Movimentos lentos. |
+| 233 | Centelha ⟲ | Quem recebe deita de costas com as pernas para o alto; o outro fica com um joelho no chão, segurando as pernas. | A altura das pernas muda a sensação. |
+| 232 | Hidrante | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 231 | Renda | Um fica em pé e segura o outro de cabeça para baixo, junto ao corpo. | Exige força e confiança. Façam perto da cama. |
+| 230 | Cachorro para baixo | Quem recebe deita de bruços; o outro deita por cima, atrás. | Muito contato de pele. Boa para ir devagar. |
+| 229 | Torre Eiffel | Quem recebe fica em pé e se inclina até as mãos tocarem o chão, com as pernas retas; o outro fica atrás. | Exige flexibilidade. Pausas curtas. |
+| 228 | Primavera | Quem recebe deita de bruços; o outro fica por cima, apoiado nas mãos, como numa prancha. | Quem está por cima precisa de força nos braços. |
+| 227 | Homem-Aranha | Quem recebe deita de costas com uma perna no ombro do outro, que fica com um joelho no chão. | Fácil de ajustar o ângulo. |
+| 226 | Ponte de Londres | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 225 | Elefante | Um fica de joelhos; o outro senta no colo dele, de frente, com as pernas apoiadas nos ombros. | Exige flexibilidade de quem está por cima. |
+| 224 | Tesoura | Quem recebe deita de lado com uma perna erguida no ombro do outro, que fica de joelhos entre as pernas. | Encaixe em tesoura: profundo e confortável. |
+| 223 | Zeus | Quem faz o oral fica de joelhos; o outro fica em pé na frente. | Uma almofada sob os joelhos ajuda muito. |
+| 222 | Orquídea | Quem recebe fica em pé, com uma perna erguida bem alto; o outro fica em pé junto. | — |
+| 221 | Helicóptero | Um deita de bruços; o outro deita por cima, atravessado. | — |
+| 220 | Bicicleta | Quem recebe se inclina com as mãos no chão e ergue uma perna; o outro fica atrás, segurando a perna. | Exige equilíbrio. Pausas curtas. |
+| 219 | T invertido | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 218 | Saca-rolhas | Quem recebe deita de lado, com o quadril torcido; o outro fica de joelhos atrás. | A torção muda o encaixe. Vão devagar. |
+| 217 | Python | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 216 | Relógio ⟲ | Um deita de costas; o outro fica de cócoras por cima, de costas, e pode girar o corpo aos poucos. | Girem devagar, como os ponteiros de um relógio. |
+| 215 | Berço ⟲ | Um fica de joelhos; o outro senta no colo dele, de frente, inclinado para trás e apoiado nas mãos. | Quem está por cima controla o ritmo. |
+| 214 | Unicórnio | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 213 | Pessoal | Quem faz o oral fica de joelhos; o outro fica de cabeça para baixo à frente, apoiado. | Muito arriscada. Prefiram uma versão com apoio na parede. |
+| 212 | Virgem | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 211 | Imperador | Quem recebe deita de costas; o outro ajoelha entre as pernas, sentado sobre os calcanhares. | Confortável e com as mãos livres para carinhos. |
+| 210 | Guarda Prisional | Quem recebe se inclina para a frente; o outro fica em pé atrás, segurando os braços dele para trás. | Combinem antes: segurar os braços é um jogo de entrega. |
+| 209 | Capitão | Quem recebe deita de costas com as pernas bem abertas para o alto; o outro ajoelha e segura as pernas. | Exige flexibilidade de quem abre as pernas. |
+| 208 | Violoncelo | Quem recebe deita de costas com as pernas juntas apoiadas no ombro do outro, que fica com um joelho no chão. | Pernas juntas deixam o encaixe mais apertado. |
+| 207 | Empilhador | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 206 | Crucificação | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 205 | Quebra-cabeça | Um senta com as pernas esticadas; o outro senta de frente, inclinado para trás, com as pernas por cima. | Movimentos curtos e muito olho no olho. |
+| 204 | T Quadrado | Quem recebe deita de lado com uma perna erguida; o outro fica de joelhos, atravessado, formando um T. | Ajustem a perna erguida até achar o encaixe. |
+| 203 | Jackhammer | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 202 | Peixes | Quem recebe deita de costas e dobra as pernas sobre os ombros do outro, que fica de joelhos. | Penetração profunda: comecem devagar. |
+| 201 | Fã | Quem recebe deita de costas com as pernas abertas ao redor do outro, que fica de joelhos, ereto. | Simples e com boa vista para os dois. |
+| 200 | Taurus | Quem recebe se inclina com as mãos no chão; o outro fica em pé atrás. | Cansa rápido: pausas curtas. |
+| 199 | Nirvana | Quem recebe deita de costas com as pernas para o alto; o outro ajoelha e se inclina, segurando as pernas. | Combinem o ritmo: o ângulo é profundo. |
+| 198 | Leopardo | Quem recebe fica de quatro; o outro ajoelha atrás. | O "de quatro" clássico. |
+| 197 | Macaco-aranha | Um fica em pé; o outro fica de cabeça para baixo, com as pernas envolvendo a cintura dele. | Muito difícil e arriscada. Façam perto da cama. |
+| 196 | Avião | Um deita de costas; o outro senta por cima com as pernas abertas em espacate. | Exige muita flexibilidade de quem está por cima. |
+| 195 | Ponte | Um faz uma ponte, com as mãos e os pés no chão e a barriga para cima; o outro senta por cima. | Muito cansativa para quem faz a ponte. Sessões curtas. |
+| 194 | Fita (colher invertida) | Os dois deitam de lado, encaixados, em sentidos opostos. | Calma e confortável, boa para ir devagar. |
+| 193 | Encanador ⟲ | Quem recebe fica de quatro; o outro fica atrás, com um joelho no chão. | Fácil de montar e de mudar. |
+| 192 | Dragão | O desenho saiu pequeno no PDF. Texto a completar. | — |
