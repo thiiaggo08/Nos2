@@ -1273,10 +1273,16 @@ let K=null;
 const MCM_MODOS={rap:{nome:"Rapidinho",min:10,max:3},c20:{nome:"Partida completa",min:20,max:5},c30:{nome:"Partida completa",min:30,max:8},c40:{nome:"Partida completa",min:40,max:10}};
 /* categoria leve para abrir a partida: Risadas quando existir; senão, a primeira desta lista que houver no baralho */
 const MCM_LEVES=["Risadas","Nós"];
-function mcmInit(){
+function mcmInit(primeira){
+  const visto=Nos2.store.get("mcm.exemplo",false);
   const op=k=>{ const m=MCM_MODOS[k]; return `${m.min} min · ${m.max} cartas`; };
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Quebrar o gelo</div>
-  <div class="game capa"><h1>Me Conta Mais</h1><p>Uma carta puxa outra. Uma resposta puxa conversa.</p></div>
+  const capa=`${voltar}<div class="eyebrow" style="margin-top:8px">Quebrar o gelo</div>
+  <div class="game capa"><h1>Me Conta Mais</h1><p>Uma carta puxa outra. Uma resposta puxa conversa.</p></div>`;
+  if(!visto&&primeira!==false){
+    $("jogoArea").innerHTML=capa+`<div class="game"><button class="btn gold" onclick="mcmExemplo(0)">Ver uma rodada de exemplo</button><button class="btn ghost" onclick="Nos2.store.set('mcm.exemplo',true);mcmInit(false)">Escolher modo</button></div>`;
+    return;
+  }
+  $("jogoArea").innerHTML=capa+`
   <h2>Quanto tempo vocês têm?</h2>
   <div class="game">
    <div class="muted">Rapidinho</div>
@@ -1285,7 +1291,26 @@ function mcmInit(){
    <button class="btn ghost" onclick="mcmComecar('c20')">${op("c20")}</button>
    <button class="btn ghost" onclick="mcmComecar('c30')">${op("c30")}</button>
    <button class="btn ghost" onclick="mcmComecar('c40')">${op("c40")}</button>
-  </div>`;
+  </div>
+  <details class="g" style="margin-top:12px"><summary>Como jogar</summary><div>
+   <p>Uma carta por vez. Quem está na vez lê a carta e começa. O par também pode responder.</p>
+   <p><b class="w">Concluir carta</b> soma 1 ponto para o casal e passa a vez. <b class="w">Pular carta</b> troca a carta sem perder ponto, e a vez continua.</p>
+   <button class="btn ghost" onclick="mcmExemplo(0)">Ver a rodada de exemplo</button></div></details>`;
+}
+/* Rodada de exemplo: antes do cronômetro e da pontuação; não usa carta do baralho. */
+const MCM_EXEMPLO={carta:"Que coisa pequena você queria me contar e acabou deixando pra depois?",a:"Passei por aquele café e lembrei da primeira vez que a gente foi lá.",b:"Ouvi uma música que achei que você ia gostar."};
+function mcmExemplo(passo){
+  const A=Nos2.settings.name("A"), B=Nos2.settings.name("B"), E=MCM_EXEMPLO;
+  const fala=(quem,t)=>`<div class="match"><div class="eyebrow">${esc(quem)}</div><div class="t" style="margin-top:6px">“${esc(t)}”</div></div>`;
+  let corpo=`<div class="gcard" style="min-height:180px"><div class="k">Exemplo</div><div class="v">${esc(E.carta)}</div></div>
+   <p class="muted" style="text-align:center">Vez de ${esc(A)}: quem está na vez lê a carta e começa. O par também pode responder.</p>`;
+  if(passo>=1) corpo+=fala(A,E.a);
+  if(passo>=2) corpo+=fala(B,E.b);
+  if(passo>=3) corpo+=`<div class="note">Depois disso, vocês tocam em <b class="w">Concluir carta</b>: o ponto é do casal e a vez passa. Se a carta não servir, <b class="w">Pular carta</b> traz outra, e a vez continua. Este exemplo não conta tempo nem ponto.</div>`;
+  const prox=[`Ver a resposta de ${esc(A)}`,`Ver a resposta de ${esc(B)}`,"E depois?"][passo];
+  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Me Conta Mais · rodada de exemplo</div><h1>Como funciona uma rodada</h1>
+  <div class="game">${corpo}${passo<3?`<button class="btn gold" onclick="mcmExemplo(${passo+1})">${prox}</button>`:`<button class="btn gold" onclick="Nos2.store.set('mcm.exemplo',true);mcmInit(false)">Escolher modo</button>`}</div>`;
+  window.scrollTo(0,0);
 }
 function mcmComecar(k){ cartasComecar("conv",3,k); }
 function cartasInit(){
@@ -1487,7 +1512,7 @@ $("data").value=st.data||"";
 renderResp();
 renderPassos();
 renderThumbs();
-function porHash(){ const h=location.hash.slice(1); if(h==="jogar") go("jogar"); else if(h==="massagem"){ go("jogar"); abrirJogo("mass"); } else if(["responder","trocar","matches"].includes(h)) go(h); }
+function porHash(){ const h=location.hash.slice(1); if(h==="jogar") go("jogar"); else if(h==="mcm"){ go("jogar"); abrirJogo("mcm"); } else if(h==="massagem"){ go("jogar"); abrirJogo("mass"); } else if(["responder","trocar","matches"].includes(h)) go(h); }
 porHash(); window.addEventListener("hashchange",porHash);
 </script>
 </body>
