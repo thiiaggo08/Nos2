@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. Lote 1 parcial: 491 a 480 (as únicas com foto no PDF), **aprovado pelo usuário em 27/11/2026**. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 sugeridas a partir dos PDFs com desenhos (aguardam aprovação; 453, 452 e 442 marcadas "a conferir"). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -31,44 +31,44 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 482 | Stickman | 🟢 Fácil | Por trás |
 | 481 | Novo 69 na cadeira | 🔴 Difícil | Oral (69) |
 | 480 | Cu suculento | 🔴 Difícil | Por trás |
-| 479 | O homem das mulheres | 🟢 Fácil | |
-| 478 | Jogo excitante | 🟠 Intermediário | |
-| 477 | Saco de chá | 🟠 Intermediário | |
-| 476 | Harpa ⟲ | 🔴 Difícil | |
-| 475 | Beijo grego | 🟠 Intermediário | |
-| 474 | Inclinação ⟲ | 🟢 Fácil | |
-| 473 | Loop | 🔴 Difícil | |
-| 472 | Roda de pino | 🔴 Difícil | |
-| 471 | Gimlet | 🟢 Fácil | |
-| 470 | Relaxamento | 🟠 Intermediário | |
-| 469 | Rata apertada | 🟠 Intermediário | |
-| 468 | Cataratas do Niágara | 🔴 Difícil | |
-| 467 | Foguetão | 🟠 Intermediário | |
-| 466 | Satyr | 🔴 Difícil | |
-| 465 | Cavaleiro ⟲ | 🟢 Fácil | |
-| 464 | Hood | 🔴 Difícil | |
-| 463 | Montanha creek | 🔴 Difícil | |
-| 462 | Colina ⟲ | 🟠 Intermediário | |
-| 461 | Wrestling | 🟢 Fácil | |
-| 460 | Olhe para o céu | 🟠 Intermediário | |
-| 459 | Passivo doggy | 🟠 Intermediário | |
-| 458 | Jack | 🟠 Intermediário | |
-| 457 | Camaleão | 🟠 Intermediário | |
-| 456 | Espetos | 🟢 Fácil | |
-| 455 | Sela | 🟠 Intermediário | |
-| 454 | Adoração | 🟢 Fácil | |
-| 453 | Emaranhado | 🔴 Difícil | |
-| 452 | Triângulo das Bermudas | 🟠 Intermediário | |
-| 451 | Counterblow | 🟢 Fácil | |
-| 450 | Lugar confortável | 🟢 Fácil | |
-| 449 | Julia | 🟠 Intermediário | |
-| 448 | Penetração orgásmica | 🟢 Fácil | |
-| 447 | Beleza flexível | 🔴 Difícil | |
-| 446 | Bomba | 🔴 Difícil | |
-| 445 | Meia-noite | 🟠 Intermediário | |
-| 444 | Tábua | 🟢 Fácil | |
-| 443 | Atordoador | 🟠 Intermediário | |
-| 442 | Pônei selvagem | 🟢 Fácil | |
+| 479 | O homem das mulheres | 🟢 Fácil | Oral (cunnilingus) |
+| 478 | Jogo excitante | 🟠 Intermediário | Em pé · também por trás |
+| 477 | Saco de chá | 🟠 Intermediário | Oral (boquete) |
+| 476 | Harpa ⟲ | 🔴 Difícil | De lado e conchinha |
+| 475 | Beijo grego | 🟠 Intermediário | Oral (anilingus) |
+| 474 | Inclinação ⟲ | 🟢 Fácil | Cara a cara |
+| 473 | Loop | 🔴 Difícil | Oral (boquete) · também acrobática |
+| 472 | Roda de pino | 🔴 Difícil | Por trás |
+| 471 | Gimlet | 🟢 Fácil | Cara a cara |
+| 470 | Relaxamento | 🟠 Intermediário | Sentados e ajoelhados |
+| 469 | Rata apertada | 🟠 Intermediário | Por trás |
+| 468 | Cataratas do Niágara | 🔴 Difícil | Em pé · também acrobática |
+| 467 | Foguetão | 🟠 Intermediário | Ela por cima |
+| 466 | Satyr | 🔴 Difícil | Em pé · também por trás |
+| 465 | Cavaleiro ⟲ | 🟢 Fácil | Cara a cara |
+| 464 | Hood | 🔴 Difícil | Acrobáticas (invertida) |
+| 463 | Montanha creek | 🔴 Difícil | Acrobáticas (invertida) |
+| 462 | Colina ⟲ | 🟠 Intermediário | Sentados · também ela por cima |
+| 461 | Wrestling | 🟢 Fácil | Cara a cara |
+| 460 | Olhe para o céu | 🟠 Intermediário | Ela por cima |
+| 459 | Passivo doggy | 🟠 Intermediário | Ela por cima |
+| 458 | Jack | 🟠 Intermediário | Por trás |
+| 457 | Camaleão | 🟠 Intermediário | Em pé · também por trás |
+| 456 | Espetos | 🟢 Fácil | Cara a cara |
+| 455 | Sela | 🟠 Intermediário | Ela por cima |
+| 454 | Adoração | 🟢 Fácil | Por trás · também em pé |
+| 453 | Emaranhado | 🔴 Difícil | Acrobáticas (a conferir) |
+| 452 | Triângulo das Bermudas | 🟠 Intermediário | Acrobáticas (a conferir) |
+| 451 | Counterblow | 🟢 Fácil | Em pé · também cara a cara |
+| 450 | Lugar confortável | 🟢 Fácil | Sentados · também ela por cima |
+| 449 | Julia | 🟠 Intermediário | Cara a cara |
+| 448 | Penetração orgásmica | 🟢 Fácil | Cara a cara · também em pé |
+| 447 | Beleza flexível | 🔴 Difícil | Cara a cara · também acrobática |
+| 446 | Bomba | 🔴 Difícil | Por trás |
+| 445 | Meia-noite | 🟠 Intermediário | Em pé · também por trás |
+| 444 | Tábua | 🟢 Fácil | Cara a cara |
+| 443 | Atordoador | 🟠 Intermediário | Cara a cara |
+| 442 | Pônei selvagem | 🟢 Fácil | (a conferir) |
 | 441 | Virada | 🟢 Fácil | |
 | 440 | Martelo de Thor | 🔴 Difícil | |
 | 439 | Cowgirl na cadeira | 🟠 Intermediário | |
@@ -531,3 +531,41 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 482 | Stickman | Quem recebe fica de joelhos e debruça o tronco sobre o braço do sofá; o outro fica em pé atrás. | O sofá sustenta o peso: boa para quando um dos dois está cansado. |
 | 481 | Novo 69 na cadeira | Um senta numa cadeira, inclinado para trás; o outro fica de cabeça para baixo apoiado no colo dele, e os dois fazem sexo oral ao mesmo tempo. | Exige força e equilíbrio de quem fica de cabeça para baixo. Façam devagar e parem ao primeiro desconforto. |
 | 480 | Cu suculento | Quem recebe fica em pé e dobra o corpo até apoiar as mãos no chão; o outro, em pé atrás, segura o quadril. | Cansa quem está dobrado: pausas curtas ajudam. |
+| 479 | O homem das mulheres | Quem recebe senta no encosto do sofá, com as pernas abertas; o outro ajoelha no assento e faz sexo oral. | O encosto deixa o quadril na altura certa, sem ninguém forçar o pescoço. |
+| 478 | Jogo excitante | Quem recebe apoia um joelho numa cadeira e se inclina sobre o encosto; o outro fica em pé atrás. | A cadeira precisa estar firme, de preferência encostada na parede. |
+| 477 | Saco de chá | Um deita de costas na cama, com a cabeça na beirada; o outro fica em pé na frente e recebe carinho oral nos testículos. | Vão devagar e com delicadeza: é uma região sensível. |
+| 476 | Harpa ⟲ | Quem recebe deita de lado no sofá e ergue uma perna, apoiando-a no peito do outro, que fica de joelhos atrás. | A perna erguida pode descer quando cansar, sem perder o encaixe. |
+| 475 | Beijo grego | Quem recebe fica de joelhos numa cadeira, debruçado no encosto; o outro ajoelha atrás e beija e lambe a região. | Higiene antes e combinem tudo com calma: é uma prática que nem todos topam. |
+| 474 | Inclinação ⟲ | Quem recebe deita de costas na beira da cama, com o tronco pendendo para fora; o outro ajoelha na cama, entre as pernas. | Com a cabeça mais baixa a sensação aumenta, mas parem se vier tontura. |
+| 473 | Loop | Um deita de costas no chão; o outro faz uma ponte por cima dele e faz sexo oral nessa posição. | Exige muita flexibilidade. Se a ponte cansar, troquem por uma variação mais simples. |
+| 472 | Roda de pino | Quem recebe deita de bruços no sofá; o outro fica atrás, com um joelho apoiado no assento. | Boa para quando quem está embaixo está cansado e só quer relaxar. |
+| 471 | Gimlet | Quem recebe deita de costas no sofá e puxa os joelhos para junto do peito; o outro ajoelha entre as pernas, com o tronco ereto. | Penetração profunda: comecem devagar. |
+| 470 | Relaxamento | Um senta numa cadeira; o outro senta no colo dele, de frente, com as pernas apoiadas por cima. | Muito contato e abraço. Bom para ir com calma. |
+| 469 | Rata apertada | Quem recebe deita de bruços na beira da cama, com as pernas juntas; o outro fica atrás, apoiado nas mãos no chão, como numa prancha. | As pernas juntas deixam o encaixe mais apertado. |
+| 468 | Cataratas do Niágara | Quem recebe fica em pé e arqueia o corpo para trás; o outro, em pé na frente, segura firme o quadril. | Muito difícil: só com bastante flexibilidade e apoio seguro. Parem ao menor desconforto. |
+| 467 | Foguetão | Um deita de costas no sofá; o outro fica de cócoras por cima, de frente, e controla o movimento. | Quem está por cima pode apoiar as mãos no peito do outro para se equilibrar. |
+| 466 | Satyr | Quem recebe se inclina para a frente, com as mãos no chão e uma perna apoiada numa cadeira; o outro fica em pé atrás. | Cansa rápido: façam pausas curtas. |
+| 465 | Cavaleiro ⟲ | Quem recebe deita de costas na beira da cama; o outro fica de joelhos na cama, ereto, entre as pernas dele. | Fácil de montar e com bom contato visual. |
+| 464 | Hood | Quem recebe ergue o quadril bem alto, com o corpo quase de cabeça para baixo; o outro, de joelhos atrás, segura o quadril. | Exige força e flexibilidade. Usem almofadas embaixo e parem se ficar desconfortável. |
+| 463 | Montanha creek | Quem recebe fica de cabeça para baixo, com as pernas no sofá e as mãos no chão; o outro, em pé, segura o quadril. | Só para quem tem força nos braços. Sessões curtas. |
+| 462 | Colina ⟲ | Um senta numa cadeira e se reclina; o outro senta por cima, de costas para ele, e se inclina para a frente. | A cadeira precisa ser bem firme. |
+| 461 | Wrestling | Quem recebe deita de costas na cama, com uma perna no ombro do outro, que fica com um joelho apoiado na cama. | Variação simples para mudar o ângulo do papai e mamãe. |
+| 460 | Olhe para o céu | Um deita de costas numa mesa; o outro sobe e fica de cócoras por cima, controlando o ritmo. | Confiram se a mesa aguenta o peso dos dois. |
+| 459 | Passivo doggy | Um deita de costas e ergue as pernas, encostando-as no peito; o outro senta por cima. | Quem está embaixo pode baixar as pernas quando cansar. |
+| 458 | Jack | Quem recebe ajoelha no chão e apoia o tronco no sofá; o outro fica com um joelho no chão, atrás. | Confortável para os dois, com boa altura de encaixe. |
+| 457 | Camaleão | Quem recebe fica em pé, inclinado, com as mãos numa cadeira; o outro fica atrás, inclinado sobre ele. | A cadeira deve estar firme e encostada na parede. |
+| 456 | Espetos | Quem recebe deita de costas na beira da cama, com o quadril elevado e as pernas para cima; o outro ajoelha no chão, ereto. | Um travesseiro sob o quadril ajuda a manter a altura. |
+| 455 | Sela | Um deita de costas sobre uma bola de pilates; o outro senta por cima, de frente. | A bola balança: mantenham os pés bem firmes no chão. |
+| 454 | Adoração | Quem recebe deita de bruços numa mesa; o outro fica em pé atrás. | A mesa dá apoio e a altura costuma ser certa para quem está em pé. |
+| 453 | Emaranhado | Posição no chão, com os corpos entrelaçados. Texto a completar depois de conferir o desenho. | — |
+| 452 | Triângulo das Bermudas | Posição no sofá, desafiadora. Texto a completar depois de conferir o desenho. | — |
+| 451 | Counterblow | Quem recebe senta na beira de uma cadeira e envolve o outro com as pernas; o outro fica em pé, segurando-o. | Bom contato visual e muito abraço. |
+| 450 | Lugar confortável | Um senta reclinado no sofá; o outro senta no colo dele, de costas. | Posição tranquila, boa para conversar e trocar carinho. |
+| 449 | Julia | Quem recebe deita de costas sobre uma bola de pilates; o outro fica por cima, de pé ou de joelhos. | A bola balança: segurem firme e vão devagar. |
+| 448 | Penetração orgásmica | Quem recebe deita de costas numa mesa; o outro fica em pé na frente, olhando nos olhos. | Ótima para ir fundo sem perder o contato visual. |
+| 447 | Beleza flexível | Quem recebe deita de costas e abre bem as pernas para os lados; o outro fica por cima. | Exige flexibilidade de quem abre as pernas. Alonguem antes. |
+| 446 | Bomba | Quem recebe deita de bruços no sofá; o outro fica por cima, apoiado nas mãos, como numa prancha. | Quem está por cima precisa de força nos braços. |
+| 445 | Meia-noite | Quem recebe ajoelha numa cadeira, de costas, com uma perna erguida; o outro fica em pé atrás. | A cadeira deve estar firme. Segurem a perna erguida com cuidado. |
+| 444 | Tábua | Quem recebe deita de costas na beira do sofá; o outro fica por cima, apoiado nas mãos, como numa prancha. | Quem está por cima controla o ritmo; quem está embaixo só aproveita. |
+| 443 | Atordoador | Quem recebe deita de costas sobre uma bola de pilates; o outro fica em pé na frente, segurando o quadril. | Variação do papai e mamãe com balanço. Mantenham a bola firme. |
+| 442 | Pônei selvagem | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
