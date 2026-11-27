@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 sugeridas a partir dos PDFs com desenhos (aguardam aprovação; 453, 452 e 442 marcadas "a conferir"). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
