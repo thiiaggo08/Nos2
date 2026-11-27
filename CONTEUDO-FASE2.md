@@ -266,6 +266,8 @@ No começo da sessão, o casal escolhe entre "perguntas gerais" e um tema.
 **Fechamento (2 minutos):** cada um diz uma coisa que gostou na conversa de hoje.
 
 ### Quando procurar ajuda profissional (tela fixa)
+
+> **Retirada do app por decisão do usuário em 27/11/2026.** O texto fica registrado aqui, mas não é exibido.
 Este modo ajuda a conversar, mas não substitui terapia de casal. Vale procurar um psicólogo ou terapeuta de casal quando:
 - a mesma briga volta sempre e só piora;
 - o desprezo, a ironia ou a humilhação viraram rotina;

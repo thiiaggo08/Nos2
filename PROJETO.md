@@ -102,6 +102,8 @@ Cartas 1 a 70 vêm do protótipo; cartas 71 a 100 estão no CONTEUDO-FASE2.md.
 
 Mantém a mecânica do protótipo: cada um responde sozinho, vocês trocam códigos, e o app mostra só o que coincide.
 
+**Etiqueta dos matches** (decisão do usuário, 27/11/2026): cada match mostra 🔥 Total (os dois Quero ou Quero muito), 🙂 Parcial (um quer, o outro toparia), 🤝 Alinhar (os dois toparam) ou 💬 Entender (um quer muito, o outro só toparia).
+
 **Mudanças:**
 - **Reflexão individual** antes de responder: 5 perguntas curtas, só para si, que não são compartilhadas.
 - **Catálogo de fantasias:** a categoria "Com terceiros" **sai**. Entram 3 categorias novas, já aprovadas: Palavras e voz, Ritmo e tempo, Romance e ritual. O item "De manhã, à tarde ou à noite?" é respondido com o horário preferido, não com o nível de vontade.
@@ -146,7 +148,7 @@ Conteúdo aprovado no CONTEUDO-FASE2.md:
 - **Escuta em turnos** com cronômetro (3 min para falar, 1 min para repetir) e frases para quando travar.
 - **8 leituras curtas.**
 - **Folha de combinados:** no máximo 2 por conversa, com data de revisão (manter, ajustar ou tirar). A revisão aparece quando o app for aberto.
-- **Tela fixa "Quando procurar ajuda"**, com Ligue 180 e 190.
+- ~~Tela fixa "Quando procurar ajuda", com Ligue 180 e 190.~~ Retirada por decisão do usuário (27/11/2026).
 
 ### 8. Rituais
 Momentos guiados, com passos e cronômetro (conteúdo a escrever):

@@ -157,16 +157,5 @@ window.CV={
   "Quando a data da revisão passa, o app mostra o combinado ao abrir. Para cada um, vocês escolhem: <b>manter</b>, <b>ajustar</b> ou <b>tirar</b>."
  ],
  "fechamento": "<b>Fechamento (2 minutos):</b> cada um diz uma coisa que gostou na conversa de hoje.",
- "ajuda": {
-  "intro": "Este modo ajuda a conversar, mas não substitui terapia de casal. Vale procurar um psicólogo ou terapeuta de casal quando:",
-  "itens": [
-   "a mesma briga volta sempre e só piora;",
-   "o desprezo, a ironia ou a humilhação viraram rotina;",
-   "um dos dois já não consegue conversar sem explodir ou se fechar;",
-   "há traição ou separação em pauta;",
-   "ansiedade, depressão ou álcool estão pesando na relação."
-  ],
-  "final": "<b>Se alguém sente medo do outro, ou se há qualquer tipo de violência, procure ajuda agora.</b> No Brasil: Ligue 180 (Central de Atendimento à Mulher) ou 190 em emergência."
- },
  "temas_intro": "No começo da sessão, o casal escolhe entre \"perguntas gerais\" e um tema."
 };
