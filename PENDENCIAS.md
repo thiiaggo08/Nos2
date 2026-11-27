@@ -66,3 +66,11 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 7.1 | Termômetro de hoje | ⏳ |
 | 7.2 | Cápsula da escala | ⏳ |
 | 7.3 | Volta em camadas | ⏳ |
+
+## 8. Diagnóstico da troca de códigos do Nós Dois (27/11/2026)
+| # | Pendência | Status | Decisão |
+|---|---|---|---|
+| 8.1 | O código leva todas as respostas “sim” (com grau e papel), inclusive as que não coincidem; quem tem o código e a senha consegue ler. A regra “só o que coincide” vale na tela e no que fica salvo, não na troca | ⏳ | |
+| 8.2 | Código antigo é aceito sem aviso e substitui uma troca mais nova | ⏳ | |
+| 8.3 | Respostas novas depois da troca não aparecem, e o app não avisa que é preciso trocar de novo | ⏳ | |
+| 8.4 | “Quem do casal” mostra também as discordâncias (ligado ao 4.7) | ⏳ | |
