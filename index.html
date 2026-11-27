@@ -247,6 +247,8 @@ function renderHome(){
   const out=[], today=new Date().toISOString().slice(0,10), now=Date.now();
   const rit=store.get("ritual.sessao",null);
   if(rit&&rit.savedAt&&Date.now()-rit.savedAt<12*3600*1000&&(rit.fase==="pausa"||rit.fase==="passo")) out.push(`<div class="aviso">Um ritual ficou pausado. <a href="rituais.html">Continuar</a></div>`);
+  const pz=store.get("pausa",null);
+  if(pz&&pz.savedAt&&Date.now()-pz.savedAt<12*3600*1000&&/^(nosdois|conversa)\.html$/.test(pz.pagina)) out.push(`<div class="aviso">${esc(pz.nome||"Uma atividade")} ficou pausada. <a href="${pz.pagina}">Continuar</a></div>`);
   const cv=store.get("conversa",{}); const due=(cv.combinados||[]).filter(c=>c.ativo!==false&&c.revisao&&c.revisao<=today);
   if(due.length) out.push(`<div class="aviso">${due.length===1?"Um combinado chegou":"Combinados chegaram"} na data de revisão. <a href="conversa.html#revisao">Revisar agora</a></div>`);
   const ev=store.get("espero",{}); const p=ev.partida;

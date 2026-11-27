@@ -13,14 +13,14 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 1.2a | Organização de “Cartas” | ✅ | Nós Dois → Quebrar o gelo → Cartas mostra: “Me Conta Mais — 40 cartas de humor, conversa e carinho.” e “Cartas íntimas (+18) — 36 perguntas dos grupos Nós, Desejo e Fantasia.” Sai o botão direto do Me Conta Mais em Quebrar o gelo. Atalho específico (nosdois.html#mcm) abre o Me Conta Mais direto. |
 | 1.2b | Onde ficam as Cartas quentes | ✅ | Opção 2: mudam para Nós Dois → Esquentar, ao lado de Preliminares e Dado da Noite. Preservar as 45 ações, os níveis Leve/Quente/Ousado, as regras e os dados salvos; reutilizar a tela atual e atualizar atalhos. “Cartas” fica só com Me Conta Mais e Cartas íntimas (+18). |
 | 1.3 | Divisão do clima | ✅ | 01–05 leves; 06–08 mais pessoais. |
-| 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | ⏳ | |
+| 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | 🚀 | Aprovados pelo usuário (27/11/2026). |
 | 1.5 | "Rapidinho" nomeando o roteiro e o modo do Me Conta Mais | ⏳ | |
 
 ## 2. Textos para aprovar
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 2.1 | Legenda e regra das etiquetas dos matches (Total, Parcial, Alinhar, Entender) | ⏳ | |
-| 2.2 | "Quanto tempo vocês têm?" e legendas dos roteiros | ⏳ | |
+| 2.1 | Legenda e regra das etiquetas dos matches | 🚀 | Aprovadas (27/11/2026). |
+| 2.2 | "Quanto tempo vocês têm?" e legendas dos roteiros | 🚀 | Aprovadas (27/11/2026). |
 | 2.3 | Legenda do roteiro "Nós 2" (promete ~40 min, dá ~24 min) | ⏳ | |
 
 ## 3. Decisões da avaliação crítica
@@ -33,7 +33,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 4. Ajustes técnicos recomendados
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | ✅ (🚀 só nos Rituais) | Spec do usuário (27/11/2026): ao ir para segundo plano ou bloquear a tela, pausa o cronômetro, para a narração e salva sessão, etapa, tempo restante, vez e placar; tempo fora não é descontado. Volta < 2 min: atividade pausada; ≥ 2 min: PIN e depois atividade pausada. Tela “Querem continuar de onde pararam?” com “Retomar” (silêncio, tempo salvo) e “Encerrar por hoje” (não conclui a etapa). Botão “Ouvir instrução” relê só a etapa atual, sem sobrepor e sem mexer em tempo/etapa/vez/placar. Prazos das missões do Espero Você e contagem do encontro continuam correndo. |
+| 4.1 | Pausa e retomada manual das atividades com cronômetro/narração | 🚀 implementado · ⏳ validação no iPhone | Implementado (27/11/2026) em Rituais, Massagem, Preliminares, Dado, Me Conta Mais e Conversa: ao sair ou bloquear, para o cronômetro e a voz e salva etapa, tempo restante, vez e placar; volta com “Querem continuar de onde pararam?” (Retomar silencioso, Ouvir instrução separado na Massagem e nas Preliminares, Encerrar por hoje); PIN a partir de 2 min e volta à atividade; sessão por 12 h; aviso na página principal. |
 | 4.1a | Pausa de 20 min da Conversa | ✅ | Continua contando o tempo real fora do app. |
 | 4.1b | Narração depois de “Retomar” | ✅ | Etapas seguintes voltam a ser narradas; só a interrompida fica em silêncio (salvo “Ouvir instrução”). |
 | 4.1c | Validade da sessão pausada | ✅ | 12 horas; depois some sozinha. |
@@ -50,7 +50,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 5. Conteúdo a escrever (PENDENTE no CONTEUDO-FASE2.md)
 | # | Pendência | Status |
 |---|---|---|
-| 5.1 | Rituais (6) | 🚀 | Aplicado em 27/11/2026 (rituais.html). Menu na página principal; Ritual de entrada abre e Ritual de depois fecha o Plano da noite; Rodada final do Espero Você abre a escolha dos rituais; pausa ao sair da tela, PIN a partir de 2 min, “Querem continuar de onde pararam?” com “Retomar” (silencioso) e “Encerrar por hoje”; sessão guardada por 12 h. Falta: teste no iPhone (ícone da Tela de Início, modo avião, trocar de app e bloquear a tela). |
+| 5.1 | Rituais (6) | 🚀 implementado · ⏳ validação no iPhone | Aplicado em 27/11/2026 (rituais.html). Menu na página principal; Ritual de entrada abre e Ritual de depois fecha o Plano da noite; Rodada final do Espero Você abre a escolha dos rituais; pausa ao sair da tela, PIN a partir de 2 min, “Querem continuar de onde pararam?” com “Retomar” (silencioso) e “Encerrar por hoje”; sessão guardada por 12 h. Falta: teste no iPhone (ícone da Tela de Início, modo avião, trocar de app e bloquear a tela). |
 | 5.2 | Prêmios do Espero Você (~20, incluindo Semana e casal) | ⏳ |
 | 5.3 | Itens novos do Nós Dois (fantasias, Quem, posições, mapa, dado, V/D, preliminares, cartas, Isso ou aquilo, massagens, Esquenta) | ⏳ |
 
@@ -76,10 +76,19 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
 | 8.4 | Quem do casal só com concordâncias | 🚀 | Comparação pela identidade absoluta (A, B, os dois, nenhum). Discordâncias e respostas em branco ficam fora. A proteção durante a troca entra no 8.1B. |
 
-## 9. Testes no iPhone real (roteiro)
-| # | Teste | Status |
-|---|---|---|
-| 9.1 | Rituais: abrir pelo ícone da Tela de Início em modo avião; no meio de um passo, trocar de app por menos de 2 min e voltar (deve aparecer “Querem continuar…” com o tempo preservado) | ⏳ |
-| 9.2 | Rituais: bloquear a tela por mais de 2 min e voltar (deve pedir o PIN e depois mostrar o ritual pausado) | ⏳ |
-| 9.3 | Rituais: “Retomar” continua o tempo de onde parou, sem som | ⏳ |
-| 9.4 | Rituais: o sino e a vibração no fim do passo (a vibração não funciona no iPhone pelo navegador; o sino depende do modo silencioso) | ⏳ |
+## 9. Validação no iPhone real
+
+Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da Tela de Início, em modo avião, trocando de app e bloqueando a tela.
+
+| # | Teste | Implementado (navegador simulando iPhone) | Validado no aparelho |
+|---|---|---|---|
+| 9.1 | Rituais: trocar de app por menos de 2 min no meio de um passo e voltar → “Querem continuar…”, tempo preservado | ✔ 27/11 | ⏳ |
+| 9.2 | Rituais: bloquear a tela por mais de 2 min → PIN, depois o ritual pausado | ✔ 27/11 | ⏳ |
+| 9.3 | Rituais: “Retomar” continua o tempo de onde parou, sem som | ✔ 27/11 | ⏳ |
+| 9.4 | Rituais: sino no fim do passo (não toca no modo silencioso) e aviso visual | ✔ 27/11 | ⏳ |
+| 9.5 | Massagem: sair com 1:15 restantes → a voz para; na volta, pausada com 1:15; Retomar sem voz; “Ouvir instrução” lê só a etapa atual; a etapa seguinte volta a ser narrada | ✔ 27/11 | ⏳ |
+| 9.6 | Preliminares: mesma carta, quem conduz e tempo restante; Retomar sem voz; “Ouvir instrução” separado | ✔ 27/11 | ⏳ |
+| 9.7 | Dado da Noite: mesma rodada e tempo restante | ✔ 27/11 | ⏳ |
+| 9.8 | Me Conta Mais: mesma carta, vez, placar e relógio da partida (o tempo fora não é descontado) | ✔ 27/11 | ⏳ |
+| 9.9 | Conversa: mesma etapa e tempo restante; a pausa de 20 min continua contando o tempo real | ✔ 27/11 | ⏳ |
+| 9.10 | Voz em português disponível em modo avião (Massagem e Preliminares) | — | ⏳ |
