@@ -478,29 +478,29 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 35 | Chama | 🔴 Difícil | Em pé · também acrobática |
 | 34 | Câncer | 🟠 Intermediário | Cara a cara |
 | 33 | Gancho | 🟠 Intermediário | Em pé · também por trás |
-| 32 | Êxtase | 🟠 Intermediário | (a conferir) |
+| 32 | Êxtase | 🟠 Intermediário | Ela por cima |
 | 31 | Clip ⟲ | 🟠 Intermediário | Por trás |
-| 30 | Escavações | 🟢 Fácil | (a conferir) |
+| 30 | Escavações | 🟢 Fácil | Por trás |
 | 29 | Harmonia | 🟢 Fácil | Cara a cara |
 | 28 | Ape | 🟠 Intermediário | Ela por cima |
 | 27 | Cavaleiro ⟲ | 🟠 Intermediário | Ela por cima |
-| 26 | Encadernação | 🟢 Fácil | (a conferir) |
+| 26 | Encadernação | 🟢 Fácil | De lado e conchinha |
 | 25 | Escravo do sexo | 🟢 Fácil | Oral (boquete) |
 | 24 | Gorge | 🟠 Intermediário | Cara a cara |
 | 23 | Livro | 🟢 Fácil | De lado e conchinha |
 | 22 | Estilo indiano | 🟠 Intermediário | Em pé · também cara a cara |
 | 21 | Gota de neve | 🟠 Intermediário | Por trás |
 | 20 | Parede | 🟠 Intermediário | Em pé · também por trás |
-| 19 | Broto | 🟢 Fácil | (a conferir) |
+| 19 | Broto | 🟢 Fácil | Ela por cima |
 | 18 | Cachoeira | 🔴 Difícil | Cara a cara · também acrobática |
 | 17 | Basset Hound | 🟢 Fácil | Por trás |
 | 16 | Tornado | 🟢 Fácil | Por trás |
 | 15 | Balançar | 🟠 Intermediário | Ela por cima |
-| 14 | Tulipa ⟲ | 🟠 Intermediário | (a conferir) |
+| 14 | Tulipa ⟲ | 🟠 Intermediário | Ela por cima |
 | 13 | Colher | 🟢 Fácil | De lado e conchinha |
 | 12 | Sussurro | 🟢 Fácil | Oral (boquete) |
 | 11 | Inquisidor | 🟢 Fácil | Ela por cima |
-| 10 | Círculo | 🟢 Fácil | (a conferir) |
+| 10 | Círculo | 🟢 Fácil | Oral (69) |
 | 9 | Disco | 🟠 Intermediário | Em pé · também por trás |
 | 8 | Barco | 🟢 Fácil | Por trás |
 | 7 | Vela | 🟢 Fácil | Em pé · também cara a cara |
@@ -978,29 +978,29 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 35 | Chama | Um fica em pé; o outro se inclina para trás, com as pernas na cintura dele e as mãos quase no chão. | Exige força de quem segura e confiança de quem se inclina. |
 | 34 | Câncer | Quem recebe deita de costas com as pernas dobradas; o outro fica de joelhos, inclinado para beijar. | Boa para quem gosta de beijar o tempo todo. |
 | 33 | Gancho | Os dois em pé diante de um espelho; o outro fica atrás. | O espelho deixa os dois se verem. |
-| 32 | Êxtase | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 32 | Êxtase | Um deita de costas; o outro senta por cima, de lado, inclinado para trás e apoiado numa mão. | Quem está embaixo tem a mão livre para estimular; quem está por cima conduz. |
 | 31 | Clip ⟲ | Quem recebe fica de quatro; o outro ajoelha atrás. | O "de quatro" clássico. |
-| 30 | Escavações | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 30 | Escavações | Quem recebe fica de quatro, com o tronco baixo apoiado nos antebraços; o outro ajoelha atrás, com um pé apoiado no chão. | Uma variação do "de quatro" com mais impulso para quem está atrás. |
 | 29 | Harmonia | Quem recebe deita de costas sobre um travesseiro; o outro deita por cima. | Sem pensar em nada: só os dois juntos. |
 | 28 | Ape | Um deita de costas e ergue as pernas; o outro senta por cima, de frente, entre elas. | Quem está por cima comanda. |
 | 27 | Cavaleiro ⟲ | Um deita de costas; o outro fica de joelhos por cima, inclinado para a frente. | Quem está por cima dita o ritmo. |
-| 26 | Encadernação | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 26 | Encadernação | Os dois deitam de lado, um atrás do outro; quem recebe ergue a perna de cima, e o outro abraça por trás. | Muito contato e carinho: dá para beijar o pescoço. |
 | 25 | Escravo do sexo | Um deita de lado; o outro se curva sobre ele e faz sexo oral. | Deitados, os dois ficam confortáveis por mais tempo. |
 | 24 | Gorge | Quem recebe deita de costas sobre um travesseiro, com as pernas no ombro do outro, que fica de joelhos. | Ótimo para quem tem pernas flexíveis. |
 | 23 | Livro | Os dois deitam de lado, frente a frente, sobre um travesseiro. | Muito íntima e tranquila. |
 | 22 | Estilo indiano | Os dois em pé, frente a frente; quem recebe ergue uma perna e a apoia no outro. | Ótima para uma rapidinha em qualquer lugar. |
 | 21 | Gota de neve | Quem recebe deita de bruços, encolhido; o outro fica de joelhos por cima, envolvendo-o. | Muito acolhedora: quem está por cima abraça. |
 | 20 | Parede | Quem recebe fica em pé, com as mãos na parede; o outro fica atrás. | Rápida e boa para lugares diferentes. |
-| 19 | Broto | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 19 | Broto | Um deita de costas; o outro senta por cima, de frente, com os joelhos dobrados e os pés apoiados. | Quem está por cima controla tudo; quem está embaixo relaxa. |
 | 18 | Cachoeira | Quem recebe deita de costas com o quadril apoiado nas coxas do outro, que fica de joelhos, e as costas arqueadas até a cabeça tocar o chão. | A cabeça fica mais baixa: parem se vier tontura. |
 | 17 | Basset Hound | Quem recebe fica de quatro; o outro ajoelha atrás, inclinado. | Simples e fácil de ajustar. |
 | 16 | Tornado | Quem recebe deita de bruços; o outro fica de joelhos por cima, atrás. | Uma almofada sob o quadril melhora o ângulo. |
 | 15 | Balançar | Um deita de costas; o outro senta por cima, inclinado para trás, e balança. | Movimentos amplos e lentos. |
-| 14 | Tulipa ⟲ | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 14 | Tulipa ⟲ | Um deita de costas; o outro deita por cima, de costas para ele, com as pernas juntas. | Quem está embaixo abraça e acaricia; movimentos lentos. |
 | 13 | Colher | Os dois deitam de lado, um atrás do outro, encaixados como colheres. | Perfeita para a manhã, ainda na cama. |
 | 12 | Sussurro | Um deita de costas, recostado num travesseiro; o outro deita entre as pernas e faz sexo oral. | Com calma e carinho. |
 | 11 | Inquisidor | Um deita de costas; o outro deita por cima, de bruços, com as pernas para trás. | Quem está por cima conduz tudo. |
-| 10 | Círculo | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 10 | Círculo | Os dois deitam de lado, em sentidos opostos, encaixados, e fazem sexo oral ao mesmo tempo. | Deitados de lado, ninguém sustenta o peso de ninguém. |
 | 9 | Disco | Os dois em pé; quem recebe se encosta no outro, que fica atrás, abraçando. | Como uma dança: movimentos lentos e juntos. |
 | 8 | Barco | Quem recebe deita de bruços; o outro fica por cima, apoiado nas mãos. | Sente-se tudo mais profundo; vão devagar. |
 | 7 | Vela | Os dois em pé, frente a frente, abraçados. | Para quando não dá para esperar. |
