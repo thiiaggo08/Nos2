@@ -111,3 +111,8 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | # | Item | Status | Detalhe |
 |---|---|---|---|
 | 11.1 | Filtros nas listas longas | 🚀 implementado · ⏳ validação no iPhone | Matches e Mapa por etiqueta; Quem do casal por Total/Entender; Depois por avaliadas/sem avaliação; Plano da noite → Posições por nível, com “Ver todas”; Responder → Fantasias e Quem por respondidas/sem resposta. Cada botão mostra a quantidade; o filtro só aparece quando há pelo menos duas opções; filtro que fica vazio volta para “Todas”; ao fechar o app, tudo volta para “Todas”. |
+
+## 12. Ideias para depois
+| # | Item | Status | Detalhe |
+|---|---|---|---|
+| 12.1 | Atualizar as posições usando os nomes do site sexpositions.club/pt (pedido do usuário, 27/11/2026) | ⏳ para depois | Nomes podem ser alinhados. As imagens do site têm direitos autorais e o repositório é público: não entram no app nem no repositório. Alternativas: “Adicionar imagem” por posição (já existe, fica só no aparelho) ou ilustrações próprias. Liga-se ao 5.3 (33 posições novas). |
