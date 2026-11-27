@@ -1325,14 +1325,14 @@ function cartasNivel(){ for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>
 function cartasComecar(deck,max,modo){
   mcmFechar();
   K={deck,max,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[],modo:modo||"c20",cats:[],t0:0,tid:null,tempoAcabou:false};
-  if(deck==="conv"){ if(Nos2.deck.remaining("nd.conv",idx(CONVERSA))===0) Nos2.deck.reset("nd.conv"); }
+  if(deck==="conv"){ K.mostradas=new Set(); }
   else if(!cartasNivel()) for(let l=1;l<=max;l++) Nos2.deck.reset("nd.q"+l);
   cartasTirar(); cartasRender();
 }
 /* Cada baralho segue de onde parou: nenhuma carta se repete antes de o baralho acabar. As quentes começam leves e esquentam. */
 function cartasTirar(){
-  if(K.deck==="conv"){ const ids=idx(CONVERSA); if(K.i>0&&Nos2.deck.remaining("nd.conv",ids)===0){ K.fim=true; Nos2.deck.reset("nd.conv"); return; }
-    const i=+mcmSortear(ids); K.c={n:i+1,t:CONVERSA[i][1],tag:CONVERSA[i][0]}; K.cats.push(K.c.tag); }
+  if(K.deck==="conv"){ const c=mcmSortear(); if(!c){ K.fim=true; return; }
+    K.c={n:c.n,id:c.id,t:c.texto,tag:c.cat,titulo:c.titulo}; K.cats.push(c.cat); K.mostradas.add(c.id); mcmMarcarVista(c.id); }
   else { const nv=cartasNivel(); if(!nv){ K.fim=true; for(let l=1;l<=K.max;l++) Nos2.deck.reset("nd.q"+l); return; }
     const i=+Nos2.deck.draw("nd.q"+nv[0],nv[1]); K.c={n:i+1,t:QUENTES[i][1],l:QUENTES[i][0]}; }
   K.i++;
@@ -1352,14 +1352,23 @@ function cartasRender(){
    <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>`;
 }
 /* ---- Me Conta Mais: partida cooperativa (pontos juntos, vez, pular, tempo) ---- */
-function mcmSortear(ids){
-  const cat=i=>CONVERSA[+i][0], tem=f=>Nos2.deck.remaining("nd.conv",ids,f)>0, ult=K.cats[K.cats.length-1];
-  const prefs=[];
-  if(!K.cats.length){ const leve=MCM_LEVES.find(c=>tem(i=>cat(i)===c)); if(leve) prefs.push(i=>cat(i)===leve); }
-  else if(K.modo==="rap") prefs.push(i=>cat(i)!==ult);
-  else { prefs.push(i=>!K.cats.includes(cat(i))); prefs.push(i=>cat(i)!==ult); }
-  const f=prefs.find(tem);
-  return Nos2.deck.draw("nd.conv",ids,f||null);
+/* Baralho do Me Conta Mais no formato {id, cat, titulo, texto, ordem}. Hoje: as 36 perguntas atuais (sem título nem ordem). */
+const MCM_CARTAS=CONVERSA.map(([cat,texto],i)=>({id:"conv-"+(i+1),n:i+1,cat,titulo:"",texto,ordem:null}));
+/* Histórico de cartas já exibidas em partidas anteriores, guardado no iPhone. Quando todas aparecerem, começa um novo ciclo. */
+function mcmVistas(){ return new Set(Nos2.store.get("mcm.vistas",[])); }
+function mcmMarcarVista(id){ const v=mcmVistas(); v.add(id); Nos2.store.set("mcm.vistas",MCM_CARTAS.every(c=>v.has(c.id))?[]:[...v]); }
+function mcmLeve(c){ if(MCM_CARTAS.some(x=>x.ordem!=null)) return c.ordem!=null&&c.ordem<=2; const cat=MCM_LEVES.find(k=>MCM_CARTAS.some(x=>x.cat===k)); return c.cat===cat; }
+function mcmSortear(){
+  const livres=MCM_CARTAS.filter(c=>!K.mostradas.has(c.id)); if(!livres.length) return null; // na mesma partida, cada carta aparece uma vez
+  const vistas=mcmVistas(), ult=K.cats[K.cats.length-1], prefs=[];
+  if(!K.cats.length) prefs.push(mcmLeve);
+  else if(K.modo==="rap") prefs.push(c=>c.cat!==ult);
+  else { prefs.push(c=>!K.cats.includes(c.cat)); prefs.push(c=>c.cat!==ult); }
+  prefs.push(()=>true);
+  const pick=a=>a[Nos2.randInt(a.length)];
+  for(const f of prefs){ const el=livres.filter(f); if(!el.length) continue;
+    const novas=el.filter(c=>!vistas.has(c.id)); return pick(novas.length?novas:el); } // primeiro as nunca vistas; esgotadas, volta às vistas
+  return null;
 }
 function mcmRestante(){ return K.modo&&K.t0?Math.max(0,MCM_MODOS[K.modo].min*60000-(Date.now()-K.t0)):0; }
 function mcmRelogio(){ const ms=mcmRestante(), s=Math.ceil(ms/1000); return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`; }
@@ -1379,7 +1388,7 @@ function mcmRender(){
   <h1>Vez de ${esc(quem)}</h1>
   ${K.tempoAcabou?`<div class="note" style="font-size:15px;color:var(--txt)">O tempo acabou. Podem terminar esta carta com calma.</div>`:""}
   <div class="game"><div class="gcard" style="min-height:220px;position:relative">
-    <div class="k">${c.tag}</div><div class="v">${c.t}</div>
+    <div class="k">${esc(c.tag)}</div>${c.titulo?`<div style="font-family:Georgia,serif;font-size:17px;color:var(--gold);margin-bottom:6px">${esc(c.titulo)}</div>`:""}<div class="v">${esc(c.t)}</div>
     <div style="position:absolute;left:14px;bottom:12px;background:var(--gold);color:#1a1208;font-size:13px;font-weight:700;padding:3px 8px;border-radius:4px">${String(c.n).padStart(2,"0")}</div></div>
    <p class="muted" style="text-align:center">${esc(quem)} lê a carta e começa. O par também pode responder.</p>
    ${K.tempoAcabou?`<button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`
@@ -1395,11 +1404,9 @@ function mcmConcluir(n){
 }
 function mcmPular(n){
   if(!K||K.fim||K.tempoAcabou||!K.c||K.c.n!==n) return;
-  K.puladas.push(n-1); cartasTirar(); mcmRender(); window.scrollTo(0,0);
+  K.puladas.push(n); cartasTirar(); mcmRender(); window.scrollTo(0,0);
 }
-function mcmFechar(){ if(K&&K.tid){ clearInterval(K.tid); K.tid=null; } if(!K||K.deck!=="conv"||K.fechado||!K.puladas) return;
-  const volta=K.puladas.slice(); if(K.c&&!K.fim&&!K.feitas.has(K.c.n)) volta.push(K.c.n-1); // carta na tela que ninguém jogou
-  if(volta.length) Nos2.deck.putBack("nd.conv",volta); K.puladas=[]; K.fechado=true; }
+function mcmFechar(){ if(K&&K.tid){ clearInterval(K.tid); K.tid=null; } }
 function mcmFim(acabou){
   mcmFechar(); const n=K.pts; K.fim=true;
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Me Conta Mais</div>
