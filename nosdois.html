@@ -637,25 +637,31 @@ function modoResp(m){ mResp=m; setSeg("segResp",m); renderResp(); window.scrollT
 function renderResp(){
   const L=$("lista"); L.innerHTML="";
   if(mResp==="inter"){
-    $("respIntro").innerHTML=`<div class="note">“Passo” nunca é revelado. Toparia, Quero e Quero muito contam como sim. Em algumas fantasias você escolhe também o seu papel.</div>`;
+    const resp=it=>(it.hora?st.hora!=null:!!st.resp[it.id])?"sim":"nao", tudo=todos();
+    $("respIntro").innerHTML=`<div class="note">“Passo” nunca é revelado. Toparia, Quero e Quero muito contam como sim. Em algumas fantasias você escolhe também o seu papel.</div>`+
+      chipsFiltro("respInter",[["todas","Todas",tudo.length],["nao","Sem resposta",tudo.filter(i=>resp(i)==="nao").length],["sim","Respondidas",tudo.filter(i=>resp(i)==="sim").length]]);
     CATALOGO.forEach(cat=>{
+      const its=cat.itens.filter(it=>filtroOk("respInter",resp(it))); if(!its.length) return;
       const d=document.createElement("div");
       d.innerHTML=`<div class="cat-h"><h2>${cat.c}</h2><span>${cat.itens.length}</span></div>`;
-      cat.itens.forEach(it=>d.appendChild(cardInter(it))); L.appendChild(d);
+      its.forEach(it=>d.appendChild(cardInter(it))); L.appendChild(d);
     });
     const d=document.createElement("div");
     d.innerHTML=`<div class="cat-h"><h2>Ideias de vocês</h2><span>${customItens().length}</span></div>
       <p class="muted" style="margin-top:8px">A fantasia que você adicionar aparece para ${esc(ele())} responder na próxima troca de códigos. Ele(a) vai saber que a ideia foi sua.</p>`;
-    customItens().forEach(it=>d.appendChild(cardInter(it)));
+    customItens().filter(it=>filtroOk("respInter",resp(it))).forEach(it=>d.appendChild(cardInter(it)));
     const f=document.createElement("div"); f.className="item";
     f.innerHTML=`<input type="text" id="novaFant" placeholder="Escreva uma fantasia sua" maxlength="90"><button class="btn gold" onclick="addCustom()">Adicionar</button>`;
     d.appendChild(f); L.appendChild(d);
   } else if(mResp==="quem"){
-    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, as respostas dos dois aparecem lado a lado, com uma etiqueta.</div>`;
+    const rq=q=>st.quem[q.id]!=null?"sim":"nao";
+    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, as respostas dos dois aparecem lado a lado, com uma etiqueta.</div>`+
+      chipsFiltro("respQuem",[["todas","Todas",QUEM.length],["nao","Sem resposta",QUEM.filter(q=>rq(q)==="nao").length],["sim","Respondidas",QUEM.filter(q=>rq(q)==="sim").length]]);
     [1,2,3].forEach(n=>{
+      const qs=QUEM.filter(q=>q.n===n&&filtroOk("respQuem",rq(q))); if(!qs.length) return;
       const d=document.createElement("div");
       d.innerHTML=`<div class="cat-h"><h2>Nível ${n}</h2><span>${["","leve","quente","ousado"][n]}</span></div>`;
-      QUEM.filter(q=>q.n===n).forEach(q=>d.appendChild(cardOpc(q.id,q.t,null,quemOps(),st.quem,"quem")));
+      qs.forEach(q=>d.appendChild(cardOpc(q.id,q.t,null,quemOps(),st.quem,"quem")));
       L.appendChild(d);
     });
   } else if(mResp==="pos"){
@@ -961,7 +967,8 @@ function renderRes(){
     const ms=calcMatches();
     if(!ms.length){ R.innerHTML=topo+`<h1>Nenhum match ainda</h1><p>Tudo bem. Nada do que cada um marcou sozinho foi revelado.</p>${horaHtml()}`; return; }
     h=`<div class="big">${ms.length}</div><h1 style="margin-top:4px">fantasias em comum</h1><p>Match mostra que os dois querem. O consentimento continua sendo combinado na hora.</p>${legendaMatch}${semGraus()}${horaHtml()}`;
-    ms.forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}${graus(m)}</div>${falaEntender(m)}</div>`; });
+    h+=chipsFiltro("inter",opsEtiqueta(ms,tipoMatch));
+    ms.filter(m=>filtroOk("inter",tipoMatch(m))).forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}${graus(m)}</div>${falaEntender(m)}</div>`; });
   } else if(mRes==="quem"){
     h=quemHtml();
   } else {
@@ -969,12 +976,26 @@ function renderRes(){
     if(!zs.length){ R.innerHTML=topo+`<p style="margin-top:14px">Ainda não há zonas que os dois marcaram.</p>`; return; }
     h=`<h1 style="margin-top:12px">Onde os dois gostam</h1><p>Aparecem só as zonas que os dois marcaram. Uma zona fora da lista não quer dizer “não”: é só perguntar.</p>`;
     const g=st.par.graus||{};
-    zs.forEach(z=>{ const a=st.mapa[z.id], b=g["m|"+z.id], mm={eu:b!=null?a:null,ele:b};
+    const tz=z=>tipoMatch({eu:st.mapa[z.id],ele:g["m|"+z.id]});
+    h+=chipsFiltro("mapa",opsEtiqueta(zs,tz));
+    zs.filter(z=>filtroOk("mapa",tz(z))).forEach(z=>{ const a=st.mapa[z.id], b=g["m|"+z.id], mm={eu:b!=null?a:null,ele:b};
       h+=`<div class="match"><div class="t">${z.t}</div><div class="m">${tagMatch(mm)}${b!=null?`<span class="pill g">${esc(eu())}: ${ZONA_OP[a]}</span><span class="pill">${esc(ele())}: ${ZONA_OP[b]}</span>`:""}</div></div>`; });
     h+=semGraus();
   }
   R.innerHTML=topo+h;
 }
+
+/* ---- Filtros (ficam marcados enquanto o app está aberto; ao fechar, voltam para "Todas") ---- */
+const FILTRO={}, VERTODOS={};
+function chipsFiltro(chave,ops){ const vis=ops.filter(o=>o[0]==="todas"||o[2]>0);
+  if(vis.length<3||!vis.some(o=>o[0]===(FILTRO[chave]||"todas"))){ FILTRO[chave]="todas"; if(vis.length<3) return ""; } // filtro vazio volta para "Todas"
+  const atual=FILTRO[chave]||"todas";
+  return `<div class="row" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;margin-top:12px">${vis.map(([v,l,n])=>`<button class="chip ${atual===v?"on":""}" style="flex:none;min-width:0;padding:9px 12px" onclick="setFiltro('${chave}','${v}')">${l} (${n})</button>`).join("")}</div>`; }
+function setFiltro(chave,v){ FILTRO[chave]=v; const y=window.scrollY; if(chave.startsWith("resp")) renderResp(); else renderRes(); window.scrollTo(0,y); }
+const filtroOk=(chave,v)=>{ const a=FILTRO[chave]||"todas"; return a==="todas"||a===v; };
+function opsEtiqueta(lista,tipo){ const c=k=>lista.filter(x=>tipo(x)===k).length; return [["todas","Todas",lista.length],["total","🔥 Total",c("total")],["parcial","🙂 Parcial",c("parcial")],["alinhar","🤝 Alinhar",c("alinhar")],["entender","💬 Entender",c("entender")]]; }
+function verTodos(chave,lista,html,n=5){ if(VERTODOS[chave]||lista.length<=n) return lista.map(html).join("");
+  return lista.slice(0,n).map(html).join("")+`<button class="btn ghost" onclick="VERTODOS['${chave}']=1;const y=window.scrollY;renderRes();window.scrollTo(0,y)">Ver todas (${lista.length})</button>`; }
 
 /* Etiqueta do match pelo nível de vontade dos dois (Toparia=1, Quero=2, Quero muito=3) */
 const TIPO_MATCH={total:["🔥","Total"],parcial:["🙂","Parcial"],alinhar:["🤝","Alinhar"],entender:["💬","Entender"]};
@@ -996,7 +1017,8 @@ function quemHtml(){
   const iguais=lista.filter(q=>quemAbs(st.quem[q.id],true)===pq[q.id]).length;
   return `<p style="margin-top:14px">${lista.length===1?"1 pergunta respondida pelos dois":lista.length+" perguntas respondidas pelos dois"}. As respostas aparecem lado a lado, sem placar.</p>
   <div class="note">🔥 <b class="w">Total</b>: responderam igual. · 💬 <b class="w">Entender</b>: responderam diferente. Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`+
-    lista.map(q=>{ const a=quemAbs(st.quem[q.id],true), b=pq[q.id], igual=a===b;
+    chipsFiltro("quem",[["todas","Todas",lista.length],["total","🔥 Total",iguais],["entender","💬 Entender",lista.length-iguais]])+
+    lista.filter(q=>filtroOk("quem",quemAbs(st.quem[q.id],true)===pq[q.id]?"total":"entender")).map(q=>{ const a=quemAbs(st.quem[q.id],true), b=pq[q.id], igual=a===b;
       return `<div class="match"><div class="t">${q.t}</div><div class="m">${tagFixa(igual?"total":"entender")}<span class="pill g">${esc(eu())} disse: ${esc(nome(a))}</span><span class="pill">${esc(ele())} disse: ${esc(nome(b))}</span></div>${igual?"":`<div class="muted" style="margin-top:8px">💬 Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`}</div>`; }).join("");
 }
 function horaHtml(){ return (st.par&&st.par.hz!=null&&st.hora===st.par.hz)?`<div class="match"><div class="t">De manhã, à tarde ou à noite?</div><div class="m">${tagFixa("total")}<span class="pill g">Os dois preferem: ${HORAS[st.hora].toLowerCase()}</span></div></div>`:""; }
@@ -1007,8 +1029,10 @@ function renderDepois(){
   const fav=ms.filter(m=>st.av[m.it.id]===0&&favPar.has(m.it.id));
   if(fav.length){ h+=`<h2>Favoritas dos dois</h2>`; fav.forEach(m=>h+=`<div class="match"><div class="t">${esc(m.it.t)}</div><div class="m">${tagFixa("total")}<span class="pill hot">Repetir</span></div></div>`); }
   h+=`<h2>Sua avaliação</h2>`;
+  const av=m=>st.av[m.it.id]!=null?"sim":"nao";
+  h+=chipsFiltro("depois",[["todas","Todas",ms.length],["nao","Sem avaliação",ms.filter(m=>av(m)==="nao").length],["sim","Avaliadas",ms.filter(m=>av(m)==="sim").length]]);
   if(!ms.length) return h+`<p class="muted">Ainda não há matches para avaliar.</p>`;
-  ms.forEach(m=>{ const v=st.av[m.it.id];
+  ms.filter(m=>filtroOk("depois",av(m))).forEach(m=>{ const v=st.av[m.it.id];
     h+=`<div class="item ${v!=null?"done":""}"><div class="t">${esc(m.it.t)}</div><div class="row">${AV_OP.map((o,i)=>`<button class="chip ${v===i?"on":""}" onclick="avaliar('${m.it.id}',${i})">${o}</button>`).join("")}<button class="chip ${v==null?"on":""}" onclick="avaliar('${m.it.id}',null)">Não fizemos</button></div></div>`; });
   return h;
 }
@@ -1062,7 +1086,9 @@ function renderPlano(){
   h+=bloco("2 · O que os dois querem",(ms.some(m=>m.ele!=null)?"Só fantasias que os dois marcaram como Quero ou Quero muito.":"Fantasias que os dois marcaram."),princ);
   h+=bloco("3 · Para conversar","Os dois toparam, mas vale combinar antes ou durante.",conversa);
   const pp=new Set(st.par.po||[]), posJ=POS.filter(p=>st.pos[p.id]&&pp.has(p.id));
-  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram no guia.</p>`+(posJ.length?posJ.map(p=>`<div class="match"><div class="t">${p.n}</div><div class="muted" style="margin-top:4px">${p.d}</div><div class="m">${tagFixa("total")}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`).join(""):`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
+  const nk=p=>"n"+p.l, chipsPos=posJ.length?chipsFiltro("pos",[["todas","Todas",posJ.length],["n1","Leve",posJ.filter(p=>p.l===1).length],["n2","Quente",posJ.filter(p=>p.l===2).length],["n3","Ousada",posJ.filter(p=>p.l===3).length]]):"", posF=posJ.filter(p=>filtroOk("pos",nk(p)));
+  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram no guia.</p>`+(posJ.length?chipsPos+
+    verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div class="t">${p.n}</div><div class="muted" style="margin-top:4px">${p.d}</div><div class="m">${tagFixa("total")}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`):`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
   const quente = quemConcorda().filter(q=>quemAbs(st.quem[q.id],true)==="ambos");
   if(quente.length){ h+=`<h2>Do Quem do Casal</h2><p style="margin-top:0">Os dois responderam “Os dois”:</p>`; quente.forEach(q=>h+=`<div class="match"><div class="t">${q.t}</div></div>`); }
   const rec=(quem,s,l)=> (s||l) ? `<div class="match"><div class="eyebrow">${esc(quem)}</div>${s?`<div class="t" style="margin-top:6px;white-space:pre-wrap">${esc(s)}</div>`:""}${l?`<div class="muted" style="margin-top:8px;white-space:pre-wrap"><b class="w">Hoje não:</b> ${esc(l)}</div>`:""}</div>` : "";

@@ -106,3 +106,8 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | 10.2 | “Guarda pra volta” | 🚀 implementado · ⏳ validação no iPhone | Acesso discreto na página Rituais. Cada lembrança é salva separadamente e pode ser apagada. Na abertura do Ritual de reencontro: “Ver o que guardei pra contar”. Fora dos códigos de troca. |
 | 9.17 | Guardar um gesto no Ritual de despedida, fechar o app e reabrir em modo avião: o texto aparece na abertura do ritual | ✔ 27/11 | ⏳ |
 | 9.18 | Guardar duas histórias em dias diferentes, reabrir em modo avião, ver as duas no reencontro, apagar uma | ✔ 27/11 | ⏳ |
+
+## 11. Filtros (27/11/2026)
+| # | Item | Status | Detalhe |
+|---|---|---|---|
+| 11.1 | Filtros nas listas longas | 🚀 implementado · ⏳ validação no iPhone | Matches e Mapa por etiqueta; Quem do casal por Total/Entender; Depois por avaliadas/sem avaliação; Plano da noite → Posições por nível, com “Ver todas”; Responder → Fantasias e Quem por respondidas/sem resposta. Cada botão mostra a quantidade; o filtro só aparece quando há pelo menos duas opções; filtro que fica vazio volta para “Todas”; ao fechar o app, tudo volta para “Todas”. |
