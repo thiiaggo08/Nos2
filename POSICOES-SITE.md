@@ -422,7 +422,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 91 | Iris | 🟢 Fácil | Por trás |
 | 90 | Bancada | 🟠 Intermediário | Sentados · também ela por cima |
 | 89 | Dejavu | 🟢 Fácil | Sentados · também cara a cara |
-| 88 | Cinto | 🟠 Intermediário | (a conferir) |
+| 88 | Cinto | 🟠 Intermediário | De lado · também por trás |
 | 87 | Descarga | 🟢 Fácil | Oral (boquete) |
 | 86 | Fruta Proibida | 🟢 Fácil | Oral (cunnilingus) |
 | 85 | Escorpião ⟲ | 🟢 Fácil | Oral (69) |
@@ -922,7 +922,7 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 91 | Iris | Quem recebe deita de bruços sobre um travesseiro; o outro fica por cima, atrás. | Ótima para acelerar aos poucos e falar ao ouvido. |
 | 90 | Bancada | Um senta reclinado, apoiado numa mão; o outro senta no colo dele, de lado. | Tão confortável que dá até para ver um filme juntos. |
 | 89 | Dejavu | Os dois sentam frente a frente, com as pernas cruzadas uma sobre a outra. | Olho no olho: como se fosse a primeira vez. |
-| 88 | Cinto | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 88 | Cinto | Quem recebe deita de lado, com a perna de cima erguida; o outro fica de joelhos atrás, segurando a perna e o quadril. | A perna erguida ajusta a profundidade; quem está atrás conduz. |
 | 87 | Descarga | Um deita de costas e relaxa; o outro deita ao lado e o estimula com a boca e as mãos. | Boa para quando um dos dois está cansado: sem pressão, só carinho. |
 | 86 | Fruta Proibida | Quem recebe se inclina para a frente, com as mãos no chão; o outro ajoelha atrás e faz sexo oral. | Uma posição diferente para o cunnilingus, com ótimo acesso. |
 | 85 | Escorpião ⟲ | Os dois deitam de lado, em sentidos opostos, e fazem sexo oral ao mesmo tempo. | O 69 mais confortável: ninguém sustenta o peso de ninguém. |
