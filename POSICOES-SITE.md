@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 conferidas por print). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) **aprovadas**. 241 a 192 (lote 6) **aprovadas**. 191 a 142 (lote 7) **aprovadas**. 141 a 92 (lote 8) **aprovadas**. 91 a 42 (lote 9) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -419,56 +419,56 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 94 | Narciso | 🔴 Difícil | Em pé · também por trás |
 | 93 | Diamante | 🟢 Fácil | (a conferir) |
 | 92 | Chave de fenda | 🔴 Difícil | (a conferir) |
-| 91 | Iris | 🟢 Fácil | |
-| 90 | Bancada | 🟠 Intermediário | |
-| 89 | Dejavu | 🟢 Fácil | |
-| 88 | Cinto | 🟠 Intermediário | |
-| 87 | Descarga | 🟢 Fácil | |
-| 86 | Fruta Proibida | 🟢 Fácil | |
-| 85 | Escorpião ⟲ | 🟢 Fácil | |
-| 84 | Olimpus | 🔴 Difícil | |
-| 83 | Profundidade | 🟠 Intermediário | |
-| 82 | Vênus | 🟢 Fácil | |
-| 81 | Fechadura | 🟢 Fácil | |
-| 80 | Avalanche | 🔴 Difícil | |
-| 79 | Rodeo | 🟢 Fácil | |
-| 78 | Berço ⟲ | 🔴 Difícil | |
-| 77 | Caranguejo ⟲ | 🟢 Fácil | |
-| 76 | Borboleta ⟲ | 🟢 Fácil | |
-| 75 | Sinfonia | 🟠 Intermediário | |
-| 74 | Concha | 🟢 Fácil | |
-| 73 | Yin-Yang | 🟠 Intermediário | |
-| 72 | Exercício | 🔴 Difícil | |
-| 71 | Cão preguiçoso | 🟠 Intermediário | |
-| 70 | Sereia ⟲ | 🔴 Difícil | |
-| 69 | Bud | 🟠 Intermediário | |
-| 68 | Bulldog | 🟠 Intermediário | |
-| 67 | Missionário | 🟢 Fácil | |
-| 66 | Rose | 🟢 Fácil | |
-| 65 | Estojo | 🟠 Intermediário | |
-| 64 | Tango | 🟢 Fácil | |
-| 63 | Croissant | 🟢 Fácil | |
-| 62 | Mastro | 🟢 Fácil | |
-| 61 | Orador | 🟢 Fácil | |
-| 60 | Vitória | 🔴 Difícil | |
-| 59 | Caranguejo ⟲ | 🟢 Fácil | |
-| 58 | Borboleta ⟲ | 🔴 Difícil | |
-| 57 | Inclinação ⟲ | 🟢 Fácil | |
-| 56 | Tartaruga | 🟢 Fácil | |
-| 55 | Espalhe a Águia | 🟠 Intermediário | |
-| 54 | Tiara | 🟢 Fácil | |
-| 53 | Precipício | 🟢 Fácil | |
-| 52 | Creme brulee | 🟠 Intermediário | |
-| 51 | Marsh-mallow | 🟢 Fácil | |
-| 50 | Toureiro | 🟠 Intermediário | |
-| 49 | Hucklebuck | 🟠 Intermediário | |
-| 48 | Barbell | 🔴 Difícil | |
-| 47 | Montanha Mágica | 🟢 Fácil | |
-| 46 | Sagitário | 🟠 Intermediário | |
-| 45 | Afrodite | 🟠 Intermediário | |
-| 44 | Caixão | 🔴 Difícil | |
-| 43 | Submisso | 🟠 Intermediário | |
-| 42 | Queda | 🟢 Fácil | |
+| 91 | Iris | 🟢 Fácil | Por trás |
+| 90 | Bancada | 🟠 Intermediário | Sentados · também ela por cima |
+| 89 | Dejavu | 🟢 Fácil | Sentados · também cara a cara |
+| 88 | Cinto | 🟠 Intermediário | (a conferir) |
+| 87 | Descarga | 🟢 Fácil | Oral (boquete) |
+| 86 | Fruta Proibida | 🟢 Fácil | Oral (cunnilingus) |
+| 85 | Escorpião ⟲ | 🟢 Fácil | Oral (69) |
+| 84 | Olimpus | 🔴 Difícil | Em pé · também cara a cara |
+| 83 | Profundidade | 🟠 Intermediário | Por trás |
+| 82 | Vênus | 🟢 Fácil | (a conferir) |
+| 81 | Fechadura | 🟢 Fácil | Sentados · também cara a cara |
+| 80 | Avalanche | 🔴 Difícil | Por trás (a conferir) |
+| 79 | Rodeo | 🟢 Fácil | Por trás |
+| 78 | Berço ⟲ | 🔴 Difícil | Sentados · também cara a cara |
+| 77 | Caranguejo ⟲ | 🟢 Fácil | Ela por cima |
+| 76 | Borboleta ⟲ | 🟢 Fácil | De lado e conchinha |
+| 75 | Sinfonia | 🟠 Intermediário | Oral (a conferir) |
+| 74 | Concha | 🟢 Fácil | Oral (cunnilingus) |
+| 73 | Yin-Yang | 🟠 Intermediário | Oral (69) |
+| 72 | Exercício | 🔴 Difícil | (a conferir) |
+| 71 | Cão preguiçoso | 🟠 Intermediário | Por trás |
+| 70 | Sereia ⟲ | 🔴 Difícil | Em pé · também cara a cara |
+| 69 | Bud | 🟠 Intermediário | Cara a cara |
+| 68 | Bulldog | 🟠 Intermediário | Por trás |
+| 67 | Missionário | 🟢 Fácil | Cara a cara |
+| 66 | Rose | 🟢 Fácil | (a conferir) |
+| 65 | Estojo | 🟠 Intermediário | De lado e conchinha |
+| 64 | Tango | 🟢 Fácil | (a conferir) |
+| 63 | Croissant | 🟢 Fácil | Oral (boquete) |
+| 62 | Mastro | 🟢 Fácil | Ela por cima (a conferir) |
+| 61 | Orador | 🟢 Fácil | Oral (69) |
+| 60 | Vitória | 🔴 Difícil | Em pé · também cara a cara |
+| 59 | Caranguejo ⟲ | 🟢 Fácil | Por trás |
+| 58 | Borboleta ⟲ | 🔴 Difícil | Em pé · também acrobática |
+| 57 | Inclinação ⟲ | 🟢 Fácil | Cara a cara |
+| 56 | Tartaruga | 🟢 Fácil | Por trás |
+| 55 | Espalhe a Águia | 🟠 Intermediário | Cara a cara |
+| 54 | Tiara | 🟢 Fácil | Ela por cima |
+| 53 | Precipício | 🟢 Fácil | Sentados · também cara a cara |
+| 52 | Creme brulee | 🟠 Intermediário | De lado e conchinha |
+| 51 | Marsh-mallow | 🟢 Fácil | Ela por cima |
+| 50 | Toureiro | 🟠 Intermediário | Oral (cunnilingus) |
+| 49 | Hucklebuck | 🟠 Intermediário | Oral (69) |
+| 48 | Barbell | 🔴 Difícil | Em pé · também acrobática (a conferir) |
+| 47 | Montanha Mágica | 🟢 Fácil | Por trás |
+| 46 | Sagitário | 🟠 Intermediário | Em pé · também de lado |
+| 45 | Afrodite | 🟠 Intermediário | Sentados · também cara a cara |
+| 44 | Caixão | 🔴 Difícil | Cara a cara |
+| 43 | Submisso | 🟠 Intermediário | Por trás |
+| 42 | Queda | 🟢 Fácil | (a conferir) |
 | 41 | Freira | 🟢 Fácil | |
 | 40 | Tigre | 🟢 Fácil | |
 | 39 | Conchinha | 🟢 Fácil | |
@@ -919,3 +919,53 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 94 | Narciso | Os dois em pé diante de um espelho; quem recebe se inclina um pouco e ergue uma perna; o outro fica atrás. | O espelho deixa os dois se verem: muito excitante. |
 | 93 | Diamante | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
 | 92 | Chave de fenda | O PDF não trouxe o desenho desta posição. Texto a completar. | — |
+| 91 | Iris | Quem recebe deita de bruços sobre um travesseiro; o outro fica por cima, atrás. | Ótima para acelerar aos poucos e falar ao ouvido. |
+| 90 | Bancada | Um senta reclinado, apoiado numa mão; o outro senta no colo dele, de lado. | Tão confortável que dá até para ver um filme juntos. |
+| 89 | Dejavu | Os dois sentam frente a frente, com as pernas cruzadas uma sobre a outra. | Olho no olho: como se fosse a primeira vez. |
+| 88 | Cinto | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 87 | Descarga | Um deita de costas e relaxa; o outro deita ao lado e o estimula com a boca e as mãos. | Boa para quando um dos dois está cansado: sem pressão, só carinho. |
+| 86 | Fruta Proibida | Quem recebe se inclina para a frente, com as mãos no chão; o outro ajoelha atrás e faz sexo oral. | Uma posição diferente para o cunnilingus, com ótimo acesso. |
+| 85 | Escorpião ⟲ | Os dois deitam de lado, em sentidos opostos, e fazem sexo oral ao mesmo tempo. | O 69 mais confortável: ninguém sustenta o peso de ninguém. |
+| 84 | Olimpus | Um fica em pé e segura o outro no colo, que o envolve com braços e pernas. | Exige força de quem segura. Usem uma parede como apoio. |
+| 83 | Profundidade | Quem recebe deita de bruços com o quadril um pouco erguido; o outro fica de joelhos por cima. | Penetração profunda: comecem devagar. |
+| 82 | Vênus | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 81 | Fechadura | Um senta apoiado nas mãos; o outro deita de costas, com as pernas apoiadas no peito dele. | Abraços e brincadeiras combinam bem com esta. |
+| 80 | Avalanche | Quem recebe fica de quatro; o outro fica por cima, atrás. | — |
+| 79 | Rodeo | Quem recebe deita de bruços; o outro fica por cima, de joelhos. | Quem está embaixo relaxa; quem está por cima conduz. |
+| 78 | Berço ⟲ | Um senta; o outro senta no colo dele, de frente, com as pernas apoiadas nos braços dele. | Quem está sentado embala o outro, como num berço. |
+| 77 | Caranguejo ⟲ | Um deita de costas; o outro senta por cima, inclinado para trás e apoiado nas mãos. | Quem está por cima controla tudo. |
+| 76 | Borboleta ⟲ | Quem recebe deita de lado, com os joelhos dobrados; o outro fica atrás. | Delicada: quem está atrás conduz com calma. |
+| 75 | Sinfonia | Posição de sexo oral. Texto a completar depois de conferir o desenho. | — |
+| 74 | Concha | Quem recebe senta reclinado; o outro deita de bruços entre as pernas e faz sexo oral. | Ótima como aquecimento ou do começo ao fim. |
+| 73 | Yin-Yang | Os dois deitam, um sobre o outro em sentidos opostos, e fazem sexo oral ao mesmo tempo. | Deitados de lado fica ainda mais confortável. |
+| 72 | Exercício | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 71 | Cão preguiçoso | Quem recebe deita de lado ou de bruços; o outro fica por cima, atrás. | Para os dias de preguiça: pouco esforço. |
+| 70 | Sereia ⟲ | Um fica em pé e segura o outro, que o envolve com as pernas. | Exige força de quem segura. Usem uma parede como apoio. |
+| 69 | Bud | Quem recebe deita de costas, com o quadril nas coxas do outro e as pernas nos ombros; o outro fica de joelhos. | Ótimo ângulo e as mãos livres para carinhos. |
+| 68 | Bulldog | Quem recebe deita de bruços com o quadril erguido; o outro fica de cócoras por cima, atrás. | Exige força nas pernas de quem está por cima. |
+| 67 | Missionário | Quem recebe deita de costas; o outro deita por cima. | O papai e mamãe clássico, cheio de contato. |
+| 66 | Rose | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 65 | Estojo | Os dois deitam de lado, bem juntos, com pouco espaço para se mexer. | Boa para brincar de "espaço apertado": movimentos curtos. |
+| 64 | Tango | O desenho saiu pequeno no PDF. Texto a completar. | — |
+| 63 | Croissant | Um deita de costas, com a cabeça confortável; o outro fica por cima e conduz o ritmo. | Quem faz o oral controla a profundidade. Combinem um sinal para parar. |
+| 62 | Mastro | Posição deitada com troca de papéis. Texto a completar depois de conferir o desenho. | — |
+| 61 | Orador | Os dois deitam de lado, em sentidos opostos, e fazem sexo oral. | Os dois ficam em pé de igualdade: dar e receber ao mesmo tempo. |
+| 60 | Vitória | Um fica em pé, apoiado numa coluna ou parede, e segura o outro no colo. | Para quando não dá para esperar chegar na cama. |
+| 59 | Caranguejo ⟲ | Quem recebe deita de bruços; o outro fica por cima, atrás. | Simples e com muito contato. |
+| 58 | Borboleta ⟲ | Um fica em pé e segura o outro sentado nos braços, de costas para ele. | Exige muita força. Façam perto da cama. |
+| 57 | Inclinação ⟲ | Quem recebe deita de costas; o outro fica de joelhos, ereto, entre as pernas. | Fácil de montar e de variar a profundidade. |
+| 56 | Tartaruga | Quem recebe ajoelha encolhido, com o tronco baixo; o outro ajoelha por cima, atrás. | Confortável para quem está encolhido. Uma almofada ajuda. |
+| 55 | Espalhe a Águia | Quem recebe deita de costas com as pernas bem abertas; o outro fica de joelhos. | Ótimo acesso e boa vista para os dois. |
+| 54 | Tiara | Um deita de costas; o outro senta por cima, com as pernas apoiadas no peito dele. | Quem está por cima pode se inclinar para trás. |
+| 53 | Precipício | Um senta; o outro senta no colo dele, de frente, e os dois se equilibram juntos. | Confiança total: ninguém precisa de força. |
+| 52 | Creme brulee | Os dois deitam de lado, um atrás do outro. | Para quem acorda junto: sem sair da cama. |
+| 51 | Marsh-mallow | Um deita de costas; o outro deita por cima, de bruços. | Ótima para quando um dos dois está cansado. |
+| 50 | Toureiro | Um deita de costas; o outro fica por cima, com o quadril perto do rosto dele, e recebe sexo oral. | Quem está por cima controla a pressão. |
+| 49 | Hucklebuck | Um deita de costas; o outro se curva por cima dele, e os dois se estimulam com a boca e as mãos. | Exige flexibilidade de quem está por cima. |
+| 48 | Barbell | Posição em pé. Texto a completar depois de conferir o desenho. | — |
+| 47 | Montanha Mágica | Quem recebe deita de bruços sobre travesseiros; o outro fica de joelhos atrás. | A versão preguiçosa: perfeita para dias de cansaço. |
+| 46 | Sagitário | Os dois em pé, lado a lado; quem recebe ergue uma perna; o outro fica de pé atrás. | Ótima para uma rapidinha no banho ou na cozinha. |
+| 45 | Afrodite | Um senta; o outro senta no colo dele, de frente, inclinado para trás, com as pernas erguidas. | Calma e cheia de ternura. |
+| 44 | Caixão | Quem recebe deita de costas com as pernas para o alto, apoiadas no outro, que fica de joelhos. | Penetração profunda e boa vista. Comecem devagar. |
+| 43 | Submisso | Quem recebe fica de quatro; o outro ajoelha atrás, inclinado sobre ele. | Alternem ternura e intensidade. |
+| 42 | Queda | O desenho saiu pequeno no PDF. Texto a completar. | — |
