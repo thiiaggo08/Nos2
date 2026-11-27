@@ -12,7 +12,7 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 - Nível (planilha do usuário, 27/11/2026): 🟢 Fácil 203 · 🟠 Intermediário 174 · 🔴 Difícil 114. Bate 1 a 1 com o selo do site (Seguro, Cuidado, Perigoso).
 - 14 nomes vinham com letras cirílicas parecidas com as latinas (ex.: Сhibi). Foram gravados com a letra latina, visualmente igual, para a busca funcionar.
 - 19 nomes se repetem no site com números diferentes (ex.: Sereia, Tulipa, Harpa). No app, esses aparecem com o número ao lado: "Sereia (nº 70)".
-- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
+- **Categorias:** sugeridas por foto e descrição, aguardando aprovação. 491 a 480 **aprovadas pelo usuário em 27/11/2026**. 479 a 442 também **aprovadas** (453, 452 e 442 seguem "a conferir"). 441 a 392 (lote 2) **aprovadas**. 391 a 342 (lote 3) **aprovadas**. 341 a 292 (lote 4) **aprovadas**. 291 a 242 (lote 5) sugeridas, aguardam aprovação. Uma posição pode estar em duas categorias: aparece nos dois baralhos, e a escolha vale uma vez só. As demais aguardam PDFs com os desenhos carregados.
 - **Categorias (fonte):** ainda não definidas para as demais. A lista geral do site não diz a categoria de cada posição; ela vem das páginas de categoria do site.
 
 ## Lista
@@ -219,56 +219,56 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 294 | Encanador ⟲ | 🟢 Fácil | (a conferir) |
 | 293 | Sem vergonha | 🟢 Fácil | Cara a cara |
 | 292 | Gravata | 🔴 Difícil | Em pé · também acrobática |
-| 291 | Holandês voador | 🔴 Difícil | |
-| 290 | Esfregaço na garganta | 🟠 Intermediário | |
-| 289 | Fator X | 🔴 Difícil | |
-| 288 | O amante mais quente | 🟠 Intermediário | |
-| 287 | Vagina apertada | 🟠 Intermediário | |
-| 286 | Entrada secreta | 🟢 Fácil | |
-| 285 | Ioga selvagem | 🔴 Difícil | |
-| 284 | Festa de aniversário | 🔴 Difícil | |
-| 283 | Lagarto | 🟢 Fácil | |
-| 282 | Sala de espera | 🟢 Fácil | |
-| 281 | Exóticos preliminares | 🔴 Difícil | |
-| 280 | Cãozinho na borda | 🟢 Fácil | |
-| 279 | A roleta russa | 🔴 Difícil | |
-| 278 | Fantasia | 🟠 Intermediário | |
-| 277 | Centelha ⟲ | 🔴 Difícil | |
-| 276 | Propulsor | 🟢 Fácil | |
-| 275 | Linda vista | 🟠 Intermediário | |
-| 274 | Toque sensual | 🟢 Fácil | |
-| 273 | Caverna | 🟢 Fácil | |
-| 272 | Capoeira brasileira | 🔴 Difícil | |
-| 271 | Princesa | 🟢 Fácil | |
-| 270 | Girafa | 🔴 Difícil | |
-| 269 | Rock and roll | 🔴 Difícil | |
-| 268 | Costas | 🟠 Intermediário | |
-| 267 | Zelo | 🟢 Fácil | |
-| 266 | Supernova | 🔴 Difícil | |
-| 265 | Prato apimentado | 🟢 Fácil | |
-| 264 | Beleza adormecida | 🟠 Intermediário | |
-| 263 | Pioneiro | 🔴 Difícil | |
-| 262 | Semeador | 🔴 Difícil | |
-| 261 | Café da manhã especial | 🟠 Intermediário | |
-| 260 | Aperto apertado | 🟢 Fácil | |
-| 259 | Estilo sapinho | 🟠 Intermediário | |
-| 258 | Nó | 🟠 Intermediário | |
-| 257 | Refém | 🟢 Fácil | |
-| 256 | Cãozinho invertido | 🔴 Difícil | |
-| 255 | Cadeira de baloiço | 🟠 Intermediário | |
-| 254 | Asteróide | 🔴 Difícil | |
-| 253 | Estilos únicos | 🔴 Difícil | |
-| 252 | Quinto elemento | 🟢 Fácil | |
-| 251 | Aterragem suave | 🟠 Intermediário | |
-| 250 | Super-herói | 🟠 Intermediário | |
-| 249 | Senhora madura | 🟢 Fácil | |
-| 248 | Pernas sobre os ombros | 🟠 Intermediário | |
-| 247 | Japão | 🟢 Fácil | |
-| 246 | Ladyboy | 🟢 Fácil | |
-| 245 | Capricórnio | 🔴 Difícil | |
-| 244 | Libra | 🟠 Intermediário | |
-| 243 | Arado | 🟢 Fácil | |
-| 242 | Gêmeos | 🟢 Fácil | |
+| 291 | Holandês voador | 🔴 Difícil | Em pé · também acrobática |
+| 290 | Esfregaço na garganta | 🟠 Intermediário | Oral (boquete) |
+| 289 | Fator X | 🔴 Difícil | (a conferir) |
+| 288 | O amante mais quente | 🟠 Intermediário | Em pé · também cara a cara |
+| 287 | Vagina apertada | 🟠 Intermediário | Cara a cara |
+| 286 | Entrada secreta | 🟢 Fácil | Em pé · também por trás |
+| 285 | Ioga selvagem | 🔴 Difícil | Acrobáticas (a conferir) |
+| 284 | Festa de aniversário | 🔴 Difícil | Acrobáticas · também ela por cima |
+| 283 | Lagarto | 🟢 Fácil | Ela por cima |
+| 282 | Sala de espera | 🟢 Fácil | Ela por cima |
+| 281 | Exóticos preliminares | 🔴 Difícil | Oral (69) · também acrobática |
+| 280 | Cãozinho na borda | 🟢 Fácil | Por trás |
+| 279 | A roleta russa | 🔴 Difícil | (a conferir) |
+| 278 | Fantasia | 🟠 Intermediário | Por trás |
+| 277 | Centelha ⟲ | 🔴 Difícil | (a conferir) |
+| 276 | Propulsor | 🟢 Fácil | Em pé · também por trás |
+| 275 | Linda vista | 🟠 Intermediário | Cara a cara |
+| 274 | Toque sensual | 🟢 Fácil | Cara a cara |
+| 273 | Caverna | 🟢 Fácil | Por trás |
+| 272 | Capoeira brasileira | 🔴 Difícil | (a conferir) |
+| 271 | Princesa | 🟢 Fácil | Ela por cima |
+| 270 | Girafa | 🔴 Difícil | Em pé · também por trás |
+| 269 | Rock and roll | 🔴 Difícil | Cara a cara |
+| 268 | Costas | 🟠 Intermediário | Por trás |
+| 267 | Zelo | 🟢 Fácil | Sentados (a conferir) |
+| 266 | Supernova | 🔴 Difícil | Acrobáticas (invertida) |
+| 265 | Prato apimentado | 🟢 Fácil | (a conferir) |
+| 264 | Beleza adormecida | 🟠 Intermediário | Por trás |
+| 263 | Pioneiro | 🔴 Difícil | Por trás |
+| 262 | Semeador | 🔴 Difícil | Cara a cara |
+| 261 | Café da manhã especial | 🟠 Intermediário | Oral (cunnilingus) |
+| 260 | Aperto apertado | 🟢 Fácil | Por trás |
+| 259 | Estilo sapinho | 🟠 Intermediário | (a conferir) |
+| 258 | Nó | 🟠 Intermediário | Sentados · também cara a cara |
+| 257 | Refém | 🟢 Fácil | Ela por cima |
+| 256 | Cãozinho invertido | 🔴 Difícil | Por trás |
+| 255 | Cadeira de baloiço | 🟠 Intermediário | Sentados · também cara a cara |
+| 254 | Asteróide | 🔴 Difícil | Por trás (a conferir) |
+| 253 | Estilos únicos | 🔴 Difícil | Em pé · também cara a cara |
+| 252 | Quinto elemento | 🟢 Fácil | Cara a cara |
+| 251 | Aterragem suave | 🟠 Intermediário | Ela por cima |
+| 250 | Super-herói | 🟠 Intermediário | Cara a cara |
+| 249 | Senhora madura | 🟢 Fácil | Em pé · também por trás |
+| 248 | Pernas sobre os ombros | 🟠 Intermediário | Sentados · também cara a cara |
+| 247 | Japão | 🟢 Fácil | Sentados · também ela por cima |
+| 246 | Ladyboy | 🟢 Fácil | Ela por cima |
+| 245 | Capricórnio | 🔴 Difícil | (a conferir) |
+| 244 | Libra | 🟠 Intermediário | Sentados · também cara a cara |
+| 243 | Arado | 🟢 Fácil | Em pé · também acrobática |
+| 242 | Gêmeos | 🟢 Fácil | Sentados · também cara a cara |
 | 241 | Carrinho de mão | 🔴 Difícil | |
 | 240 | Flor de lótus | 🟢 Fácil | |
 | 239 | Fusão ⟲ | 🔴 Difícil | |
@@ -719,3 +719,53 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 294 | Encanador ⟲ | Posição com cadeira. Texto a completar depois de conferir o desenho. | — |
 | 293 | Sem vergonha | Quem recebe deita de costas com uma perna erguida; o outro ajoelha na frente. | A perna erguida ajusta o ângulo. |
 | 292 | Gravata | Um fica em pé e segura o outro, que envolve o pescoço dele com as pernas. | Muita força e confiança. Façam perto da cama, para apoiar se precisar. |
+| 291 | Holandês voador | Um fica em pé e segura o outro de cabeça para baixo, junto ao corpo. | Muito arriscada: exige força e confiança. Façam perto da cama. |
+| 290 | Esfregaço na garganta | Quem faz o oral deita de costas sobre uma bola de pilates, com a cabeça para trás; o outro fica em pé na frente. | Quem está deitado controla a profundidade. Combinem um sinal para parar. |
+| 289 | Fator X | Os dois deitados, em sentidos cruzados, formando um X. Texto a completar depois de conferir o desenho. | — |
+| 288 | O amante mais quente | Quem recebe senta na beira de uma mesa e envolve o outro com as pernas; o outro fica em pé. | Altura de mesa é perfeita para quem está em pé. |
+| 287 | Vagina apertada | Quem recebe deita de costas com as pernas juntas, dobradas para um lado; o outro deita por cima. | As pernas juntas deixam o encaixe mais apertado. |
+| 286 | Entrada secreta | Quem recebe ajoelha numa poltrona, debruçado sobre o encosto; o outro fica em pé atrás, inclinado. | Fácil de fazer e confortável para os dois. |
+| 285 | Ioga selvagem | Posição com o corpo invertido. Texto a completar depois de conferir o desenho. | — |
+| 284 | Festa de aniversário | Um apoia os pés no sofá e as mãos no chão, com o corpo esticado; o outro fica embaixo, de cócoras. | Muito difícil e cansativa. Só para quem tem força nos braços. |
+| 283 | Lagarto | Um deita de costas; o outro deita por cima, de bruços, com os corpos colados. | Máximo contato de pele e muito beijo. |
+| 282 | Sala de espera | Um deita de costas no sofá; o outro senta por cima, de costas para ele. | Boa para começar sem pressa. |
+| 281 | Exóticos preliminares | Quem recebe fica de quatro; o outro se curva por cima dele, em sentido oposto, para o oral ao mesmo tempo. | Exige flexibilidade. Se cansar, troquem pelo 69 deitado. |
+| 280 | Cãozinho na borda | Quem recebe fica de quatro na beira da cama; o outro fica em pé atrás. | Fácil e popular, ótima para quem está começando. |
+| 279 | A roleta russa | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 278 | Fantasia | Quem recebe deita de bruços sobre uma bola de pilates, com uma perna erguida; o outro ajoelha atrás, segurando a perna. | A perna erguida abre o ângulo. Segurem a bola firme. |
+| 277 | Centelha ⟲ | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 276 | Propulsor | Quem recebe se debruça sobre uma mesa; o outro fica em pé atrás. | Mesa firme. Boa para uma rapidinha. |
+| 275 | Linda vista | Quem recebe deita de costas e pressiona as coxas contra o peito; o outro ajoelha na frente. | Encaixe profundo: comecem devagar. |
+| 274 | Toque sensual | Quem recebe deita de costas numa poltrona; o outro fica em pé, inclinado sobre ele. | A poltrona dá conforto para quem está deitado. |
+| 273 | Caverna | Um senta sobre os calcanhares; o outro fica de quatro na frente, encaixado no colo dele. | Quem está sentado tem as mãos livres para carinhos. |
+| 272 | Capoeira brasileira | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 271 | Princesa | Um deita de costas; o outro senta por cima, de frente. | Clássica: quem está por cima dita o ritmo. |
+| 270 | Girafa | Quem recebe se inclina até apoiar as mãos no chão; o outro fica em pé atrás, segurando o quadril. | Exige flexibilidade de quem se inclina. Pausas curtas. |
+| 269 | Rock and roll | Quem recebe deita de costas no sofá e leva as pernas para trás, por cima da cabeça; o outro fica de joelhos. | Cuidado com o pescoço: usem uma almofada. |
+| 268 | Costas | Quem recebe deita de bruços; o outro fica por cima, atrás, com um joelho apoiado. | Simples e relaxada para quem está embaixo. |
+| 267 | Zelo | Um senta numa cadeira. Texto a completar depois de conferir o desenho. | — |
+| 266 | Supernova | Quem recebe deita com os ombros no chão, o quadril alto e as pernas bem abertas; o outro fica de cócoras por cima. | Muito exigente. Alonguem antes e usem almofadas. |
+| 265 | Prato apimentado | Posição no sofá. Texto a completar depois de conferir o desenho. | — |
+| 264 | Beleza adormecida | Quem recebe deita de bruços, com um travesseiro sob o quadril; o outro fica por cima, apoiado nas mãos. | O travesseiro melhora o ângulo e o conforto. |
+| 263 | Pioneiro | Quem recebe deita de bruços sobre uma bola de pilates; o outro fica em pé atrás e ergue uma das pernas dele. | Encostem a bola num móvel para ela não fugir. |
+| 262 | Semeador | Um ajoelha, inclinado para trás e apoiado nas mãos; o outro deita de costas, com as pernas sobre ele. | Bom ângulo e pouco esforço para os dois. |
+| 261 | Café da manhã especial | Quem recebe deita de costas numa mesa; o outro senta numa cadeira na frente e faz sexo oral. | A mesa deixa tudo na altura certa. Ótima para começar o dia. |
+| 260 | Aperto apertado | Quem recebe fica de quatro; o outro ajoelha atrás e o envolve com os braços. | Muito contato: dá para beijar o pescoço. |
+| 259 | Estilo sapinho | Posição com poltrona. Texto a completar depois de conferir o desenho. | — |
+| 258 | Nó | Os dois sentam frente a frente, com braços e pernas entrelaçados. | Muito íntima. Movimentos lentos. |
+| 257 | Refém | Um deita de costas no sofá; o outro senta por cima, reclinado, com uma perna erguida. | A perna erguida muda o ângulo. |
+| 256 | Cãozinho invertido | Quem recebe fica de quatro; o outro fica atrás, mas virado para o lado oposto. | Diferente e divertida. Vão devagar até achar o encaixe. |
+| 255 | Cadeira de baloiço | Um senta numa cadeira; o outro senta no colo dele, de frente, com as pernas apoiadas nos ombros. | Exige flexibilidade de quem está por cima. |
+| 254 | Asteróide | Quem recebe fica de quatro; o outro fica por cima, atrás. | — |
+| 253 | Estilos únicos | Quem recebe deita na beira da cama ou da mesa, com uma perna erguida bem alto; o outro fica em pé. | A perna erguida pode descansar no ombro de quem está em pé. |
+| 252 | Quinto elemento | Quem recebe deita de costas e envolve o outro com as pernas; o outro deita por cima. | Variação aconchegante do papai e mamãe. |
+| 251 | Aterragem suave | Um deita de costas sobre uma bola de pilates; o outro senta por cima. | Quem está por cima comanda. Pés firmes no chão. |
+| 250 | Super-herói | Quem recebe deita de costas com as pernas nos ombros do outro, que fica de joelhos inclinado para a frente. | Penetração profunda: comecem devagar. |
+| 249 | Senhora madura | Quem recebe se debruça sobre uma mesa; o outro fica em pé atrás. | Simples e rápida. |
+| 248 | Pernas sobre os ombros | Um senta no chão, com as pernas esticadas; o outro senta no colo dele, de frente, com as pernas nos ombros. | Exige flexibilidade de quem está por cima. |
+| 247 | Japão | Um senta numa poltrona; o outro senta no colo dele, de costas. | Confortável e estável. |
+| 246 | Ladyboy | Um deita de costas; o outro senta por cima, de costas, com uma perna esticada. | Quem está por cima dita o ritmo. |
+| 245 | Capricórnio | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 244 | Libra | Um senta no chão com as pernas abertas; o outro senta no colo dele, de frente, também com as pernas abertas. | Muito toque e olho no olho. |
+| 243 | Arado | Um fica em pé; o outro fica de cabeça para baixo, com as mãos no chão e as pernas envolvendo a cintura dele. | Exige força nos braços de quem está embaixo. Sessões curtas. |
+| 242 | Gêmeos | Os dois sentam frente a frente, com as pernas cruzadas uma sobre a outra, abraçados. | Abraços duplos e olho no olho: muito íntima. |
