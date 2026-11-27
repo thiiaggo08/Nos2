@@ -123,24 +123,24 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 390 | Playboy | 🔴 Difícil | Em pé · também por trás |
 | 389 | Fome | 🟢 Fácil | Oral (cunnilingus) |
 | 388 | Necessidade de Speed | 🟢 Fácil | Por trás |
-| 387 | Pernas no ar | 🟠 Intermediário | Cara a cara (a conferir) |
+| 387 | Pernas no ar | 🟠 Intermediário | Em pé · também cara a cara |
 | 386 | Arte chinesa | 🟠 Intermediário | Em pé · também por trás |
 | 385 | Crazy broche | 🔴 Difícil | Oral (boquete) · também acrobática |
 | 384 | Slide | 🟠 Intermediário | Cara a cara |
 | 383 | Encosto | 🔴 Difícil | Em pé · também por trás |
 | 382 | Parafuso | 🟢 Fácil | De lado e conchinha |
 | 381 | Conquistador | 🟠 Intermediário | Cara a cara |
-| 380 | Desculpas | 🟠 Intermediário | Por trás (a conferir) |
+| 380 | Desculpas | 🟠 Intermediário | Oral (cunnilingus) |
 | 379 | Mestre | 🟢 Fácil | Sentados · também cara a cara |
 | 378 | Piloto de ar | 🔴 Difícil | Ela por cima |
-| 377 | Cunha | 🟠 Intermediário | De lado e conchinha (a conferir) |
+| 377 | Cunha | 🟠 Intermediário | De lado e conchinha |
 | 376 | Fada | 🟢 Fácil | Sentados · também ela por cima |
 | 375 | Encontro surpreendente | 🟠 Intermediário | Em pé · também cara a cara |
 | 374 | Inseminador | 🟢 Fácil | Por trás |
 | 373 | Cozinha | 🟠 Intermediário | Ela por cima |
 | 372 | Multiplicar Prazer | 🟢 Fácil | Em pé · também por trás |
-| 371 | Estilo militar | 🔴 Difícil | Cara a cara (a conferir) |
-| 370 | Desejo desagradável | 🟠 Intermediário | (a conferir) |
+| 371 | Estilo militar | 🔴 Difícil | Cara a cara |
+| 370 | Desejo desagradável | 🟠 Intermediário | Oral (cunnilingus) |
 | 369 | Chocolate de leite | 🟠 Intermediário | Sentados · também acrobática |
 | 368 | Dança suja | 🟠 Intermediário | Sentados · também ela por cima |
 | 367 | Arreios | 🟠 Intermediário | Por trás |
@@ -151,23 +151,23 @@ Regras: só o número, o nome e o nível, iguais aos do site. Descrições e ima
 | 362 | Courtesan | 🟠 Intermediário | Sentados · também cara a cara |
 | 361 | Aranha Kinky | 🟠 Intermediário | Sentados · também cara a cara |
 | 360 | Trabalhador duro | 🟠 Intermediário | Cara a cara |
-| 359 | Pterodáctilo | 🟢 Fácil | Cara a cara (a conferir) |
+| 359 | Pterodáctilo | 🟢 Fácil | Em pé · também por trás |
 | 358 | Menina tímida | 🟢 Fácil | Sentados · também ela por cima |
 | 357 | Atleta | 🔴 Difícil | Acrobáticas (invertida) |
 | 356 | Noite preguiçosa | 🟢 Fácil | De lado e conchinha |
 | 355 | Arco-estrela | 🟢 Fácil | Sentados · também cara a cara |
 | 354 | Compliment | 🟢 Fácil | Oral (boquete) |
-| 353 | Cativeiro | 🟠 Intermediário | (a conferir) |
+| 353 | Cativeiro | 🟠 Intermediário | Oral (69) · também acrobática |
 | 352 | Sem peso | 🔴 Difícil | Por trás |
 | 351 | Apetite | 🟢 Fácil | Sentados · também por trás |
-| 350 | XXX | 🟢 Fácil | (a conferir) |
+| 350 | XXX | 🟢 Fácil | Cara a cara |
 | 349 | Luz da Lua | 🟢 Fácil | Cara a cara |
 | 348 | Tulipa ⟲ | 🟢 Fácil | Sentados · também ela por cima |
 | 347 | Guilhotina | 🔴 Difícil | Oral (boquete) · também acrobática |
 | 346 | Guitarra espanhola | 🟢 Fácil | Sentados · também ela por cima |
 | 345 | Torta no céu | 🟠 Intermediário | Por trás |
 | 344 | Recarga | 🟢 Fácil | Cara a cara |
-| 343 | Torta americana | 🟠 Intermediário | (a conferir) |
+| 343 | Torta americana | 🟠 Intermediário | Oral (69) · também acrobática |
 | 342 | Silêncio | 🟠 Intermediário | Sentados · também cara a cara |
 | 341 | Garganta profunda | 🟢 Fácil | Oral (boquete) |
 | 340 | Chili cão | 🟠 Intermediário | Por trás |
@@ -623,24 +623,24 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 390 | Playboy | Quem recebe ajoelha numa cadeira e se inclina bem para a frente; o outro fica em pé atrás. | A cadeira precisa estar firme. Um apoio para as mãos ajuda. |
 | 389 | Fome | Quem recebe senta na beira da cama ou do sofá; o outro ajoelha na frente e faz sexo oral. | Clássica e confortável para os dois. |
 | 388 | Necessidade de Speed | Quem recebe deita de bruços sobre uma bola de pilates; o outro fica em pé atrás. | Encostem a bola num móvel para ela não fugir. |
-| 387 | Pernas no ar | Quem recebe deita de costas com as pernas para o alto; o outro fica de joelhos na frente. | — |
+| 387 | Pernas no ar | Quem recebe senta na beira de uma mesa, inclinado para trás e apoiado nas mãos, com uma perna erguida no ombro do outro, que fica em pé. | Penetração profunda e muito beijo. Mesa firme. |
 | 386 | Arte chinesa | Quem recebe ajoelha no assento de uma poltrona, de frente para o encosto; o outro fica em pé atrás. | A poltrona dá apoio firme para as mãos. |
 | 385 | Crazy broche | Quem faz o oral fica de joelhos e arqueia o corpo para trás; o outro fica em pé na frente. | Exige flexibilidade. Se cansar, voltem ao oral de joelhos tradicional. |
 | 384 | Slide | Quem recebe deita de costas no sofá, escorregando a cabeça para fora do assento; o outro fica por cima. | Cabeça mais baixa: parem se vier tontura. |
 | 383 | Encosto | Quem recebe fica em pé, debruçado sobre o encosto de uma cadeira; o outro fica em pé atrás. | Também é usada para sexo anal: nesse caso, muito lubrificante e calma. |
 | 382 | Parafuso | Quem recebe deita de lado na beira da cama; o outro ajoelha no chão, atrás. | Confortável para os dois, sem peso sobre ninguém. |
 | 381 | Conquistador | Quem recebe deita de costas sobre uma bola de pilates; o outro fica com um joelho no chão, na frente. | A bola balança: segurem firme. |
-| 380 | Desculpas | Quem recebe fica de quatro na cama; o outro fica atrás. | — |
+| 380 | Desculpas | Quem recebe fica de quatro sobre uma mesa, com o quadril na beirada; o outro senta numa cadeira atrás e faz sexo oral. | Mesa firme e encostada na parede. |
 | 379 | Mestre | Um senta numa cadeira com as costas retas; o outro deita de costas com as pernas apoiadas nele. | Quem está sentado controla o ritmo com as mãos livres. |
 | 378 | Piloto de ar | Um deita de costas, apoiado nos cotovelos; o outro senta por cima, de frente. | Com o tronco erguido, os dois se olham e se beijam fácil. |
-| 377 | Cunha | Quem recebe deita de lado no sofá; o outro fica de joelhos atrás. | — |
+| 377 | Cunha | Quem recebe deita de lado no sofá, com a perna de cima erguida no ombro do outro, que fica com um joelho no sofá. | A perna erguida pode descer quando cansar. |
 | 376 | Fada | Um senta na beira do sofá; o outro senta no colo dele, de costas, com os pés no chão. | Quem está por cima controla o ritmo com as pernas. |
 | 375 | Encontro surpreendente | Quem recebe senta no braço de uma poltrona, com as pernas no ombro do outro, que fica em pé. | A poltrona precisa ser firme. Bom contato visual. |
 | 374 | Inseminador | Quem recebe ajoelha na cama e se inclina para a frente sobre um travesseiro; o outro fica em pé atrás. | O travesseiro dá conforto e melhora o ângulo. |
 | 373 | Cozinha | Um deita com as costas apoiadas entre uma cadeira e uma mesa; o outro senta por cima. | Exige móveis firmes e bem posicionados. Testem antes. |
 | 372 | Multiplicar Prazer | Quem recebe ajoelha numa poltrona, de frente para o encosto; o outro fica em pé atrás. | Boa para estimular com as mãos ao mesmo tempo. |
-| 371 | Estilo militar | Quem recebe deita de costas com as pernas nos ombros do outro, que fica de joelhos. | — |
-| 370 | Desejo desagradável | O desenho não ficou claro no PDF. Texto a completar. | — |
+| 371 | Estilo militar | Quem recebe deita de costas com as pernas abertas para o alto; o outro fica de cócoras por cima, segurando as pernas. | Exige força nas pernas de quem está por cima. |
+| 370 | Desejo desagradável | Um deita no sofá, com a cabeça no braço do sofá; o outro fica em pé ao lado, com um pé no sofá, e recebe sexo oral. | Quem está em pé controla a altura; quem está deitado só se entrega. |
 | 369 | Chocolate de leite | Um senta numa cadeira; o outro fica de cabeça para baixo apoiado no colo dele. | Quem está sentado segura firme. Parem se vier tontura. |
 | 368 | Dança suja | Um senta na beira da cama; o outro senta no colo dele, de costas. | Quem está sentado tem as mãos livres para carinhos. |
 | 367 | Arreios | Quem recebe deita de bruços sobre uma bola de pilates; o outro ajoelha atrás. | A bola encostada num móvel fica mais estável. |
@@ -651,23 +651,23 @@ Pedido do usuário em 27/11/2026: cada posição ganha um texto curto, **escrito
 | 362 | Courtesan | Um senta numa cadeira; o outro senta no colo dele, de frente, com as pernas apoiadas nos ombros. | Exige flexibilidade de quem está por cima. |
 | 361 | Aranha Kinky | Os dois sentam frente a frente, apoiados nas mãos para trás, com as pernas entrelaçadas. | Movimentos curtos e muito olho no olho. |
 | 360 | Trabalhador duro | Quem recebe deita de costas sobre uma bola de pilates; o outro ajoelha na frente, segurando-o. | A bola relaxa as costas de quem está deitado. |
-| 359 | Pterodáctilo | Quem recebe deita de costas na beira de uma mesa; o outro fica em pé. | — |
+| 359 | Pterodáctilo | Quem recebe fica em pé, debruçado sobre uma mesa; o outro fica atrás, inclinado sobre ele, com as mãos na mesa. | Mesa firme. Boa para uma rapidinha. |
 | 358 | Menina tímida | Um senta numa poltrona; o outro senta no colo dele, de costas, com as pernas erguidas. | A poltrona dá apoio; vão no ritmo de quem está por cima. |
 | 357 | Atleta | Quem recebe fica com os ombros no chão e o quadril para cima; o outro fica de cócoras por cima. | Muito exigente: só com boa forma e alongamento. |
 | 356 | Noite preguiçosa | Quem recebe deita de lado no sofá; o outro fica atrás, de joelhos ou deitado. | Sem acrobacias: perfeita para o fim do dia. |
 | 355 | Arco-estrela | Quem recebe senta numa cadeira, com uma perna no ombro do outro, que fica com um joelho no chão. | Boa altura para os dois e contato visual. |
 | 354 | Compliment | Quem faz o oral fica de joelhos; o outro fica em pé na frente. | Uma almofada sob os joelhos deixa tudo mais confortável. |
-| 353 | Cativeiro | O desenho não ficou claro no PDF. Texto a completar. | — |
+| 353 | Cativeiro | Um senta na beira da cama; o outro fica de cabeça para baixo à frente dele, com as pernas nos ombros, e os dois fazem sexo oral. | Exige força e confiança de quem segura. Parem se vier tontura. |
 | 352 | Sem peso | Quem recebe deita de bruços sobre uma bola de pilates; o outro fica de joelhos atrás. | A bola dá apoio ao tronco de quem está deitado. |
 | 351 | Apetite | Um senta numa cadeira; o outro senta no colo dele, de costas, debruçado sobre uma mesa. | Mesa e cadeira firmes. Bom para uma rapidinha. |
-| 350 | XXX | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 350 | XXX | Quem recebe deita de costas numa poltrona, com as pernas para o alto; o outro fica por cima, apoiado nos braços da poltrona. | Ótima para um momento impulsivo. |
 | 349 | Luz da Lua | Quem recebe deita de costas; o outro fica de joelhos na frente, segurando as pernas dele. | Simples e confortável. |
 | 348 | Tulipa ⟲ | Um senta no sofá; o outro senta no colo dele, de costas. | Quem está sentado pode abraçar e beijar o pescoço. |
 | 347 | Guilhotina | Quem faz o oral fica de cabeça para baixo, apoiado pelo outro, que fica em pé. | Muito arriscada: só com força e confiança. Prefiram uma versão no chão. |
 | 346 | Guitarra espanhola | Um senta numa cadeira; o outro senta no colo dele, de costas, e é abraçado como um violão. | Quem está sentado tem as mãos livres para carinhos. |
 | 345 | Torta no céu | Quem recebe fica de quatro com o tronco baixo; o outro fica de cócoras por cima, atrás. | Exige força nas pernas de quem está por cima. |
 | 344 | Recarga | Quem recebe deita de costas na beira da cama, com uma perna erguida; o outro fica com um joelho na cama. | Variação rápida do papai e mamãe. |
-| 343 | Torta americana | O desenho saiu cortado no PDF. Texto a completar. | — |
+| 343 | Torta americana | Um fica de quatro; o outro deita por cima, de cabeça para baixo, com as pernas sobre as costas dele, e os dois fazem sexo oral. | Exige equilíbrio. Se cansar, troquem pelo 69 deitado. |
 | 342 | Silêncio | Um senta numa bola de pilates; o outro senta no colo dele, de frente. | A bola ajuda no movimento, mas exige equilíbrio. |
 | 341 | Garganta profunda | Quem faz o oral deita de costas numa poltrona, com a cabeça pendendo para fora; o outro fica em pé na frente. | Quem está deitado controla a profundidade com as mãos. Combinem um sinal para parar. |
 | 340 | Chili cão | Quem recebe fica de quatro no chão; o outro fica atrás, com um joelho no chão e o outro pé apoiado. | O "de quatro" clássico, com mais impulso para quem está atrás. |
