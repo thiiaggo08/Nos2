@@ -9,7 +9,9 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 |---|---|---|---|
 | 1.1 | Baralho de 40 cartas | ✅ | Baralho escrito pelo usuário, APROVADO. Primeira partida abre com R03. |
 | 1.1a | 5 ajustes sugeridos (R01; M07; T05; “seu par”; aspas brasileiras) | ✅ | Todos aceitos. Já aplicados no texto do baralho em CONTEUDO-ME-CONTA-MAIS.md. |
-| 1.2 | As 40 novas substituem as 36 perguntas atuais? | ✅ | Sim: o baralho do Me Conta Mais passa a ser o aprovado. (Confirmar se as 36 antigas somem ou ficam em outro lugar.) |
+| 1.2 | As 40 novas substituem as 36 perguntas atuais? | ✅ | Me Conta Mais = só as 40 aprovadas. As 36 antigas ficam em “Cartas íntimas (+18)”, com textos, grupos (Nós, Desejo, Fantasia), regras antigas e histórico preservados. |
+| 1.2a | Organização de “Cartas” | ✅ | Nós Dois → Quebrar o gelo → Cartas mostra: “Me Conta Mais — 40 cartas de humor, conversa e carinho.” e “Cartas íntimas (+18) — 36 perguntas dos grupos Nós, Desejo e Fantasia.” Sai o botão direto do Me Conta Mais em Quebrar o gelo. Atalho específico (nosdois.html#mcm) abre o Me Conta Mais direto. |
+| 1.2b | Onde ficam as Cartas quentes (45, em 3 níveis), que hoje também estão dentro de “Cartas”? | ⏳ | |
 | 1.3 | Divisão do clima | ✅ | 01–05 leves; 06–08 mais pessoais. |
 | 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | ⏳ | |
 | 1.5 | "Rapidinho" nomeando o roteiro e o modo do Me Conta Mais | ⏳ | |
