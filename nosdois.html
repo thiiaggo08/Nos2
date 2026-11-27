@@ -165,15 +165,15 @@
     <p>Tudo é salvo automaticamente no seu celular. Dá para parar e continuar depois.</p>
   </div></details>
   <details class="g"><summary>3 · Os códigos: como sincronizar</summary><div>
-    <p>O app não tem servidor nem conta. Nada sai do celular sozinho. Para comparar as respostas, vocês passam <b class="w">três códigos</b>, um de cada vez. Eles começam com <b class="w">NDP-</b>.</p>
-    <p><b class="w">Passo a passo:</b> na aba <b class="w">Trocar</b>, um de vocês toca em <b class="w">Começar troca</b> e envia o código 1. O outro cola e envia o código 2. Quem começou cola e envia o código 3. Os dois veem o resultado quando o código 3 é concluído.</p>
-    <p>Fantasias e papéis, posições, horário, Mapa, Quem do casal e favoritas do Depois vão <b class="w">trancados</b>: nenhum código permite ler o que não coincidir, nem com a senha do casal. Nome, ideias próprias, recados e data do encontro vão para o par ler, e o app mostra uma prévia antes.</p>
+    <p>O app não tem servidor nem conta. Nada sai do celular sozinho. Para comparar as respostas, vocês passam <b class="w">quatro códigos</b>, um de cada vez. Eles começam com <b class="w">NDP-</b>.</p>
+    <p><b class="w">Passo a passo:</b> na aba <b class="w">Trocar</b>, um de vocês toca em <b class="w">Começar troca</b> e envia o código 1. O outro cola e envia o código 2. Quem começou cola e envia o código 3. O outro cola e envia o código 4. As coincidências aparecem com o código 3; os graus e as etiquetas, com o código 4.</p>
+    <p>Fantasias e papéis, posições, horário, Mapa e favoritas do Depois vão <b class="w">trancados</b>: nenhum código permite ler o que não coincidir, nem com a senha do casal. Os graus de vontade vão só para as coincidências. Nome, ideias próprias, recados, data do encontro e as respostas do Quem do casal vão para o par ler, e o app mostra uma prévia antes.</p>
     <p><b class="w">Mudou alguma resposta, adicionou uma ideia ou avaliou depois do encontro?</b> Façam uma nova troca.</p>
     <p>Sugestão: depois de colar, apaguem o código da conversa.</p>
   </div></details>
   <details class="g"><summary>4 · O que o outro vê (e o que não vê)</summary><div>
     <p>O app <b class="w">só mostra o que encaixa</b>: uma fantasia aparece quando os dois marcaram sim e os papéis combinam. O que só um marcou, ou um “Passo”, nunca aparece. Ninguém recebe uma rejeição.</p>
-    <p>No Mapa, aparecem só as zonas que os dois marcaram. No Quem do casal, só as respostas iguais. Os graus de vontade (Toparia, Quero, Quero muito) ficam só no próprio celular.</p>
+    <p>Cada coincidência aparece com o grau de cada um e uma etiqueta: 🔥 Total, 🙂 Parcial, 🤝 Alinhar ou 💬 Entender. No Mapa, aparecem só as zonas que os dois marcaram. No Quem do casal, as respostas dos dois aparecem lado a lado.</p>
     <p><b class="w">Um limite:</b> as coincidências dependem do que cada pessoa marcou. Se alguém marcar todas as opções, poderá deduzir quais delas a outra pessoa também marcou.</p>
   </div></details>
   <details class="g"><summary>5 · No encontro e depois</summary><div>
@@ -651,7 +651,7 @@ function renderResp(){
     f.innerHTML=`<input type="text" id="novaFant" placeholder="Escreva uma fantasia sua" maxlength="90"><button class="btn gold" onclick="addCustom()">Adicionar</button>`;
     d.appendChild(f); L.appendChild(d);
   } else if(mResp==="quem"){
-    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, aparecem só as respostas iguais às do seu par.</div>`;
+    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, as respostas dos dois aparecem lado a lado, com uma etiqueta.</div>`;
     [1,2,3].forEach(n=>{
       const d=document.createElement("div");
       d.innerHTML=`<div class="cat-h"><h2>Nível ${n}</h2><span>${["","leve","quente","ousado"][n]}</span></div>`;
@@ -774,7 +774,11 @@ function psiPreparar(sid){
 function juntar(list){ const out=new Uint8Array(list.length*32); list.forEach((p,i)=>out.set(p,i*32)); return Nos2.b64u(out); }
 function separar(str){ const b=Nos2.unb64u(str||""); if(!b.length||b.length%32) throw "formato"; const out=[]; for(let i=0;i<b.length;i+=32) out.push(b.slice(i,i+32)); return out; }
 /* O que vai para o par ler (envio intencional) */
-const meuEnvio=()=>({n:st.nome||"",cu:(st.custom||[]).map(c=>({id:c.id,t:c.t})),g:st.sug||"",l:st.lim||"",d:st.data||""});
+const meuEnvio=()=>{ const q={}; Object.entries(st.quem).forEach(([id,v])=>{ if(v!=null) q[id]=quemAbsDe(v,meuLado()); });
+  return {n:st.nome||"",cu:(st.custom||[]).map(c=>({id:c.id,t:c.t})),g:st.sug||"",l:st.lim||"",d:st.data||"",q}; };
+/* Graus de vontade só das coincidências (fantasias 1–3, Mapa 1–2) */
+function grausDe(tokens){ const g={}; tokens.forEach(t=>{ const p=t.split("|");
+  if(p[0]==="f"&&st.resp[p[1]]) g["f|"+p[1]]=st.resp[p[1]].n; else if(p[0]==="m"&&st.mapa[p[1]]) g["m|"+p[1]]=st.mapa[p[1]]; }); return g; }
 function previaHtml(){
   const e=meuEnvio(), nome=e.n||("Jogador "+meuLado()), dt=e.d?new Date(e.d+"T12:00").toLocaleDateString("pt-BR"):"";
   const linha=(r,v)=>`<div class="match"><div class="eyebrow">${r}</div><div class="t" style="margin-top:6px;white-space:pre-wrap">${v}</div></div>`;
@@ -783,15 +787,17 @@ function previaHtml(){
     linha("Sugestões para o encontro",e.g?esc(e.g):`<span class="muted">Nada escrito</span>`)+
     linha("Hoje não",e.l?esc(e.l):`<span class="muted">Nada escrito</span>`)+
     linha("Data do encontro",dt||`<span class="muted">Sem data</span>`)+
-    `<div class="note">Fantasias e papéis, posições, horário, Mapa, Quem do casal e favoritas do Depois vão trancados: ${esc(ele())} só descobre o que coincidir.</div>`;
+    linha("Quem do casal",Object.keys(e.q).length?`<details><summary>${Object.keys(e.q).length} respostas (${esc(ele())} vê todas)</summary>${QUEM.filter(q=>e.q[q.id]).map(q=>`<div class="muted" style="margin-top:6px">${esc(q.t)} <b class="w">${esc(e.q[q.id]==="ambos"?"Os dois":e.q[q.id]==="nenhum"?"Nenhum":Nos2.settings.name(e.q[q.id]))}</b></div>`).join("")}</details>`:`<span class="muted">Nenhuma resposta</span>`)+
+    `<div class="note">Fantasias e papéis, posições, horário, Mapa e favoritas do Depois vão trancados: ${esc(ele())} só descobre o que coincidir. Os graus de vontade vão só para as coincidências.</div>`;
 }
 let PREVIA=null, M1REC=null;
 function psiValida(){ if(st.psi&&Date.now()-st.psi.criado>PSI_VALIDADE){ st.psi=null; salvar(); } }
-function codigoBox(n,cod){ return `<h2>Código ${n} de 3</h2><textarea id="meuCodigo" readonly>${esc(cod)}</textarea><button class="btn ghost" onclick="copiarCodigo()">Copiar código ${n}</button>`; }
+function codigoBox(n,cod){ return `<h2>Código ${n} de 4</h2><textarea id="meuCodigo" readonly>${esc(cod)}</textarea><button class="btn ghost" onclick="copiarCodigo()">Copiar código ${n}</button>`; }
 function colarBox(rotulo){ return `<h2>${rotulo}</h2><textarea id="codigoPar" placeholder="Cole aqui o código recebido"></textarea><button class="btn primary" onclick="colarCodigo()">Continuar</button>`; }
 const limiteTxt=`<details class="g"><summary>O que vai em cada código?</summary><div>
-  <p><b class="w">Trancado</b> (ninguém consegue ler o que não coincidir, nem com a senha do casal): fantasias e papéis, posições, horário preferido, zonas do Mapa, Quem do casal e favoritas do Depois. Os graus de vontade não vão.</p>
-  <p><b class="w">Para o par ler:</b> seu nome, suas ideias próprias, recados, “Hoje não” e a data do encontro. O app mostra uma prévia antes.</p>
+  <p><b class="w">Trancado</b> (ninguém consegue ler o que não coincidir, nem com a senha do casal): fantasias e papéis, posições, horário preferido, zonas do Mapa e favoritas do Depois.</p>
+  <p><b class="w">Só das coincidências</b> (códigos 3 e 4): os graus de vontade nas fantasias e no Mapa.</p>
+  <p><b class="w">Para o par ler:</b> seu nome, suas ideias próprias, recados, “Hoje não”, a data do encontro e suas respostas do Quem do casal. O app mostra uma prévia antes.</p>
   <p><b class="w">Para o app organizar a troca:</b> um identificador do aparelho, um número de revisão e a data e hora.</p>
   <p>As coincidências dependem do que cada pessoa marcou. Se alguém marcar todas as opções, poderá deduzir quais delas a outra pessoa também marcou.</p></div></details>`;
 function renderTroca(){
@@ -804,9 +810,11 @@ function renderTroca(){
   if(st.psi&&st.psi.papel==="ini") h=`<p class="note" style="color:var(--txt)">Próximo passo: envie o código 1 para ${esc(ele())}. Quando o código 2 chegar, cole abaixo.</p>${codigoBox(1,st.psi.codigo)}${colarBox("Código 2 do seu par")}<button class="btn ghost" onclick="cancelarTroca()">Cancelar esta troca</button>`;
   else if(st.psi&&st.psi.papel==="resp") h=`<p class="note" style="color:var(--txt)">Próximo passo: envie o código 2 para ${esc(ele())}. Quando o código 3 chegar, cole abaixo.</p>${codigoBox(2,st.psi.codigo)}${colarBox("Código 3 do seu par")}<button class="btn ghost" onclick="cancelarTroca()">Cancelar esta troca</button>`;
   else {
-    if(st.psiFim) h+=`<p class="note" style="color:var(--txt)">Troca concluída neste iPhone. Próximo passo: envie o código 3 para ${esc(ele())} ver o resultado também.</p>${codigoBox(3,st.psiFim.codigo)}<button class="btn primary" onclick="go('matches')">Ver resultado</button>`;
-    h+=`${ultimaTroca()}<p>Vocês passam três códigos, um de cada vez. Os dois veem o resultado quando o código 3 é concluído.</p>
-    <button class="btn ${st.psiFim?"ghost":"primary"}" onclick="PREVIA='ini';renderTroca()">Começar troca</button>${colarBox("Recebeu um código? Cole aqui")}`;
+    const pend=st.psiFim&&st.psiFim.aguardaM4;
+    if(pend) h+=`<p class="note" style="color:var(--txt)">As coincidências já aparecem neste iPhone. Próximo passo: envie o código 3 para ${esc(ele())}. Quando o código 4 chegar, cole abaixo para ver os graus e as etiquetas.</p>${codigoBox(3,st.psiFim.codigo)}${colarBox("Código 4 do seu par")}<button class="btn ghost" onclick="go('matches')">Ver resultado</button>`;
+    else if(st.psiM4) h+=`<p class="note" style="color:var(--txt)">Troca concluída neste iPhone. Próximo passo: envie o código 4 para ${esc(ele())} ver os graus e as etiquetas também.</p>${codigoBox(4,st.psiM4.codigo)}<button class="btn primary" onclick="go('matches')">Ver resultado</button>`;
+    h+=`${ultimaTroca()}<p>Vocês passam quatro códigos, um de cada vez. As coincidências aparecem com o código 3; os graus e as etiquetas, com o código 4.</p>
+    <button class="btn ${pend||st.psiM4?"ghost":"primary"}" onclick="PREVIA='ini';renderTroca()">Começar troca</button>${pend?"":colarBox("Recebeu um código? Cole aqui")}`;
   }
   A.innerHTML=h+limiteTxt;
 }
@@ -816,18 +824,18 @@ async function gerarM1(){
   PREVIA=null; const sid=hexb(crypto.getRandomValues(new Uint8Array(12)));
   const prep=psiPreparar(sid);
   const cod=await Nos2.encrypt({k:1,v:1,sid,s:devId(),rv:proxRev(),t:Date.now(),de:meuLado(),pts:juntar(prep.pts),sh:meuEnvio()},st.senha,PFX);
-  st.psi={papel:"ini",sid,sec:NosPSI.scalarToHex(prep.sec),ordem:prep.ordem,criado:Date.now(),snapRev:st.rev||0,codigo:cod}; st.psiFim=null;
+  st.psi={papel:"ini",sid,sec:NosPSI.scalarToHex(prep.sec),ordem:prep.ordem,criado:Date.now(),snapRev:st.rev||0,codigo:cod}; st.psiFim=null; st.psiM4=null;
   salvar(); renderTroca();
 }
 async function gerarM2(){
   const msg=M1REC; PREVIA=null; M1REC=null; if(!msg) return renderTroca();
   const prep=psiPreparar(msg.sid), dup=separar(msg.pts).map(p=>NosPSI.mul(p,prep.sec)); // pontos de quem começou, trancados também por este iPhone
   const cod=await Nos2.encrypt({k:2,v:1,sid:msg.sid,s:devId(),rv:proxRev(),t:Date.now(),de:meuLado(),dup:juntar(dup),pts:juntar(prep.pts),sh:meuEnvio()},st.senha,PFX);
-  st.psi={papel:"resp",sid:msg.sid,ordem:prep.ordem,dupSet:dup.map(hexb),criado:Date.now(),snapRev:st.rev||0,envioPar:msg.sh||{},parS:msg.s,parRv:msg.rv,parT:msg.t,codigo:cod}; st.psiFim=null;
+  st.psi={papel:"resp",sid:msg.sid,ordem:prep.ordem,dupSet:dup.map(hexb),criado:Date.now(),snapRev:st.rev||0,envioPar:msg.sh||{},parS:msg.s,parRv:msg.rv,parT:msg.t,codigo:cod}; st.psiFim=null; st.psiM4=null;
   salvar(); renderTroca();
 }
 function aplicarResultado(tokens,sh,meta,snapRev){
-  const par={modo:meta.modo||"privado",n:sh.n||"",cu:sh.cu||[],g:sh.g||"",l:sh.l||"",d:sh.d||"",f:[],papeis:{},po:[],hz:null,m:[],q:{},fav:[]};
+  const par={modo:meta.modo||"privado",n:sh.n||"",cu:sh.cu||[],g:sh.g||"",l:sh.l||"",d:sh.d||"",f:[],papeis:{},po:[],hz:null,m:[],q:{},fav:[],qAll:sh.q||null,graus:meta.graus||null};
   tokens.forEach(t=>{ const p=t.split("|");
     if(p[0]==="f"){ par.f.push(p[1]); if(p.length===4) (par.papeis[p[1]]=par.papeis[p[1]]||[]).push([+p[2],+p[3]]); }
     else if(p[0]==="p") par.po.push(p[1]); else if(p[0]==="h") par.hz=+p[1]; else if(p[0]==="m") par.m.push(p[1]);
@@ -847,6 +855,7 @@ async function colarCodigo(){
   let msg; try{ msg=await Nos2.decrypt(txt,st.senha,PFX); }catch(e){ return avisoTroca(e==="senha"?"Senha do casal diferente":"Código inválido"); }
   if(msg.s===devId()) return avisoTroca("Este código foi gerado neste iPhone. Envie para seu par.");
   if(msg.de===meuLado()) return avisoTroca(`Os dois celulares estão como Jogador ${meuLado()}. Ajustem em Configurações.`);
+  try{ if(msg.k===4) return tratarM4(msg); }catch(e){ return avisoTroca("Código inválido"); }
   if(st.troca&&st.troca.sid&&st.troca.sid===msg.sid) return avisoTroca("Este código já foi usado. Nada mudou.");
   try{
     if(msg.k===1) return tratarM1(msg);
@@ -870,8 +879,8 @@ async function tratarM2(msg){
   const SB=ptsB.map(p=>NosPSI.mul(p,sec)), setB=new Set(SB.map(hexb));
   const tokens=st.psi.ordem.filter((t,i)=>t!=null&&setB.has(hexb(dupA[i])));
   const snap=st.psi.snapRev;
-  const cod=await Nos2.encrypt({k:3,v:1,sid:msg.sid,s:devId(),dup:juntar(SB)},st.senha,PFX);
-  st.psi=null; st.psiFim={codigo:cod,sid:msg.sid};
+  const cod=await Nos2.encrypt({k:3,v:1,sid:msg.sid,s:devId(),dup:juntar(SB),gr:grausDe(tokens)},st.senha,PFX);
+  st.psi=null; st.psiFim={codigo:cod,sid:msg.sid,aguardaM4:true};
   aplicarResultado(tokens,msg.sh||{},{sid:msg.sid,s:msg.s,rv:msg.rv,t:msg.t},snap);
   renderTroca(); window.scrollTo(0,0); toast("Troca concluída neste iPhone");
 }
@@ -880,9 +889,15 @@ function tratarM3(msg){
   const vals=separar(msg.dup); if(vals.length!==st.psi.ordem.length) throw "formato";
   const set=new Set(st.psi.dupSet), tokens=st.psi.ordem.filter((t,j)=>t!=null&&set.has(hexb(vals[j])));
   const p=st.psi; st.psi=null;
-  aplicarResultado(tokens,p.envioPar||{},{sid:p.sid,s:p.parS,rv:p.parRv,t:p.parT},p.snapRev);
+  aplicarResultado(tokens,p.envioPar||{},{sid:p.sid,s:p.parS,rv:p.parRv,t:p.parT,graus:msg.gr||{}},p.snapRev);
+  Nos2.encrypt({k:4,v:1,sid:p.sid,s:devId(),gr:grausDe(tokens)},st.senha,PFX).then(cod=>{ st.psiM4={codigo:cod,sid:p.sid}; salvar(); renderTroca(); window.scrollTo(0,0); });
   const novas=(st.parCustom||[]).filter(c=>!st.resp[c.id]).length;
-  toast(novas?`${novas} ideia(s) nova(s) de ${ele()} para responder`:"Troca concluída"); go("matches");
+  toast(novas?`${novas} ideia(s) nova(s) de ${ele()} para responder`:"Troca concluída. Envie o código 4.");
+}
+function tratarM4(msg){
+  if(!st.psiFim||!st.psiFim.aguardaM4||st.psiFim.sid!==msg.sid||!st.par) return avisoTroca(st.psiFim&&st.psiFim.sid===msg.sid?"Este código já foi usado. Nada mudou.":"Este código é de outra troca.");
+  st.par.graus=msg.gr||{}; st.psiFim.aguardaM4=false; salvar();
+  toast("Graus e etiquetas recebidos"); go("matches");
 }
 /* ---- formato antigo (ND3): ainda lido, convertido para o resultado só com coincidências ---- */
 /* Decide se um código ND3 entra (8.2). Retorna "novo", "mesmo" ou "antigo". */
@@ -905,7 +920,9 @@ async function cruzarND3(txt){
   const outro=meuLado()==="A"?"B":"A";
   const deles=new Set(tokensDe({resp:obj.a||{},pos:obj.po||[],hora:obj.hz,mapa:obj.m||{},quem:obj.q||{},av:obj.av||{}},outro));
   const tokens=tokensDe(meusDados(),meuLado()).filter(t=>deles.has(t));
-  aplicarResultado(tokens,{n:obj.n,cu:obj.cu,g:obj.g,l:obj.l,d:obj.d},{modo:"nd3",s:obj.s,rv:obj.rv,t:obj.t},st.rev);
+  const gr={}; tokens.forEach(t=>{ const p=t.split("|"); if(p[0]==="f"&&obj.a&&obj.a[p[1]]) gr["f|"+p[1]]=obj.a[p[1]][0]; if(p[0]==="m"&&obj.m) gr["m|"+p[1]]=obj.m[p[1]]; });
+  const qAll={}; Object.entries(obj.q||{}).forEach(([id,v])=>{ if(v!=null) qAll[id]=quemAbsDe(v,outro); });
+  aplicarResultado(tokens,{n:obj.n,cu:obj.cu,g:obj.g,l:obj.l,d:obj.d,q:qAll},{modo:"nd3",s:obj.s,rv:obj.rv,t:obj.t,graus:gr},st.rev);
   toast("Código no formato antigo lido. Na próxima, usem a troca privada."); go("matches");
 }
 /* Dados de trocas antigas já salvos neste aparelho: converte para o formato só com coincidências */
@@ -929,6 +946,7 @@ function calcMatches(){
   todos().forEach(it=>{ if(it.hora||!f.has(it.id)) return; const m=st.resp[it.id]; if(!m||m.n<1) return;
     if(it.r){ const cs=((st.par.papeis||{})[it.id]||[]).filter(c=>papelVale(it,c)); if(!cs.length) return; out.push({it,papel:descrCombo(it,cs)}); }
     else out.push({it}); });
+  const g=st.par.graus; out.forEach(m=>{ m.eu=st.resp[m.it.id].n; m.ele=g?g["f|"+m.it.id]:null; if(m.ele==null) m.eu=null; });
   return out;
 }
 function renderRes(){
@@ -942,42 +960,52 @@ function renderRes(){
   if(mRes==="inter"){
     const ms=calcMatches();
     if(!ms.length){ R.innerHTML=topo+`<h1>Nenhum match ainda</h1><p>Tudo bem. Nada do que cada um marcou sozinho foi revelado.</p>${horaHtml()}`; return; }
-    h=`<div class="big">${ms.length}</div><h1 style="margin-top:4px">fantasias em comum</h1><p>Match mostra que os dois querem. O consentimento continua sendo combinado na hora.</p><p class="muted">Os graus de vontade de cada um ficam só no próprio celular.</p>${horaHtml()}`;
-    ms.forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}</div>`; });
+    h=`<div class="big">${ms.length}</div><h1 style="margin-top:4px">fantasias em comum</h1><p>Match mostra que os dois querem. O consentimento continua sendo combinado na hora.</p>${legendaMatch}${semGraus()}${horaHtml()}`;
+    ms.forEach(m=>{ h+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}${graus(m)}</div>${falaEntender(m)}</div>`; });
   } else if(mRes==="quem"){
     h=quemHtml();
   } else {
     const zs=ZONAS.filter(z=>(st.par.m||[]).includes(z.id)&&st.mapa[z.id]>0);
     if(!zs.length){ R.innerHTML=topo+`<p style="margin-top:14px">Ainda não há zonas que os dois marcaram.</p>`; return; }
     h=`<h1 style="margin-top:12px">Onde os dois gostam</h1><p>Aparecem só as zonas que os dois marcaram. Uma zona fora da lista não quer dizer “não”: é só perguntar.</p>`;
-    zs.forEach(z=>{ h+=`<div class="match"><div class="t">${z.t}</div></div>`; });
+    const g=st.par.graus||{};
+    zs.forEach(z=>{ const a=st.mapa[z.id], b=g["m|"+z.id], mm={eu:b!=null?a:null,ele:b};
+      h+=`<div class="match"><div class="t">${z.t}</div><div class="m">${tagMatch(mm)}${b!=null?`<span class="pill g">${esc(eu())}: ${ZONA_OP[a]}</span><span class="pill">${esc(ele())}: ${ZONA_OP[b]}</span>`:""}</div></div>`; });
+    h+=semGraus();
   }
   R.innerHTML=topo+h;
 }
 
 /* Etiqueta do match pelo nível de vontade dos dois (Toparia=1, Quero=2, Quero muito=3) */
 const TIPO_MATCH={total:["🔥","Total"],parcial:["🙂","Parcial"],alinhar:["🤝","Alinhar"],entender:["💬","Entender"]};
-function tipoMatch(m){ if(m.eu==null) return null; const a=Math.min(m.eu,m.ele), b=Math.max(m.eu,m.ele); return a>=2?"total":(a===1&&b===1)?"alinhar":(b-a>=2)?"entender":"parcial"; }
-function tagMatch(m){ if(m.eu==null) return ""; const [e,t]=TIPO_MATCH[tipoMatch(m)]; return `<span class="pill ${tipoMatch(m)==="total"?"hot":"g"}">${e} ${t}</span>`; }
-const falaEntender=m=>m.eu!=null&&tipoMatch(m)==="entender"?`<div class="muted" style="margin-top:8px">💬 Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`:"";
+function tipoMatch(m){ if(m.eu==null||m.ele==null) return null; const a=Math.min(m.eu,m.ele), b=Math.max(m.eu,m.ele); return a>=2?"total":(a===1&&b===1)?"alinhar":(b-a>=2)?"entender":"parcial"; }
+const tagFixa=k=>`<span class="pill ${k==="total"?"hot":"g"}">${TIPO_MATCH[k][0]} ${TIPO_MATCH[k][1]}</span>`;
+const graus=m=>m.eu!=null?`<span class="pill g">${esc(eu())}: ${NIVEIS[m.eu]}</span><span class="pill">${esc(ele())}: ${NIVEIS[m.ele]}</span>`:"";
+const semGraus=()=>st.psiFim&&st.psiFim.aguardaM4?`<p class="muted">Os graus e as etiquetas aparecem quando o código 4 chegar.</p>`:"";
+function tagMatch(m){ if(tipoMatch(m)==null) return ""; const [e,t]=TIPO_MATCH[tipoMatch(m)]; return `<span class="pill ${tipoMatch(m)==="total"?"hot":"g"}">${e} ${t}</span>`; }
+const falaEntender=m=>tipoMatch(m)==="entender"?`<div class="muted" style="margin-top:8px">💬 Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`:"";
 const legendaMatch=`<div class="note">🔥 <b class="w">Total</b>: os dois querem. · 🙂 <b class="w">Parcial</b>: um quer, o outro toparia. · 🤝 <b class="w">Alinhar</b>: os dois toparam; falta combinar como. · 💬 <b class="w">Entender</b>: um quer muito, o outro só toparia. Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`;
 /* 8.4: compara pela identidade absoluta (A, B, os dois, nenhum) e mostra só as concordâncias. Discordâncias e respostas em branco ficam fora. */
 function quemAbs(v,deMim){ const eu=st.sou||"A", par=eu==="A"?"B":"A"; return v===0?(deMim?eu:par):v===1?(deMim?par:eu):v===2?"ambos":"nenhum"; }
-function quemConcorda(){ const pq=(st.par&&st.par.q)||{}; return QUEM.filter(q=>{ const a=st.quem[q.id]; return a!=null&&pq[q.id]!=null&&quemAbs(a,true)===pq[q.id]; }); }
+function quemPar(){ return (st.par&&(st.par.qAll||st.par.q))||{}; }
+function quemConcorda(){ const pq=quemPar(); return QUEM.filter(q=>{ const a=st.quem[q.id]; return a!=null&&pq[q.id]!=null&&quemAbs(a,true)===pq[q.id]; }); }
 function quemHtml(){
   const nome=x=>x==="ambos"?"Os dois":x==="nenhum"?"Nenhum":Nos2.settings.name(x);
-  const lista=quemConcorda();
-  if(!lista.length) return `<p style="margin-top:14px">Ainda não há respostas iguais no Quem do casal. Só as concordâncias aparecem aqui.</p>`;
-  return `<p style="margin-top:14px">${lista.length===1?"1 resposta igual":lista.length+" respostas iguais"}. Só as concordâncias aparecem aqui.</p>`+
-    lista.map(q=>`<div class="match"><div class="t">${q.t}</div><div class="m"><span class="pill ${quemAbs(st.quem[q.id],true)==="ambos"?"hot":"g"}">Os dois responderam: ${esc(nome(quemAbs(st.quem[q.id],true)))}</span></div></div>`).join("");
+  const pq=quemPar(), lista=QUEM.filter(q=>st.quem[q.id]!=null&&pq[q.id]!=null);
+  if(!lista.length) return `<p style="margin-top:14px">Vocês ainda não responderam as mesmas perguntas do Quem do casal.</p>`;
+  const iguais=lista.filter(q=>quemAbs(st.quem[q.id],true)===pq[q.id]).length;
+  return `<p style="margin-top:14px">${lista.length===1?"1 pergunta respondida pelos dois":lista.length+" perguntas respondidas pelos dois"}. As respostas aparecem lado a lado, sem placar.</p>
+  <div class="note">🔥 <b class="w">Total</b>: responderam igual. · 💬 <b class="w">Entender</b>: responderam diferente. Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`+
+    lista.map(q=>{ const a=quemAbs(st.quem[q.id],true), b=pq[q.id], igual=a===b;
+      return `<div class="match"><div class="t">${q.t}</div><div class="m">${tagFixa(igual?"total":"entender")}<span class="pill g">${esc(eu())} disse: ${esc(nome(a))}</span><span class="pill">${esc(ele())} disse: ${esc(nome(b))}</span></div>${igual?"":`<div class="muted" style="margin-top:8px">💬 Vamos sentar e cada um fala seu ponto. E tudo bem.</div>`}</div>`; }).join("");
 }
-function horaHtml(){ return (st.par&&st.par.hz!=null&&st.hora===st.par.hz)?`<div class="match"><div class="t">De manhã, à tarde ou à noite?</div><div class="m"><span class="pill hot">Os dois preferem: ${HORAS[st.hora].toLowerCase()}</span></div></div>`:""; }
+function horaHtml(){ return (st.par&&st.par.hz!=null&&st.hora===st.par.hz)?`<div class="match"><div class="t">De manhã, à tarde ou à noite?</div><div class="m">${tagFixa("total")}<span class="pill g">Os dois preferem: ${HORAS[st.hora].toLowerCase()}</span></div></div>`:""; }
 const AV_OP=["Repetiria","Foi bom","Não repetiria"];
 function renderDepois(){
   const ms=calcMatches(); const favPar=new Set((st.par&&st.par.fav)||[]);
   let h=`<h1 style="margin-top:12px">Depois do encontro</h1><p>Avalie em segredo o que rolou. Sua nota não aparece para ${esc(ele())}. A fantasia só vira <b class="w">favorita</b> quando os dois marcam “Repetiria”. Depois de avaliar, troquem os códigos de novo.</p>`;
   const fav=ms.filter(m=>st.av[m.it.id]===0&&favPar.has(m.it.id));
-  if(fav.length){ h+=`<h2>Favoritas dos dois</h2>`; fav.forEach(m=>h+=`<div class="match"><div class="t">${esc(m.it.t)}</div><div class="m"><span class="pill hot">Repetir</span></div></div>`); }
+  if(fav.length){ h+=`<h2>Favoritas dos dois</h2>`; fav.forEach(m=>h+=`<div class="match"><div class="t">${esc(m.it.t)}</div><div class="m">${tagFixa("total")}<span class="pill hot">Repetir</span></div></div>`); }
   h+=`<h2>Sua avaliação</h2>`;
   if(!ms.length) return h+`<p class="muted">Ainda não há matches para avaliar.</p>`;
   ms.forEach(m=>{ const v=st.av[m.it.id];
@@ -1022,7 +1050,7 @@ function renderPlano(){
   h+=esquentaHtml(diasAte(d));
   h+=`<h1 style="margin-top:10px">Plano da noite</h1><p>Montado com o que os dois marcaram. É um roteiro, não uma obrigação. Na hora, qualquer um pode mudar.</p>`;
   h+=`<h2>Abertura</h2><div class="menu"><a class="ritlink" href="rituais.html?r=entrada&volta=nosdois.html%23planoentrada"><small>Ritual · 10 min</small><span>Ritual de entrada</span><em>Para passar da rotina para um momento a dois.</em></a></div>`;
-  const dos2 = ms, cat = id => { const c=CATALOGO.find(c=>c.itens.some(i=>i.id===id)); return c?c.c:"Ideias"; };
+  const dos2 = ms.filter(m=>m.ele==null||(m.eu>=2&&m.ele>=2)), cat = id => { const c=CATALOGO.find(c=>c.itens.some(i=>i.id===id)); return c?c.c:"Ideias"; };
   const princ = dos2.filter(m=>cat(m.it.id)!=="Com terceiros (fantasia)").slice(0,5);
   const aquec = ms.filter(m=>!princ.includes(m)&&["Clima e lugares","Toque e sentidos","Personagens e fetiches","Oral","Ideias"].includes(cat(m.it.id))).slice(0,3);
   const conversa = ms.filter(m=>cat(m.it.id)==="Com terceiros (fantasia)" || (m.eu===1&&m.ele===1)).filter(m=>!princ.includes(m)&&!aquec.includes(m)).slice(0,4);
@@ -1031,10 +1059,10 @@ function renderPlano(){
     lista.forEach(m=>b+=`<div class="match"><div class="t">${esc(m.it.t)}</div>${m.papel?`<div class="muted" style="margin-top:4px">${m.papel}</div>`:""}<div class="m">${tagMatch(m)}</div>${falaEntender(m)}</div>`);
     return b+(extra||""); };
   h+=bloco("1 · Aquecimento","Para começar sem pressa.",aquec,`<button class="btn ghost" onclick="go('jogar');abrirJogo('prel')">Abrir Preliminares</button>`);
-  h+=bloco("2 · O que os dois querem","Fantasias que os dois marcaram.",princ);
+  h+=bloco("2 · O que os dois querem",(ms.some(m=>m.ele!=null)?"Só fantasias que os dois marcaram como Quero ou Quero muito.":"Fantasias que os dois marcaram."),princ);
   h+=bloco("3 · Para conversar","Os dois toparam, mas vale combinar antes ou durante.",conversa);
   const pp=new Set(st.par.po||[]), posJ=POS.filter(p=>st.pos[p.id]&&pp.has(p.id));
-  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram no guia.</p>`+(posJ.length?posJ.map(p=>`<div class="match"><div class="t">${p.n}</div><div class="muted" style="margin-top:4px">${p.d}</div><div class="m"><span class="pill g">${nivelTxt(p.l)}</span></div></div>`).join(""):`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
+  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram no guia.</p>`+(posJ.length?posJ.map(p=>`<div class="match"><div class="t">${p.n}</div><div class="muted" style="margin-top:4px">${p.d}</div><div class="m">${tagFixa("total")}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`).join(""):`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
   const quente = quemConcorda().filter(q=>quemAbs(st.quem[q.id],true)==="ambos");
   if(quente.length){ h+=`<h2>Do Quem do Casal</h2><p style="margin-top:0">Os dois responderam “Os dois”:</p>`; quente.forEach(q=>h+=`<div class="match"><div class="t">${q.t}</div></div>`); }
   const rec=(quem,s,l)=> (s||l) ? `<div class="match"><div class="eyebrow">${esc(quem)}</div>${s?`<div class="t" style="margin-top:6px;white-space:pre-wrap">${esc(s)}</div>`:""}${l?`<div class="muted" style="margin-top:8px;white-space:pre-wrap"><b class="w">Hoje não:</b> ${esc(l)}</div>`:""}</div>` : "";

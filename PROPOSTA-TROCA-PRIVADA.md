@@ -1,6 +1,6 @@
 # Proposta técnica — troca privada de coincidências (item 8.1, opção B)
 
-**Status: APROVADA e IMPLEMENTADA (27/11/2026)**, com as decisões do usuário: opção B (3 mensagens, sem graus nem etiquetas); sem contador diário; Mapa comparado; ideias com autor e prévia. As seções abaixo descrevem a proposta original; onde ela fala em M4 ou em Mapa como envio, vale a decisão acima.
+**Status: APROVADA e IMPLEMENTADA (27/11/2026). Revisada no mesmo dia: opção A (4 mensagens, graus e etiquetas só nas coincidências) e Quem do casal como envio para o par ler.** Versão anterior:, com as decisões do usuário: opção B (3 mensagens, sem graus nem etiquetas); sem contador diário; Mapa comparado; ideias com autor e prévia. As seções abaixo descrevem a proposta original; onde ela fala em M4 ou em Mapa como envio, vale a decisão acima.
 
 ## 1. Objetivo
 

@@ -19,7 +19,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 ## 2. Textos para aprovar
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 2.1 | Legenda e regra das etiquetas dos matches | ⏸ adiado | Decisão do usuário (27/11/2026). Com a troca privada (opção B), as etiquetas não aparecem. |
+| 2.1 | Etiquetas | 🚀 | Revisão do usuário (27/11/2026): 🔥 Total, 🙂 Parcial, 🤝 Alinhar e 💬 Entender em fantasias e Mapa; 🔥 Total em posições, horário e favoritas; Total/Entender no Quem do casal. |
 | 2.2 | "Quanto tempo vocês têm?" e legendas dos roteiros | ⏸ adiado | Decisão do usuário (27/11/2026). |
 | 2.3 | Duração do roteiro “Nós 2” | 🚀 | Avulso: “Cerca de 25 min”. No Plano da noite: “Cerca de 40 min, incluindo os rituais” (o roteiro passa pelos rituais de entrada e de depois; a entrada não se repete se já foi feita pela Abertura). |
 
@@ -43,7 +43,7 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 4.4 | "Esquentar sozinho" desligado por padrão | ⏳ | |
 | 4.5 | Dado e Cartas quentes respeitando "Passo" e "Hoje não" | ⏳ | |
 | 4.6 | Passes ilimitados no Dado e nas Preliminares | ⏳ | |
-| 4.7 | "Quem do casal" mostrando só concordâncias | 🚀 | Aplicado junto com o 8.4. |
+| 4.7 | "Quem do casal" | 🚀 | Substituído pela revisão do 8.4: todas as respostas lado a lado, com etiqueta. |
 | 4.8 | "+1 min" e regiões a evitar nas massagens | ⏳ | |
 | 4.9 | Roleta vazia como última etapa do roteiro "Nós 2" | ⏳ | |
 
@@ -71,10 +71,10 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
 | 8.1A | Avisos do formato atual (ND3): introdução, aviso junto do código e “O que vai no código?” | 🚀 | Aplicado. |
-| 8.1B | Troca privada de coincidências | 🚀 implementado · ⏳ validação no iPhone | Decisões do usuário (27/11/2026): opção B (3 códigos, graus privados, papéis só com combinação compatível); sem contador diário (só próximo passo e “Última troca neste iPhone”); Mapa comparado (só zonas dos dois); ideias com autor e prévia do envio. Implementado com DH-PSI em ristretto255 (noble-curves 1.9.7 empacotada em js/vendor). ND3 ainda é lido, mas não sobrescreve troca privada. Consequência da opção B: as etiquetas Total/Parcial/Alinhar/Entender deixam de aparecer. |
+| 8.1B | Troca privada de coincidências | 🚀 implementado · ⏳ validação no iPhone | Revisão do usuário (27/11/2026): opção 1 — só coincidências, agora com os graus de cada um e etiquetas. A troca passou a ter 4 códigos: coincidências no código 3, graus e etiquetas no código 4. Os graus vão só para as coincidências; o que só um marcou continua sem aparecer e sem ficar legível. |
 | 8.2 | Código antigo e última troca | 🚀 | Identificação por aparelho, pareamento e revisão; aviso “Este código é de uma troca anterior. Peça um código novo.”; reimportar o mesmo código não muda nada; “Última troca neste iPhone” na tela. |
 | 8.3 | Aviso de respostas alteradas | 🚀 | Aviso até o par confirmar (no código dele) um código seu gerado depois da edição. Gerar sozinho não limpa. |
-| 8.4 | Quem do casal só com concordâncias | 🚀 | Comparação pela identidade absoluta (A, B, os dois, nenhum). Discordâncias e respostas em branco ficam fora. A proteção durante a troca entra no 8.1B. |
+| 8.4 | Quem do casal | 🚀 | Revisão do usuário (27/11/2026): as respostas dos dois voltam a aparecer lado a lado, com 🔥 Total (iguais) ou 💬 Entender (diferentes). As respostas do Quem vão como envio para o par ler, com prévia. |
 
 ## 9. Validação no iPhone real
 
@@ -92,9 +92,9 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | 9.8 | Me Conta Mais: mesma carta, vez, placar e relógio da partida (o tempo fora não é descontado) | ✔ 27/11 | ⏳ |
 | 9.9 | Conversa: mesma etapa e tempo restante; a pausa de 20 min continua contando o tempo real | ✔ 27/11 | ⏳ |
 | 9.10 | Voz em português disponível em modo avião (Massagem e Preliminares) | — | ⏳ |
-| 9.11 | Troca privada: os três códigos (≈ 8,6 mil, 16,8 mil e 8,4 mil caracteres) chegam inteiros depois de copiados e colados num app de mensagens | ✔ 27/11 (tamanho medido) | ⏳ |
+| 9.11 | Troca privada: os quatro códigos (≈ 8,6 mil, 16,8 mil, 8,5 mil e poucos caracteres) chegam inteiros depois de copiados e colados num app de mensagens | ✔ 27/11 (tamanho medido) | ⏳ |
 | 9.12 | Troca privada: tempo para gerar e abrir os códigos no iPhone (no navegador: 0,2 s, 0,3 s e 0,65 s) | ✔ 27/11 | ⏳ |
-| 9.13 | Troca privada: quem começou vê o resultado ao colar o código 2; o par, ao colar o código 3 | ✔ 27/11 | ⏳ |
+| 9.13 | Troca privada: quem começou vê as coincidências ao colar o código 2 e os graus ao colar o código 4; o par vê tudo ao colar o código 3 | ✔ 27/11 | ⏳ |
 | 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ⏳ |
 | 9.15 | Tela acesa: numa massagem pelo ícone da Tela de Início, a tela não apaga sozinha; ao pausar, volta a apagar no tempo normal (exige iOS 16.4; no app instalado, iOS 18.4 ou mais novo) | ✔ 27/11 | ⏳ |
 | 9.16 | Nível máximo: criar uma partida até o nível 3 num iPhone e entrar com o código no outro; conferências iguais e nenhuma missão acima do nível 3 | ✔ 27/11 | ⏳ |
