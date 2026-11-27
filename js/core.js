@@ -132,5 +132,28 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){
   window.addEventListener("load",()=>{ navigator.serviceWorker.register("./sw.js").catch(()=>{}); });
 }
 
-window.Nos2={SCHEMA_VERSION,store,settings,esc,hash,rng,seededShuffle,randInt,copyText,deck,encrypt,decrypt,pin,lock,b64u,unb64u};
+/* ---------- tela acesa nas sessões guiadas (4.2) ----------
+   Cada sessão começa com "Manter a tela acesa" ligado. Ao pausar ou encerrar, o bloqueio automático volta ao normal. */
+const tela={
+  quer:true, lock:null, rodando:false,
+  suportado(){ return "wakeLock" in navigator; },
+  pedindo:false,
+  async pedir(){ if(!tela.quer||!tela.rodando||document.hidden||!tela.suportado()||tela.lock||tela.pedindo) return;
+    tela.pedindo=true;
+    try{ const l=await navigator.wakeLock.request("screen");
+      if(!tela.quer||!tela.rodando||document.hidden){ l.release(); } // pausaram enquanto o pedido chegava
+      else { tela.lock=l; l.addEventListener("release",()=>{ if(tela.lock===l) tela.lock=null; }); } }
+    catch(e){ tela.lock=null; }
+    tela.pedindo=false; },
+  soltar(){ try{ if(tela.lock) tela.lock.release(); }catch(e){} tela.lock=null; },
+  iniciarSessao(){ tela.quer=true; tela.rodando=true; tela.pedir(); },
+  continuar(){ tela.rodando=true; tela.pedir(); },
+  pausar(){ tela.rodando=false; tela.soltar(); },
+  encerrar(){ tela.rodando=false; tela.soltar(); },
+  alternar(on){ tela.quer=!!on; if(on) tela.pedir(); else tela.soltar(); },
+  html(){ return `<label style="display:flex;gap:10px;align-items:center;margin:12px 0;font-size:14px;min-height:44px;cursor:pointer"><input type="checkbox" style="width:22px;height:22px" ${tela.quer?"checked":""} onchange="Nos2.tela.alternar(this.checked)"> Manter a tela acesa</label>`; }
+};
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) tela.soltar(); });
+
+window.Nos2={tela,SCHEMA_VERSION,store,settings,esc,hash,rng,seededShuffle,randInt,copyText,deck,encrypt,decrypt,pin,lock,b64u,unb64u};
 })();

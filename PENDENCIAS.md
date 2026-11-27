@@ -13,22 +13,22 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 1.2a | Organização de “Cartas” | ✅ | Nós Dois → Quebrar o gelo → Cartas mostra: “Me Conta Mais — 40 cartas de humor, conversa e carinho.” e “Cartas íntimas (+18) — 36 perguntas dos grupos Nós, Desejo e Fantasia.” Sai o botão direto do Me Conta Mais em Quebrar o gelo. Atalho específico (nosdois.html#mcm) abre o Me Conta Mais direto. |
 | 1.2b | Onde ficam as Cartas quentes | ✅ | Opção 2: mudam para Nós Dois → Esquentar, ao lado de Preliminares e Dado da Noite. Preservar as 45 ações, os níveis Leve/Quente/Ousado, as regras e os dados salvos; reutilizar a tela atual e atualizar atalhos. “Cartas” fica só com Me Conta Mais e Cartas íntimas (+18). |
 | 1.3 | Divisão do clima | ✅ | 01–05 leves; 06–08 mais pessoais. |
-| 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | 🚀 | Aprovados pelo usuário (27/11/2026). |
-| 1.5 | "Rapidinho" nomeando o roteiro e o modo do Me Conta Mais | ⏳ | |
+| 1.4 | Textos do exemplo, do "Como jogar" e das dicas da partida | ⏸ adiado | Decisão do usuário (27/11/2026): fica para depois. Os textos atuais continuam no app. |
+| 1.5 | Nome do modo curto do Me Conta Mais | 🚀 | “3 cartas”, com a legenda “Até 10 minutos de conversa.” O roteiro curto do Nós Dois continua “Rapidinho”. |
 
 ## 2. Textos para aprovar
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
-| 2.1 | Legenda e regra das etiquetas dos matches | 🚀 | Aprovadas (27/11/2026). |
-| 2.2 | "Quanto tempo vocês têm?" e legendas dos roteiros | 🚀 | Aprovadas (27/11/2026). |
-| 2.3 | Legenda do roteiro "Nós 2" (promete ~40 min, dá ~24 min) | ⏳ | |
+| 2.1 | Legenda e regra das etiquetas dos matches | ⏸ adiado | Decisão do usuário (27/11/2026). Com a troca privada (opção B), as etiquetas não aparecem. |
+| 2.2 | "Quanto tempo vocês têm?" e legendas dos roteiros | ⏸ adiado | Decisão do usuário (27/11/2026). |
+| 2.3 | Duração do roteiro “Nós 2” | 🚀 | Avulso: “Cerca de 25 min”. No Plano da noite: “Cerca de 40 min, incluindo os rituais” (o roteiro passa pelos rituais de entrada e de depois; a entrada não se repete se já foi feita pela Abertura). |
 
 ## 3. Decisões da avaliação crítica
 | # | Pendência | Status | Decisão |
 |---|---|---|---|
 | 3.1 | Espero Você: recusa do par | ✅ | Decisão final (27/11/2026): fica como está hoje (Cumpri, Fui descoberto(a), Não fiz). Sem o botão “Encerrar missão”. Nada a aplicar. |
-| 3.2 | Trocar o prêmio "vale-sim" | ⏳ | |
-| 3.3 | Linha discreta com Ligue 180/190 em "Como funciona" | ⏳ | |
+| 3.2 | Prêmio “vale-sim” | 🚀 | Trocado por “Vale escolher o próximo jogo”: “Vocês escolhem duas opções que topariam jogar. Quem venceu dá o voto final.” |
+| 3.3 | Linha de ajuda (Ligue 180/190) em “Como funciona” | ✖ encerrado | Decisão do usuário (27/11/2026): não acrescentar. |
 
 ## 4. Ajustes técnicos recomendados
 | # | Pendência | Status | Decisão |
@@ -38,8 +38,8 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 4.1b | Narração depois de “Retomar” | ✅ | Etapas seguintes voltam a ser narradas; só a interrompida fica em silêncio (salvo “Ouvir instrução”). |
 | 4.1c | Validade da sessão pausada | ✅ | 12 horas; depois some sozinha. |
 | 4.1d | Cronômetros das cartas do Espero Você | ✅ | Pausam; o prazo da missão continua correndo. |
-| 4.2 | Manter a tela acesa nas sessões guiadas | ⏳ | |
-| 4.3 | "Até que nível?" ao criar partida do Espero Você | ⏳ | |
+| 4.2 | Manter a tela acesa nas sessões guiadas | 🚀 implementado · ⏳ validação no iPhone | Opção “Manter a tela acesa” ligada no início de Massagem, Preliminares, Dado, Me Conta Mais, Conversa e Rituais; pode desligar na sessão; ao pausar ou encerrar, volta o bloqueio automático normal. |
+| 4.3 | Nível máximo no Espero Você | 🚀 implementado · ⏳ validação no iPhone | “Até que nível vocês querem jogar hoje?” ao criar a partida (obrigatório, sem nível pré-marcado). O teto vai no código (ex.: R24N3-…) e vale para todas as missões e para o veto; o nível 5 só entra quando escolhido. Códigos antigos, sem nível, valem até o 5. |
 | 4.4 | "Esquentar sozinho" desligado por padrão | ⏳ | |
 | 4.5 | Dado e Cartas quentes respeitando "Passo" e "Hoje não" | ⏳ | |
 | 4.6 | Passes ilimitados no Dado e nas Preliminares | ⏳ | |
@@ -96,3 +96,5 @@ Regra: um item só muda para ✔ depois de conferido no iPhone, pelo ícone da T
 | 9.12 | Troca privada: tempo para gerar e abrir os códigos no iPhone (no navegador: 0,2 s, 0,3 s e 0,65 s) | ✔ 27/11 | ⏳ |
 | 9.13 | Troca privada: quem começou vê o resultado ao colar o código 2; o par, ao colar o código 3 | ✔ 27/11 | ⏳ |
 | 9.14 | Troca privada: os dois iPhones com iOS 16.4 ou mais novo | — | ⏳ |
+| 9.15 | Tela acesa: numa massagem pelo ícone da Tela de Início, a tela não apaga sozinha; ao pausar, volta a apagar no tempo normal (exige iOS 16.4; no app instalado, iOS 18.4 ou mais novo) | ✔ 27/11 | ⏳ |
+| 9.16 | Nível máximo: criar uma partida até o nível 3 num iPhone e entrar com o código no outro; conferências iguais e nenhuma missão acima do nível 3 | ✔ 27/11 | ⏳ |

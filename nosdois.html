@@ -241,7 +241,7 @@
     <h2>Quanto tempo vocês têm?</h2>
     <div class="rotgrid">
       <button onclick="rotIniciar('rap')"><span>Rapidinho</span><em>cerca de 10 min</em></button>
-      <button onclick="rotIniciar('nos')"><span>Nós 2</span><em>cerca de 40 min</em></button>
+      <button onclick="rotIniciar('nos')"><span>Nós 2</span><em>Cerca de 25 min</em></button>
       <button onclick="rotIniciar('tempo')"><span>Temos tempo</span><em>sem hora para acabar</em></button>
       <button onclick="rotIniciar('sorte')"><span>Sorte de hoje</span><em>o app escolhe por vocês</em></button>
     </div>
@@ -1020,7 +1020,7 @@ function renderPlano(){
     h+=`<div class="big">${dias>0?dias:dias===0?"Hoje":"—"}</div><div class="muted">${dias>0?(dias===1?"dia para o encontro":"dias para o encontro")+" · ":""}${dt}</div>`; }
   h+=esquentaHtml(diasAte(d));
   h+=`<h1 style="margin-top:10px">Plano da noite</h1><p>Montado com o que os dois marcaram. É um roteiro, não uma obrigação. Na hora, qualquer um pode mudar.</p>`;
-  h+=`<h2>Abertura</h2><div class="menu"><a class="ritlink" href="rituais.html?r=entrada&volta=nosdois.html%23matches"><small>Ritual · 10 min</small><span>Ritual de entrada</span><em>Para passar da rotina para um momento a dois.</em></a></div>`;
+  h+=`<h2>Abertura</h2><div class="menu"><a class="ritlink" href="rituais.html?r=entrada&volta=nosdois.html%23planoentrada"><small>Ritual · 10 min</small><span>Ritual de entrada</span><em>Para passar da rotina para um momento a dois.</em></a></div>`;
   const dos2 = ms, cat = id => { const c=CATALOGO.find(c=>c.itens.some(i=>i.id===id)); return c?c.c:"Ideias"; };
   const princ = dos2.filter(m=>cat(m.it.id)!=="Com terceiros (fantasia)").slice(0,5);
   const aquec = ms.filter(m=>!princ.includes(m)&&["Clima e lugares","Toque e sentidos","Personagens e fetiches","Oral","Ideias"].includes(cat(m.it.id))).slice(0,3);
@@ -1042,7 +1042,8 @@ function renderPlano(){
   h+=`<h2>Na hora</h2><div class="menu">
     <button onclick="go('jogar');abrirJogo('roleta')"><small>Indecisos?</small><span>Sortear um match</span></button>
     <button onclick="go('jogar');abrirJogo('dado')"><small>Jogo</small><span>Dado da Noite</span></button>
-    <button onclick="go('jogar');abrirJogo('vd')"><small>Jogo</small><span>Verdade ou Desafio</span></button></div>
+    <button onclick="go('jogar');abrirJogo('vd')"><small>Jogo</small><span>Verdade ou Desafio</span></button>
+    <button onclick="go('jogar');rotIniciar('nosPlano')"><small>Roteiro</small><span>Nós 2</span><em>Cerca de 40 min, incluindo os rituais</em></button></div>
     <div class="note">O match mostra o que os dois querem. O consentimento continua sendo combinado na hora.</div>`;
   h+=`<h2>Fechamento</h2><div class="menu"><a class="ritlink" href="rituais.html?r=depois&volta=nosdois.html%23matches"><small>Ritual · 5 min</small><span>Ritual de depois</span><em>Para ficar mais um pouquinho juntos no fim.</em></a></div><p class="muted">Se vocês encerrarem antes, tudo bem.</p>`;
   return h;
@@ -1057,7 +1058,7 @@ function iniciarTimer(seg,onEnd,onTick){
   draw();
   T.id=setInterval(()=>{ if(!T||!T.run) return; T.left--; draw(); if(T.onTick) T.onTick(T.left); if(T.left<=0){ const f=T.onEnd; pararTimer(); f&&f(); } },1000);
 }
-function pausarTimer(){ if(!T) return; T.run=!T.run; try{ if(!T.run) speechSynthesis.pause(); else speechSynthesis.resume(); }catch(e){} const b=$("btnPausa"); if(b) b.textContent=T.run?"Pausar":"Continuar"; }
+function pausarTimer(){ if(!T) return; T.run=!T.run; if(T.run) Nos2.tela.continuar(); else Nos2.tela.pausar(); try{ if(!T.run) speechSynthesis.pause(); else speechSynthesis.resume(); }catch(e){} const b=$("btnPausa"); if(b) b.textContent=T.run?"Pausar":"Continuar"; }
 
 /* ======================= PAUSA E RETOMADA (4.1) =======================
    Ao sair do app ou bloquear a tela: o cronômetro para, a narração para e a atividade fica salva no aparelho
@@ -1068,7 +1069,7 @@ function fotoMcm(){ return Object.assign({},K,{mostradas:[...K.mostradas],feitas
 function pausarAtividade(){
   if(!ATIVO||PAUSADO) return;
   const snap={pagina:"nosdois.html",tipo:ATIVO,nome:NOME_ATIV[ATIVO],savedAt:Date.now(),left:T?T.left:null,ROT:ROT};
-  pararTimer(); calar();
+  pararTimer(); calar(); Nos2.tela.pausar();
   if(ATIVO==="mass") snap.M=M;
   else if(ATIVO==="prel") snap.P=P;
   else if(ATIVO==="dado") snap.D=D;
@@ -1101,7 +1102,7 @@ function restaurar(s){
   else if(s.tipo==="mcm"){ K=Object.assign(s.K,{mostradas:new Set(s.K.mostradas),feitas:new Set(s.K.feitas),tid:null}); K.t0=Date.now()-(MCM_MODOS[K.modo].min*60000-(s.restMs||0)); }
 }
 function retomarAtividade(){
-  const s=PAUSADO; if(!s) return; restaurar(s); PAUSADO=null; Nos2.store.del("pausa");
+  const s=PAUSADO; if(!s) return; restaurar(s); PAUSADO=null; Nos2.store.del("pausa"); Nos2.tela.continuar();
   const l=s.left;
   if(s.tipo==="mass") massEtapa({left:l,silencio:true});
   else if(s.tipo==="prel"){ prelRender(); if(P.fase==="carta") iniciarTimer(l!=null?l:P.carta.s,prelTempo); else if(P.avanca&&l!=null) iniciarTimer(l,()=>prelProxima()); }
@@ -1129,14 +1130,17 @@ function abrirJogo(j){
   ({dado:dadoInit,vd:vdInit,prel:prelInit,mass:massInit,cartas:cartasInit,mcm:mcmInit,pos:posInit,roleta:roletaInit})[j]();
   window.scrollTo(0,0);
 }
-function sairJogo(){ ATIVO=null; PAUSADO=null; Nos2.store.del("pausa"); mcmFechar(); pararTimer(); try{speechSynthesis.cancel();}catch(e){} if(ROT){ ROT.i++; return rotTela(); } $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
+function sairJogo(){ Nos2.tela.encerrar(); ATIVO=null; PAUSADO=null; Nos2.store.del("pausa"); mcmFechar(); pararTimer(); try{speechSynthesis.cancel();}catch(e){} if(ROT){ ROT.i++; return rotTela(); } $("jogoMenu").style.display=""; $("jogoArea").style.display="none"; }
 
 /* ---- Rapidinho, Nós 2, Temos tempo, Sorte de hoje: roteiros montados com os jogos existentes ---- */
 let ROT=null;
-const ROT_NOME={rap:"Rapidinho",nos:"Nós 2",tempo:"Temos tempo",sorte:"Sorte de hoje"};
-function rotPasso(k){ return {prel6:{k:"prel",n:6,t:"Preliminares · curta"},prel10:{k:"prel",n:10,t:"Preliminares · média"},prel15:{k:"prel",n:15,t:"Preliminares · longa"},
+const ROT_NOME={rap:"Rapidinho",nos:"Nós 2",nosPlano:"Nós 2",tempo:"Temos tempo",sorte:"Sorte de hoje"};
+function rotPasso(k){ return {ritEntrada:{k:"ritual",r:"entrada",t:"Ritual de entrada"},ritDepois:{k:"ritual",r:"depois",t:"Ritual de depois"},prel6:{k:"prel",n:6,t:"Preliminares · curta"},prel10:{k:"prel",n:10,t:"Preliminares · média"},prel15:{k:"prel",n:15,t:"Preliminares · longa"},
   dado:{k:"dado",t:"Dado da Noite"},roleta:{k:"roleta",t:"Roleta dos matches"},sensual:{k:"mass",tipo:"sensual",t:"Massagem sensual"},tantrica:{k:"mass",tipo:"tantrica",t:"Massagem tântrica"}}[k]; }
 function rotMontar(tipo){
+  if(tipo==="nosPlano"){ // no Plano da noite: abertura e fechamento uma vez por sessão (a entrada já feita pela Abertura não se repete)
+    const feita=Date.now()-(Nos2.store.get("plano.entrada",0)||0)<6*3600*1000;
+    return [...(feita?[]:["ritEntrada"]),"prel10","dado","roleta","ritDepois"].map(rotPasso); }
   if(tipo==="rap") return [rotPasso(Nos2.deck.draw("nd.rot.rap",["prel6","dado"]))];
   if(tipo==="nos") return ["prel10","dado","roleta"].map(rotPasso);
   return [rotPasso(Nos2.deck.draw("nd.rot.mass",["sensual","tantrica"])),rotPasso("prel15")];
@@ -1153,12 +1157,14 @@ function rotTela(){
   let acao;
   if(p.k==="prel") acao=`<div class="muted" style="margin-top:6px">Primeiro a conduzir:</div><div class="two"><button class="btn gold" onclick="rotPrel(0)">${esc(eu())}</button><button class="btn gold" onclick="rotPrel(1)">${esc(ele())}</button></div>`;
   else if(p.k==="mass") acao=`<div class="muted" style="margin-top:6px">Quem recebe primeiro:</div><div class="two"><button class="btn gold" onclick="rotMass(0)">${esc(eu())}</button><button class="btn gold" onclick="rotMass(1)">${esc(ele())}</button></div>`;
+  else if(p.k==="ritual") acao=`<button class="btn primary" onclick="rotRitual()">Começar</button>`;
   else acao=`<button class="btn primary" onclick="rotJogo()">Começar</button>`;
   A.innerHTML=`<button class="back" onclick="rotSair()">‹ Jogos</button><div class="eyebrow" style="margin-top:8px">${ROT_NOME[ROT.tipo]}${sorte?"":` · etapa ${ROT.i+1} de ${n}`}</div><h1>${p.t}</h1>
   ${sorte||n===1?"":`<div class="mbar">${ROT.passos.map((_,k)=>`<i class="${k<ROT.i?"d":k===ROT.i?"c":""}"></i>`).join("")}</div><p>${ROT.passos.map((x,k)=>k===ROT.i?`<b class="w">${x.t}</b>`:x.t).join(" → ")}</p>`}
   <div class="game">${acao}<button class="btn ghost" onclick="ROT.i++;rotTela()">Pular esta etapa</button></div>`;
   window.scrollTo(0,0);
 }
+function rotRitual(){ const p=ROT.passos[ROT.i]; Nos2.store.set("rot",ROT); location.href=`rituais.html?r=${p.r}&volta=nosdois.html%23rot`; }
 function rotSair(){ ROT=null; sairJogo(); }
 function rotJogo(){ const p=ROT.passos[ROT.i]; (p.k==="dado"?dadoInit:roletaInit)(); window.scrollTo(0,0); }
 function rotPrel(quem){ const p=ROT.passos[ROT.i]; prelInit(); document.querySelectorAll("#prelDur .chip").forEach(c=>c.classList.toggle("on",+c.dataset.n===p.n)); $("pAuto").checked=true; prelComecar(quem); }
@@ -1168,7 +1174,7 @@ const voltar = `<button class="back" onclick="sairJogo()">‹ Jogos</button>`;
 
 /* ---- Dado da Noite ---- */
 let D;
-function dadoInit(){ D={passes:2,rodada:0,toques:[false,false],res:null}; dadoRender(); }
+function dadoInit(){ Nos2.tela.iniciarSessao(); D={passes:2,rodada:0,toques:[false,false],res:null}; dadoRender(); }
 function dadoRender(){
   ATIVO="dado";
   const A=$("jogoArea");
@@ -1184,7 +1190,7 @@ function dadoRender(){
     <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" ${D.passes?"":"disabled"} onclick="dadoPassar()">Passar (${D.passes})</button></div>
     <button class="btn primary" onclick="dadoProxima()">Próxima rodada</button>`;
   }
-  h+=`<button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>
+  h+=`${Nos2.tela.html()}<button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>
   ${!D.res && D.rodada===0 ? "" : comoHtml("dado",false)}
   <div class="note">Não curtiu? Passa. Travou? Pausa. Mudou de ideia? Encerra. Filmagem, terceiros e contato no pescoço ficam fora deste jogo.</div>`;
   A.innerHTML=h;
@@ -1245,7 +1251,7 @@ function prelComecar(quem){
   const sol=$("soltura").checked, max=+(document.querySelector("#prelDur .chip.on")||{dataset:{n:10}}).dataset.n;
   st.voz=$("pVoz").checked; salvar();
   P={nivel:1,n:0,max,conduz:quem,trocas:2,subir:[false,false],sol,auto:$("pAuto").checked,avanca:$("pAvanca").checked,decks:{},fav:[],feitas:[]};
-  sino(); prelProxima(true);
+  sino(); Nos2.tela.iniciarSessao(); prelProxima(true);
 }
 function prelCarta(){ const L=PREL[P.nivel]; return Object.assign({},L[+Nos2.deck.draw("nd.prel."+P.nivel,idx(L),i=>P.sol||!L[+i].v)]); }
 function prelNivelAuto(){ if(!P.auto) return; const alvo=Math.min(3,1+Math.floor(P.n*3/P.max)); if(alvo>P.nivel){ P.nivel=alvo; toast("Esquentando: nível "+alvo); } }
@@ -1292,12 +1298,12 @@ function prelRender(){
   }
   if(P.nivel<3) h+=`<p style="margin-top:14px">Subir para o nível ${P.nivel+1}:</p><div class="two"><button class="btn ${P.subir[0]?"gold":"ghost"}" onclick="prelSubir(0)">${P.subir[0]?"✓ ":""}${esc(eu())}</button><button class="btn ${P.subir[1]?"gold":"ghost"}" onclick="prelSubir(1)">${P.subir[1]?"✓ ":""}${esc(ele())}</button></div>`;
   if(P.nivel>1) h+=`<button class="btn ghost" onclick="prelBaixar()">Baixar nível</button>`;
-  h+=`<button class="btn ghost" onclick="calar();prelFim()">Encerrar</button></div>`;
+  h+=`${Nos2.tela.html()}<button class="btn ghost" onclick="calar();prelFim()">Encerrar</button></div>`;
   $("jogoArea").innerHTML=h;
   if(T){ const e=$("tmr"); if(e) e.textContent=`${Math.floor(T.left/60)}:${String(T.left%60).padStart(2,"0")}`; }
 }
 function prelFim(){
-  ATIVO=null; Nos2.store.del("pausa");
+  Nos2.tela.encerrar(); ATIVO=null; Nos2.store.del("pausa");
   pararTimer(); calar(); falar("Fim das preliminares.");
   const f=P?P.fav:[];
   $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim das preliminares</h1><p>${P?P.feitas.length:0} cartas jogadas. Daqui pra frente é com vocês.</p>
@@ -1422,7 +1428,7 @@ let AC=null;
 function sino(){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const o=AC.createOscillator(), g=AC.createGain(); o.type="sine"; o.frequency.value=660; g.gain.setValueAtTime(.0001,AC.currentTime); g.gain.exponentialRampToValueAtTime(.18,AC.currentTime+.02); g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+1.6); o.connect(g).connect(AC.destination); o.start(); o.stop(AC.currentTime+1.7); }catch(e){} }
 function falar(t){ if(st.voz===false) return; try{ const u=new SpeechSynthesisUtterance(t); u.lang="pt-BR"; u.rate=.92; const v=speechSynthesis.getVoices().find(v=>/pt[-_]BR/i.test(v.lang)); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
 function calar(){ try{ speechSynthesis.cancel(); }catch(e){} }
-function massIniciar(){ const v=$("vozOn"); st.voz=v?v.checked:true; salvar(); sino(); massEtapa(); }
+function massIniciar(){ Nos2.tela.iniciarSessao(); const v=$("vozOn"); st.voz=v?v.checked:true; salvar(); sino(); massEtapa(); }
 function massEtapa(op){
   op=op||{}; calar(); ATIVO="mass";
   const MASS=MASSAGENS[M.tipo].steps;
@@ -1435,7 +1441,7 @@ function massEtapa(op){
   <div class="game"><div class="stat"><span>${esc(da)} faz</span><span>${esc(rec)} recebe</span></div>
   ${e.b?`<div class="resp">respirem</div><div class="muted" style="text-align:center">Inspira enquanto cresce · solta enquanto diminui</div>`:mapaCorpo(e.t)}
   ${(e.p||e.r)?`<div class="badges">${e.p?`<span class="pill g">Pressão: ${e.p}</span>`:""}${e.r?`<span class="pill">Ritmo: ${e.r}</span>`:""}</div>`:""}
-  <ul class="cues" id="cues">${e.c.map(c=>`<li>${c}</li>`).join("")}</ul>
+  <ul class="cues" id="cues">${e.c.map(c=>`<li>${c}</li>`).join("")}</ul>${Nos2.tela.html()}
   <div class="timer" id="tmr"></div>
   <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" onclick="M.i++;sino();massEtapa()">Próxima etapa</button></div>
   ${st.voz!==false?`<button class="btn ghost" onclick="ouvirInstrucao()">Ouvir instrução</button>`:""}
@@ -1447,7 +1453,7 @@ function massEtapa(op){
   mostrar(Math.min(n-1,Math.floor((e.s-ini)/fatia)));
   iniciarTimer(ini,()=>{ M.i++; sino(); massEtapa(); }, left=>{ const k=Math.min(n-1,Math.floor((e.s-left)/fatia)); mostrar(k); });
 }
-function massFim(){ ATIVO=null; Nos2.store.del("pausa"); pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p>${ROT?proxEtapa():`<button class="btn primary" onclick="massInit()">Outra massagem</button>`}`; }
+function massFim(){ Nos2.tela.encerrar(); ATIVO=null; Nos2.store.del("pausa"); pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p>${ROT?proxEtapa():`<button class="btn primary" onclick="massInit()">Outra massagem</button>`}`; }
 
 /* ---- Guia de posições ---- */
 const nivelTxt=l=>["","Leve","Quente","Ousada"][l];
@@ -1496,7 +1502,7 @@ function sortearPos(){ const ok=new Set(window._posPool.map(x=>x.id)); const id=
 /* ---- Baralhos ---- */
 let K=null;
 /* ---- Me Conta Mais: tela de entrada (usa o baralho de perguntas já existente) ---- */
-const MCM_MODOS={rap:{nome:"Rapidinho",min:10,max:3},c20:{nome:"Partida completa",min:20,max:5},c30:{nome:"Partida completa",min:30,max:8},c40:{nome:"Partida completa",min:40,max:10}};
+const MCM_MODOS={rap:{nome:"3 cartas",min:10,max:3},c20:{nome:"Partida completa",min:20,max:5},c30:{nome:"Partida completa",min:30,max:8},c40:{nome:"Partida completa",min:40,max:10}};
 /* categoria leve para abrir a partida: Risadas quando existir; senão, a primeira desta lista que houver no baralho */
 const MCM_LEVES=["Risadas","Nós"];
 function mcmInit(primeira){
@@ -1511,8 +1517,8 @@ function mcmInit(primeira){
   $("jogoArea").innerHTML=capa+`
   <h2>Quanto tempo vocês têm?</h2>
   <div class="game">
-   <div class="muted">Rapidinho</div>
-   <button class="btn gold" onclick="mcmComecar('rap')">Rapidinho · até 10 min · 3 cartas</button>
+   <button class="btn gold" onclick="mcmComecar('rap')">3 cartas</button>
+   <div class="muted" style="text-align:center;margin-top:6px">Até 10 minutos de conversa.</div>
    <div class="muted" style="margin-top:16px">Partida completa</div>
    <button class="btn ghost" onclick="mcmComecar('c20')">${op("c20")}</button>
    <button class="btn ghost" onclick="mcmComecar('c30')">${op("c30")}</button>
@@ -1538,7 +1544,7 @@ function mcmExemplo(passo){
   <div class="game">${corpo}${passo<3?`<button class="btn gold" onclick="mcmExemplo(${passo+1})">${prox}</button>`:`<button class="btn gold" onclick="Nos2.store.set('mcm.exemplo',true);mcmInit(false)">Escolher modo</button>`}</div>`;
   window.scrollTo(0,0);
 }
-function mcmComecar(k){ cartasComecar("conv",3,k); }
+function mcmComecar(k){ Nos2.tela.iniciarSessao(); cartasComecar("conv",3,k); }
 function cartasInit(){
   mcmFechar();
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Baralhos</div><h1>Cartas</h1>${comoHtml("cartas",true)}
@@ -1589,7 +1595,7 @@ function mcmPessoal(c){ if(MCM_CARTAS.some(x=>x.ordem!=null)) return c.ordem!=nu
 function mcmSortear(){
   const livres=MCM_CARTAS.filter(c=>!K.mostradas.has(c.id)); if(!livres.length) return null; // na mesma partida, cada carta aparece uma vez
   const vistas=mcmVistas(), ult=K.cats[K.cats.length-1], ultC=K.ultima;
-  // nível: abre com as mais leves; Rapidinho e "Continuar de boa" ficam só nas leves; "Pode aprofundar" intercala
+  // nível: abre com as mais leves; o modo "3 cartas" e "Continuar de boa" ficam só nas leves; "Pode aprofundar" intercala
   const niveis=[];
   if(!K.cats.length) niveis.push(mcmLeve);
   if(K.clima==="fundo"){ if(ultC&&mcmPessoal(ultC)) niveis.push(c=>!mcmPessoal(c)); else { niveis.push(mcmPessoal); niveis.push(()=>true); } }
@@ -1642,7 +1648,7 @@ function mcmRender(){
    ${K.tempoAcabou?`<button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`
    :`<div class="two"><button class="btn gold" onclick="mcmConcluir(${c.n})">Concluir carta</button><button class="btn ghost" onclick="mcmPular(${c.n})">Pular carta</button></div>
    <p class="muted" style="text-align:center">Pular não tira ponto, e a vez continua com ${esc(quem)}.</p>
-   <button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`}`;
+   ${Nos2.tela.html()}<button class="btn ghost" onclick="cartasInit()">Trocar de baralho</button><button class="btn ghost" onclick="mcmFim(false)">Encerrar</button></div>`}`;
 }
 function mcmConcluir(n){
   if(!K||K.fim||K.escolhendo||!K.c||K.c.n!==n||K.feitas.has(n)) return; // toque duplo não conta duas vezes
@@ -1658,7 +1664,7 @@ function mcmPular(n){
 }
 function mcmFechar(){ if(K&&K.tid){ clearInterval(K.tid); K.tid=null; } }
 function mcmFim(acabou){
-  ATIVO=null; Nos2.store.del("pausa");
+  Nos2.tela.encerrar(); ATIVO=null; Nos2.store.del("pausa");
   mcmFechar(); const n=K.pts; K.fim=true;
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Me Conta Mais</div>
   <div class="game capa"><h1>${n===1?"Vocês jogaram 1 carta juntos":`Vocês jogaram ${n} cartas juntos`}</h1>
@@ -1770,7 +1776,10 @@ $("data").value=st.data||"";
 renderResp();
 renderPassos();
 renderThumbs();
-function porHash(){ const h=location.hash.slice(1); if(h==="jogar") go("jogar"); else if(h==="mcm"){ go("jogar"); abrirJogo("mcm"); } else if(h==="massagem"){ go("jogar"); abrirJogo("mass"); } else if(["responder","trocar","matches"].includes(h)) go(h); }
+function porHash(){ const h=location.hash.slice(1);
+  if(h==="planoentrada"){ Nos2.store.set("plano.entrada",Date.now()); go("matches"); return; }
+  if(h==="rot"){ const r=Nos2.store.get("rot",null); Nos2.store.del("rot"); go("jogar"); if(r){ if(r.passos[r.i]&&r.passos[r.i].r==="entrada") Nos2.store.set("plano.entrada",Date.now()); ROT=r; ROT.i++; $("jogoMenu").style.display="none"; $("jogoArea").style.display=""; rotTela(); } return; }
+  if(h==="jogar") go("jogar"); else if(h==="mcm"){ go("jogar"); abrirJogo("mcm"); } else if(h==="massagem"){ go("jogar"); abrirJogo("mass"); } else if(["responder","trocar","matches"].includes(h)) go(h); }
 (function(){ const s=Nos2.store.get("pausa",null); // atividade pausada (até 12 h), inclusive depois do PIN: tem prioridade sobre o atalho do endereço
   if(s&&s.pagina==="nosdois.html"&&s.savedAt&&Date.now()-s.savedAt<12*3600*1000){ PAUSADO=s; go("jogar"); telaPausa(s); return; }
   if(s&&s.pagina==="nosdois.html") Nos2.store.del("pausa");

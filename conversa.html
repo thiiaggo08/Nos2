@@ -78,13 +78,13 @@ function stopT(){ if(T){ clearInterval(T.id); T=null; } }
 function startT(sec,onEnd){ stopT(); T={end:Date.now()+sec*1000,left:sec,run:true,onEnd};
   const draw=()=>{ const e=$("tmr"); if(!e) return; const l=Math.max(0,Math.ceil(T.left)); e.textContent=`${Math.floor(l/60)}:${String(l%60).padStart(2,"0")}`; };
   draw(); T.id=setInterval(()=>{ if(!T.run) return; T.left=(T.end-Date.now())/1000; draw(); if(T.left<=0){ const f=T.onEnd; stopT(); try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){} const e=$("tmr"); if(e) e.textContent="Tempo!"; f&&f(); } },250); }
-function pauseT(){ if(!T) return; if(T.run){ T.run=false; T.left=(T.end-Date.now())/1000; } else { T.end=Date.now()+T.left*1000; T.run=true; } const b=$("tPause"); if(b) b.textContent=T.run?"Pausar":"Continuar"; }
-const timerBox=(label)=>`<div class="timer" id="tmr" aria-live="polite"></div><div class="row"><button id="tPause">Pausar</button>${label?`<button id="tSkip">${label}</button>`:""}</div>`;
+function pauseT(){ if(!T) return; if(T.run){ T.run=false; T.left=(T.end-Date.now())/1000; Nos2.tela.pausar(); } else { T.end=Date.now()+T.left*1000; T.run=true; Nos2.tela.continuar(); } const b=$("tPause"); if(b) b.textContent=T.run?"Pausar":"Continuar"; }
+const timerBox=(label)=>`<div class="timer" id="tmr" aria-live="polite"></div><div class="row"><button id="tPause">Pausar</button>${label?`<button id="tSkip">${label}</button>`:""}</div>${Nos2.tela.html()}`;
 
 /* ---------- navegação ---------- */
 function view(html){ stopT(); $("main").innerHTML=html; scrollTo(0,0); }
 function home(){
-  S=null; PAUSA=null; store.del("pausa");
+  Nos2.tela.encerrar(); S=null; PAUSA=null; store.del("pausa");
   const due=D.combinados.filter(c=>c.ativo!==false&&c.revisao&&c.revisao<=today());
   const act=D.combinados.filter(c=>c.ativo!==false);
   view(`${due.length?`<div class="box" style="border-color:var(--acc)"><b>${due.length===1?"Um combinado chegou":"Combinados chegaram"} na data de revisão.</b><button class="pri full" id="goRev">Revisar agora</button></div>`:""}
@@ -101,6 +101,7 @@ function bindPausa(){ const b=$("pausa"); if(b) b.onclick=pausa; }
 
 /* ---------- 0. regras ---------- */
 function regras(){
+  Nos2.tela.iniciarSessao();
   S={step:0,abertas:[],vez:"A",combs:[],tela:"regras"};
   view(`${prog(0)}<h2>Antes de começar</h2><div class="box"><ul>${CV.regras.map(r=>`<li>${r}</li>`).join("")}</ul></div>
   <button class="pri full" id="go">Estamos prontos</button>`);
@@ -216,14 +217,14 @@ function pausa(t0salvo){
 let PAUSA=null;
 const NOME_TELA={regras:"Antes de começar",abrir:"Abrir",pergunta:"Perguntas de abertura",escutar:"Escuta em turnos",falar:"Escuta: quem fala",repetir:"Escuta: quem repete",solucao:"Procurar uma solução",combinar:"Folha de combinados",fechamento:"Fechamento"};
 function restanteT(){ return T?(T.run?Math.max(0,(T.end-Date.now())/1000):T.left):null; }
-function salvarSessao(){ if(!S||!S.tela) return; const left=restanteT(); if(T&&T.run){ T.run=false; T.left=left; }
+function salvarSessao(){ if(!S||!S.tela) return; Nos2.tela.pausar(); const left=restanteT(); if(T&&T.run){ T.run=false; T.left=left; }
   PAUSA={pagina:"conversa.html",nome:"Conversa",savedAt:Date.now(),S:JSON.parse(JSON.stringify(S)),left}; store.set("pausa",PAUSA); }
 function telaPausaC(){
   if(!PAUSA) return; const ov=$("ov"), l=PAUSA.left, t=l!=null?` · ${Math.floor(l/60)}:${String(Math.ceil(l)%60).padStart(2,"0")} restantes`:"";
   ov.classList.add("on");
   ov.innerHTML=`<div style="max-width:560px;margin:0 auto"><h2>Conversa pausada</h2><div class="box"><h3 style="margin-top:0">Querem continuar de onde pararam?</h3><p class="mute">${esc(NOME_TELA[PAUSA.S.tela]||"")}${t}</p>
   <button class="pri full" id="cRet">Retomar</button><button class="full" id="cEnc">Encerrar por hoje</button></div></div>`;
-  $("cRet").onclick=()=>{ ov.classList.remove("on"); ov.innerHTML=""; PAUSA=null; store.del("pausa"); if(T&&!T.run) pauseT(); };
+  $("cRet").onclick=()=>{ ov.classList.remove("on"); ov.innerHTML=""; PAUSA=null; store.del("pausa"); if(T&&!T.run) pauseT(); else Nos2.tela.continuar(); };
   $("cEnc").onclick=()=>{ ov.classList.remove("on"); ov.innerHTML=""; home(); };
 }
 function restaurarSessao(p){

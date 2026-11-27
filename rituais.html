@@ -57,12 +57,12 @@ let tick=null, endAt=0;
 const fmt=s=>{ s=Math.max(0,Math.ceil(s)); return s<60&&S&&porId(S.id).passos[S.i].s<60?`${s} s`:`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`; };
 function salvar(){ if(!S) return store.del("ritual.sessao"); S.savedAt=Date.now(); store.set("ritual.sessao",S); }
 function restante(){ return endAt?Math.max(0,(endAt-Date.now())/1000):S.left; }
-function parar(){ if(tick){ clearInterval(tick); tick=null; } if(S&&endAt){ S.left=restante(); } endAt=0; }
+function parar(){ Nos2.tela.pausar(); if(tick){ clearInterval(tick); tick=null; } if(S&&endAt){ S.left=restante(); } endAt=0; }
 function sino(){ try{ const AC=new (window.AudioContext||window.webkitAudioContext)(), o=AC.createOscillator(), g=AC.createGain(); o.frequency.value=660; g.gain.setValueAtTime(.0001,AC.currentTime); g.gain.exponentialRampToValueAtTime(.15,AC.currentTime+.02); g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+1.4); o.connect(g).connect(AC.destination); o.start(); o.stop(AC.currentTime+1.5); }catch(e){} try{navigator.vibrate&&navigator.vibrate(300)}catch(e){} }
 function correr(){
-  parar(); endAt=Date.now()+S.left*1000; salvar();
+  parar(); endAt=Date.now()+S.left*1000; salvar(); Nos2.tela.continuar();
   tick=setInterval(()=>{ const l=restante(), e=$("tmr"); if(e) e.textContent=fmt(l);
-    if(l<=0&&!S.acabou){ S.acabou=true; S.left=0; parar(); salvar(); sino(); render(); } },250);
+    if(l<=0&&!S.acabou){ S.acabou=true; S.left=0; parar(); Nos2.tela.continuar(); salvar(); sino(); render(); } },250);
 }
 function sair(){ const v=S&&S.volta; parar(); S=null; salvar(); location.href=voltaSegura(v)||"rituais.html"; }
 
@@ -81,7 +81,7 @@ function render(){
     ${r.abre?`<div class="card"><div class="frase">${esc(r.abre)}</div></div>`:""}
     ${r.obs?`<p class="obs">${esc(r.obs)}</p>`:""}
     <button class="btn pri" id="go">Começar</button><button class="btn" id="enc">Voltar</button>`;
-    $("go").onclick=()=>{ S.fase="passo"; S.i=0; S.left=r.passos[0].s; S.acabou=false; render(); correr(); };
+    $("go").onclick=()=>{ Nos2.tela.iniciarSessao(); S.fase="passo"; S.i=0; S.left=r.passos[0].s; S.acabou=false; render(); correr(); };
     $("enc").onclick=sair; return;
   }
   if(S.fase==="fim"){
@@ -100,7 +100,7 @@ function render(){
   <div class="prog">${r.passos.map((_,k)=>`<i class="${k<S.i?"d":k===S.i?"c":""}"></i>`).join("")}</div>
   <div class="card"><div class="meta">Passo ${S.i+1} de ${r.passos.length}</div><div class="passo">${esc(p.t)}</div>
    <div class="timer" id="tmr" aria-live="polite">${fmt(S.left)}</div>
-   ${S.acabou?`<div class="fim">O tempo deste passo acabou. Avancem quando quiserem.</div>`:""}</div>
+   ${S.acabou?`<div class="fim">O tempo deste passo acabou. Avancem quando quiserem.</div>`:""}${Nos2.tela.html()}</div>
   ${!S.acabou?`<button class="btn" id="pz">Pausar</button>`:""}
   <button class="btn pri" id="nx">${ultimo?"Concluir":"Próximo passo"}</button>
   <button class="btn" id="enc">Encerrar o ritual</button>`;

@@ -101,7 +101,7 @@ const LV=["","Carinho","Cumplicidade","Provocação","Sedução","Espero Você"]
 const BRIDGE={60:["ol3"],64:["lug6"],65:"*",66:["ol2"],68:["br1","br2","br4"],70:["pd3"]};
 /* Cartas com cronômetro (segundos) */
 const TIMED={27:300,51:300,57:600,78:300,87:120,92:120};
-const PRIZES=[["Vitória por 1 a 3 pontos","café na cama, escolher o filme da semana, uma tarefa de casa, uma playlist."],["Por 4 a 7 pontos","massagem de 20 minutos, uma manhã livre, jantar preparado pelo perdedor, um banho preparado."],["Por 8 ou mais","encontro planejado pelo perdedor, um pedido íntimo realizado, um “vale-sim”, uma noite fora."],["Empate","escolham juntos um prêmio da faixa do meio e façam um para o outro."]];
+const PRIZES=[["Vitória por 1 a 3 pontos","café na cama, escolher o filme da semana, uma tarefa de casa, uma playlist."],["Por 4 a 7 pontos","massagem de 20 minutos, uma manhã livre, jantar preparado pelo perdedor, um banho preparado."],["Por 8 ou mais","encontro planejado pelo perdedor, um pedido íntimo realizado, “Vale escolher o próximo jogo”, uma noite fora."],["Empate","escolham juntos um prêmio da faixa do meio e façam um para o outro."]];
 const LINES=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 const $=id=>document.getElementById(id);
 const DEF=()=>({tab:"partida",partida:null,history:[],used:{cards:[],bingo:[]},favs:[],proxima:""});
@@ -115,18 +115,19 @@ let shown={}, timers={};
 /* ---------- código da partida ---------- */
 const EPOCH=new Date(2020,0,1);
 function dayStart(n){ return new Date(2020,0,1+n).getTime(); }
-function makeCode(mode,dur,startMs,seed){
+const NIVEL_NOMES=["","Carinho","Cumplicidade","Provocação","Sedução","Carta Espero Você (+18)"];
+function makeCode(mode,dur,startMs,seed,max){
   const t=mode==="R"?Math.round(startMs/60000).toString(36):Math.round((new Date(startMs).setHours(0,0,0,0)-EPOCH.getTime())/864e5).toString(36);
-  return `${mode}${dur}-${t.toUpperCase()}-${seed}`;
+  return `${mode}${dur}${max&&max<5?"N"+max:""}-${t.toUpperCase()}-${seed}`;
 }
 function parseCode(c){
   c=String(c||"").trim().toUpperCase().replace(/\s+/g,"");
-  const m=c.match(/^([RS])(\d{1,2})-([0-9A-Z]+)-(\d{4})$/); if(!m) return null;
-  const mode=m[1], dur=+m[2], seed=m[4]; let start;
-  if(mode==="R"){ if(dur!==24&&dur!==48) return null; start=parseInt(m[3],36)*60000; }
-  else { if(dur<3||dur>7) return null; start=dayStart(parseInt(m[3],36)); }
+  const m=c.match(/^([RS])(\d{1,2})(?:N([1-4]))?-([0-9A-Z]+)-(\d{4})$/); if(!m) return null;
+  const mode=m[1], dur=+m[2], max=m[3]?+m[3]:5, seed=m[5]; let start; // sem "N": código anterior a esta regra, até o nível 5
+  if(mode==="R"){ if(dur!==24&&dur!==48) return null; start=parseInt(m[4],36)*60000; }
+  else { if(dur<3||dur>7) return null; start=dayStart(parseInt(m[4],36)); }
   if(!isFinite(start)) return null;
-  return {code:c,mode,dur,start,seed};
+  return {code:c,mode,dur,start,seed,max};
 }
 
 /* ---------- matches do Nós Dois (ponte) ---------- */
@@ -153,13 +154,15 @@ const lvl=i=>CARDS[i][0];
 function deal(pc){
   const s=cfg(), base=pc.code+"|"+s.pass, bridge=bridgeAllowed();
   const excluded=new Set(Object.keys(BRIDGE).map(Number).filter(n=>!bridge.includes(n)).map(n=>n-1));
-  const nHigh=pc.mode==="R"?1:Math.max(1,Math.round(pc.dur*2/7)), nLow=pc.mode==="R"?3:pc.dur-nHigh;
+  const max=pc.max||5; // teto escolhido pelo casal; o nível 5 só entra quando escolhido
+  const nHigh=max<5?0:(pc.mode==="R"?1:Math.max(1,Math.round(pc.dur*2/7))), nLow=(pc.mode==="R"?4:pc.dur)-nHigh;
   const used=new Set(S.used.cards);
   let reset=false;
   const pool=(f)=>{ let a=[...CARDS.keys()].filter(i=>f(i)&&!excluded.has(i)&&!used.has(i)); return a; };
-  let low=pool(i=>lvl(i)<5), high=pool(i=>lvl(i)===5);
-  if(low.length<2*(nLow+1)){ low=[...CARDS.keys()].filter(i=>lvl(i)<5&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>lvl(i)===5); }
-  if(high.length<2*(nHigh+1)){ high=[...CARDS.keys()].filter(i=>lvl(i)===5&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>lvl(i)<5); }
+  const baixa=i=>lvl(i)<5&&lvl(i)<=max;
+  let low=pool(baixa), high=max<5?[]:pool(i=>lvl(i)===5);
+  if(low.length<2*(nLow+1)){ low=[...CARDS.keys()].filter(i=>baixa(i)&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>!baixa(i)); }
+  if(max===5&&high.length<2*(nHigh+1)){ high=[...CARDS.keys()].filter(i=>lvl(i)===5&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>lvl(i)<5); }
   const confBase=base+"|"+[...S.used.cards].sort((a,b)=>a-b).join(",")+"|"+bridge.join(",")+"|"+[...S.used.bingo].sort((a,b)=>a-b).join(",");
   const lo=seededShuffle(low,"lo:"+base), hi=seededShuffle(high,"hi:"+base);
   const hands={}, spares={};
@@ -225,7 +228,7 @@ function bindTimers(root){
 }
 
 /* ---------- aba Partida ---------- */
-let newForm={mode:"R",dur:24,start:"",day:""};
+let newForm={mode:"R",dur:24,start:"",day:"",max:0};
 function pad(n){return String(n).padStart(2,"0")}
 function localDT(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`}
 function localD(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
@@ -234,7 +237,7 @@ function rPartida(){
   if(!settings.ready()){ el.innerHTML=`<h2>Partida</h2><div class="box">Antes de jogar, defina em <a href="index.html#cfg">Configurações</a> se este celular é o Jogador A ou B e a senha do casal.</div>`; return; }
   const P=S.partida;
   if(P){
-    const lab=P.mode==="R"?`Partida rápida · ${P.dur} horas`:`Semana · ${P.dur} dias`;
+    const lab=(P.mode==="R"?`Partida rápida · ${P.dur} horas`:`Semana · ${P.dur} dias`)+` · até o nível ${P.max||5}: ${NIVEL_NOMES[P.max||5]}`;
     el.innerHTML=`<h2>Partida</h2><div class="box"><div class="tag">${lab}</div>
       <label>Código da partida</label><div class="code">${esc(P.code)}</div>
       <div class="row"><button id="cpCode">Copiar código</button></div>
@@ -253,21 +256,26 @@ function rPartida(){
   const f=newForm; if(!f.start) f.start=localDT(new Date()); if(!f.day){ const t=new Date(); t.setDate(t.getDate()+1); f.day=localD(t); }
   el.innerHTML=`<h2>Nova partida</h2>
   <div class="box"><label>Modo</label><div class="row"><button id="mR" class="${f.mode==="R"?"sel":""}">Partida rápida</button><button id="mS" class="${f.mode==="S"?"sel":""}">Semana</button></div>
-  ${f.mode==="R"?`<p class="hint">4 cartas para cada um: 3 dos níveis 1 a 4 e 1 Carta Espero Você.</p>
+  ${f.mode==="R"?`<p class="hint">4 cartas para cada um${f.max===5?": 3 dos níveis 1 a 4 e 1 Carta Espero Você":", até o nível escolhido"}.</p>
    <label for="dur">Duração</label><select id="dur"><option value="24"${f.dur==24?" selected":""}>24 horas</option><option value="48"${f.dur==48?" selected":""}>48 horas</option></select>
    <label for="ini">Início</label><div class="row"><input id="ini" type="datetime-local" value="${esc(f.start)}"><button id="now">Agora</button></div>`
   :`<p class="hint">Uma missão por dia para cada um, com janela de horário, e o Bingo do casal. Comecem quando os dois puderem.</p>
    <label for="dur">Duração</label><select id="dur">${[3,4,5,6,7].map(d=>`<option value="${d}"${f.dur==d?" selected":""}>${d} dias</option>`).join("")}</select>
    <label for="ini">Primeiro dia</label><input id="ini" type="date" value="${esc(f.day)}">`}
-  <button id="create" class="pri full">Criar partida</button></div>
+  <label>Até que nível vocês querem jogar hoje?</label>
+  <div class="row" style="flex-direction:column">${[1,2,3,4,5].map(n=>`<button data-max="${n}" class="${f.max===n?"sel":""}" style="justify-content:flex-start"><span class="lv" style="background:var(--l${n});margin-right:8px">${n}</span>${NIVEL_NOMES[n]}</button>`).join("")}</div>
+  <p class="hint">As missões são sorteadas até o nível escolhido, inclusive no veto.</p>
+  <button id="create" class="pri full" ${f.max?"":"disabled"}>Criar partida</button></div>
   <div class="box"><label for="jc">Ou entre com o código que seu par criou</label><input id="jc" autocapitalize="characters" autocomplete="off" placeholder="ex.: R24-K3P9QX-4827"><button id="join" class="full">Entrar na partida</button><div class="msg" id="pmsg"></div></div>`;
   $("mR").onclick=()=>{f.mode="R";f.dur=24;rPartida()}; $("mS").onclick=()=>{f.mode="S";f.dur=7;rPartida()};
   $("dur").onchange=e=>{f.dur=+e.target.value};
+  document.querySelectorAll("[data-max]").forEach(b=>b.onclick=()=>{ f.max=+b.dataset.max; rPartida(); });
   $("ini").onchange=e=>{ if(f.mode==="R") f.start=e.target.value; else f.day=e.target.value; };
   if($("now")) $("now").onclick=()=>{ f.start=localDT(new Date()); rPartida(); };
   $("create").onclick=()=>{ let st; if(f.mode==="R"){ st=new Date(f.start).getTime(); } else { const [y,m,d]=f.day.split("-").map(Number); st=new Date(y,m-1,d).getTime(); }
     if(!isFinite(st)){ $("pmsg").textContent="Escolha o início."; return; }
-    join(makeCode(f.mode,f.dur,st,String(1000+randInt(9000)))); };
+    if(!f.max){ $("pmsg").textContent="Escolham até que nível querem jogar."; return; }
+    join(makeCode(f.mode,f.dur,st,String(1000+randInt(9000)),f.max)); };
   $("join").onclick=()=>join($("jc").value);
 }
 function join(code){
@@ -326,6 +334,7 @@ function score(){ const P=S.partida,r=P.reveal,hA=handOf("A",r.A.veto),hB=handOf
   r.B.res.forEach((x,i)=>{if(x==="ok")b+=lvl(hB[i]);if(x==="pego")a++});
   const lines=P.mode==="S"?bingoLines(r.marks):0, full=P.mode==="S"&&r.marks.every(Boolean);
   return{a:a-r.wrongA+lines,b:b-r.wrongB+lines,hA,hB,lines,full}}
+const VALE_JOGO="“Vale escolher o próximo jogo”: Vocês escolhem duas opções que topariam jogar. Quem venceu dá o voto final.";
 function prizeText(sc){ const d=Math.abs(sc.a-sc.b); const t=d===0?PRIZES[3]:d<=3?PRIZES[0]:d<=7?PRIZES[1]:PRIZES[2]; return t; }
 function rRevelar(){
   const el=$("t-revelar"),P=S.partida;
@@ -356,7 +365,7 @@ function revealStep(){ const P=S.partida,r=P.reveal,sc=score(),isS=P.mode==="S",
   return `<p class="hint" style="margin:0 0 10px">Num celular só, revelem as missões dos dois e marquem cada uma. ${isS?"Janela perdida vale zero: marque “Não fez”.":""}</p>${block("A")}${block("B")}${isS?bingoHTML(r.marks,true).replace("Qualquer um marca","Conferiram juntos? Marque a cartela final. Qualquer um marca"):""}`; }
 function placarStep(){ const P=S.partida,sc=score(),pr=prizeText(sc),win=sc.a===sc.b?null:sc.a>sc.b?"A":"B";
   return `<div class="box score"><div><b>${sc.a}</b><span>${esc(name("A"))}</span></div><span>x</span><div><b>${sc.b}</b><span>${esc(name("B"))}</span></div></div>
-  <div class="box"><h3 style="margin-top:0">Placar individual</h3><p style="margin:0">${win?`<b>${esc(name(win))}</b> venceu e escolhe um prêmio.`:"Empate."}</p><p class="hint"><b>${pr[0]}:</b> ${pr[1]}</p>
+  <div class="box"><h3 style="margin-top:0">Placar individual</h3><p style="margin:0">${win?`<b>${esc(name(win))}</b> venceu e escolhe um prêmio.`:"Empate."}</p><p class="hint"><b>${pr[0]}:</b> ${pr[1]}</p>${pr===PRIZES[2]?`<p class="hint">${VALE_JOGO}</p>`:""}
   ${P.mode==="S"?`<h3>Placar do casal (Bingo)</h3><p style="margin:0">${sc.lines} ${sc.lines===1?"linha completa":"linhas completas"}: +${sc.lines} para cada um (já somado acima).</p>${sc.full?`<p><b>Cartela cheia!</b> Vocês ganharam um prêmio do casal.</p>`:`<p class="hint">Cartela cheia daria um prêmio do casal.</p>`}`:""}</div>`; }
 function favStep(){ const P=S.partida,r=P.reveal,sc=score(),all=[...sc.hA,...sc.hB];
   if(r.fav.A&&r.fav.B){ const both=all.filter(i=>r.fav.A.includes(i)&&r.fav.B.includes(i));
@@ -430,7 +439,8 @@ function rRegras(){
   <div class="box"><p style="margin:0">Cada pessoa recebe missões secretas para cumprir sem o par perceber. No fim, quem somar mais pontos vence e escolhe um prêmio.</p>
   <table style="margin-top:12px"><tbody>${[1,2,3,4,5].map(l=>`<tr><td><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]}</td><td class="n">${l} ${l>1?"pontos":"ponto"}</td></tr>`).join("")}</tbody></table></div>
   <div class="box"><h3 style="margin-top:0">Dois modos</h3><ul>
-  <li><b>Partida rápida:</b> 24 ou 48 horas. Cada um recebe 4 cartas: 3 dos níveis 1 a 4 e 1 Carta Espero Você, sempre na 4ª posição.</li>
+  <li><b>Partida rápida:</b> 24 ou 48 horas. Cada um recebe 4 cartas. Com o nível 5 escolhido, são 3 dos níveis 1 a 4 e 1 Carta Espero Você, sempre na 4ª posição.</li>
+  <li><b>Nível máximo:</b> ao criar a partida, vocês escolhem até que nível querem jogar. Todas as missões, inclusive a do veto, saem até esse nível. O nível 5 só entra quando escolhido.</li>
   <li><b>Semana:</b> de 3 a 7 dias, começando quando os dois decidirem. Uma missão por dia para cada um, com uma janela de horário: níveis 1 e 2 entre 6h e 21h; níveis 3 e 4 entre 17h e 23h; nível 5 só depois das 21h. Cada um vê só a própria agenda. Missão cumprida dentro da janela soma pontos; janela perdida, zero.</li>
   <li><b>Bingo do casal</b> (na Semana): cartela 3x3 com o centro livre. Cada linha completa vale +1 para os dois. Cartela cheia até o fim da Semana dá um prêmio do casal.</li></ul>
   <h3>Passo a passo</h3><ol>
@@ -454,7 +464,7 @@ function rRegras(){
   <li>Níveis 4 e 5 só quando estiverem a sós.</li>
   <li>Fotos, vídeos e provas ficam fora do app. Fotos íntimas só entre vocês, em pasta protegida e fora de backup compartilhado.</li>
   <li>Briga durante a rodada pausa o jogo. Retomem quando os dois quiserem.</li></ul>
-  <h3>Prêmios</h3><ul>${PRIZES.map(([a,b])=>`<li>${a}: ${b}</li>`).join("")}</ul>
+  <h3>Prêmios</h3><ul>${PRIZES.map(([a,b])=>`<li>${a}: ${b}</li>`).join("")}</ul><p class="hint">${VALE_JOGO}</p>
   <p class="hint">O app não usa internet. Para levar o resumo para outro lugar, use “Copiar texto”.</p></div>
   <div class="box"><h3 style="margin-top:0">Perguntas de fechamento</h3><ol>${FECHO.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>
   <div class="box"><h3 style="margin-top:0">Baralho completo (${CARDS.length} cartas)</h3><p class="hint" style="margin-top:0">Ver o baralho não revela quais cartas cada um sorteou.</p>
