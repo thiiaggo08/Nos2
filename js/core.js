@@ -56,7 +56,9 @@ const deck={
   },
   remaining(key, ids, filter){ ids=ids.map(String); const st=deck._all()[key]; let rem=(st&&st.r?st.r:ids).filter(x=>ids.includes(x)); return filter?rem.filter(filter).length:rem.length; },
   isFresh(key){ const st=deck._all()[key]; return !st||!st.r; },
-  reset(key){ const all=deck._all(); delete all[key]; store.set("decks",all); }
+  reset(key){ const all=deck._all(); delete all[key]; store.set("decks",all); },
+  /* devolve itens ao sorteio (ex.: cartas puladas voltam depois da partida) */
+  putBack(key, ids){ const all=deck._all(), st=all[key]; if(!st||!st.r) return; ids.map(String).forEach(x=>{ if(!st.r.includes(x)) st.r.push(x); }); store.set("decks",all); }
 };
 
 /* ---------- cripto (WebCrypto: PBKDF2 + AES-GCM) ---------- */
