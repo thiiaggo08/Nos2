@@ -571,14 +571,27 @@ const DADO = {
     {n:"Quem recebe dá as ordens", precisaPapel:1},
   ],
 };
+/* 4.5: cada ação ligada a um item do catálogo só entra quando o item é coincidência dos dois ("Só o que os dois marcaram") */
+const DADO_REQ={pos:{"69":["or2"],"Oral em A":["or1"],"Oral em B":["or1"]},
+  jeito:{"Falando sacanagem":["pd5"],"Sem poder gozar até o tempo acabar":["rt1","pd3"],"Com um brinquedo":["br1","br3","br4"],"Olhos vendados (vocês escolhem quem)":["tq2"],"Mãos presas, só seguradas (quem recebe)":["pd2"],"Quem recebe dá as ordens":["pd1","pd4"]},
+  lugar:{"Chuveiro":["lug5","rr1"],"Na frente do espelho":["lug6"],"Contra a porta":["lug1"],"Mesa ou bancada":["lug1"]}};
+const coincidencias=()=>new Set(calcMatches().map(m=>m.it.id));
+const liberado=(req,C)=>!req||req.some(id=>C.has(id));
+const LUG_DECK={cara:["Cama","Sofá","Chão, com cobertor"],cima:["Cama","Sofá","Chão, com cobertor","Poltrona ou cadeira"],tras:["Cama","Sofá","Chão, com cobertor"],lado:["Cama","Sofá","Chão, com cobertor"],pe:["Chuveiro","Contra a porta","Mesa ou bancada","Na frente do espelho"],sent:["Sofá","Poltrona ou cadeira","Cama"],oral:["Cama","Sofá","Poltrona ou cadeira"],acro:["Cama","Chão, com cobertor"]};
+function facesPosicao(so){ const C=coincidencias(), out=DADO.posicao.map((p,i)=>({id:"d"+i,...p})).filter(p=>!so||liberado(DADO_REQ.pos[p.n],C));
+  const pp=new Set((st.par&&st.par.po)||[]);
+  POS.filter(p=>quer(p.id)&&pp.has(p.id)).forEach(p=>out.push({id:p.id,n:p.nome,l:[...new Set(p.k.flatMap(k=>LUG_DECK[k]||[]))],costas:p.k[0]==="tras"?1:0,oral:p.k[0]==="oral"?"x":0,site:p.n}));
+  return out; }
 function nomeDado(t){ return t.replace("Oral em A","Oral em "+eu()).replace("Oral em B","Oral em "+ele()); }
 const idx=a=>a.map((_,i)=>i);
 function sortearDado(){
-  const p=DADO.posicao[+Nos2.deck.draw("nd.dado.pos",idx(DADO.posicao))];
-  const j=DADO.jeito[+Nos2.deck.draw("nd.dado.jeito",idx(DADO.jeito),i=>{ const x=DADO.jeito[+i]; return !(x.semCostas&&p.costas)&&!(x.semOral&&p.oral)&&!(x.precisaPapel&&p.semPapel); })];
-  const ls=p.l.filter(l=>!(j.semLugar||[]).includes(l));
+  const so=!D||D.so!==false, C=coincidencias(), faces=facesPosicao(so);
+  const pid=Nos2.deck.draw("nd.dado.pos2",faces.map(f=>f.id)), p=faces.find(f=>f.id===pid)||faces[0];
+  const jOk=i=>{ const x=DADO.jeito[+i]; return !(x.semCostas&&p.costas)&&!(x.semOral&&p.oral)&&!(x.precisaPapel&&p.semPapel)&&(!so||liberado(DADO_REQ.jeito[x.n],C)); };
+  const j=DADO.jeito[+Nos2.deck.draw("nd.dado.jeito",idx(DADO.jeito),jOk)];
+  let ls=p.l.filter(l=>!(j.semLugar||[]).includes(l)); const lsSo=ls.filter(l=>!so||liberado(DADO_REQ.lugar[l],C)); if(lsSo.length) ls=lsSo;
   const l=TODOS_LUG[+Nos2.deck.draw("nd.dado.lugar",idx(TODOS_LUG),i=>ls.includes(TODOS_LUG[+i]))];
-  return [nomeDado(p.n), j.n, l];
+  return [nomeDado(p.n)+(p.site?` <span class="muted" style="font-size:12px">(nº ${p.site})</span>`:""), j.n, l];
 }
 
 const VD = {
@@ -1089,7 +1102,7 @@ function renderPlano(){
   const tP=p=>tipoMatch({eu:gP["p|"+p.id]!=null?st.pos[p.id]:null,ele:gP["p|"+p.id]});
   const nk=p=>"n"+p.l, chipsPos=posJ.length?chipsFiltro("pos",[["todas","Todas",posJ.length],["n1","Fácil",posJ.filter(p=>p.l===1).length],["n2","Intermediário",posJ.filter(p=>p.l===2).length],["n3","Difícil",posJ.filter(p=>p.l===3).length]]):"", posF=posJ.filter(p=>filtroOk("pos",nk(p)));
   h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram como Topo ou Tentar.</p>`+(posJ.length?chipsPos+
-    verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t">${esc(p.nome)}</div><div class="muted" style="margin-top:4px">Nº ${p.n} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div><div class="m">${tP(p)?tagFixa(tP(p)):""}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`)+`<button class="btn ghost" onclick="go('jogar');abrirJogo('pos')">Girar a roleta das posições</button>`:`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
+    verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t">${esc(p.nome)}</div><div class="muted" style="margin-top:4px">Nº ${p.n} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div><div class="m">${tP(p)?tagFixa(tP(p)):""}<span class="pill g">${posNivelTxt(p.l)}</span></div></div>`)+`<button class="btn ghost" onclick="go('jogar');abrirJogo('pos')">Girar a roleta das posições</button>`:`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
   const quente = quemConcorda().filter(q=>quemAbs(st.quem[q.id],true)==="ambos");
   if(quente.length){ h+=`<h2>Do Quem do Casal</h2><p style="margin-top:0">Os dois responderam “Os dois”:</p>`; quente.forEach(q=>h+=`<div class="match"><div class="t">${q.t}</div></div>`); }
   const rec=(quem,s,l)=> (s||l) ? `<div class="match"><div class="eyebrow">${esc(quem)}</div>${s?`<div class="t" style="margin-top:6px;white-space:pre-wrap">${esc(s)}</div>`:""}${l?`<div class="muted" style="margin-top:8px;white-space:pre-wrap"><b class="w">Hoje não:</b> ${esc(l)}</div>`:""}</div>` : "";
@@ -1210,6 +1223,7 @@ function rotTela(){
   const A=$("jogoArea"), sorte=ROT.tipo==="sorte", n=ROT.passos.length;
   if(ROT.i>=n){ A.innerHTML=`<div class="eyebrow" style="margin-top:8px">${ROT_NOME[ROT.tipo]}</div><h1>Fim do roteiro</h1><p>Daqui pra frente é com vocês.</p><button class="btn primary" onclick="rotSair()">Voltar aos jogos</button>`; window.scrollTo(0,0); return; }
   const p=ROT.passos[ROT.i];
+  if(p.k==="roleta"&&!calcMatches().length){ ROT.i++; toast("Roleta pulada: ainda não há matches"); return rotTela(); } // 4.9
   let acao;
   if(p.k==="prel") acao=`<div class="muted" style="margin-top:6px">Primeiro a conduzir:</div><div class="two"><button class="btn gold" onclick="rotPrel(0)">${esc(eu())}</button><button class="btn gold" onclick="rotPrel(1)">${esc(ele())}</button></div>`;
   else if(p.k==="mass") acao=`<div class="muted" style="margin-top:6px">Quem recebe primeiro:</div><div class="two"><button class="btn gold" onclick="rotMass(0)">${esc(eu())}</button><button class="btn gold" onclick="rotMass(1)">${esc(ele())}</button></div>`;
@@ -1223,27 +1237,28 @@ function rotTela(){
 function rotRitual(){ const p=ROT.passos[ROT.i]; Nos2.store.set("rot",ROT); location.href=`rituais.html?r=${p.r}&volta=nosdois.html%23rot`; }
 function rotSair(){ ROT=null; sairJogo(); }
 function rotJogo(){ const p=ROT.passos[ROT.i]; (p.k==="dado"?dadoInit:roletaInit)(); window.scrollTo(0,0); }
-function rotPrel(quem){ const p=ROT.passos[ROT.i]; prelInit(); document.querySelectorAll("#prelDur .chip").forEach(c=>c.classList.toggle("on",+c.dataset.n===p.n)); $("pAuto").checked=true; prelComecar(quem); }
+function rotPrel(quem){ const p=ROT.passos[ROT.i]; prelInit(); document.querySelectorAll("#prelDur .chip").forEach(c=>c.classList.toggle("on",+c.dataset.n===p.n)); prelComecar(quem); }
 function rotMass(quem){ massComecar(ROT.passos[ROT.i].tipo,quem,false); }
 const proxEtapa=()=>ROT?`<button class="btn primary" onclick="ROT.i++;rotTela()">Próxima etapa</button>`:"";
 const voltar = `<button class="back" onclick="sairJogo()">‹ Jogos</button>`;
 
 /* ---- Dado da Noite ---- */
 let D;
-function dadoInit(){ Nos2.tela.iniciarSessao(); D={passes:2,rodada:0,toques:[false,false],res:null}; dadoRender(); }
+function dadoInit(){ Nos2.tela.iniciarSessao(); D={rodada:0,toques:[false,false],res:null,so:true}; dadoRender(); }
 function dadoRender(){
   ATIVO="dado";
   const A=$("jogoArea");
   let h=`${voltar}<div class="eyebrow" style="margin-top:8px">Jogo 1</div><h1>Dado da Noite</h1>${!D.res && D.rodada===0 ? comoHtml("dado",true) : ""}
-  <div class="game"><div class="stat"><span>Rodada ${D.rodada+(D.res?0:1)}</span><span>Passes: ${D.passes}</span></div>`;
+  <div class="game"><div class="stat"><span>Rodada ${D.rodada+(D.res?0:1)}</span><span>Passar não tem limite</span></div>`;
   if(!D.res){
+    if(D.rodada===0) h+=`<label class="check"><input type="checkbox" ${D.so?"checked":""} onchange="D.so=this.checked"> <span><b class="w">Só o que os dois marcaram</b> · oral, brinquedo, venda, mãos presas e lugares especiais só aparecem se forem match. As posições que os dois marcaram (Topo ou Tentar) também entram no dado.</span></label>`;
     h+=`<p style="margin-top:12px">Cada um dá um toque às cegas. O resultado só aparece depois do segundo.</p>
     <div class="two"><button class="btn ${D.toques[0]?"ghost":"gold"}" ${D.toques[0]?"disabled":""} onclick="dadoToque(0)">${D.toques[0]?"✓ ":""}${eu()}</button>
     <button class="btn ${D.toques[1]?"ghost":"gold"}" ${D.toques[1]?"disabled":""} onclick="dadoToque(1)">${D.toques[1]?"✓ ":""}${ele()}</button></div>`;
   } else {
     h+=`<div class="dice"><div class="die"><small>Posição</small><b>${D.res[0]}</b></div><div class="die"><small>Jeito</small><b>${D.res[1]}</b></div><div class="die"><small>Lugar</small><b>${D.res[2]}</b></div></div>
     <div class="timer" id="tmr">3:00</div>
-    <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" ${D.passes?"":"disabled"} onclick="dadoPassar()">Passar (${D.passes})</button></div>
+    <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" onclick="dadoPassar()">Passar</button></div>
     <button class="btn primary" onclick="dadoProxima()">Próxima rodada</button>`;
   }
   h+=`${Nos2.tela.html()}<button class="btn ghost" onclick="sairJogo()">Encerrar</button></div>
@@ -1253,7 +1268,7 @@ function dadoRender(){
 }
 function dadoToque(i){ D.toques[i]=true; if(D.toques[0]&&D.toques[1]) dadoRolar(); else dadoRender(); }
 function dadoRolar(){ D.res=sortearDado(); D.rodada++; dadoRender(); iniciarTimer(180,()=>toast("Tempo! Próxima rodada quando quiserem")); }
-function dadoPassar(){ if(!D.passes) return; D.passes--; D.res=sortearDado(); dadoRender(); iniciarTimer(180,()=>toast("Tempo!")); }
+function dadoPassar(){ D.res=sortearDado(); dadoRender(); iniciarTimer(180,()=>toast("Tempo!")); }
 function dadoProxima(){ pararTimer(); D.res=null; D.toques=[false,false]; dadoRender(); }
 
 /* ---- Verdade ou Desafio ---- */
@@ -1294,7 +1309,7 @@ function prelInit(){
   <div class="game">
     <div class="muted">Duração</div>
     <div class="row" id="prelDur">${[[6,"Curta · 6 cartas"],[10,"Média · 10"],[15,"Longa · 15"]].map(([n,t])=>`<button class="chip ${n===10?"on":""}" data-n="${n}" onclick="document.querySelectorAll('#prelDur .chip').forEach(c=>c.classList.toggle('on',c===this))">${t}</button>`).join("")}</div>
-    <label class="check"><input type="checkbox" id="pAuto" checked> <span><b class="w">Esquentar sozinho</b> · o nível sobe aos poucos durante a sessão. Combinem antes; qualquer um pode baixar a qualquer momento.</span></label>
+    <label class="check"><input type="checkbox" id="pAuto"> <span><b class="w">Esquentar sozinho</b> · o nível sobe aos poucos durante a sessão. Combinem antes; qualquer um pode baixar a qualquer momento.</span></label>
     <label class="check"><input type="checkbox" id="soltura"> <span>Combinamos uma soltura rápida. Isso libera as cartas com <b class="w">venda e mãos presas</b>.</span></label>
     <label class="check"><input type="checkbox" id="pVoz" ${st.voz!==false?"checked":""}> <span><b class="w">Voz</b> · o app lê a carta e avisa quando o tempo acaba.</span></label>
     <label class="check"><input type="checkbox" id="pAvanca" checked> <span><b class="w">Passar sozinho</b> · quando o tempo acaba, a próxima carta vem em 8 segundos, com os papéis trocados.</span></label>
@@ -1306,7 +1321,7 @@ function prelInit(){
 function prelComecar(quem){
   const sol=$("soltura").checked, max=+(document.querySelector("#prelDur .chip.on")||{dataset:{n:10}}).dataset.n;
   st.voz=$("pVoz").checked; salvar();
-  P={nivel:1,n:0,max,conduz:quem,trocas:2,subir:[false,false],sol,auto:$("pAuto").checked,avanca:$("pAvanca").checked,decks:{},fav:[],feitas:[]};
+  P={nivel:1,n:0,max,conduz:quem,trocas:Infinity,subir:[false,false],sol,auto:$("pAuto").checked,avanca:$("pAvanca").checked,decks:{},fav:[],feitas:[]};
   sino(); Nos2.tela.iniciarSessao(); prelProxima(true);
 }
 function prelCarta(){ const L=PREL[P.nivel]; return Object.assign({},L[+Nos2.deck.draw("nd.prel."+P.nivel,idx(L),i=>P.sol||!L[+i].v)]); }
@@ -1326,7 +1341,7 @@ function prelTempo(){
   P.fase="pausa"; prelRender();
   if(P.avanca) iniciarTimer(8,()=>prelProxima());
 }
-function prelTrocar(){ if(!P.trocas) return; P.trocas--; P.feitas.pop(); P.carta=prelCarta(); P.carta.nivel=P.nivel; P.feitas.push(P.carta); P.fase="carta"; prelRender(); prelFalar(); iniciarTimer(P.carta.s,prelTempo); }
+function prelTrocar(){ P.feitas.pop(); P.carta=prelCarta(); P.carta.nivel=P.nivel; P.feitas.push(P.carta); P.fase="carta"; prelRender(); prelFalar(); iniciarTimer(P.carta.s,prelTempo); }
 function prelSubir(i){ P.subir[i]=!P.subir[i]; if(P.subir[0]&&P.subir[1]&&P.nivel<3){ P.nivel++; P.subir=[false,false]; toast("Nível "+P.nivel+" na próxima carta"); } prelRender(); }
 function prelBaixar(){ P.nivel--; P.auto=false; P.subir=[false,false]; toast("Nível "+P.nivel+" · esquentar sozinho desligado"); prelRender(); }
 function prelFav(){ const c=P.carta, i=P.fav.indexOf(c); if(i>=0) P.fav.splice(i,1); else P.fav.push(c); prelRender(); }
@@ -1336,7 +1351,7 @@ function prelRender(){
   const prox=P.conduz===0?ele():eu();
   let h=`${voltar}<div class="eyebrow" style="margin-top:8px">Preliminares · carta ${P.n} de ${P.max}</div>
   <div class="mbar">${Array.from({length:P.max},(_,k)=>`<i class="${k<P.n-1?"d":k===P.n-1?"c":""}"></i>`).join("")}</div>
-  <div class="game"><div class="stat"><span>Nível ${P.nivel} · ${NOME_NIVEL[P.nivel]}${P.auto?" · auto":""}</span><span>Trocas: ${P.trocas}</span></div>`;
+  <div class="game"><div class="stat"><span>Nível ${P.nivel} · ${NOME_NIVEL[P.nivel]}${P.auto?" · auto":""}</span><span>Carta ${P.n} de ${P.max}</span></div>`;
   if(P.fase==="pausa"){
     h+=`<div class="gcard" style="min-height:180px"><div class="k">Tempo!</div><div class="v">Agora ${esc(prox)} conduz</div><div class="muted" style="margin-top:8px">${P.avanca?"Próxima carta em alguns segundos…":"Toquem em Próxima carta quando quiserem."}</div></div>
     <div class="timer" id="tmr">${P.avanca?"":"—"}</div>
@@ -1348,7 +1363,7 @@ function prelRender(){
       <div style="position:absolute;right:14px;bottom:12px">${dots(c.nivel)}</div>
       <button onclick="prelFav()" aria-label="Favoritar" style="position:absolute;left:10px;bottom:6px;background:none;border:0;font-size:22px;color:${fav?"#c43a52":"#5a4e48"}">${fav?"♥":"♡"}</button></div>
     <div class="timer" id="tmr"></div>
-    <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">${T&&!T.run?"Continuar":"Pausar"}</button><button class="btn ghost" ${P.trocas?"":"disabled"} onclick="prelTrocar()">Trocar carta (${P.trocas})</button></div>
+    <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">${T&&!T.run?"Continuar":"Pausar"}</button><button class="btn ghost" onclick="prelTrocar()">Trocar carta</button></div>
     <button class="btn primary" onclick="pararTimer();prelTempo()">Terminamos esta</button>
     ${st.voz!==false?`<button class="btn ghost" onclick="ouvirInstrucao()">Ouvir instrução</button>`:""}`;
   }
@@ -1472,12 +1487,20 @@ function massInit(){
 }
 const CHECK_BASE=["Óleo morno (frasco num copo de água quente)","Toalha ou lençol velho por baixo","Quarto aquecido e luz baixa","Música calma","Celular no silencioso (deixe só este app aberto)"];
 const CHECK_EXTRA={erotica:["Lubrificante à base de água ou silicone","Combinado: o que pode, o que não pode e o sinal para pausar"],tantrica:["Tempo sem pressa: nada marcado depois"]};
+const REGIAO_NOME={cabeca:"Cabeça e rosto",pescoco:"Pescoço e nuca",ombros:"Ombros",bracos:"Braços e mãos",costas:"Costas",lombar:"Lombar",quadril:"Quadril e bumbum",peito:"Peito",barriga:"Barriga",coxas:"Coxas",panturrilhas:"Panturrilhas",pes:"Pés"};
+const regioesEtapa=e=>(ZONA_ETAPA[e.t]||[null,[]])[1];
+const etapaEvitada=e=>{ const r=regioesEtapa(e); return !e.b&&r.length>0&&M.evitar&&M.evitar.length>0&&r.every(x=>M.evitar.includes(x)); };
+function massEvitar(k,b){ M.evitar=M.evitar||[]; const i=M.evitar.indexOf(k); if(i>=0) M.evitar.splice(i,1); else M.evitar.push(k); b.classList.toggle("on",i<0); }
+function massMais1(){ if(!T) return; T.left+=60; const e=$("tmr"); if(e) e.textContent=`${Math.floor(T.left/60)}:${String(T.left%60).padStart(2,"0")}`; toast("+1 minuto nesta etapa"); }
 function massComecar(tipo,quem,ambos){
-  M={tipo,quem,ambos,i:0,volta:0,cue:-1};
+  M={tipo,quem,ambos,i:0,volta:0,cue:-1,evitar:[]};
   const itens=CHECK_BASE.concat(CHECK_EXTRA[tipo]||[]);
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${MASSAGENS[tipo].nome}</div><h1>Antes de começar</h1>
   <div class="game">${itens.map((t,i)=>`<label class="check"><input type="checkbox"> ${t}</label>`).join("")}
    <label class="check" style="border-top:1px solid var(--line);padding-top:14px"><input type="checkbox" id="vozOn" ${st.voz!==false?"checked":""}> <span><b class="w">Narração por voz</b> · o app lê cada etapa em voz alta, para ninguém precisar olhar a tela com as mãos sujas de óleo.</span></label>
+   <div style="border-top:1px solid var(--line);margin-top:14px;padding-top:12px"><b class="w">Regiões a evitar hoje</b> <span class="muted">(opcional)</span>
+    <div class="muted" style="font-size:13px;margin-top:4px">Etapas só dessas regiões são puladas. Nas etapas mistas, aparece “Evitar: …”.</div>
+    <div class="row" style="flex-wrap:wrap">${Object.entries(REGIAO_NOME).map(([k,t])=>`<button class="chip" style="flex:0 0 auto;padding:8px 10px" onclick="massEvitar('${k}',this)">${t}</button>`).join("")}</div></div>
    <button class="btn primary" onclick="massIniciar()">Começar a massagem</button></div>`;
 }
 let AC=null;
@@ -1489,7 +1512,9 @@ function massEtapa(op){
   op=op||{}; calar(); ATIVO="mass";
   const MASS=MASSAGENS[M.tipo].steps;
   if(M.i>=MASS.length){ if(M.ambos&&M.volta===0){ M.volta=1; M.quem=1-M.quem; M.i=1; toast("Troca! Agora o outro recebe"); falar("Troca! Agora o outro recebe."); } else return massFim(); }
-  const e=MASS[M.i], rec=M.quem===0?eu():ele(), da=M.quem===0?ele():eu(), prox=MASS[M.i+1];
+  if(!op.left&&etapaEvitada(MASS[M.i])){ M.i++; return massEtapa(op); }
+  const e=MASS[M.i], rec=M.quem===0?eu():ele(), da=M.quem===0?ele():eu(); let pi=M.i+1; while(MASS[pi]&&etapaEvitada(MASS[pi])) pi++; const prox=MASS[pi];
+  const evitarAqui=(M.evitar||[]).filter(x=>regioesEtapa(e).includes(x));
   M.cue=-1; if(op.silencio) M.mudo=M.i+"-"+M.volta; // a etapa retomada fica em silêncio; as próximas voltam a ser narradas
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">${MASSAGENS[M.tipo].nome} · etapa ${M.i+1} de ${MASS.length}${M.ambos?` · parte ${M.volta+1} de 2`:""}</div>
   <div class="mbar">${MASS.map((_,k)=>`<i class="${k<M.i?"d":k===M.i?"c":""}"></i>`).join("")}</div>
@@ -1497,17 +1522,19 @@ function massEtapa(op){
   <div class="game"><div class="stat"><span>${esc(da)} faz</span><span>${esc(rec)} recebe</span></div>
   ${e.b?`<div class="resp">respirem</div><div class="muted" style="text-align:center">Inspira enquanto cresce · solta enquanto diminui</div>`:mapaCorpo(e.t)}
   ${(e.p||e.r)?`<div class="badges">${e.p?`<span class="pill g">Pressão: ${e.p}</span>`:""}${e.r?`<span class="pill">Ritmo: ${e.r}</span>`:""}</div>`:""}
+  ${evitarAqui.length?`<div class="note" style="margin-top:10px">⚠ Evitar: <b class="w">${evitarAqui.map(x=>REGIAO_NOME[x]).join(", ")}</b></div>`:""}
   <ul class="cues" id="cues">${e.c.map(c=>`<li>${c}</li>`).join("")}</ul>${Nos2.tela.html()}
   <div class="timer" id="tmr"></div>
-  <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" onclick="M.i++;sino();massEtapa()">Próxima etapa</button></div>
+  <div class="two"><button class="btn ghost" id="btnPausa" onclick="pausarTimer()">Pausar</button><button class="btn ghost" onclick="massMais1()">+1 min</button></div>
+  <button class="btn ghost" onclick="M.i++;sino();massEtapa()">Próxima etapa</button>
   ${st.voz!==false?`<button class="btn ghost" onclick="ouvirInstrucao()">Ouvir instrução</button>`:""}
   ${prox?`<div class="muted" style="margin-top:14px">A seguir: <b class="w">${prox.t}</b> · ${Math.round(prox.s/60)} min</div>`:""}
   <button class="btn ghost" onclick="calar();sairJogo()">Encerrar</button></div>`;
   const n=e.c.length, fatia=e.s/n;
   const mostrar=k=>{ if(k===M.cue) return; M.cue=k; document.querySelectorAll("#cues li").forEach((li,x)=>{ li.classList.toggle("on",x===k); li.classList.toggle("done",x<k); }); if(M.mudo!==M.i+"-"+M.volta) falar(k===0?`${e.t}. ${e.c[0]}`:e.c[k]); };
   const ini=op.left!=null?op.left:e.s;
-  mostrar(Math.min(n-1,Math.floor((e.s-ini)/fatia)));
-  iniciarTimer(ini,()=>{ M.i++; sino(); massEtapa(); }, left=>{ const k=Math.min(n-1,Math.floor((e.s-left)/fatia)); mostrar(k); });
+  mostrar(Math.max(0,Math.min(n-1,Math.floor((e.s-ini)/fatia))));
+  iniciarTimer(ini,()=>{ M.i++; sino(); massEtapa(); }, left=>{ const k=Math.max(0,Math.min(n-1,Math.floor((e.s-left)/fatia))); mostrar(k); });
 }
 function massFim(){ Nos2.tela.encerrar(); ATIVO=null; Nos2.store.del("pausa"); pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p>${ROT?proxEtapa():`<button class="btn primary" onclick="massInit()">Outra massagem</button>`}`; }
 
@@ -1516,7 +1543,8 @@ const POS_DECKS=[["cara","Cara a cara"],["cima","Ela por cima"],["tras","Por tr�
 const DECK_NOME=Object.fromEntries(POS_DECKS);
 const POS=(window.POS_SITE||[]).map(p=>({id:"s"+p.n,n:p.n,nome:p.nome+(p.dup?` (nº ${p.n})`:""),l:p.l,k:p.k,d:p.d,t:p.t||""}));
 const POS_BY=Object.fromEntries(POS.map(p=>[p.id,p]));
-const nivelTxt=l=>["","Fácil","Intermediário","Difícil"][l];
+const nivelTxt=l=>["","Leve","Quente","Ousada"][l];
+const posNivelTxt=l=>["","Fácil","Intermediário","Difícil"][l];
 const dots=l=>`<span style="letter-spacing:2px;color:var(--gold)">${"●".repeat(l)}<span style="color:#3a3134">${"●".repeat(3-l)}</span></span>`;
 const POS_OP={2:"♥ Topo",1:"↑ Tentar",0:"✕ Agora não"};
 /* migração: marcas do guia antigo (27 posições) para os nomes do site; o resto some */
@@ -1556,7 +1584,7 @@ let posFiltro={k:"todas",l:0}, posVista="deslize", posHist=[];
 const posFiltrar=lista=>lista.filter(p=>(posFiltro.k==="todas"||p.k.includes(posFiltro.k))&&(!posFiltro.l||p.l===posFiltro.l));
 function filtrosPosHtml(contaFn){ const base=POS.filter(p=>!posFiltro.l||p.l===posFiltro.l);
   const ks=[["todas","Todas"],...POS_DECKS].map(([k,t])=>{ const n=contaFn(base.filter(p=>k==="todas"||p.k.includes(k))); return `<button class="chip ${posFiltro.k===k?"on":""}" style="flex:none;min-width:0;padding:8px 12px" onclick="posFiltro.k='${k}';reRenderPos()">${t} (${n})</button>`; }).join("");
-  const ls=[0,1,2,3].map(l=>`<button class="chip ${posFiltro.l===l?"on":""}" onclick="posFiltro.l=${l};reRenderPos()">${l?nivelTxt(l):"Todos"}</button>`).join("");
+  const ls=[0,1,2,3].map(l=>`<button class="chip ${posFiltro.l===l?"on":""}" onclick="posFiltro.l=${l};reRenderPos()">${l?posNivelTxt(l):"Todos"}</button>`).join("");
   return `<div class="row" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px">${ks}</div><div class="row">${ls}</div>`; }
 function posFila(){ const pend=posFiltrar(POS).filter(p=>!marcouPos(p.id)); const pulo=st.posPulo||[];
   return pend.filter(p=>!pulo.includes(p.id)).concat(pulo.map(id=>pend.find(p=>p.id===id)).filter(Boolean)); }
@@ -1570,7 +1598,7 @@ function renderPosLista(L){
      <div id="posSelo" style="position:absolute;top:14px;left:14px;z-index:2;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:8px;opacity:0"></div>
      <div style="display:flex;justify-content:center">${posImg(p.id,300,232)}</div>
      <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-top:10px"><div class="t" style="font-family:Georgia,serif;font-size:22px">${esc(p.nome)}</div>${dots(p.l)}</div>
-     <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div>
+     <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div>
      <div style="margin-top:10px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${esc(p.t)}</div>`:""}
      ${FOTO[p.id]?"":`<label class="chip" style="display:block;text-align:center;margin-top:10px;cursor:pointer">Adicionar foto<input type="file" accept="image/*" style="display:none" onchange="fotoDaGaleria('${p.id}',this)"></label>`}</div>
    <div class="row" style="margin-top:12px"><button class="chip pass" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',0)">✕ Agora não</button><button class="chip" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',1)">↑ Tentar</button><button class="chip on" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',2)">♥ Topo</button></div>
@@ -1584,7 +1612,7 @@ function posListaHtml(){ const val=p=>st.pos[p.id]==null?"sem":String(st.pos[p.i
   return chips+`<div class="muted" style="margin-top:8px">${lista.length} posições</div>`+verPos(lista); }
 let posLimite=40;
 function verPos(lista){ return lista.slice(0,posLimite).map(p=>`<div class="item"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t" style="font-family:Georgia,serif;font-size:18px">${esc(p.nome)}</div>
-   <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div>
+   <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div>
    <details style="margin-top:8px"><summary class="muted">Como é</summary><div style="margin-top:6px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${esc(p.t)}</div>`:""}</details>
    <div class="row">${[2,1,0].map(v=>`<button class="chip ${st.pos[p.id]===v?"on":""} ${v===0?"pass":""}" style="padding:9px 4px" onclick="posMudar('${p.id}',${v})">${POS_OP[v]}</button>`).join("")}</div>
    <div class="row"><label class="chip" style="margin:0;display:flex;align-items:center;justify-content:center;cursor:pointer">${FOTO[p.id]?"Trocar foto":"Adicionar foto"}<input type="file" accept="image/*" style="display:none" onchange="fotoDaGaleria('${p.id}',this)"></label>${FOTO[p.id]?`<button class="chip pass" style="flex:0 0 auto;padding:9px 12px" onclick="fotoRemover('${p.id}')">Remover foto</button>`:""}</div></div>`).join("")+
@@ -1614,10 +1642,10 @@ function posPool(){ const pp=new Set((st.par&&st.par.po)||[]), nv=p=>!rolNivel||
   return [POS.filter(p=>nv(p)&&st.pos[p.id]!==0),"entre todas deste nível"]; }
 function posInit(){ rolSorte=null; $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Na hora</div><h1>Roleta das posições</h1>${comoHtml("pos",false)}<div id="rolArea"></div>`; renderRoletaPos(); }
 function renderRoletaPos(){ const [pool,origem]=posPool();
-  const ls=[0,1,2,3].map(l=>`<button class="chip ${rolNivel===l?"on":""}" onclick="rolNivel=${l};rolSorte=null;renderRoletaPos()">${l?nivelTxt(l):"Todos"}</button>`).join("");
+  const ls=[0,1,2,3].map(l=>`<button class="chip ${rolNivel===l?"on":""}" onclick="rolNivel=${l};rolSorte=null;renderRoletaPos()">${l?posNivelTxt(l):"Todos"}</button>`).join("");
   const p=rolSorte&&POS_BY[rolSorte];
   $("rolArea").innerHTML=`<p style="margin-bottom:4px">Escolha o nível:</p><div class="row" style="margin-top:0">${ls}</div>
-   <div class="game"><div class="gcard" id="rolCard">${p?`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(p.id,280,216)}</div><div class="k">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div><div class="v">${esc(p.nome)}</div><div style="margin-top:8px;font-size:14px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="muted" style="margin-top:6px">${esc(p.t)}</div>`:""}`:`<div class="k">Sorteio ${origem}</div><div class="v">?</div><div class="muted">${pool.length} posições na roleta</div>`}</div>
+   <div class="game"><div class="gcard" id="rolCard">${p?`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(p.id,280,216)}</div><div class="k">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div><div class="v">${esc(p.nome)}</div><div style="margin-top:8px;font-size:14px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="muted" style="margin-top:6px">${esc(p.t)}</div>`:""}`:`<div class="k">Sorteio ${origem}</div><div class="v">?</div><div class="muted">${pool.length} posições na roleta</div>`}</div>
    <button class="btn primary" ${pool.length?"":"disabled"} onclick="girarRoleta()">${p?"Girar de novo":"Girar a roleta"}</button></div>`; }
 function girarRoleta(){ const [pool]=posPool(); if(!pool.length) return; const ok=new Set(pool.map(p=>p.id));
   const fim=Nos2.deck.draw("nd.pos2",POS.map(p=>p.id),i=>ok.has(i)); let t=0; const c=$("rolCard");
@@ -1679,13 +1707,15 @@ function cartasInit(){
 function quentesInit(){
   mcmFechar();
   $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Esquentar</div><h1>Cartas quentes</h1>
-  <div class="game"><div class="muted">${QUENTES.length} ações · até que nível?</div>
+  <div class="game"><label class="check"><input type="checkbox" id="qSo" checked> <span><b class="w">Só o que os dois marcaram</b> · oral, venda, brinquedo, gelo, mãos presas e ordens só aparecem se forem match.</span></label><div class="muted">${QUENTES.length} ações · até que nível?</div>
    <div class="two"><button class="btn ghost" onclick="cartasComecar('q',1)">Leve</button><button class="btn ghost" onclick="cartasComecar('q',2)">Quente</button><button class="btn primary" onclick="cartasComecar('q',3)">Ousado</button></div></div>`;
 }
-function cartasNivel(){ for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>c[0]===l?i:-1).filter(i=>i>=0); if(Nos2.deck.remaining("nd.q"+l,ids)>0) return [l,ids]; } return null; }
+const QUENTE_REQ=[[/69/,["or2"]],[/oral/i,["or1"]],[/Vende/,["tq2"]],[/brinquedo/,["br1","br3","br4"]],[/quase ao limite/,["rt1","pd3"]],[/Mãos presas/,["pd2"]],[/gelo/i,["tq3"]],[/Se toque na frente/,["ol3"]],[/obedeça/,["pd1","pd4"]],[/em detalhes, o que você vai fazer/,["pd5","pv3"]]];
+function quentePode(i,C){ if(!K||K.so===false) return true; const r=QUENTE_REQ.find(([re])=>re.test(QUENTES[i][1])); return !r||liberado(r[1],C); }
+function cartasNivel(){ const C=coincidencias(); for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>c[0]===l&&quentePode(i,C)?i:-1).filter(i=>i>=0); if(ids.length&&Nos2.deck.remaining("nd.q"+l,ids)>0) return [l,ids]; } return null; }
 function cartasComecar(deck,max,modo){
   mcmFechar();
-  K={deck,max,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[],modo:modo||"c20",clima:"leve",climaPerguntado:false,escolhendo:false,ultima:null,cats:[],t0:0,tid:null,tempoAcabou:false};
+  K={deck,max,so:!$("qSo")||$("qSo").checked,i:0,vez:0,c:null,fim:false,pts:0,feitas:new Set(),puladas:[],modo:modo||"c20",clima:"leve",climaPerguntado:false,escolhendo:false,ultima:null,cats:[],t0:0,tid:null,tempoAcabou:false};
   if(deck==="conv"){ K.mostradas=new Set(); }
   else if(deck==="int"){ if(Nos2.deck.remaining("nd.conv",idx(CONVERSA))===0) Nos2.deck.reset("nd.conv"); } // mesmo histórico de antes
   else if(!cartasNivel()) for(let l=1;l<=max;l++) Nos2.deck.reset("nd.q"+l);
@@ -1885,7 +1915,7 @@ const COMO={
    <g ${fnt} font-size="12" font-weight="700"><circle cx="252" cy="54" r="16" fill="${C_G}"/><text x="252" y="58" text-anchor="middle" fill="#1a1208">A</text><circle cx="252" cy="108" r="16" fill="#2b1e21" stroke="${C_G}"/><text x="252" y="112" text-anchor="middle" fill="${C_T}">B</text></g>
    <path d="M276,58 C300,70 300,92 276,104" fill="none" stroke="${C_G}" stroke-width="2.5"/><path d="M280,98 l-6,8 l10,1z" fill="${C_G}"/>
    <text x="300" y="84" font-size="10" fill="${C_M}" ${fnt} text-anchor="end" transform="rotate(90 300 84)">alternam</text>`,
-  ex:`<b class="w">Exemplo:</b> sai a carta “Beijar o pescoço e a nuca”, com 1 minuto. A conduz e B só recebe, sem retribuir até o tempo zerar. Na próxima carta, os papéis se invertem. Escolham 6, 10 ou 15 cartas; vocês têm 2 trocas. Com “esquentar sozinho”, o nível sobe aos poucos. O ♡ guarda as favoritas para o final. As cartas com venda ou mãos presas só entram se vocês marcarem que combinaram uma soltura rápida.`},
+  ex:`<b class="w">Exemplo:</b> sai a carta “Beijar o pescoço e a nuca”, com 1 minuto. A conduz e B só recebe, sem retribuir até o tempo zerar. Na próxima carta, os papéis se invertem. Escolham 6, 10 ou 15 cartas; dá para trocar de carta quantas vezes quiserem. Se ligarem “esquentar sozinho”, o nível sobe aos poucos. O ♡ guarda as favoritas para o final. As cartas com venda ou mãos presas só entram se vocês marcarem que combinaram uma soltura rápida.`},
  mass:{svg:`${Array.from({length:13},(_,i)=>`<circle cx="${28+i*22}" cy="62" r="${i===2?9:6}" fill="${i<2?C_G:i===2?C_W:"#2b2326"}" ${i===2?`stroke="${C_G}" stroke-width="2"`:""}/>`).join("")}
    <path d="M28,62 H292" stroke="#2b2326" stroke-width="2" style="mix-blend-mode:lighten"/>
    <text x="72" y="40" text-anchor="middle" font-size="10" fill="${C_G}" ${fnt}>agora</text>

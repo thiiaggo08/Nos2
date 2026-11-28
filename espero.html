@@ -101,7 +101,15 @@ const LV=["","Carinho","Cumplicidade","Provocação","Sedução","Espero Você"]
 const BRIDGE={60:["ol3"],64:["lug6"],65:"*",66:["ol2"],68:["br1","br2","br4"],70:["pd3"]};
 /* Cartas com cronômetro (segundos) */
 const TIMED={27:300,51:300,57:600,78:300,87:120,92:120};
-const PRIZES=[["Vitória por 1 a 3 pontos","café na cama, escolher o filme da semana, uma tarefa de casa, uma playlist."],["Por 4 a 7 pontos","massagem de 20 minutos, uma manhã livre, jantar preparado pelo perdedor, um banho preparado."],["Por 8 ou mais","encontro planejado pelo perdedor, um pedido íntimo realizado, “Vale escolher o próximo jogo”, uma noite fora."],["Empate","escolham juntos um prêmio da faixa do meio e façam um para o outro."]];
+/* Prêmios aprovados (CONTEUDO-PREMIOS.md, 5.2). Nenhum prêmio obriga o outro a dizer sim; os íntimos são convites. */
+const PRIZES=[
+ ["Vitória por 1 a 3 pontos",["Café na cama no dia que você escolher.","Escolher o filme ou a série da noite.","Uma tarefa da casa feita pelo outro.","Escolher a música do jantar.","Dez minutos de cafuné, sem pressa."]],
+ ["Vitória por 4 a 7 pontos",["Massagem de 20 minutos (pode ser pela Massagem guiada).","Uma manhã livre, com o outro cuidando da casa.","Jantar preparado pelo outro.","Banho preparado com calma.","Escolher o próximo ritual de vocês."]],
+ ["Vitória por 8 pontos ou mais",["Encontro planejado pelo outro, do convite ao fim da noite.","“Vale escolher o próximo jogo”: Vocês escolhem duas opções que topariam jogar. Quem venceu dá o voto final.","Uma noite fora, quando der.","Um convite especial, feito por quem venceu. O outro pode aceitar, adiar ou recusar."]],
+ ["Empate",["Escolham juntos um prêmio da faixa do meio e façam um para o outro."]]];
+const PRIZES_SEMANA=["Escolher o programa do próximo fim de semana livre.","Um dia sem aquela tarefa de que você menos gosta.","Uma carta escrita à mão pelo outro, com três coisas que ele(a) reparou em você durante a Semana."];
+const PRIZES_CASAL=["Uma noite só de vocês: celular longe e nenhum roteiro.","Escolher juntos um passeio novo perto de casa.","Cozinhar juntos uma receita que vocês nunca fizeram."];
+const listaPremios=l=>`<ul style="margin:6px 0 0;padding-left:20px">${l.map(x=>`<li>${x}</li>`).join("")}</ul>`;
 const LINES=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 const $=id=>document.getElementById(id);
 const DEF=()=>({tab:"partida",partida:null,history:[],used:{cards:[],bingo:[]},favs:[],proxima:""});
@@ -386,8 +394,8 @@ function revealStep(){ const P=S.partida,r=P.reveal,sc=score(),isS=P.mode==="S",
   return `<p class="hint" style="margin:0 0 10px">Num celular só, revelem as missões dos dois e marquem cada uma. ${isS?"Janela perdida vale zero: marque “Não fez”.":""}</p>${block("A")}${block("B")}${isS?bingoHTML(r.marks,true).replace("Qualquer um marca","Conferiram juntos? Marque a cartela final. Qualquer um marca"):""}`; }
 function placarStep(){ const P=S.partida,sc=score(),pr=prizeText(sc),win=sc.a===sc.b?null:sc.a>sc.b?"A":"B";
   return `<div class="box score"><div><b>${sc.a}</b><span>${esc(name("A"))}</span></div><span>x</span><div><b>${sc.b}</b><span>${esc(name("B"))}</span></div></div>
-  <div class="box"><h3 style="margin-top:0">Placar individual</h3><p style="margin:0">${win?`<b>${esc(name(win))}</b> venceu e escolhe um prêmio.`:"Empate."}</p><p class="hint"><b>${pr[0]}:</b> ${pr[1]}</p>${pr===PRIZES[2]?`<p class="hint">${VALE_JOGO}</p>`:""}
-  ${P.mode==="S"?`<h3>Placar do casal (Bingo)</h3><p style="margin:0">${sc.lines} ${sc.lines===1?"linha completa":"linhas completas"}: +${sc.lines} para cada um (já somado acima).</p>${sc.full?`<p><b>Cartela cheia!</b> Vocês ganharam um prêmio do casal.</p>`:`<p class="hint">Cartela cheia daria um prêmio do casal.</p>`}`:""}</div>`; }
+  <div class="box"><h3 style="margin-top:0">Placar individual</h3><p style="margin:0">${win?`<b>${esc(name(win))}</b> venceu e escolhe um prêmio.`:"Empate."}</p><p class="hint" style="margin-bottom:0"><b>${pr[0]}:</b></p>${listaPremios(pr[1])}${win&&P.mode==="S"?`<p class="hint" style="margin-bottom:0"><b>Prêmios da Semana</b> (quem venceu escolhe um):</p>${listaPremios(PRIZES_SEMANA)}`:""}
+  ${P.mode==="S"?`<h3>Placar do casal (Bingo)</h3><p style="margin:0">${sc.lines} ${sc.lines===1?"linha completa":"linhas completas"}: +${sc.lines} para cada um (já somado acima).</p>${sc.full?`<p><b>Cartela cheia!</b> Vocês ganharam um prêmio do casal. Escolham juntos:</p>${listaPremios(PRIZES_CASAL)}`:`<p class="hint">Cartela cheia daria um prêmio do casal.</p>`}`:""}</div>`; }
 function favStep(){ const P=S.partida,r=P.reveal,sc=score(),all=[...sc.hA,...sc.hB];
   if(r.fav.A&&r.fav.B){ const both=all.filter(i=>r.fav.A.includes(i)&&r.fav.B.includes(i));
     return `<div class="box"><h3 style="margin-top:0">Favoritas dos dois</h3>${both.length?both.map(i=>cardHTML(i,true)+"</div>").join(""):`<p class="hint">Nenhuma missão foi marcada pelos dois. O que só um marcou não aparece.</p>`}<button id="favRedo" class="full">Refazer avaliação</button></div>`; }
@@ -485,7 +493,7 @@ function rRegras(){
   <li>Níveis 4 e 5 só quando estiverem a sós.</li>
   <li>Fotos, vídeos e provas ficam fora do app. Fotos íntimas só entre vocês, em pasta protegida e fora de backup compartilhado.</li>
   <li>Briga durante a rodada pausa o jogo. Retomem quando os dois quiserem.</li></ul>
-  <h3>Prêmios</h3><ul>${PRIZES.map(([a,b])=>`<li>${a}: ${b}</li>`).join("")}</ul><p class="hint">${VALE_JOGO}</p>
+  <h3>Prêmios</h3>${PRIZES.map(([a,b])=>`<p style="margin:10px 0 0"><b>${a}</b></p>${listaPremios(b)}`).join("")}<p style="margin:10px 0 0"><b>Semana</b> (quem venceu)</p>${listaPremios(PRIZES_SEMANA)}<p style="margin:10px 0 0"><b>Bingo com a cartela cheia</b> (o casal)</p>${listaPremios(PRIZES_CASAL)}<p class="hint">Nenhum prêmio obriga o outro a dizer sim.</p>
   <p class="hint">O app não usa internet. Para levar o resumo para outro lugar, use “Copiar texto”.</p></div>
   <div class="box"><h3 style="margin-top:0">Perguntas de fechamento</h3><ol>${FECHO.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>
   <div class="box"><h3 style="margin-top:0">Baralho completo (${CARDS.length} cartas)</h3><p class="hint" style="margin-top:0">Ver o baralho não revela quais cartas cada um sorteou.</p>

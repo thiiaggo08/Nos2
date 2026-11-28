@@ -1,6 +1,6 @@
 # Espero Você — prêmios em faixas (item 5.2)
 
-**Status: PROPOSTA EM REVISÃO.** Não entra no app até a aprovação do usuário.
+**Status: APROVADO (28/11/2026) e aplicado no Espero Você.**
 
 Regras de escrita: nenhum prêmio obriga o outro a dizer sim; os prêmios íntimos são convites, que podem ser recusados; nada exige compra.
 
