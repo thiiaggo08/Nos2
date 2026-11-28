@@ -120,6 +120,30 @@ Os itens novos foram escritos para o Nós 2 com palavras próprias, inspirados e
 | q32 | Quem toparia contar a fantasia mais forte em voz alta? | 3 |
 | q33 | Quem toparia uma viagem só para transar? | 3 |
 
+## Lote 2 (parte 1) — Anal e Personagens (PROPOSTA)
+
+### Anal (hoje: 2 itens → 6)
+Cuidados que aparecem como dica no item (escrita própria, baseada em orientações de educação sexual): muito lubrificante, começar devagar, quem recebe controla o ritmo, e não passar do anal para o vaginal sem trocar a camisinha ou lavar.
+
+| id | Item | Descrição | Papéis |
+|---|---|---|---|
+| an3 | Começar só com massagem por fora | Sem penetração, com lubrificante, só para conhecer a sensação | Fazer / Receber |
+| an4 | Estímulo anal junto com o oral | Os dois ao mesmo tempo, com calma | Fazer / Receber |
+| an5 | Inverter os papéis com cinta ou brinquedo | Quem costuma fazer, recebe | Fazer / Receber |
+| an6 | Preparar a noite com calma | Banho, lubrificante por perto e combinar o ritmo antes | — |
+
+### Personagens e fetiches (hoje: 4 itens → 10)
+Sempre entre adultos e combinado antes; a palavra de segurança vale para qualquer personagem.
+
+| id | Item | Descrição | Papéis |
+|---|---|---|---|
+| rp5 | Chefe e funcionário(a) | Jogo de poder num cenário de escritório | Chefe / Funcionário(a) |
+| rp6 | Massagista e cliente | A massagem que "sai do roteiro" | Massagista / Cliente |
+| rp7 | Desconhecidos num quarto de hotel | Chegar separados e se apresentar com outro nome | — |
+| rp8 | Fantasia escolhida pelo outro | Um escolhe a roupa ou o personagem que o outro vai usar | Escolher / Usar |
+| rp9 | Salto, meia-calça ou couro | Roupas que mudam o clima | Usar / Ver |
+| rp10 | Atenção especial aos pés | Massagem, beijos e carinho nos pés | Fazer / Receber |
+
 ## Depois deste lote
 
 - **Total com o lote 1:** 87 fantasias em 16 categorias e 33 perguntas no Quem do casal.
