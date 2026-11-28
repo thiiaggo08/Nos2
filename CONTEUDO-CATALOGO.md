@@ -144,6 +144,35 @@ Sempre entre adultos e combinado antes; a palavra de segurança vale para qualqu
 | rp9 | Salto, meia-calça ou couro | Roupas que mudam o clima | Usar / Ver |
 | rp10 | Atenção especial aos pés | Massagem, beijos e carinho nos pés | Fazer / Receber |
 
+## Lote 2 (parte 2) — Entrega leve: chicote, amarras e dor leve (PROPOSTA)
+
+Nova categoria **"Entrega leve"**, separada de "Controle e poder" para quem quer só a parte física, bem leve. Já existem no catálogo e continuam onde estão: Amarração leve (mãos), Tapas na bunda, Puxar o cabelo, Olhos vendados e Dominar e obedecer.
+
+**Regras que aparecem no topo da categoria** (escrita própria, baseada em orientações comuns de BDSM seguro):
+- **Semáforo:** verde = continua; amarelo = mais leve ou pausa; vermelho = para tudo. Vale mesmo sem palavra de segurança combinada.
+- **Onde não bater:** rosto, pescoço, coluna, rins (lateral das costas) e articulações. Bunda e coxas são as áreas mais seguras.
+- **Amarras:** sempre fáceis de soltar; nada no pescoço; checar mãos e pés (formigamento ou frio = soltar); tesoura sem ponta por perto.
+- **Depois:** abraço, água e conversa sobre como foi.
+
+| id | Item | Descrição | Papéis |
+|---|---|---|---|
+| el1 | Chicote macio (flogger) | Tiras macias, batidas leves na bunda e nas costas altas | Usar / Receber |
+| el2 | Palmatória ou mão aberta, bem leve | Começar fraco e subir só se pedir | Fazer / Receber |
+| el3 | Amarrar mãos e pés na cama | Com faixas macias ou gravatas, fáceis de soltar | Amarrar / Ser amarrado(a) |
+| el4 | Venda + mãos presas ao mesmo tempo | Sem ver e sem poder tocar | Conduzir / Se entregar |
+| el5 | Mordidas e arranhões leves | Marcar sem machucar | Fazer / Receber |
+| el6 | Vela de massagem que derrete morna | Própria para pele, nunca vela comum | Pingar / Receber |
+| el7 | Contar as batidas em voz alta | Quem recebe conta; quem faz respeita o número combinado | Fazer / Receber |
+| el8 | Uma cena combinada do começo ao fim | Escolher juntos o que vai ter, o semáforo e o depois | — |
+
+**Quem do casal (+2):**
+| id | Pergunta | Nível |
+|---|---|---|
+| q34 | Quem toparia experimentar um chicote macio? | 3 |
+| q35 | Quem gostaria de ser amarrado(a) na cama? | 3 |
+
+Ligação com os jogos: "Mãos presas" e "Quem recebe dá as ordens" do Dado e das Cartas quentes passariam a aceitar também match em el3, el4 e el8.
+
 ## Depois deste lote
 
 - **Total com o lote 1:** 87 fantasias em 16 categorias e 33 perguntas no Quem do casal.
