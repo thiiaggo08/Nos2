@@ -126,16 +126,18 @@ function dayStart(n){ return new Date(2020,0,1+n).getTime(); }
 const NIVEL_NOMES=["","Carinho","Cumplicidade","Provocação","Sedução","Carta Espero Você (+18)"];
 function makeCode(mode,dur,startMs,seed,max){
   const t=mode==="R"?Math.round(startMs/60000).toString(36):Math.round((new Date(startMs).setHours(0,0,0,0)-EPOCH.getTime())/864e5).toString(36);
-  return `${mode}${dur}${max&&max<5?"N"+max:""}-${t.toUpperCase()}-${seed}`;
+  const plano=mode==="R"||(mode==="S"&&+dur===7);
+  return `${mode}${dur}${max&&max<5?"N"+max:""}${plano?"P":""}-${t.toUpperCase()}-${seed}`;
 }
 function parseCode(c){
   c=String(c||"").trim().toUpperCase().replace(/\s+/g,"");
-  const m=c.match(/^([RS])(\d{1,2})(?:N([1-4]))?-([0-9A-Z]+)-(\d{4})$/); if(!m) return null;
-  const mode=m[1], dur=+m[2], max=m[3]?+m[3]:5, seed=m[5]; let start; // sem "N": código anterior a esta regra, até o nível 5
+  const m=c.match(/^([RS])(\d{1,2})(?:N([1-4]))?(P)?-([0-9A-Z]+)-(\d{4})$/); if(!m) return null;
+  const mode=m[1], dur=+m[2], max=m[3]?+m[3]:5, v2=!!m[4], seed=m[6]; let start; // sem "N": código anterior a esta regra, até o nível 5
   if(mode==="R"){ if(dur!==24&&dur!==48) return null; start=parseInt(m[4],36)*60000; }
-  else { if(dur<3||dur>7) return null; start=dayStart(parseInt(m[4],36)); }
+  else { if(dur<3||dur>7) return null; start=dayStart(parseInt(m[5],36)); }
+  if(mode==="R") start=parseInt(m[5],36)*60000;
   if(!isFinite(start)) return null;
-  return {code:c,mode,dur,start,seed,max};
+  return {code:c,mode,dur,start,seed,max,v2:v2&&(mode==="R"||dur===7)};
 }
 
 /* ---------- matches do Nós Dois (ponte) ---------- */
@@ -159,7 +161,45 @@ function bridgeAllowed(){
 
 /* ---------- sorteio sincronizado ---------- */
 const lvl=i=>CARDS[i][0];
+/* Plano novo (3.4 e 3.5): missões por período, esquentando. leve = níveis 1-2; moderada = 3-4; pesada = 5 (+18). */
+const PERIODO={manha:"Manhã",tarde:"Tarde",noite:"Noite",dia:"De dia"};
+const CAT_NOME={leve:"leve",mod:"moderada",pes:"+18"};
+function planoDe(pc){
+  if(pc.mode==="R"&&pc.dur===24) return {vetos:1,slots:[{d:0,p:"manha",c:"leve"},{d:0,p:"tarde",c:"mod"},{d:0,p:"noite",c:"pes"}]};
+  if(pc.mode==="R") return {vetos:1,slots:[{d:0,p:"dia",c:"leve"},{d:0,p:"noite",c:"mod"},{d:1,p:"dia",c:"mod"},{d:1,p:"noite",c:"pes"}]};
+  const sl=[]; for(let d=0;d<7;d++){ sl.push({d,p:"dia",c:"leve"}); sl.push({d,p:"noite",c:d%2===0?"pes":"mod"}); } return {vetos:2,slots:sl};
+}
+function catEfetiva(c,max){ if(c==="pes"&&max<5) c="mod"; if(c==="mod"&&max<3) c="leve"; return c; }
+function noCat(c,max){ return i=>{ const l=lvl(i); return c==="leve"?l<=2&&l<=max:c==="mod"?l>=3&&l<=4&&l<=max:l===5; }; }
+function dealV2(pc){
+  const s=cfg(), base=pc.code+"|"+s.pass, bridge=bridgeAllowed(), max=pc.max||5;
+  const excluded=new Set(Object.keys(BRIDGE).map(Number).filter(n=>!bridge.includes(n)).map(n=>n-1));
+  const pl=planoDe(pc), slots=pl.slots.map(x=>Object.assign({},x,{c:catEfetiva(x.c,max)}));
+  let reset=false; const lists={};
+  ["leve","mod","pes"].forEach(c=>{ const need=2*(slots.filter(x=>x.c===c).length+pl.vetos); if(!need) return;
+    const f=noCat(c,max); let a=[...CARDS.keys()].filter(i=>f(i)&&!excluded.has(i)&&!S.used.cards.includes(i));
+    if(a.length<need){ a=[...CARDS.keys()].filter(i=>f(i)&&!excluded.has(i)); reset=true; S.used.cards=S.used.cards.filter(i=>!f(i)); }
+    lists[c]=seededShuffle(a,c+":"+base); });
+  const confBase=base+"|v2|"+[...S.used.cards].sort((a,b)=>a-b).join(",")+"|"+bridge.join(",")+"|"+[...S.used.bingo].sort((a,b)=>a-b).join(",");
+  const hands={A:[],B:[]}, spares={A:{},B:{}}, pos={leve:0,mod:0,pes:0};
+  ["A","B"].forEach(p=>slots.forEach(x=>hands[p].push(lists[x.c][pos[x.c]++])));
+  ["A","B"].forEach(p=>Object.keys(lists).forEach(c=>{ spares[p][c]=[]; for(let k=0;k<pl.vetos;k++) spares[p][c].push(lists[c][pos[c]++]); }));
+  let bingo=null;
+  if(pc.mode==="S"){ let avail=[...BINGO.keys()].filter(i=>!S.used.bingo.includes(i)); if(avail.length<8){ avail=[...BINGO.keys()]; S.used.bingo=[]; } bingo=seededShuffle(avail,"bingo:"+base).slice(0,8); }
+  const conf=(hash(confBase).toString(36).toUpperCase()+"0000").slice(0,4);
+  const added=[...hands.A,...hands.B];
+  S.used.cards=[...new Set([...S.used.cards,...added])];
+  if(bingo) S.used.bingo=[...new Set([...S.used.bingo,...bingo])];
+  return Object.assign({},pc,{slots,vetos:pl.vetos,hands,spares,bingo,bridge,conf,reset,added,addedBingo:bingo||[],
+    my:{st:[],at:[],veto:[],wrong:0},marks:Array(9).fill(false).map((v,i)=>i===4),reveal:null,done:false,joined:Date.now()});
+}
+const vetoArr=v=>Array.isArray(v)?v.filter(x=>x>=0):(v>=0?[v]:[]);
+const nVetos=()=>S.partida&&S.partida.vetos||1;
+function slotWindow(p,i){ const P=S.partida, x=P.slots[i], r=rng(hash("w2:"+P.code+"|"+cfg().pass+p+i));
+  const [a,b,len]={manha:[8,10,3],tarde:[13,15,3],noite:[20,21,2],dia:[9,14,3]}[x.p], h=a+Math.floor(r()*(b-a+1));
+  const st=new Date(P.start), ws=new Date(st.getFullYear(),st.getMonth(),st.getDate()+x.d,h).getTime(); return [ws,ws+len*3600000]; }
 function deal(pc){
+  if(pc.v2) return dealV2(pc);
   const s=cfg(), base=pc.code+"|"+s.pass, bridge=bridgeAllowed();
   const excluded=new Set(Object.keys(BRIDGE).map(Number).filter(n=>!bridge.includes(n)).map(n=>n-1));
   const max=pc.max||5; // teto escolhido pelo casal; o nível 5 só entra quando escolhido
@@ -193,14 +233,16 @@ function deal(pc){
   return Object.assign({},pc,{hands,spares,bingo,bridge,conf,reset,added,addedBingo:bingo||[],
     my:{st:[],at:[],veto:-1,wrong:0},marks:Array(9).fill(false).map((v,i)=>i===4),reveal:null,done:false,joined:Date.now()});
 }
-function handOf(p,veto){ const P=S.partida,h=P.hands[p].slice(); if(veto>=0&&veto<h.length) h[veto]=lvl(h[veto])===5?P.spares[p].hi:P.spares[p].lo; return h; }
+function handOf(p,veto){ const P=S.partida,h=P.hands[p].slice();
+  if(P.slots){ const n={}; vetoArr(veto).forEach(i=>{ if(i>=h.length) return; const c=P.slots[i].c, k=n[c]=(n[c]||0); const sp=(P.spares[p][c]||[])[k]; if(sp!=null){ h[i]=sp; n[c]++; } }); return h; }
+  veto=vetoArr(veto)[0]; if(veto>=0&&veto<h.length) h[veto]=lvl(h[veto])===5?P.spares[p].hi:P.spares[p].lo; return h; }
 function windowFor(p,d,card,vetoed){
   const P=S.partida, r=rng(hash("w:"+P.code+"|"+cfg().pass+p+d+(vetoed?"v":""))), l=lvl(card);
   let h,len; if(l<=2){ h=6+Math.floor(r()*13); len=3; } else if(l<=4){ h=17+Math.floor(r()*4); len=3; } else { h=21+Math.floor(r()*2); len=2; }
   const st=new Date(P.start); const ws=new Date(st.getFullYear(),st.getMonth(),st.getDate()+d,h).getTime();
   return [ws,ws+len*3600000];
 }
-function windowsOf(p,veto){ return handOf(p,veto).map((c,d)=>windowFor(p,d,c,d===veto)); }
+function windowsOf(p,veto){ const P=S.partida; if(P.slots) return P.slots.map((_,i)=>slotWindow(p,i)); const v=vetoArr(veto)[0]; return handOf(p,veto).map((c,d)=>windowFor(p,d,c,d===v)); }
 function refreshMine(){ const P=S.partida; if(!P||P.mode!=="S"){ if(P) P.mine=null; return; } const h=handOf(me(),P.my.veto), w=windowsOf(me(),P.my.veto); P.mine=h.map((c,d)=>({ws:w[d][0],we:w[d][1]})); }
 
 const endT=()=>{ const P=S.partida; if(!P) return 0; return P.mode==="R"?P.start+P.dur*3600000:new Date(new Date(P.start).setDate(new Date(P.start).getDate()+P.dur)).getTime(); };
@@ -264,10 +306,10 @@ function rPartida(){
   const f=newForm; if(!f.start) f.start=localDT(new Date()); if(!f.day){ const t=new Date(); t.setDate(t.getDate()+1); f.day=localD(t); }
   el.innerHTML=`<h2>Nova partida</h2>
   <div class="box"><label>Modo</label><div class="row"><button id="mR" class="${f.mode==="R"?"sel":""}">Partida rápida</button><button id="mS" class="${f.mode==="S"?"sel":""}">Semana</button></div>
-  ${f.mode==="R"?`<p class="hint">4 cartas para cada um${f.max===5?": 3 dos níveis 1 a 4 e 1 Carta Espero Você":", até o nível escolhido"}.</p>
+  ${f.mode==="R"?`<p class="hint">${f.dur==48?"48 horas: 4 missões para cada um. Dia 1: uma leve de dia e uma moderada à noite. Dia 2: uma moderada de dia e uma +18 à noite.":"24 horas: 3 missões para cada um, esquentando: leve de manhã, moderada à tarde e +18 à noite."} Leve = níveis 1 e 2; moderada = 3 e 4; +18 = nível 5. Com teto abaixo de 5, a +18 vira moderada. 1 veto.</p>
    <label for="dur">Duração</label><select id="dur"><option value="24"${f.dur==24?" selected":""}>24 horas</option><option value="48"${f.dur==48?" selected":""}>48 horas</option></select>
    <label for="ini">Início</label><div class="row"><input id="ini" type="datetime-local" value="${esc(f.start)}"><button id="now">Agora</button></div>`
-  :`<p class="hint">Uma missão por dia para cada um, com janela de horário, e o Bingo do casal. Comecem quando os dois puderem.</p>
+  :`<p class="hint">${f.dur==7?"7 dias: duas missões por dia para cada um (14 no total), cada uma com sua janela: uma leve de dia e, à noite, uma +18 nos dias 1, 3, 5 e 7 e uma moderada nos dias 2, 4 e 6. 2 vetos.":"Uma missão por dia para cada um, com janela de horário."} E o Bingo do casal. Comecem quando os dois puderem.</p>
    <label for="dur">Duração</label><select id="dur">${[3,4,5,6,7].map(d=>`<option value="${d}"${f.dur==d?" selected":""}>${d} dias</option>`).join("")}</select>
    <label for="ini">Primeiro dia</label><input id="ini" type="date" value="${esc(f.day)}">`}
   <label>Até que nível vocês querem jogar hoje?</label>
@@ -276,7 +318,7 @@ function rPartida(){
   <button id="create" class="pri full" ${f.max?"":"disabled"}>Criar partida</button></div>
   <div class="box"><label for="jc">Ou entre com o código que seu par criou</label><input id="jc" autocapitalize="characters" autocomplete="off" placeholder="ex.: R24-K3P9QX-4827"><button id="join" class="full">Entrar na partida</button><div class="msg" id="pmsg"></div></div>`;
   $("mR").onclick=()=>{f.mode="R";f.dur=24;rPartida()}; $("mS").onclick=()=>{f.mode="S";f.dur=7;rPartida()};
-  $("dur").onchange=e=>{f.dur=+e.target.value};
+  $("dur").onchange=e=>{f.dur=+e.target.value; rPartida();};
   document.querySelectorAll("[data-max]").forEach(b=>b.onclick=()=>{ f.max=+b.dataset.max; rPartida(); });
   $("ini").onchange=e=>{ if(f.mode==="R") f.start=e.target.value; else f.day=e.target.value; };
   if($("now")) $("now").onclick=()=>{ f.start=localDT(new Date()); rPartida(); };
@@ -297,7 +339,7 @@ function rCartas(){
   if(!P){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">Na aba Partida, crie uma partida ou entre com o código do seu par.</div>`;return}
   if(!started()){el.innerHTML=`<h2>Minhas cartas</h2><div class="box">As cartas aparecem quando a partida começar.</div>`;return}
   const p=me(),my=P.my,h=handOf(p,my.veto),now=Date.now(),isS=P.mode==="S";
-  const win=isS?windowsOf(p,my.veto):null;
+  const win=isS?windowsOf(p,my.veto):null, v2=!!P.slots, usados=vetoArr(my.veto);
   const lab={ok:"Cumpri",pego:"Fui descoberto(a)",no:"Não fiz"};
   let html=`<h2>Minhas cartas · ${esc(name(p))}</h2><p class="hint" style="margin:-6px 0 12px">${isS?"Sua agenda é só sua: as janelas do seu par ficam escondidas até a revelação. ":""}Toque numa carta lacrada para ver. Ela fecha de novo ao sair da aba.</p>`;
   h.forEach((idx,i)=>{
@@ -305,23 +347,24 @@ function rCartas(){
     if(isS){ const [ws,we]=win[i], dayS=new Date(ws).setHours(0,0,0,0);
       canOpen=now>=dayS;
       const state=my.st[i]==="ok"?"cumprida":now<ws?"abre às "+hm(ws):now<we?"<b style='color:var(--acc)'>janela aberta agora</b>":my.st[i]?"":"janela encerrada";
-      extra=`<div class="when"><span>Dia ${i+1} · ${dmy(ws)}</span><span>Janela <b>${hm(ws)}–${hm(we)}</b> · ${state}</span></div>`;
+      extra=`<div class="when"><span>Dia ${v2?P.slots[i].d+1:i+1} · ${dmy(ws)}${v2?" · "+PERIODO[P.slots[i].p]:""}</span><span>Janela <b>${hm(ws)}–${hm(we)}</b> · ${state}</span></div>`;
       canOk=canOk&&now>=ws&&now<we+30*60000; }
+    else if(v2){ const x=P.slots[i]; extra=`<div class="when"><span>${P.dur===48?"Dia "+(x.d+1)+" · ":""}${PERIODO[x.p]}</span><span>Missão ${CAT_NOME[x.c]} · sugestão de período</span></div>`; }
     const open=shown[i]&&canOpen;
     html+=cardHTML(idx,open,p,extra);
     if(open){ html+=`<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-i="${i}" data-s="${k}" class="${my.st[i]===k?"sel":""}" ${k==="ok"&&!canOk&&my.st[i]!=="ok"?"disabled":""}>${lab[k]}</button>`).join("")}</div>
       ${isS&&!canOk&&my.st[i]!=="ok"&&now<win[i][0]?`<p class="hint">“Cumpri” libera quando a janela abrir.</p>`:""}
-      ${my.veto<0&&!ended()?`<button data-v="${i}" style="width:100%;margin-top:8px">Usar meu veto nesta carta</button>`:""}</div>`; }
+      ${usados.length<nVetos()&&!usados.includes(i)&&!ended()?`<button data-v="${i}" style="width:100%;margin-top:8px">Usar ${nVetos()>1?"um veto":"meu veto"} nesta carta</button>`:""}</div>`; }
     else html+=`<button class="seal" data-o="${i}" ${canOpen?"":"disabled"}>${lvl(idx)===5?"Carta Espero Você":"Missão"} lacrada · ${canOpen?"toque para abrir":"abre no dia"}</button>`;
     html+="</div>";
   });
   html+=`<div class="box"><label>Acusei e errei (cada erro tira 1 ponto)</label><div class="step"><button id="wm" aria-label="Menos">−</button><b>${my.wrong}</b><button id="wp" aria-label="Mais">+</button></div>
-  <p class="hint">${my.veto>=0?"Veto já usado nesta partida.":"Você tem 1 veto: troca uma carta sem explicar. A nova vem da mesma faixa."} Anote aqui para lembrar na revelação.</p></div>`;
+  <p class="hint">${usados.length>=nVetos()?(nVetos()>1?"Os dois vetos já foram usados.":"Veto já usado nesta partida."):`Você tem ${nVetos()-usados.length} ${nVetos()-usados.length>1?"vetos":"veto"}: troca uma carta sem explicar. A nova vem da mesma faixa.`} Anote aqui para lembrar na revelação.</p></div>`;
   if(isS) html+=bingoHTML(P.marks,true);
   el.innerHTML=html;
   el.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{shown[+b.dataset.o]=true;rCartas()});
   el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;my.st[i]=my.st[i]===b.dataset.s?"":b.dataset.s;my.at[i]=Date.now();save();rCartas()});
-  el.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>confirm2(b,()=>{const i=+b.dataset.v;my.veto=i;my.st[i]="";delete timers[h[i]+1];refreshMine();save();rCartas()}));
+  el.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>confirm2(b,()=>{const i=+b.dataset.v;if(P.slots) my.veto=[...vetoArr(my.veto),i]; else my.veto=i;my.st[i]="";delete timers[h[i]+1];refreshMine();save();rCartas()}));
   $("wm").onclick=()=>{my.wrong=Math.max(0,my.wrong-1);save();rCartas()};$("wp").onclick=()=>{my.wrong++;save();rCartas()};
   bindBingo(el,P.marks,rCartas); bindTimers(el);
 }
@@ -355,8 +398,8 @@ function bindGesto(r){
     const g=store.get("gestos",[]); g.push({id:Date.now().toString(36),texto:t,ritual:r.gestoRit,criado:new Date().toISOString()}); store.set("gestos",g);
     r.gestoTxt=""; r.gestoRit=null; segue(); };
 }
-function blankReveal(){ const P=S.partida,p=me(),r={A:{veto:-1,res:[]},B:{veto:-1,res:[]},wrongA:0,wrongB:0,forced:false,step:0,marks:P.marks.slice(),fav:{A:null,B:null},favTurn:"A",proxima:"",init:true};
-  r[p].veto=P.my.veto; r[p].res=P.my.st.slice(); r["wrong"+p]=P.my.wrong; return r; }
+function blankReveal(){ const P=S.partida,p=me(),r={A:{veto:P.slots?[]:-1,res:[]},B:{veto:P.slots?[]:-1,res:[]},wrongA:0,wrongB:0,forced:false,step:0,marks:P.marks.slice(),fav:{A:null,B:null},favTurn:"A",proxima:"",init:true};
+  r[p].veto=Array.isArray(P.my.veto)?P.my.veto.slice():P.my.veto; r[p].res=P.my.st.slice(); r["wrong"+p]=P.my.wrong; return r; }
 function score(){ const P=S.partida,r=P.reveal,hA=handOf("A",r.A.veto),hB=handOf("B",r.B.veto);let a=0,b=0;
   r.A.res.forEach((x,i)=>{if(x==="ok")a+=lvl(hA[i]);if(x==="pego")b++});
   r.B.res.forEach((x,i)=>{if(x==="ok")b+=lvl(hB[i]);if(x==="pego")a++});
@@ -388,8 +431,8 @@ function rRevelar(){
 }
 function revealStep(){ const P=S.partida,r=P.reveal,sc=score(),isS=P.mode==="S",lab={ok:isS?"Cumprida na janela":"Cumprida",pego:"Descoberta",no:"Não fez"};
   const block=p=>{const h=p==="A"?sc.hA:sc.hB, w=isS?windowsOf(p,r[p].veto):null;return `<div class="box"><h2 style="font-size:22px">${esc(name(p))}</h2>
-    <label for="v${p}">Veto usado</label><select id="v${p}"><option value="-1">Não usou</option>${h.map((_,i)=>`<option value="${i}"${r[p].veto===i?" selected":""}>Na carta ${i+1}</option>`).join("")}</select>
-    ${h.map((idx,i)=>`<div style="margin-top:12px">${cardHTML(idx,true,p,isS?`<div class="when"><span>Dia ${i+1} · ${dmy(w[i][0])}</span><span>Janela <b>${hm(w[i][0])}–${hm(w[i][1])}</b></span></div>`:"")}<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-p="${p}" data-i="${i}" data-s="${k}" class="${r[p].res[i]===k?"sel":""}">${lab[k]}</button>`).join("")}</div></div></div></div>`).join("")}
+    ${[...Array(S.partida.slots?nVetos():1).keys()].map(k=>{ const cur=vetoArr(r[p].veto)[k]; return `<label for="v${p}${k}">${S.partida.slots&&nVetos()>1?"Veto "+(k+1):"Veto usado"}</label><select id="v${p}${k}" data-vk="${p}"><option value="-1">Não usou</option>${h.map((_,i)=>`<option value="${i}"${cur===i?" selected":""}>Na carta ${i+1}</option>`).join("")}</select>`; }).join("")}
+    ${h.map((idx,i)=>`<div style="margin-top:12px">${cardHTML(idx,true,p,isS?`<div class="when"><span>Dia ${S.partida.slots?S.partida.slots[i].d+1:i+1} · ${dmy(w[i][0])}${S.partida.slots?" · "+PERIODO[S.partida.slots[i].p]:""}</span><span>Janela <b>${hm(w[i][0])}–${hm(w[i][1])}</b></span></div>`:"")}<div class="mbody" style="padding-top:0"><div class="st">${Object.keys(lab).map(k=>`<button data-p="${p}" data-i="${i}" data-s="${k}" class="${r[p].res[i]===k?"sel":""}">${lab[k]}</button>`).join("")}</div></div></div></div>`).join("")}
     <label>Acusações erradas de ${esc(name(p))}</label><div class="step"><button data-w="${p}" data-d="-1">−</button><b>${r["wrong"+p]}</b><button data-w="${p}" data-d="1">+</button></div></div>`};
   return `<p class="hint" style="margin:0 0 10px">Num celular só, revelem as missões dos dois e marquem cada uma. ${isS?"Janela perdida vale zero: marque “Não fez”.":""}</p>${block("A")}${block("B")}${isS?bingoHTML(r.marks,true).replace("Qualquer um marca","Conferiram juntos? Marque a cartela final. Qualquer um marca"):""}`; }
 function placarStep(){ const P=S.partida,sc=score(),pr=prizeText(sc),win=sc.a===sc.b?null:sc.a>sc.b?"A":"B";
@@ -409,7 +452,8 @@ function nextStep(){ const P=S.partida,r=P.reveal;
   <button id="finish" class="pri full">Concluir e salvar no ranking</button><p class="hint">Depois de concluir, este celular gera o código do placar para o outro colar.</p></div>`; }
 function bindReveal(el){
   const P=S.partida,r=P.reveal;
-  ["A","B"].forEach(p=>{const s=$("v"+p); if(s) s.onchange=e=>{r[p].veto=+e.target.value;r[p].res=[];save();rRevelar()}});
+  ["A","B"].forEach(p=>{ el.querySelectorAll(`[data-vk="${p}"]`).forEach(s=>s.onchange=()=>{ const vs=[...el.querySelectorAll(`[data-vk="${p}"]`)].map(x=>+x.value).filter(x=>x>=0);
+    r[p].veto=S.partida.slots?[...new Set(vs)]:(vs[0]??-1); r[p].res=[]; save(); rRevelar(); }); });
   el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const p=b.dataset.p,i=+b.dataset.i;r[p].res[i]=r[p].res[i]===b.dataset.s?"":b.dataset.s;save();rRevelar()});
   el.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const k="wrong"+b.dataset.w;r[k]=Math.max(0,r[k]+ +b.dataset.d);save();rRevelar()});
   bindBingo(el,r.marks,rRevelar); bindTimers(el);
@@ -468,9 +512,12 @@ function rRegras(){
   <div class="box"><p style="margin:0">Cada pessoa recebe missões secretas para cumprir sem o par perceber. No fim, quem somar mais pontos vence e escolhe um prêmio.</p>
   <table style="margin-top:12px"><tbody>${[1,2,3,4,5].map(l=>`<tr><td><span class="lv" style="background:var(--l${l})">Nível ${l}</span> ${LV[l]}</td><td class="n">${l} ${l>1?"pontos":"ponto"}</td></tr>`).join("")}</tbody></table></div>
   <div class="box"><h3 style="margin-top:0">Dois modos</h3><ul>
-  <li><b>Partida rápida:</b> 24 ou 48 horas. Cada um recebe 4 cartas. Com o nível 5 escolhido, são 3 dos níveis 1 a 4 e 1 Carta Espero Você, sempre na 4ª posição.</li>
+  <li><b>Partida rápida de 24 horas:</b> 3 missões para cada um, esquentando: leve de manhã, moderada à tarde e +18 à noite.</li>
+  <li><b>Partida rápida de 48 horas:</b> 4 missões para cada um. Dia 1: leve de dia e moderada à noite. Dia 2: moderada de dia e +18 à noite.</li>
+  <li><b>Faixas:</b> leve = níveis 1 e 2; moderada = níveis 3 e 4; +18 = nível 5 (Carta Espero Você). Na Partida rápida, o período é uma sugestão: dá para cumprir a qualquer hora dentro do prazo.</li>
   <li><b>Nível máximo:</b> ao criar a partida, vocês escolhem até que nível querem jogar. Todas as missões, inclusive a do veto, saem até esse nível. O nível 5 só entra quando escolhido.</li>
-  <li><b>Semana:</b> de 3 a 7 dias, começando quando os dois decidirem. Uma missão por dia para cada um, com uma janela de horário: níveis 1 e 2 entre 6h e 21h; níveis 3 e 4 entre 17h e 23h; nível 5 só depois das 21h. Cada um vê só a própria agenda. Missão cumprida dentro da janela soma pontos; janela perdida, zero.</li>
+  <li><b>Semana de 7 dias:</b> duas missões por dia para cada um, cada uma com a sua janela: uma leve de dia (entre 9h e 17h) e uma à noite (entre 20h e 23h), que é +18 nos dias 1, 3, 5 e 7 e moderada nos dias 2, 4 e 6. São 2 vetos por pessoa.</li>
+  <li><b>Semana de 3 a 6 dias:</b> começando quando os dois decidirem. Uma missão por dia para cada um, com uma janela de horário: níveis 1 e 2 entre 6h e 21h; níveis 3 e 4 entre 17h e 23h; nível 5 só depois das 21h. Cada um vê só a própria agenda. Missão cumprida dentro da janela soma pontos; janela perdida, zero.</li>
   <li><b>Bingo do casal</b> (na Semana): cartela 3x3 com o centro livre. Cada linha completa vale +1 para os dois. Cartela cheia até o fim da Semana dá um prêmio do casal.</li></ul>
   <h3>Passo a passo</h3><ol>
   <li>Um de vocês cria a partida na aba Partida e copia o código. O outro cola o código em “Entrar na partida”.</li>
@@ -483,7 +530,7 @@ function rRegras(){
   <li>Missão cumprida sem ser descoberta: pontos do nível (1 a 5).</li>
   <li>“Te peguei!” certo: a missão do par falha e quem acusou ganha 1 ponto.</li>
   <li>“Te peguei!” errado: quem acusou perde 1 ponto.</li>
-  <li>Cada jogador tem 1 veto por partida para trocar uma carta sem explicar. A nova carta vem da mesma faixa.</li>
+  <li>Cada jogador tem 1 veto por partida (2 na Semana de 7 dias) para trocar uma carta sem explicar. A nova carta vem da mesma faixa.</li>
   <li>As cartas não se repetem até o baralho inteiro ser usado.</li>
   <li>As cartas 60, 64, 65, 66, 68 e 70 só entram no sorteio quando houver match no Nós Dois para o item correspondente.</li></ul>
   <h3>Regras de cuidado</h3><ul>
