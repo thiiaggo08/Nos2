@@ -1,6 +1,6 @@
 # Nós Dois — revisão e ampliação do catálogo (Fantasias e Quem do casal)
 
-**Status: PROPOSTA (lote 1), aguardando aprovação.** Nada entra no app até o usuário aprovar e dizer "pode atualizar".
+**Status: APROVADO (28/11/2026): lote 1, lote 2 parte 1 (Anal e Personagens) e lote 2 parte 2 (Entrega leve), com o ajuste em tq5.** Entra no app quando o usuário disser "pode atualizar".
 
 ## Hoje
 
@@ -120,7 +120,7 @@ Os itens novos foram escritos para o Nós 2 com palavras próprias, inspirados e
 | q32 | Quem toparia contar a fantasia mais forte em voz alta? | 3 |
 | q33 | Quem toparia uma viagem só para transar? | 3 |
 
-## Lote 2 (parte 1) — Anal e Personagens (PROPOSTA)
+## Lote 2 (parte 1) — Anal e Personagens (APROVADO)
 
 ### Anal (hoje: 2 itens → 6)
 Cuidados que aparecem como dica no item (escrita própria, baseada em orientações de educação sexual): muito lubrificante, começar devagar, quem recebe controla o ritmo, e não passar do anal para o vaginal sem trocar a camisinha ou lavar.
@@ -144,7 +144,7 @@ Sempre entre adultos e combinado antes; a palavra de segurança vale para qualqu
 | rp9 | Salto, meia-calça ou couro | Roupas que mudam o clima | Usar / Ver |
 | rp10 | Atenção especial aos pés | Massagem, beijos e carinho nos pés | Fazer / Receber |
 
-## Lote 2 (parte 2) — Entrega leve: chicote, amarras e dor leve (PROPOSTA)
+## Lote 2 (parte 2) — Entrega leve: chicote, amarras e dor leve (APROVADO)
 
 Nova categoria **"Entrega leve"**, separada de "Controle e poder" para quem quer só a parte física, bem leve. Já existem no catálogo e continuam onde estão: Amarração leve (mãos), Tapas na bunda, Puxar o cabelo, Olhos vendados e Dominar e obedecer.
 
