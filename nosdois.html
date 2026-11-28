@@ -922,9 +922,10 @@ function tokensDe(d,lado){
   Object.entries(d.mapa||{}).forEach(([z,v])=>{ if(v>0) out.push(`m|${z}`); });
   Object.entries(d.quem||{}).forEach(([id,v])=>{ if(v!=null) out.push(`q|${id}|${quemAbsDe(v,lado)}`); });
   Object.entries(d.av||{}).forEach(([id,v])=>{ if(v===0) out.push(`av|${id}`); });
+  Object.entries(d.posRep||{}).forEach(([id,v])=>{ if(v===1) out.push(`pr|${id}`); });
   return [...new Set(out)];
 }
-const meusDados=()=>({resp:st.resp,pos:Object.keys(st.pos).filter(id=>st.pos[id]>=1),hora:st.hora,mapa:st.mapa,quem:st.quem,av:st.av});
+const meusDados=()=>({resp:st.resp,pos:Object.keys(st.pos).filter(id=>st.pos[id]>=1),hora:st.hora,mapa:st.mapa,quem:st.quem,av:st.av,posRep:st.posRep||{}});
 function psiPreparar(sid){
   const toks=tokensDe(meusDados(),meuLado()), N=Math.max(PSI_MIN,Math.ceil(toks.length/32)*32);
   const ordem=toks.concat(Array(N-toks.length).fill(null));
@@ -937,7 +938,7 @@ function juntar(list){ const out=new Uint8Array(list.length*32); list.forEach((p
 function separar(str){ const b=Nos2.unb64u(str||""); if(!b.length||b.length%32) throw "formato"; const out=[]; for(let i=0;i<b.length;i+=32) out.push(b.slice(i,i+32)); return out; }
 /* O que vai para o par ler (envio intencional) */
 const meuEnvio=()=>{ const q={}; Object.entries(st.quem).forEach(([id,v])=>{ if(v!=null) q[id]=quemAbsDe(v,meuLado()); });
-  return {n:st.nome||"",cu:(st.custom||[]).map(c=>({id:c.id,t:c.t})),g:st.sug||"",l:st.lim||"",d:st.data||"",q}; };
+  return {n:st.nome||"",cu:(st.custom||[]).map(c=>({id:c.id,t:c.t})),g:st.sug||"",l:st.lim||"",d:st.data||"",q,pf:Object.keys(st.posFeita||{})}; };
 /* Graus de vontade só das coincidências (fantasias 1–3, Mapa 1–2) */
 function grausDe(tokens){ const g={}; tokens.forEach(t=>{ const p=t.split("|");
   if(p[0]==="f"&&st.resp[p[1]]) g["f|"+p[1]]=st.resp[p[1]].n; else if(p[0]==="m"&&st.mapa[p[1]]) g["m|"+p[1]]=st.mapa[p[1]]; else if(p[0]==="p"&&st.pos[p[1]]>=1) g["p|"+p[1]]=st.pos[p[1]]; }); return g; }
@@ -950,6 +951,7 @@ function previaHtml(){
     linha("Hoje não",e.l?esc(e.l):`<span class="muted">Nada escrito</span>`)+
     linha("Data do encontro",dt||`<span class="muted">Sem data</span>`)+
     linha("Quem do casal",Object.keys(e.q).length?`<details><summary>${Object.keys(e.q).length} respostas (${esc(ele())} vê todas)</summary>${QUEM.filter(q=>e.q[q.id]).map(q=>`<div class="muted" style="margin-top:6px">${esc(q.t)} <b class="w">${esc(e.q[q.id]==="ambos"?"Os dois":e.q[q.id]==="nenhum"?"Nenhum":Nos2.settings.name(e.q[q.id]))}</b></div>`).join("")}</details>`:`<span class="muted">Nenhuma resposta</span>`)+
+    linha("Posições que já fizemos",e.pf.length?`${e.pf.length} ${e.pf.length===1?"posição":"posições"} (${esc(ele())} passa a ver como “✓ Já fizemos”)`:`<span class="muted">Nenhuma</span>`)+
     `<div class="note">Fantasias e papéis, posições, horário, Mapa e favoritas do Depois vão trancados: ${esc(ele())} só descobre o que coincidir. Os graus de vontade vão só para as coincidências.</div>`;
 }
 let PREVIA=null, M1REC=null;
@@ -1001,7 +1003,8 @@ function aplicarResultado(tokens,sh,meta,snapRev){
   tokens.forEach(t=>{ const p=t.split("|");
     if(p[0]==="f"){ par.f.push(p[1]); if(p.length===4) (par.papeis[p[1]]=par.papeis[p[1]]||[]).push([+p[2],+p[3]]); }
     else if(p[0]==="p") par.po.push(p[1]); else if(p[0]==="h") par.hz=+p[1]; else if(p[0]==="m") par.m.push(p[1]);
-    else if(p[0]==="q") par.q[p[1]]=p[2]; else if(p[0]==="av") par.fav.push(p[1]); });
+    else if(p[0]==="q") par.q[p[1]]=p[2]; else if(p[0]==="av") par.fav.push(p[1]); else if(p[0]==="pr") (par.pr=par.pr||[]).push(p[1]); });
+  st.posFeita=st.posFeita||{}; (sh.pf||[]).forEach(id=>{ if(/^s\d+$/.test(id)) st.posFeita[id]=1; }); // "Já fizemos" chega pelo código do par
   par.f=[...new Set(par.f)];
   st.par=par; st.parCustom=(sh.cu||[]).map(c=>({id:c.id,t:c.t,de:sh.n||"par"}));
   st.troca={modo:par.modo,sid:meta.sid||null,s:meta.s==null?null:meta.s,k:meta.s==null?null:parKey(meta.s),rv:meta.rv==null?null:meta.rv,t:meta.t||null,aceito:Date.now()};
@@ -1246,6 +1249,8 @@ function renderPlano(){
   const nk=p=>"n"+p.l, chipsPos=posJ.length?chipsFiltro("pos",[["todas","Todas",posJ.length],["n1","Fácil",posJ.filter(p=>p.l===1).length],["n2","Intermediário",posJ.filter(p=>p.l===2).length],["n3","Difícil",posJ.filter(p=>p.l===3).length]]):"", posF=posJ.filter(p=>filtroOk("pos",nk(p)));
   h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram como Topo ou Tentar.</p>`+(posJ.length?chipsPos+
     verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t">${esc(p.nome)}</div><div class="muted" style="margin-top:4px">Nº ${p.n} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div><div class="m">${tP(p)?tagFixa(tP(p)):""}<span class="pill g">${posNivelTxt(p.l)}</span></div></div>`)+`<button class="btn ghost" onclick="go('jogar');abrirJogo('pos')">Girar a roleta das posições</button>`:`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
+  const repComum=POS.filter(p=>st.posRep&&st.posRep[p.id]===1&&(st.par.pr||[]).includes(p.id));
+  if(repComum.length){ h+=`<h2>Posições que os dois repetiriam</h2>`+repComum.map(p=>`<div class="match"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,80)}<div><div class="t">${esc(p.nome)}</div><div class="m">${tagFixa("total")}</div></div></div></div>`).join(""); }
   const quente = quemConcorda().filter(q=>quemAbs(st.quem[q.id],true)==="ambos");
   if(quente.length){ h+=`<h2>Do Quem do Casal</h2><p style="margin-top:0">Os dois responderam “Os dois”:</p>`; quente.forEach(q=>h+=`<div class="match"><div class="t">${q.t}</div></div>`); }
   const rec=(quem,s,l)=> (s||l) ? `<div class="match"><div class="eyebrow">${esc(quem)}</div>${s?`<div class="t" style="margin-top:6px;white-space:pre-wrap">${esc(s)}</div>`:""}${l?`<div class="muted" style="margin-top:8px;white-space:pre-wrap"><b class="w">Hoje não:</b> ${esc(l)}</div>`:""}</div>` : "";
@@ -1695,6 +1700,9 @@ const POS_OP={2:"♥ Topo",1:"↑ Tentar",0:"✕ Agora não"};
   Object.keys(st.pos||{}).forEach(id=>{ if(/^p\d+$/.test(id)){ if(mapa[id]&&st.pos[mapa[id]]==null) st.pos[mapa[id]]=1; delete st.pos[id]; mud=true; } });
   if(!Array.isArray(st.posPulo)) st.posPulo=[]; if(mud) salvar(); })();
 const marcouPos=id=>st.pos[id]!=null;
+const feita=id=>!!(st.posFeita&&st.posFeita[id]);
+function posFizemos(id,v){ st.posFeita=st.posFeita||{}; st.posRep=st.posRep||{}; st.posFeita[id]=1; if(v==null) delete st.posRep[id]; else st.posRep[id]=v; editou(); salvar(); }
+function posDesfeita(id){ if(st.posFeita) delete st.posFeita[id]; if(st.posRep) delete st.posRep[id]; editou(); salvar(); }
 const quer=id=>st.pos[id]>=1;
 
 /* Fotos: ficam só neste aparelho (IndexedDB). Cache em memória para desenhar rápido. */
@@ -1751,11 +1759,15 @@ function renderPosLista(L){
 }
 function posListaHtml(){ const val=p=>st.pos[p.id]==null?"sem":String(st.pos[p.id]); const base=posFiltrar(POS);
   const ops=[["todas","Todas",base.length],["2","♥ Topo",base.filter(p=>st.pos[p.id]===2).length],["1","↑ Tentar",base.filter(p=>st.pos[p.id]===1).length],["0","✕ Agora não",base.filter(p=>st.pos[p.id]===0).length],["sem","Sem resposta",base.filter(p=>st.pos[p.id]==null).length]];
-  const chips=chipsFiltro("respPos",ops); const lista=base.filter(p=>filtroOk("respPos",val(p)));
+  const fz=p=>feita(p.id)?"sim":"nao";
+  const chips=chipsFiltro("respPos",ops)+chipsFiltro("respPosF",[["todas","Todas",base.length],["sim","✓ Já fizemos",base.filter(p=>feita(p.id)).length],["nao","Ainda não",base.filter(p=>!feita(p.id)).length]]);
+  const lista=base.filter(p=>filtroOk("respPos",val(p))&&filtroOk("respPosF",fz(p)));
   return chips+`<div class="muted" style="margin-top:8px">${lista.length} posições</div>`+verPos(lista); }
 let posLimite=40;
 function verPos(lista){ return lista.slice(0,posLimite).map(p=>`<div class="item"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t" style="font-family:Georgia,serif;font-size:18px">${esc(p.nome)}</div>
-   <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div>
+   <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div>
+   ${feita(p.id)?`<div class="d" style="margin-top:4px">✓ Já fizemos${st.posRep&&st.posRep[p.id]!=null?" · "+(st.posRep[p.id]?"você repetiria":"você não repetiria"):""}</div>`:""}</div></div>
+   ${feita(p.id)?`<div class="row"><button class="chip ${st.posRep&&st.posRep[p.id]===1?"on":""}" onclick="posFizemos('${p.id}',1);reRenderPos()">Repetiria</button><button class="chip ${st.posRep&&st.posRep[p.id]===0?"on":""}" onclick="posFizemos('${p.id}',0);reRenderPos()">Não repetiria</button><button class="chip pass" style="flex:0 0 auto;padding:9px 12px" onclick="posDesfeita('${p.id}');reRenderPos()">Desmarcar</button></div>`:""}
    <details style="margin-top:8px"><summary class="muted">Como é</summary><div style="margin-top:6px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${esc(p.t)}</div>`:""}</details>
    <div class="row">${[2,1,0].map(v=>`<button class="chip ${st.pos[p.id]===v?"on":""} ${v===0?"pass":""}" style="padding:9px 4px" onclick="posMudar('${p.id}',${v})">${POS_OP[v]}</button>`).join("")}</div>
    <div class="row"><label class="chip" style="margin:0;display:flex;align-items:center;justify-content:center;cursor:pointer">${FOTO[p.id]?"Trocar foto":"Adicionar foto"}<input type="file" accept="image/*" style="display:none" onchange="fotoDaGaleria('${p.id}',this)"></label>${FOTO[p.id]?`<button class="chip pass" style="flex:0 0 auto;padding:9px 12px" onclick="fotoRemover('${p.id}')">Remover foto</button>`:""}</div></div>`).join("")+
@@ -1778,8 +1790,8 @@ function posGestos(id){ const c=$("posCard"), selo=$("posSelo"); if(!c) return; 
 function reRenderPos(){ const box=$("posBox"); if(box) renderPosLista(box.parentElement); else if($("rolArea")) renderRoletaPos(); }
 
 /* Jogar › Posições: escolhe o nível e gira a roleta */
-let rolNivel=0, rolSorte=null;
-function posPool(){ const pp=new Set((st.par&&st.par.po)||[]), nv=p=>!rolNivel||p.l===rolNivel;
+let rolNivel=0, rolSorte=null, rolNovas=false, rolFase=null;
+function posPool(){ const pp=new Set((st.par&&st.par.po)||[]), nv=p=>(!rolNivel||p.l===rolNivel)&&!(st.posRep&&st.posRep[p.id]===0)&&!(rolNovas&&feita(p.id));
   const dosDois=POS.filter(p=>nv(p)&&quer(p.id)&&pp.has(p.id)); if(dosDois.length) return [dosDois,"entre as que vocês dois marcaram"];
   const minhas=POS.filter(p=>nv(p)&&quer(p.id)); if(minhas.length) return [minhas, st.par?"entre as suas (ainda não há em comum neste nível)":"entre as que você marcou (troquem os códigos para ver as em comum)"];
   return [POS.filter(p=>nv(p)&&st.pos[p.id]!==0),"entre todas deste nível"]; }
@@ -1788,12 +1800,16 @@ function renderRoletaPos(){ const [pool,origem]=posPool();
   const ls=[0,1,2,3].map(l=>`<button class="chip ${rolNivel===l?"on":""}" onclick="rolNivel=${l};rolSorte=null;renderRoletaPos()">${l?posNivelTxt(l):"Todos"}</button>`).join("");
   const p=rolSorte&&POS_BY[rolSorte];
   $("rolArea").innerHTML=`<p style="margin-bottom:4px">Escolha o nível:</p><div class="row" style="margin-top:0">${ls}</div>
+   <label class="check"><input type="checkbox" ${rolNovas?"checked":""} onchange="rolNovas=this.checked;rolSorte=null;renderRoletaPos()"> <span>Só as que ainda não fizemos</span></label>
    <div class="game"><div class="gcard" id="rolCard">${p?`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(p.id,280,216)}</div><div class="k">Nº ${p.n} · ${posNivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div><div class="v">${esc(p.nome)}</div><div style="margin-top:8px;font-size:14px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="muted" style="margin-top:6px">${esc(p.t)}</div>`:""}`:`<div class="k">Sorteio ${origem}</div><div class="v">?</div><div class="muted">${pool.length} posições na roleta</div>`}</div>
+   ${p?(rolFase==="avaliar"?`<p style="margin:12px 0 4px;text-align:center">Vocês repetiriam?</p><div class="two"><button class="btn gold" onclick="posFizemos('${p.id}',1);rolFase='ok';renderRoletaPos()">Repetiria</button><button class="btn ghost" onclick="posFizemos('${p.id}',0);rolFase='ok';renderRoletaPos()">Não repetiria</button></div>`
+     :rolFase==="ok"?`<div class="note" style="text-align:center">✓ Marcado. Vai junto no próximo código para ${esc(ele())}.</div>`
+     :`<div class="two" style="margin-top:12px"><button class="btn gold" onclick="rolFase='avaliar';renderRoletaPos()">✓ Fizemos</button><button class="btn ghost" onclick="rolSorte=null;rolFase=null;renderRoletaPos()">Não deu</button></div>`):""}
    <button class="btn primary" ${pool.length?"":"disabled"} onclick="girarRoleta()">${p?"Girar de novo":"Girar a roleta"}</button></div>`; }
 function girarRoleta(){ const [pool]=posPool(); if(!pool.length) return; const ok=new Set(pool.map(p=>p.id));
   const fim=Nos2.deck.draw("nd.pos2",POS.map(p=>p.id),i=>ok.has(i)); let t=0; const c=$("rolCard");
   const tick=()=>{ const q=pool[Nos2.randInt(pool.length)]; c.innerHTML=`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(q.id,280,216)}</div><div class="v">${esc(q.nome)}</div>`;
-    t++; if(t<14) setTimeout(tick,60+t*14); else { rolSorte=fim; renderRoletaPos(); } }; tick(); }
+    t++; if(t<14) setTimeout(tick,60+t*14); else { rolSorte=fim; rolFase=null; renderRoletaPos(); } }; tick(); }
 
 /* ---- Baralhos ---- */
 let K=null;
