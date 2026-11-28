@@ -1,5 +1,5 @@
 /* Nós 2 — service worker: põe tudo em cache na primeira abertura; depois funciona sem internet. */
-const VERSION = "nos2-v25";
+const VERSION = "nos2-v26";
 const FILES = [
   "./", "./index.html", "./espero.html", "./nosdois.html", "./conversa.html", "./rituais.html",
   "./js/core.js", "./js/espero-data.js", "./js/conversa-data.js", "./js/rituais-data.js", "./js/mcm-data.js", "./js/posicoes-data.js", "./js/vendor/noble-psi.min.js",

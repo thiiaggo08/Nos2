@@ -368,11 +368,17 @@ const CATALOGO = [
     {id:"rp9", t:"Salto, meia-calça ou couro", d:"Roupas que mudam o clima", r:["Usar","Ver"]},
     {id:"rp10", t:"Atenção especial aos pés", d:"Massagem, beijos e carinho nos pés", r:["Fazer","Receber"]},
   ]},
-  {c:"À distância", itens:[
+  {c:"À distância", nota:"Fotos e vídeos só com combinado claro. Apaguem quando quiserem e nada de rosto se um dos dois preferir.", itens:[
     {id:"ds1", t:"Mensagens picantes ao longo do dia"},
     {id:"ds2", t:"Trocar fotos ousadas", r:["Mandar","Receber"]},
     {id:"ds3", t:"Chamada de vídeo quente"},
     {id:"ds4", t:"Combinar por mensagem o que vai rolar na volta"},
+    {id:"ds5", t:"Áudio sussurrado antes de dormir", d:"Um áudio curto, só para ouvir de fone", r:["Mandar","Receber"]},
+    {id:"ds6", t:"Se tocar ao mesmo tempo por chamada", d:"Cada um no seu lugar, juntos na voz ou no vídeo"},
+    {id:"ds7", t:"Brinquedo com controle pelo celular", d:"Um controla de longe", r:["Controlar","Usar"]},
+    {id:"ds8", t:"Contagem regressiva para o reencontro", d:"Uma provocação por dia até a volta", r:["Provocar","Receber"]},
+    {id:"ds9", t:"Escolher a roupa que o outro vai usar na volta", d:"Mandar a escolha por mensagem", r:["Escolher","Usar"]},
+    {id:"ds10", t:"Uma carta de desejo, escrita à mão", d:"Para abrir só no dia do reencontro", r:["Escrever","Receber"]},
   ]},
   {c:"Olhar e registrar", itens:[
     {id:"ol1", t:"Assistir conteúdo adulto juntos"},
@@ -410,6 +416,11 @@ const CATALOGO = [
     {id:"rr3", t:"Noite fora num hotel, só vocês dois"},
     {id:"rr4", t:"Dançar juntos antes de qualquer coisa"},
     {id:"rr5", t:"Escrever um bilhete de desejo um para o outro"},
+    {id:"rr6", t:"Velas, música e lençol trocado", d:"Preparar o quarto como para uma ocasião", r:["Preparar","Ser surpreendido(a)"]},
+    {id:"rr7", t:"Recriar o primeiro encontro", d:"O mesmo lugar, a mesma comida ou a mesma música"},
+    {id:"rr8", t:"Olhar nos olhos durante", d:"Sem desviar, devagar"},
+    {id:"rr9", t:"Dizer “eu te amo” no meio", d:"Sem pressa e sem vergonha"},
+    {id:"rr10", t:"Café da manhã na cama depois da noite", d:"Continuar o carinho no dia seguinte", r:["Preparar","Receber"]},
   ]},
   {c:"Cuidado e depois", itens:[
     {id:"cd1", t:"Ficar abraçados depois, sem pressa", d:"Sem pegar o celular logo em seguida"},
@@ -462,6 +473,16 @@ const QUEM = [
   {id:"q33", t:"Quem toparia uma viagem só para transar?", n:3},
   {id:"q34", t:"Quem toparia experimentar um chicote macio?", n:3},
   {id:"q35", t:"Quem gostaria de ser amarrado(a) na cama?", n:3},
+  {id:"q36", t:"Quem sente mais saudade quando estão longe?", n:1},
+  {id:"q37", t:"Quem mandaria a primeira mensagem picante do dia?", n:1},
+  {id:"q38", t:"Quem prepararia o quarto para uma noite especial?", n:1},
+  {id:"q39", t:"Quem lembra a música de vocês?", n:1},
+  {id:"q40", t:"Quem gravaria um áudio sussurrado?", n:2},
+  {id:"q41", t:"Quem toparia uma chamada de vídeo quente?", n:2},
+  {id:"q42", t:"Quem planejaria a volta de uma viagem com surpresa?", n:2},
+  {id:"q43", t:"Quem olha mais nos olhos durante?", n:2},
+  {id:"q44", t:"Quem controlaria um brinquedo de longe?", n:3},
+  {id:"q45", t:"Quem toparia se tocar junto por chamada?", n:3},
 ];
 const quemOps = () => ["Eu", parCurto(), "Os dois", "Nenhum"];
 

@@ -173,7 +173,7 @@ Nova categoria **"Entrega leve"**, separada de "Controle e poder" para quem quer
 
 Ligação com os jogos: "Mãos presas" e "Quem recebe dá as ordens" do Dado e das Cartas quentes passariam a aceitar também match em el3, el4 e el8.
 
-## Lote 2 (parte 3) — À distância, Romance e Quem (PROPOSTA)
+## Lote 2 (parte 3) — À distância, Romance e Quem (APROVADO e aplicado, v26)
 
 ### À distância (hoje: 4 itens → 10)
 Já existem: Mensagens picantes ao longo do dia, Trocar fotos ousadas, Chamada de vídeo quente, Combinar por mensagem o que vai rolar na volta.
