@@ -1,6 +1,6 @@
 # Nós Dois — revisão e ampliação do catálogo (Fantasias e Quem do casal)
 
-**Status: APROVADO (28/11/2026): lote 1, lote 2 parte 1 (Anal e Personagens) e lote 2 parte 2 (Entrega leve), com o ajuste em tq5.** Entra no app quando o usuário disser "pode atualizar".
+**Status: APROVADO (28/11/2026): lote 1, lote 2 parte 1 (Anal e Personagens) e lote 2 parte 2 (Entrega leve), com o ajuste em tq5.** Aplicado no app em 28/11/2026 (v24).
 
 ## Hoje
 

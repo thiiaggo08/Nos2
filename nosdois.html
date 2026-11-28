@@ -279,6 +279,13 @@
 <script>
 /* ======================= CONTEÚDO ======================= */
 const CATALOGO = [
+  {c:"Entrar no clima", itens:[
+    {id:"ec1", t:"Começar sem compromisso de terminar", d:"Só beijo e carinho; se esquentar, esquentou"},
+    {id:"ec2", t:"Um convite combinado, só nosso", d:"Uma palavra ou um gesto que quer dizer “estou com vontade”"},
+    {id:"ec3", t:"Ser seduzido(a) devagar ao longo do dia", d:"Mensagens, olhares e toques antes da noite", r:["Seduzir","Ser seduzido(a)"]},
+    {id:"ec4", t:"Banho ou cochilo antes, para tirar o cansaço", d:"Chegar descansado(a) ao encontro"},
+    {id:"ec5", t:"Casa arrumada e sem pendências", d:"Tirar da frente o que distrai"},
+  ]},
   {c:"Clima e lugares", itens:[
     {id:"lug1", t:"Transar fora da cama", d:"Sofá, chuveiro, cozinha, contra a porta"},
     {id:"lug2", t:"Noite de motel ou hotel", d:"Só os dois, sem pressa"},
@@ -287,24 +294,39 @@ const CATALOGO = [
     {id:"lug5", t:"Banho juntos que vira algo mais"},
     {id:"lug6", t:"Transar na frente do espelho"},
   ]},
+  {c:"Novidade e aventura", itens:[
+    {id:"nv1", t:"Um encontro como se fosse o primeiro", d:"Marcar num lugar, chegar separados, paquerar de novo"},
+    {id:"nv2", t:"Surpresa planejada por um dos dois", d:"Um roteiro secreto para a noite", r:["Planejar","Ser surpreendido(a)"]},
+    {id:"nv3", t:"Trocar de papel de quem conduz", d:"Quem costuma conduzir deixa o outro guiar"},
+    {id:"nv4", t:"Fim de semana fora sem roteiro", d:"Viagem curta só para os dois"},
+    {id:"nv5", t:"Experimentar uma posição nova por noite", d:"Escolher do guia de posições"},
+  ]},
   {c:"Toque e sentidos", itens:[
     {id:"tq1", t:"Massagem com óleo", r:["Fazer","Receber"]},
     {id:"tq2", t:"Olhos vendados", r:["Vendar","Ser vendado(a)"]},
     {id:"tq3", t:"Gelo, calor e texturas na pele", r:["Fazer","Receber"]},
     {id:"tq4", t:"Beijar o corpo todo, devagar", r:["Fazer","Receber"]},
-    {id:"tq5", t:"Puxar o cabelo", r:["Puxar","Ter puxado"]},
+    {id:"tq5", t:"Puxar o cabelo", r:["Puxar","Ter puxado"], d:"Com leveza; combinem a intensidade"},
     {id:"tq6", t:"Tapas na bunda", r:["Dar","Levar"]},
+    {id:"tq7", t:"Beijo longo, só beijo, por vários minutos", d:"Como no começo do namoro"},
+    {id:"tq8", t:"Penas, seda ou texturas leves", d:"Arrepiar sem pressa", r:["Fazer","Receber"]},
+    {id:"tq9", t:"Massagem nos pés que vira algo mais", d:"Começar longe e ir subindo", r:["Fazer","Receber"]},
   ]},
   {c:"Oral", itens:[
     {id:"or1", t:"Oral demorado", r:["Fazer","Receber"]},
     {id:"or2", t:"69"},
     {id:"or3", t:"Dizer em voz alta como gosta", d:"Guiar o outro durante"},
+    {id:"or4", t:"Oral bem devagar, como provocação", d:"Chegar perto e voltar, sem pressa", r:["Fazer","Receber"]},
+    {id:"or5", t:"Oral até o fim", d:"Combinem antes como vai ser", r:["Fazer","Receber"]},
+    {id:"or6", t:"Oral com gelo ou bebida morna", d:"Brincar com a temperatura", r:["Fazer","Receber"]},
   ]},
   {c:"Brinquedos", itens:[
     {id:"br1", t:"Vibrador durante a transa"},
     {id:"br2", t:"Plug", r:["Usar em mim","Usar no outro"]},
     {id:"br3", t:"Escolher e comprar um brinquedo juntos"},
     {id:"br4", t:"Brinquedo com controle remoto", r:["Controlar","Ser controlado(a)"]},
+    {id:"br5", t:"Brinquedo para os dois ao mesmo tempo", d:"Escolham juntos"},
+    {id:"br6", t:"Óleo ou gel que esquenta ou esfria", d:"Para massagem e toque"},
   ]},
   {c:"Controle e poder", itens:[
     {id:"pd1", t:"Dominar e obedecer", r:["Dominar","Obedecer"]},
@@ -312,16 +334,39 @@ const CATALOGO = [
     {id:"pd3", t:"Controlar o orgasmo do outro", r:["Controlar","Ser controlado(a)"]},
     {id:"pd4", t:"Uma noite em que um decide tudo", r:["Decidir","Seguir"]},
     {id:"pd5", t:"Falar sacanagem durante", r:["Falar","Ouvir"]},
+    {id:"pd6", t:"Dar ordens leves por uma noite", d:"Combinado antes, com palavra de segurança", r:["Mandar","Obedecer"]},
+    {id:"pd7", t:"Provocar e não deixar tocar", d:"O outro só pode olhar", r:["Provocar","Esperar"]},
+    {id:"pd8", t:"Pedir “por favor” para continuar", d:"Brincadeira de espera", r:["Fazer pedir","Pedir"]},
   ]},
-  {c:"Anal", itens:[
+  {c:"Entrega leve", nota:"<b class=\"w\">Semáforo:</b> verde = continua; amarelo = mais leve ou pausa; vermelho = para tudo. <b class=\"w\">Onde não bater:</b> rosto, pescoço, coluna, rins e articulações; bunda e coxas são as áreas mais seguras. <b class=\"w\">Amarras:</b> sempre fáceis de soltar, nada no pescoço; formigou ou esfriou, solte; tesoura sem ponta por perto. <b class=\"w\">Depois:</b> abraço, água e conversa sobre como foi.", itens:[
+    {id:"el1", t:"Chicote macio (flogger)", d:"Tiras macias, batidas leves na bunda e nas costas altas", r:["Usar","Receber"]},
+    {id:"el2", t:"Palmatória ou mão aberta, bem leve", d:"Começar fraco e subir só se pedir", r:["Fazer","Receber"]},
+    {id:"el3", t:"Amarrar mãos e pés na cama", d:"Com faixas macias ou gravatas, fáceis de soltar", r:["Amarrar","Ser amarrado(a)"]},
+    {id:"el4", t:"Venda + mãos presas ao mesmo tempo", d:"Sem ver e sem poder tocar", r:["Conduzir","Se entregar"]},
+    {id:"el5", t:"Mordidas e arranhões leves", d:"Marcar sem machucar", r:["Fazer","Receber"]},
+    {id:"el6", t:"Vela de massagem que derrete morna", d:"Própria para pele, nunca vela comum", r:["Pingar","Receber"]},
+    {id:"el7", t:"Contar as batidas em voz alta", d:"Quem recebe conta; quem faz respeita o número combinado", r:["Fazer","Receber"]},
+    {id:"el8", t:"Uma cena combinada do começo ao fim", d:"Escolher juntos o que vai ter, o semáforo e o depois"},
+  ]},
+  {c:"Anal", nota:"Muito lubrificante, começar devagar e quem recebe controla o ritmo. Não passar do anal para o vaginal sem trocar a camisinha ou lavar.", itens:[
     {id:"an1", t:"Sexo anal", r:["Fazer","Receber"]},
     {id:"an2", t:"Estímulo anal com dedo ou língua", r:["Fazer","Receber"]},
+    {id:"an3", t:"Começar só com massagem por fora", d:"Sem penetração, com lubrificante, só para conhecer a sensação", r:["Fazer","Receber"]},
+    {id:"an4", t:"Estímulo anal junto com o oral", d:"Os dois ao mesmo tempo, com calma", r:["Fazer","Receber"]},
+    {id:"an5", t:"Inverter os papéis com cinta ou brinquedo", d:"Quem costuma fazer, recebe", r:["Fazer","Receber"]},
+    {id:"an6", t:"Preparar a noite com calma", d:"Banho, lubrificante por perto e combinar o ritmo antes"},
   ]},
-  {c:"Personagens e fetiches", itens:[
+  {c:"Personagens e fetiches", nota:"Sempre entre adultos e combinado antes. A palavra de segurança vale para qualquer personagem.", itens:[
     {id:"rp1", t:"Lingerie ou roupa especial", r:["Usar","Ver"]},
     {id:"rp2", t:"Roleplay de desconhecidos", d:"Se encontrar num bar como se não se conhecessem"},
     {id:"rp3", t:"Vestir um personagem / fantasia"},
     {id:"rp4", t:"Striptease", r:["Fazer","Assistir"]},
+    {id:"rp5", t:"Chefe e funcionário(a)", d:"Jogo de poder num cenário de escritório", r:["Chefe","Funcionário(a)"]},
+    {id:"rp6", t:"Massagista e cliente", d:"A massagem que “sai do roteiro”", r:["Massagista","Cliente"]},
+    {id:"rp7", t:"Desconhecidos num quarto de hotel", d:"Chegar separados e se apresentar com outro nome"},
+    {id:"rp8", t:"Fantasia escolhida pelo outro", d:"Um escolhe a roupa ou o personagem que o outro vai usar", r:["Escolher","Usar"]},
+    {id:"rp9", t:"Salto, meia-calça ou couro", d:"Roupas que mudam o clima", r:["Usar","Ver"]},
+    {id:"rp10", t:"Atenção especial aos pés", d:"Massagem, beijos e carinho nos pés", r:["Fazer","Receber"]},
   ]},
   {c:"À distância", itens:[
     {id:"ds1", t:"Mensagens picantes ao longo do dia"},
@@ -333,6 +378,9 @@ const CATALOGO = [
     {id:"ol1", t:"Assistir conteúdo adulto juntos"},
     {id:"ol2", t:"Filmar ou fotografar só para vocês", d:"Apagando depois, se combinarem"},
     {id:"ol3", t:"Se masturbar na frente do outro", r:["Fazer","Assistir"]},
+    {id:"ol4", t:"Deixar a luz acesa", d:"Ver tudo, sem esconder o corpo"},
+    {id:"ol5", t:"Assistir o outro se arrumar ou se despir", d:"Um “show” particular", r:["Mostrar","Assistir"]},
+    {id:"ol6", t:"Ver no espelho enquanto acontece", d:"Olhar os dois juntos"},
   ]},
   {c:"Com terceiros (fantasia)", itens:[
     {id:"tr1", t:"Conversar sobre fantasias com outra pessoa", d:"Só imaginação"},
@@ -344,6 +392,9 @@ const CATALOGO = [
     {id:"pv1", t:"Ler juntos um conto erótico"},
     {id:"pv2", t:"Trocar áudios ou textos provocantes durante o dia"},
     {id:"pv3", t:"Pedir em voz alta o que quer, sem rodeio"},
+    {id:"pv4", t:"Ouvir o que o outro sente na hora", d:"Falar o que está gostando, em voz baixa"},
+    {id:"pv5", t:"Mensagem descrevendo a noite que vem", d:"Durante o dia, por escrito", r:["Escrever","Receber"]},
+    {id:"pv6", t:"Gemer e fazer barulho sem vergonha", d:"Sem se conter"},
   ]},
   {c:"Ritmo e tempo", itens:[
     {id:"rt1", t:"Chegar perto do clímax e parar, várias vezes"},
@@ -359,6 +410,13 @@ const CATALOGO = [
     {id:"rr3", t:"Noite fora num hotel, só vocês dois"},
     {id:"rr4", t:"Dançar juntos antes de qualquer coisa"},
     {id:"rr5", t:"Escrever um bilhete de desejo um para o outro"},
+  ]},
+  {c:"Cuidado e depois", itens:[
+    {id:"cd1", t:"Ficar abraçados depois, sem pressa", d:"Sem pegar o celular logo em seguida"},
+    {id:"cd2", t:"Contar um para o outro o que foi melhor", d:"Um elogio específico depois"},
+    {id:"cd3", t:"Palavra de segurança para qualquer brincadeira", d:"Uma palavra que para tudo, sem explicação"},
+    {id:"cd4", t:"Combinar antes o que pode e o que não pode", d:"Cinco minutos de conversa antes de algo novo"},
+    {id:"cd5", t:"Um lanche ou banho juntos depois", d:"Cuidar do corpo do outro no fim"},
   ]},
 ];
 const NIVEIS = ["Passo","Toparia","Quero","Quero muito"];
@@ -387,6 +445,23 @@ const QUEM = [
   {id:"q16", t:"Quem toparia ir a uma festa de casais?", n:3},
   {id:"q17", t:"Quem já pensou em ménage?", n:3},
   {id:"q18", t:"Quem toparia swing primeiro?", n:3},
+  {id:"q19", t:"Quem precisa de mais carinho antes para entrar no clima?", n:1},
+  {id:"q20", t:"Quem gosta mais de ser convidado(a) com calma?", n:1},
+  {id:"q21", t:"Quem fica com mais vontade depois que começa?", n:1},
+  {id:"q22", t:"Quem sente mais falta de beijo demorado?", n:1},
+  {id:"q23", t:"Quem mais gosta de ficar abraçado depois?", n:1},
+  {id:"q24", t:"Quem lembra mais das noites boas de vocês?", n:1},
+  {id:"q25", t:"Quem se arrumaria primeiro para seduzir o outro?", n:2},
+  {id:"q26", t:"Quem toparia planejar uma noite surpresa?", n:2},
+  {id:"q27", t:"Quem gostaria de ouvir mais o que o outro sente na hora?", n:2},
+  {id:"q28", t:"Quem deixaria a luz acesa?", n:2},
+  {id:"q29", t:"Quem gostaria de conduzir mais vezes?", n:2},
+  {id:"q30", t:"Quem toparia uma noite de ordens leves, com palavra de segurança?", n:3},
+  {id:"q31", t:"Quem tem uma fantasia que só contaria se o outro contasse primeiro?", n:3},
+  {id:"q32", t:"Quem toparia contar a fantasia mais forte em voz alta?", n:3},
+  {id:"q33", t:"Quem toparia uma viagem só para transar?", n:3},
+  {id:"q34", t:"Quem toparia experimentar um chicote macio?", n:3},
+  {id:"q35", t:"Quem gostaria de ser amarrado(a) na cama?", n:3},
 ];
 const quemOps = () => ["Eu", parCurto(), "Os dois", "Nenhum"];
 
@@ -573,7 +648,7 @@ const DADO = {
 };
 /* 4.5: cada ação ligada a um item do catálogo só entra quando o item é coincidência dos dois ("Só o que os dois marcaram") */
 const DADO_REQ={pos:{"69":["or2"],"Oral em A":["or1"],"Oral em B":["or1"]},
-  jeito:{"Falando sacanagem":["pd5"],"Sem poder gozar até o tempo acabar":["rt1","pd3"],"Com um brinquedo":["br1","br3","br4"],"Olhos vendados (vocês escolhem quem)":["tq2"],"Mãos presas, só seguradas (quem recebe)":["pd2"],"Quem recebe dá as ordens":["pd1","pd4"]},
+  jeito:{"Falando sacanagem":["pd5"],"Sem poder gozar até o tempo acabar":["rt1","pd3"],"Com um brinquedo":["br1","br3","br4"],"Olhos vendados (vocês escolhem quem)":["tq2"],"Mãos presas, só seguradas (quem recebe)":["pd2","el3","el4","el8"],"Quem recebe dá as ordens":["pd1","pd4","pd6","el8"]},
   lugar:{"Chuveiro":["lug5","rr1"],"Na frente do espelho":["lug6"],"Contra a porta":["lug1"],"Mesa ou bancada":["lug1"]}};
 const coincidencias=()=>new Set(calcMatches().map(m=>m.it.id));
 const liberado=(req,C)=>!req||req.some(id=>C.has(id));
@@ -649,14 +724,20 @@ let mResp="inter";
 function modoResp(m){ mResp=m; setSeg("segResp",m); renderResp(); window.scrollTo(0,0); }
 function renderResp(){
   const L=$("lista"); L.innerHTML="";
-  if(mResp==="inter"){
+  if(mResp==="inter"&&fantVista==="cartas"){
+    $("respIntro").innerHTML=`<div class="note">Uma fantasia por vez. “Passo” nunca é revelado; Toparia, Quero e Quero muito contam como sim.</div>`;
+    renderFantCartas(L);
+  } else if(mResp==="quem"&&quemVista==="cartas"){
+    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Um toque e vem a próxima.</div>`;
+    renderQuemCartas(L);
+  } else if(mResp==="inter"){
     const resp=it=>(it.hora?st.hora!=null:!!st.resp[it.id])?"sim":"nao", tudo=todos();
-    $("respIntro").innerHTML=`<div class="note">“Passo” nunca é revelado. Toparia, Quero e Quero muito contam como sim. Em algumas fantasias você escolhe também o seu papel.</div>`+
+    $("respIntro").innerHTML=abasResp("lista","fantVista")+`<div class="note">“Passo” nunca é revelado. Toparia, Quero e Quero muito contam como sim. Em algumas fantasias você escolhe também o seu papel.</div>`+
       chipsFiltro("respInter",[["todas","Todas",tudo.length],["nao","Sem resposta",tudo.filter(i=>resp(i)==="nao").length],["sim","Respondidas",tudo.filter(i=>resp(i)==="sim").length]]);
     CATALOGO.forEach(cat=>{
       const its=cat.itens.filter(it=>filtroOk("respInter",resp(it))); if(!its.length) return;
       const d=document.createElement("div");
-      d.innerHTML=`<div class="cat-h"><h2>${cat.c}</h2><span>${cat.itens.length}</span></div>`;
+      d.innerHTML=`<div class="cat-h"><h2>${cat.c}</h2><span>${cat.itens.length}</span></div>${cat.nota?`<div class="note" style="font-size:13px">${cat.nota}</div>`:""}`;
       its.forEach(it=>d.appendChild(cardInter(it))); L.appendChild(d);
     });
     const d=document.createElement("div");
@@ -668,7 +749,7 @@ function renderResp(){
     d.appendChild(f); L.appendChild(d);
   } else if(mResp==="quem"){
     const rq=q=>st.quem[q.id]!=null?"sim":"nao";
-    $("respIntro").innerHTML=`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, as respostas dos dois aparecem lado a lado, com uma etiqueta.</div>`+
+    $("respIntro").innerHTML=abasResp("lista","quemVista")+`<div class="note">Responda do seu ponto de vista: <b class="w">Eu</b> = você, <b class="w">${esc(parCurto())}</b> = seu par. Depois da troca, as respostas dos dois aparecem lado a lado, com uma etiqueta.</div>`+
       chipsFiltro("respQuem",[["todas","Todas",QUEM.length],["nao","Sem resposta",QUEM.filter(q=>rq(q)==="nao").length],["sim","Respondidas",QUEM.filter(q=>rq(q)==="sim").length]]);
     [1,2,3].forEach(n=>{
       const qs=QUEM.filter(q=>q.n===n&&filtroOk("respQuem",rq(q))); if(!qs.length) return;
@@ -698,6 +779,68 @@ function cardHora(it){
   return el;
 }
 function setHora(i){ st.hora=st.hora===i?null:i; editou(); salvar(); const it=porId("rt6"), el=$("it-rt6"); if(el) el.replaceWith(cardHora(it)); progresso(); }
+/* ---- 5.5: responder em cartas (Fantasias e Quem do casal) ---- */
+let fantVista="cartas", fantCat="todas", fantHist=[], fantPapelDe=null, quemVista="cartas", quemHist=[];
+const FANT_OP={3:"♥ Quero muito",2:"↑ Quero",1:"↓ Toparia",0:"✕ Passo"};
+function catDe(id){ const c=CATALOGO.find(c=>c.itens.some(i=>i.id===id)); return c?c.c:"Ideias de vocês"; }
+function fantBase(){ const its=fantCat==="todas"?todos():fantCat==="ideias"?customItens():(CATALOGO.find(c=>c.c===fantCat)||{itens:[]}).itens; return its.filter(it=>!it.hora); }
+function fantFila(){ const pend=fantBase().filter(it=>!st.resp[it.id]); const pulo=st.fantPulo||[];
+  return pend.filter(it=>!pulo.includes(it.id)).concat(pulo.map(id=>pend.find(it=>it.id===id)).filter(Boolean)); }
+function abasResp(atual,fn){ return `<div class="row" style="margin-top:0"><button class="chip ${atual==="cartas"?"on":""}" onclick="${fn}='cartas';renderResp()">Cartas</button><button class="chip ${atual==="lista"?"on":""}" onclick="${fn}='lista';renderResp()">Ver lista</button></div>`; }
+function renderFantCartas(L){
+  const cats=[["todas","Todas"],...CATALOGO.map(c=>[c.c,c.c]),...(customItens().length?[["ideias","Ideias de vocês"]]:[])];
+  const pend=k=>{ const o=fantCat; fantCat=k; const n=fantBase().filter(it=>!st.resp[it.id]).length; fantCat=o; return n; };
+  const chips=`<div class="row" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px">${cats.map(([k,t])=>`<button class="chip ${fantCat===k?"on":""}" style="flex:none;min-width:0;padding:8px 12px" onclick="fantCat=${JSON.stringify(k).replace(/"/g,"&quot;")};fantPapelDe=null;renderResp()">${esc(t)} (${pend(k)})</button>`).join("")}</div>`;
+  const base=fantBase(), fila=fantFila(), feitas=base.length-fila.length;
+  let h=abasResp("cartas","fantVista")+chips+(fantCat!=="todas"?`<div class="muted" style="margin-top:10px">${feitas} de ${base.length} respondidas em ${esc(fantCat==="ideias"?"Ideias de vocês":fantCat)}</div>`:"");
+  const papelIt=fantPapelDe&&porId(fantPapelDe);
+  if(papelIt){ const r=st.resp[papelIt.id];
+    h+=`<div class="match" style="text-align:center"><div class="eyebrow">${esc(catDe(papelIt.id))} · ${FANT_OP[r.n]}</div><div class="t" style="font-family:Georgia,serif;font-size:22px;margin-top:8px">${esc(papelIt.t)}</div>
+      <p style="margin:12px 0 4px">Qual é o seu papel?</p><div class="row">${[papelIt.r[0],papelIt.r[1],"Tanto faz"].map((p,i)=>`<button class="chip" style="padding:12px 4px" onclick="fantPapel(${i})">${esc(p)}</button>`).join("")}</div></div>`;
+    L.innerHTML=h; return; }
+  const it=fila[0];
+  if(!it){ L.innerHTML=h+`<div class="match" style="text-align:center"><div class="t">Respondeu tudo aqui 🎉</div><p class="muted">Escolha outra categoria ou revise em “Ver lista”.</p><button class="btn ghost" onclick="fantVista='lista';renderResp()">Ver lista</button></div>`; return; }
+  const cat=CATALOGO.find(c=>c.itens.includes(it)), mine=(st.custom||[]).some(c=>c.id===it.id);
+  h+=`<div id="fantCard" class="match" style="touch-action:none;user-select:none;-webkit-user-select:none;position:relative;transition:transform .2s;min-height:200px;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:22px 16px">
+    <div id="fantSelo" style="position:absolute;top:12px;left:12px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:8px;opacity:0"></div>
+    <div class="eyebrow">${esc(catDe(it.id))}</div><div class="t" style="font-family:Georgia,serif;font-size:24px;margin-top:10px;line-height:1.25">${esc(it.t)}</div>
+    ${it.d?`<div class="d" style="margin-top:8px">${it.d}</div>`:""}${it.de?`<div class="d" style="margin-top:6px">Ideia de ${esc(mine?eu():ele())}</div>`:""}
+    ${it.r?`<div class="muted" style="margin-top:8px;font-size:12px">Depois você escolhe o papel: ${esc(it.r[0])} ou ${esc(it.r[1])}</div>`:""}
+    ${cat&&cat.nota?`<details style="margin-top:10px;text-align:left"><summary class="muted">Cuidados desta categoria</summary><div class="d" style="margin-top:6px">${cat.nota}</div></details>`:""}</div>
+   <div class="row" style="margin-top:12px"><button class="chip pass" style="padding:12px 2px" onclick="fantMarcar('${it.id}',0)">✕ Passo</button><button class="chip" style="padding:12px 2px" onclick="fantMarcar('${it.id}',1)">↓ Toparia</button><button class="chip" style="padding:12px 2px" onclick="fantMarcar('${it.id}',2)">↑ Quero</button><button class="chip on" style="padding:12px 2px" onclick="fantMarcar('${it.id}',3)">♥ Quero muito</button></div>
+   <div class="row"><button class="chip" onclick="fantPular('${it.id}')">Pular por enquanto</button><button class="chip" ${fantHist.length?"":"disabled style='opacity:.4'"} onclick="fantDesfazer()">Desfazer</button></div>
+   <p class="muted" style="font-size:13px">Deslize: <b class="w">→</b> Quero muito · <b class="w">↑</b> Quero · <b class="w">↓</b> Toparia · <b class="w">←</b> Passo. “Passo” nunca é revelado.</p>`;
+  L.innerHTML=h; fantGestos(it.id);
+}
+function fantMarcar(id,n){ const it=porId(id); fantHist.push({id,ant:st.resp[id]?{...st.resp[id]}:null,pulo:[...(st.fantPulo||[])]}); if(fantHist.length>40) fantHist.shift();
+  st.resp[id]={n,r:n===0?null:(it.r?2:null)}; st.fantPulo=(st.fantPulo||[]).filter(x=>x!==id); editou(); salvar();
+  fantPapelDe=(n>0&&it.r)?id:null; renderResp(); }
+function fantPapel(i){ const id=fantPapelDe; if(id&&st.resp[id]){ st.resp[id].r=i; editou(); salvar(); } fantPapelDe=null; renderResp(); }
+function fantPular(id){ fantHist.push({id,ant:st.resp[id]?{...st.resp[id]}:null,pulo:[...(st.fantPulo||[])]}); st.fantPulo=(st.fantPulo||[]).filter(x=>x!==id).concat(id); salvar(); renderResp(); }
+function fantDesfazer(){ const h=fantHist.pop(); if(!h) return; if(h.ant) st.resp[h.id]=h.ant; else delete st.resp[h.id]; st.fantPulo=h.pulo; fantPapelDe=null; editou(); salvar(); renderResp(); }
+function fantGestos(id){ const c=$("fantCard"), selo=$("fantSelo"); if(!c) return; let x0=null,y0=null,dx=0,dy=0;
+  const dir=()=>Math.abs(dx)>Math.abs(dy)?(dx>0?3:0):(dy<0?2:1);
+  const cores={3:"#9e2a3c",2:"#b8955a",1:"#5a4e48",0:"#444"}, txt={3:"♥ QUERO MUITO",2:"↑ QUERO",1:"↓ TOPARIA",0:"✕ PASSO"};
+  c.addEventListener("pointerdown",e=>{ if(e.target.closest("summary,details,button,a")) return; x0=e.clientX; y0=e.clientY; c.style.transition="none"; try{c.setPointerCapture(e.pointerId);}catch(_){} });
+  c.addEventListener("pointermove",e=>{ if(x0==null) return; dx=e.clientX-x0; dy=e.clientY-y0; c.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/22}deg)`;
+    const d=dir(); selo.textContent=txt[d]; selo.style.background=cores[d]; selo.style.color="#fff"; selo.style.opacity=Math.min(1,Math.max(Math.abs(dx),Math.abs(dy))/90); });
+  const fim=()=>{ if(x0==null) return; x0=null; c.style.transition="transform .2s";
+    if(Math.max(Math.abs(dx),Math.abs(dy))>90) return fantMarcar(id,dir());
+    c.style.transform=""; selo.style.opacity=0; dx=dy=0; };
+  c.addEventListener("pointerup",fim); c.addEventListener("pointercancel",fim); }
+
+function renderQuemCartas(L){
+  const fila=QUEM.filter(q=>st.quem[q.id]==null), q=fila[0], feitas=QUEM.length-fila.length;
+  let h=abasResp("cartas","quemVista");
+  if(!q){ L.innerHTML=h+`<div class="match" style="text-align:center"><div class="t">Respondeu todas 🎉</div><button class="btn ghost" onclick="quemVista='lista';renderResp()">Ver lista</button></div>`; return; }
+  h+=`<div class="match" style="text-align:center;min-height:170px;display:flex;flex-direction:column;justify-content:center;padding:22px 16px"><div class="eyebrow">Nível ${q.n} · ${["","leve","quente","ousado"][q.n]}</div><div class="t" style="font-family:Georgia,serif;font-size:24px;margin-top:10px;line-height:1.25">${esc(q.t)}</div></div>
+   <div class="two" style="margin-top:12px">${quemOps().slice(0,2).map((o,i)=>`<button class="btn gold" onclick="quemMarcar('${q.id}',${i})">${esc(o)}</button>`).join("")}</div>
+   <div class="two">${quemOps().slice(2).map((o,i)=>`<button class="btn ghost" onclick="quemMarcar('${q.id}',${i+2})">${esc(o)}</button>`).join("")}</div>
+   <div class="row"><button class="chip" ${quemHist.length?"":"disabled style='opacity:.4'"} onclick="quemDesfazer()">Desfazer</button></div>`;
+  L.innerHTML=h; }
+function quemMarcar(id,i){ quemHist.push({id,ant:st.quem[id]}); st.quem[id]=i; editou(); salvar(); renderResp(); }
+function quemDesfazer(){ const h=quemHist.pop(); if(!h) return; if(h.ant==null) delete st.quem[h.id]; else st.quem[h.id]=h.ant; editou(); salvar(); renderResp(); }
+
 function cardInter(it){
   if(it.hora) return cardHora(it);
   const el=document.createElement("div"); el.className="item"; el.id="it-"+it.id;
@@ -1710,7 +1853,7 @@ function quentesInit(){
   <div class="game"><label class="check"><input type="checkbox" id="qSo" checked> <span><b class="w">Só o que os dois marcaram</b> · oral, venda, brinquedo, gelo, mãos presas e ordens só aparecem se forem match.</span></label><div class="muted">${QUENTES.length} ações · até que nível?</div>
    <div class="two"><button class="btn ghost" onclick="cartasComecar('q',1)">Leve</button><button class="btn ghost" onclick="cartasComecar('q',2)">Quente</button><button class="btn primary" onclick="cartasComecar('q',3)">Ousado</button></div></div>`;
 }
-const QUENTE_REQ=[[/69/,["or2"]],[/oral/i,["or1"]],[/Vende/,["tq2"]],[/brinquedo/,["br1","br3","br4"]],[/quase ao limite/,["rt1","pd3"]],[/Mãos presas/,["pd2"]],[/gelo/i,["tq3"]],[/Se toque na frente/,["ol3"]],[/obedeça/,["pd1","pd4"]],[/em detalhes, o que você vai fazer/,["pd5","pv3"]]];
+const QUENTE_REQ=[[/69/,["or2"]],[/oral/i,["or1"]],[/Vende/,["tq2"]],[/brinquedo/,["br1","br3","br4"]],[/quase ao limite/,["rt1","pd3"]],[/Mãos presas/,["pd2","el3","el4","el8"]],[/gelo/i,["tq3"]],[/Se toque na frente/,["ol3"]],[/obedeça/,["pd1","pd4","pd6","el8"]],[/em detalhes, o que você vai fazer/,["pd5","pv3"]]];
 function quentePode(i,C){ if(!K||K.so===false) return true; const r=QUENTE_REQ.find(([re])=>re.test(QUENTES[i][1])); return !r||liberado(r[1],C); }
 function cartasNivel(){ const C=coincidencias(); for(let l=1;l<=K.max;l++){ const ids=QUENTES.map((c,i)=>c[0]===l&&quentePode(i,C)?i:-1).filter(i=>i>=0); if(ids.length&&Nos2.deck.remaining("nd.q"+l,ids)>0) return [l,ids]; } return null; }
 function cartasComecar(deck,max,modo){
