@@ -29,6 +29,8 @@ Status: ⏳ aguardando decisão · ✅ decidido (falta aplicar) · 🚀 aplicado
 | 3.1 | Espero Você: recusa do par | ✅ | Decisão final (27/11/2026): fica como está hoje (Cumpri, Fui descoberto(a), Não fiz). Sem o botão “Encerrar missão”. Nada a aplicar. |
 | 3.2 | Prêmio “vale-sim” | 🚀 | Trocado por “Vale escolher o próximo jogo”: “Vocês escolhem duas opções que topariam jogar. Quem venceu dá o voto final.” |
 | 3.3 | Linha de ajuda (Ligue 180/190) em “Como funciona” | ✖ encerrado | Decisão do usuário (27/11/2026): não acrescentar. |
+| 3.4 | Semana de 7 dias com 2 missões por dia | ✅ aprovado (28/11/2026), falta aplicar | Só na Semana de 7 dias. Cada um recebe 14 missões: dias 1, 3, 5 e 7 = 1 leve + 1 pesada (+18); dias 2, 4 e 6 = 1 leve + 1 moderada. Leve = níveis 1 e 2; moderada = 3 e 4; pesada = 5 (Carta Espero Você, +18). Com teto abaixo de 5, a pesada vira moderada. Duas janelas por dia (uma de dia, outra à noite), cada uma com sua missão. 2 vetos por pessoa. Semana de 3 a 6 dias continua como hoje. |
+| 3.5 | Novo fluxo para a Partida rápida (24 h e 48 h) | ⏳ ideia do usuário, a definir | O usuário vai pensar em outro fluxo para 24 h e 48 h. Até lá, fica como está. |
 
 ## 4. Ajustes técnicos recomendados
 | # | Pendência | Status | Decisão |
