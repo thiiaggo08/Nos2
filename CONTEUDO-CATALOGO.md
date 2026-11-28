@@ -173,6 +173,48 @@ Nova categoria **"Entrega leve"**, separada de "Controle e poder" para quem quer
 
 Ligação com os jogos: "Mãos presas" e "Quem recebe dá as ordens" do Dado e das Cartas quentes passariam a aceitar também match em el3, el4 e el8.
 
+## Lote 2 (parte 3) — À distância, Romance e Quem (PROPOSTA)
+
+### À distância (hoje: 4 itens → 10)
+Já existem: Mensagens picantes ao longo do dia, Trocar fotos ousadas, Chamada de vídeo quente, Combinar por mensagem o que vai rolar na volta.
+Cuidado que aparece no topo da categoria: fotos e vídeos só com combinado claro; apaguem quando quiserem; nada de rosto se um dos dois preferir.
+
+| id | Item | Descrição | Papéis |
+|---|---|---|---|
+| ds5 | Áudio sussurrado antes de dormir | Um áudio curto, só para ouvir de fone | Mandar / Receber |
+| ds6 | Se tocar ao mesmo tempo por chamada | Cada um no seu lugar, juntos na voz ou no vídeo | — |
+| ds7 | Brinquedo com controle pelo celular | Um controla de longe | Controlar / Usar |
+| ds8 | Contagem regressiva para o reencontro | Uma provocação por dia até a volta | Provocar / Receber |
+| ds9 | Escolher a roupa que o outro vai usar na volta | Mandar a escolha por mensagem | Escolher / Usar |
+| ds10 | Uma carta de desejo, escrita à mão | Para abrir só no dia do reencontro | Escrever / Receber |
+
+### Romance e ritual (hoje: 5 itens → 10)
+Já existem: Banho a dois preparado com calma, Jantar em casa que termina no quarto, Noite fora num hotel, Dançar juntos antes de qualquer coisa, Escrever um bilhete de desejo.
+
+| id | Item | Descrição | Papéis |
+|---|---|---|---|
+| rr6 | Velas, música e lençol trocado | Preparar o quarto como para uma ocasião | Preparar / Ser surpreendido(a) |
+| rr7 | Recriar o primeiro encontro | O mesmo lugar, a mesma comida ou a mesma música | — |
+| rr8 | Olhar nos olhos durante | Sem desviar, devagar | — |
+| rr9 | Dizer “eu te amo” no meio | Sem pressa e sem vergonha | — |
+| rr10 | Café da manhã na cama depois da noite | Continuar o carinho no dia seguinte | Preparar / Receber |
+
+### Quem do casal (+10)
+| id | Pergunta | Nível |
+|---|---|---|
+| q36 | Quem sente mais saudade quando estão longe? | 1 |
+| q37 | Quem mandaria a primeira mensagem picante do dia? | 1 |
+| q38 | Quem prepararia o quarto para uma noite especial? | 1 |
+| q39 | Quem lembra a música de vocês? | 1 |
+| q40 | Quem gravaria um áudio sussurrado? | 2 |
+| q41 | Quem toparia uma chamada de vídeo quente? | 2 |
+| q42 | Quem planejaria a volta de uma viagem com surpresa? | 2 |
+| q43 | Quem olha mais nos olhos durante? | 2 |
+| q44 | Quem controlaria um brinquedo de longe? | 3 |
+| q45 | Quem toparia se tocar junto por chamada? | 3 |
+
+**Total com esta parte:** 116 fantasias e 45 perguntas no Quem.
+
 ## Depois deste lote
 
 - **Total com o lote 1:** 87 fantasias em 16 categorias e 33 perguntas no Quem do casal.
