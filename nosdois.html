@@ -13,6 +13,7 @@
 <script src="js/core.js"></script>
 <script src="js/vendor/noble-psi.min.js"></script>
 <script src="js/mcm-data.js"></script>
+<script src="js/posicoes-data.js"></script>
 <style>
   :root{--bg:#0c0a0b;--card:#161214;--line:#2a2326;--txt:#efe6dc;--mute:#9d928a;--gold:#b8955a;--wine:#9e2a3c;--deep:#2b1015}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -254,7 +255,7 @@
       <button class="thumb" data-thumb="prel" onclick="abrirJogo('prel')"><div><small>Jogo 3</small><span>Preliminares</span><em>48 cartas em 3 níveis, com voz e tempo. Um conduz, o outro só recebe.</em></div></button>
       <button class="thumb" data-thumb="cartas" onclick="abrirJogo('quentes')"><div><small>Baralho</small><span>Cartas quentes</span><em>45 ações em 3 níveis: Leve, Quente e Ousado.</em></div></button>
       <button class="thumb" data-thumb="dado" onclick="abrirJogo('dado')"><div><small>Jogo 1</small><span>Dado da Noite</span><em>Dois toques às cegas sorteiam posição, jeito e lugar. 3 min por rodada, 2 passes.</em></div></button>
-      <button class="thumb" data-thumb="pos" onclick="abrirJogo('pos')"><div><small>Guia</small><span>Posições</span><em>27 posições explicadas, com dicas e sorteio.</em></div></button>
+      <button class="thumb" data-thumb="pos" onclick="abrirJogo('pos')"><div><small>Guia</small><span>Posições</span><em>491 posições. Escolha o nível e gire a roleta.</em></div></button>
       <div class="jgrp">Fantasias</div>
       <button class="thumb" data-thumb="roleta" onclick="abrirJogo('roleta')"><div><small>Extra</small><span>Roleta dos matches</span><em>Sorteia uma fantasia da Interseção de vocês.</em></div></button>
       <div class="jgrp">Relaxar</div>
@@ -391,7 +392,7 @@ const quemOps = () => ["Eu", parCurto(), "Os dois", "Nenhum"];
 
 
 /* ======================= POSIÇÕES (guia próprio) ======================= */
-const POS=[
+const POS_OLD=[ // guia antigo: só para referência dos esquemas
  {id:"p1",c:"Clássicas",n:"Papai e mamãe",l:1,d:"Quem fica embaixo deita de costas; o outro vem por cima, apoiado nos braços.",t:"Um travesseiro sob o quadril de quem está embaixo muda o ângulo e a sensação."},
  {id:"p2",c:"Clássicas",n:"Abraço apertado",l:1,d:"Papai e mamãe com as pernas de quem está embaixo envolvendo a cintura do outro.",t:"Muito contato de pele e beijo. Bom para começar devagar."},
  {id:"p3",c:"Clássicas",n:"Pernas nos ombros",l:2,d:"Variação do papai e mamãe com as pernas de quem está embaixo apoiadas nos ombros do outro.",t:"Fica mais profundo: comecem devagar e conversem sobre o ritmo."},
@@ -518,7 +519,6 @@ const ESQ_TXT={
  p27:"Quem recebe: mãos no chão · O outro: em pé, segurando as pernas pela cintura",
 };
 const legendaEsq=`<div class="muted" style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin:8px 0 2px"><span><span style="display:inline-block;width:14px;height:8px;border-radius:4px;background:#9e2a3c;vertical-align:middle"></span> quem recebe</span><span><span style="display:inline-block;width:14px;height:8px;border-radius:4px;background:#b8955a;vertical-align:middle"></span> o outro</span><span>▸ para onde está virado</span></div>`;
-const POS_CATS=["Todas",...new Set(POS.map(p=>p.c))];
 
 /* ======================= BARALHOS ======================= */
 const CONVERSA=[
@@ -665,7 +665,7 @@ function renderResp(){
       L.appendChild(d);
     });
   } else if(mResp==="pos"){
-    $("respIntro").innerHTML=`<div class="note">Quer uma imagem no lugar do esquema? Toque em <b class="w">Adicionar imagem</b> na posição e escolha da galeria. Ela fica guardada só neste celular.</div><div class="note">Um guia de posições. Marque <b class="w">Quero tentar</b> nas que te interessam. Seu par só vê as que <b class="w">os dois</b> marcarem, no Plano da noite.</div>`;
+    $("respIntro").innerHTML=`<div class="note">Deslize as cartas: <b class="w">♥ Topo</b>, <b class="w">↑ Tentar</b> ou <b class="w">✕ Agora não</b>. Seu par só vê as que os dois marcarem como Topo ou Tentar.</div>`;
     renderPosLista(L);
   } else if(mResp==="sug"){
     $("respIntro").innerHTML=`<div class="note">Diferente do resto, os recados <b class="w">aparecem inteiros para seu par</b> no Plano da noite. Escreva só o que você quer que ele(a) leia.</div>`;
@@ -726,10 +726,10 @@ function progresso(){
   let n,tot;
   if(mResp==="inter"){ tot=todos().length; n=todos().filter(i=>i.hora?st.hora!=null:st.resp[i.id]).length; }
   else if(mResp==="quem"){ tot=QUEM.length; n=QUEM.filter(q=>st.quem[q.id]!=null).length; }
-  else if(mResp==="pos"){ tot=POS.length; n=Object.keys(st.pos).length; }
+  else if(mResp==="pos"){ tot=POS.length; n=POS.filter(p=>marcouPos(p.id)).length; }
   else if(mResp==="sug"){ tot=2; n=(st.sug.trim()?1:0)+(st.lim.trim()?1:0); }
   else { tot=ZONAS.length; n=Object.keys(st.mapa).length; }
-  $("prog").textContent = mResp==="mapa" ? `${n} zonas marcadas` : mResp==="pos" ? `${n} posições marcadas para tentar` : mResp==="sug" ? `${n} de 2 campos preenchidos` : `${n} de ${tot} respondidas`;
+  $("prog").textContent = mResp==="mapa" ? `${n} zonas marcadas` : mResp==="pos" ? `${n} de ${tot} posições respondidas` : mResp==="sug" ? `${n} de 2 campos preenchidos` : `${n} de ${tot} respondidas`;
   $("bar").style.width=(100*n/tot)+"%";
 }
 
@@ -768,7 +768,7 @@ function tokensDe(d,lado){
   Object.entries(d.av||{}).forEach(([id,v])=>{ if(v===0) out.push(`av|${id}`); });
   return [...new Set(out)];
 }
-const meusDados=()=>({resp:st.resp,pos:Object.keys(st.pos),hora:st.hora,mapa:st.mapa,quem:st.quem,av:st.av});
+const meusDados=()=>({resp:st.resp,pos:Object.keys(st.pos).filter(id=>st.pos[id]>=1),hora:st.hora,mapa:st.mapa,quem:st.quem,av:st.av});
 function psiPreparar(sid){
   const toks=tokensDe(meusDados(),meuLado()), N=Math.max(PSI_MIN,Math.ceil(toks.length/32)*32);
   const ordem=toks.concat(Array(N-toks.length).fill(null));
@@ -784,7 +784,7 @@ const meuEnvio=()=>{ const q={}; Object.entries(st.quem).forEach(([id,v])=>{ if(
   return {n:st.nome||"",cu:(st.custom||[]).map(c=>({id:c.id,t:c.t})),g:st.sug||"",l:st.lim||"",d:st.data||"",q}; };
 /* Graus de vontade só das coincidências (fantasias 1–3, Mapa 1–2) */
 function grausDe(tokens){ const g={}; tokens.forEach(t=>{ const p=t.split("|");
-  if(p[0]==="f"&&st.resp[p[1]]) g["f|"+p[1]]=st.resp[p[1]].n; else if(p[0]==="m"&&st.mapa[p[1]]) g["m|"+p[1]]=st.mapa[p[1]]; }); return g; }
+  if(p[0]==="f"&&st.resp[p[1]]) g["f|"+p[1]]=st.resp[p[1]].n; else if(p[0]==="m"&&st.mapa[p[1]]) g["m|"+p[1]]=st.mapa[p[1]]; else if(p[0]==="p"&&st.pos[p[1]]>=1) g["p|"+p[1]]=st.pos[p[1]]; }); return g; }
 function previaHtml(){
   const e=meuEnvio(), nome=e.n||("Jogador "+meuLado()), dt=e.d?new Date(e.d+"T12:00").toLocaleDateString("pt-BR"):"";
   const linha=(r,v)=>`<div class="match"><div class="eyebrow">${r}</div><div class="t" style="margin-top:6px;white-space:pre-wrap">${v}</div></div>`;
@@ -1085,10 +1085,11 @@ function renderPlano(){
   h+=bloco("1 · Aquecimento","Para começar sem pressa.",aquec,`<button class="btn ghost" onclick="go('jogar');abrirJogo('prel')">Abrir Preliminares</button>`);
   h+=bloco("2 · O que os dois querem",(ms.some(m=>m.ele!=null)?"Só fantasias que os dois marcaram como Quero ou Quero muito.":"Fantasias que os dois marcaram."),princ);
   h+=bloco("3 · Para conversar","Os dois toparam, mas vale combinar antes ou durante.",conversa);
-  const pp=new Set(st.par.po||[]), posJ=POS.filter(p=>st.pos[p.id]&&pp.has(p.id));
-  const nk=p=>"n"+p.l, chipsPos=posJ.length?chipsFiltro("pos",[["todas","Todas",posJ.length],["n1","Leve",posJ.filter(p=>p.l===1).length],["n2","Quente",posJ.filter(p=>p.l===2).length],["n3","Ousada",posJ.filter(p=>p.l===3).length]]):"", posF=posJ.filter(p=>filtroOk("pos",nk(p)));
-  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram no guia.</p>`+(posJ.length?chipsPos+
-    verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div class="t">${p.n}</div><div class="muted" style="margin-top:4px">${p.d}</div><div class="m">${tagFixa("total")}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`):`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
+  const pp=new Set(st.par.po||[]), gP=st.par.graus||{}, posJ=POS.filter(p=>quer(p.id)&&pp.has(p.id)).sort((x,y)=>((gP["p|"+y.id]||0)+st.pos[y.id])-((gP["p|"+x.id]||0)+st.pos[x.id]));
+  const tP=p=>tipoMatch({eu:gP["p|"+p.id]!=null?st.pos[p.id]:null,ele:gP["p|"+p.id]});
+  const nk=p=>"n"+p.l, chipsPos=posJ.length?chipsFiltro("pos",[["todas","Todas",posJ.length],["n1","Fácil",posJ.filter(p=>p.l===1).length],["n2","Intermediário",posJ.filter(p=>p.l===2).length],["n3","Difícil",posJ.filter(p=>p.l===3).length]]):"", posF=posJ.filter(p=>filtroOk("pos",nk(p)));
+  h+=`<h2>Posições para tentar</h2><p style="margin-top:0">As que os dois marcaram como Topo ou Tentar.</p>`+(posJ.length?chipsPos+
+    verTodos("pos"+(FILTRO.pos||""),posF,p=>`<div class="match"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t">${esc(p.nome)}</div><div class="muted" style="margin-top:4px">Nº ${p.n} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div><div class="m">${tP(p)?tagFixa(tP(p)):""}<span class="pill g">${nivelTxt(p.l)}</span></div></div>`)+`<button class="btn ghost" onclick="go('jogar');abrirJogo('pos')">Girar a roleta das posições</button>`:`<p class="muted">Nenhuma em comum ainda. Marquem em Responder › Posições.</p>`);
   const quente = quemConcorda().filter(q=>quemAbs(st.quem[q.id],true)==="ambos");
   if(quente.length){ h+=`<h2>Do Quem do Casal</h2><p style="margin-top:0">Os dois responderam “Os dois”:</p>`; quente.forEach(q=>h+=`<div class="match"><div class="t">${q.t}</div></div>`); }
   const rec=(quem,s,l)=> (s||l) ? `<div class="match"><div class="eyebrow">${esc(quem)}</div>${s?`<div class="t" style="margin-top:6px;white-space:pre-wrap">${esc(s)}</div>`:""}${l?`<div class="muted" style="margin-top:8px;white-space:pre-wrap"><b class="w">Hoje não:</b> ${esc(l)}</div>`:""}</div>` : "";
@@ -1510,49 +1511,118 @@ function massEtapa(op){
 }
 function massFim(){ Nos2.tela.encerrar(); ATIVO=null; Nos2.store.del("pausa"); pararTimer(); calar(); falar("Fim da massagem."); $("jogoArea").innerHTML=`${voltar}<h1 style="margin-top:12px">Fim da massagem</h1><p>Sem pressa para o que vem depois.</p>${ROT?proxEtapa():`<button class="btn primary" onclick="massInit()">Outra massagem</button>`}`; }
 
-/* ---- Guia de posições ---- */
-const nivelTxt=l=>["","Leve","Quente","Ousada"][l];
+/* ---- Posições (catálogo do site: 491) ---- */
+const POS_DECKS=[["cara","Cara a cara"],["cima","Ela por cima"],["tras","Por trás"],["lado","De lado"],["pe","Em pé"],["sent","Sentados"],["oral","Oral"],["acro","Acrobáticas"]];
+const DECK_NOME=Object.fromEntries(POS_DECKS);
+const POS=(window.POS_SITE||[]).map(p=>({id:"s"+p.n,n:p.n,nome:p.nome+(p.dup?` (nº ${p.n})`:""),l:p.l,k:p.k,d:p.d,t:p.t||""}));
+const POS_BY=Object.fromEntries(POS.map(p=>[p.id,p]));
+const nivelTxt=l=>["","Fácil","Intermediário","Difícil"][l];
 const dots=l=>`<span style="letter-spacing:2px;color:var(--gold)">${"●".repeat(l)}<span style="color:#3a3134">${"●".repeat(3-l)}</span></span>`;
-let posFiltro={c:"Todas",l:0};
+const POS_OP={2:"♥ Topo",1:"↑ Tentar",0:"✕ Agora não"};
+/* migração: marcas do guia antigo (27 posições) para os nomes do site; o resto some */
+(function(){ const mapa={p1:"s67",p5:"s113",p9:"s13",p11:"s224",p12:"s140",p16:"s240",p24:"s85",p27:"s241"}; let mud=false;
+  Object.keys(st.pos||{}).forEach(id=>{ if(/^p\d+$/.test(id)){ if(mapa[id]&&st.pos[mapa[id]]==null) st.pos[mapa[id]]=1; delete st.pos[id]; mud=true; } });
+  if(!Array.isArray(st.posPulo)) st.posPulo=[]; if(mud) salvar(); })();
+const marcouPos=id=>st.pos[id]!=null;
+const quer=id=>st.pos[id]>=1;
+
+/* Fotos: ficam só neste aparelho (IndexedDB). Cache em memória para desenhar rápido. */
+const FOTO={};
+const fotoDB=()=>new Promise((ok,err)=>{ const r=indexedDB.open("nos2-fotos",1); r.onupgradeneeded=()=>r.result.createObjectStore("f"); r.onsuccess=()=>ok(r.result); r.onerror=()=>err(r.error); });
+async function fotoTx(modo,fn){ const db=await fotoDB(); return new Promise((ok,err)=>{ const tx=db.transaction("f",modo), s=tx.objectStore("f"); const res=fn(s); tx.oncomplete=()=>ok(res&&res.result); tx.onerror=()=>err(tx.error); }); }
+async function fotosCarregar(){ try{ const db=await fotoDB(); await new Promise(ok=>{ const c=db.transaction("f").objectStore("f").openCursor(); c.onsuccess=()=>{ const x=c.result; if(x){ FOTO[x.key]=x.value; x.continue(); } else ok(); }; c.onerror=()=>ok(); }); }catch(e){} }
+async function fotoSalvar(id,url){ FOTO[id]=url; try{ await fotoTx("readwrite",s=>s.put(url,id)); return true; }catch(e){ delete FOTO[id]; return false; } }
+async function fotoApagar(id){ delete FOTO[id]; try{ await fotoTx("readwrite",s=>s.delete(id)); }catch(e){} }
+const nFotos=()=>Object.keys(FOTO).length;
+function posImg(id,w=110,h){ const u=FOTO[id], hh=h||Math.round(w*0.77);
+  if(u) return `<img src="${u}" alt="" style="width:${w}px;height:${hh}px;object-fit:contain;background:#fff;border-radius:10px;flex:none">`;
+  const p=POS_BY[id]; return `<div style="width:${w}px;height:${hh}px;flex:none;border-radius:10px;background:#0e0b0c;border:1px dashed #3a3134;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--mute);font-size:12px;text-align:center"><div style="font-family:Georgia,serif;font-size:${Math.max(18,w/6)}px;color:var(--gold)">${p?p.n:""}</div>sem foto</div>`; }
+function reduzirImg(file,max=480){ return new Promise((ok,err)=>{ const r=new FileReader(); r.onload=()=>{ const im=new Image(); im.onload=()=>{ const k=Math.min(1,max/Math.max(im.width,im.height)), c=document.createElement("canvas"); c.width=Math.round(im.width*k); c.height=Math.round(im.height*k); const g=c.getContext("2d"); g.fillStyle="#fff"; g.fillRect(0,0,c.width,c.height); g.drawImage(im,0,0,c.width,c.height); ok(c.toDataURL("image/jpeg",0.8)); }; im.onerror=err; im.src=r.result; }; r.onerror=err; r.readAsDataURL(file); }); }
+async function fotoDaGaleria(id,inp){ const f=inp.files&&inp.files[0]; if(!f) return; try{ const u=await reduzirImg(f); toast(await fotoSalvar(id,u)?"Foto salva neste celular":"Sem espaço para a foto"); }catch(e){ toast("Não consegui abrir essa imagem"); } reRenderPos(); }
+async function fotoRemover(id){ await fotoApagar(id); reRenderPos(); }
+async function importarPacote(inp){ const f=inp.files&&inp.files[0]; if(!f) return; const st0=$("pacoteStatus"); if(st0) st0.textContent="Importando…";
+  try{ const j=JSON.parse(await f.text()); if(!j||j.tipo!=="nos2-fotos-posicoes"||!j.fotos) throw 0;
+    const ents=Object.entries(j.fotos).filter(([n,u])=>POS_BY["s"+n]&&/^data:image\//.test(u));
+    const db=await fotoDB(); await new Promise((ok,err)=>{ const tx=db.transaction("f","readwrite"), s=tx.objectStore("f"); ents.forEach(([n,u])=>s.put(u,"s"+n)); tx.oncomplete=ok; tx.onerror=()=>err(tx.error); });
+    ents.forEach(([n,u])=>FOTO["s"+n]=u); toast(`${ents.length} fotos importadas`); }
+  catch(e){ toast("Esse arquivo não é o pacote de fotos"); }
+  inp.value=""; reRenderPos(); }
+const pacoteHtml=()=>{ const inp=`<input type="file" accept=".json,application/json" style="display:none" onchange="importarPacote(this)">`;
+  return nFotos()>0 ? `<div class="muted" style="margin-top:8px;font-size:13px"><span id="pacoteStatus">📷 ${nFotos()} de ${POS.length} com foto</span> · <label style="display:inline;color:var(--gold);cursor:pointer;margin:0;font-size:13px;letter-spacing:0;text-transform:none">importar pacote de novo${inp}</label></div>`
+   : `<div class="note" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap"><span id="pacoteStatus">📷 Nenhuma foto ainda. Importe o pacote de fotos (arquivo .json).</span><label class="chip" style="flex:none;margin:0;cursor:pointer;padding:9px 12px">Importar pacote de fotos${inp}</label></div>`; };
+
+/* Filtro de categoria e nível (vale no deslize, na lista e na roleta) */
+let posFiltro={k:"todas",l:0}, posVista="deslize", posHist=[];
+const posFiltrar=lista=>lista.filter(p=>(posFiltro.k==="todas"||p.k.includes(posFiltro.k))&&(!posFiltro.l||p.l===posFiltro.l));
+function filtrosPosHtml(contaFn){ const base=POS.filter(p=>!posFiltro.l||p.l===posFiltro.l);
+  const ks=[["todas","Todas"],...POS_DECKS].map(([k,t])=>{ const n=contaFn(base.filter(p=>k==="todas"||p.k.includes(k))); return `<button class="chip ${posFiltro.k===k?"on":""}" style="flex:none;min-width:0;padding:8px 12px" onclick="posFiltro.k='${k}';reRenderPos()">${t} (${n})</button>`; }).join("");
+  const ls=[0,1,2,3].map(l=>`<button class="chip ${posFiltro.l===l?"on":""}" onclick="posFiltro.l=${l};reRenderPos()">${l?nivelTxt(l):"Todos"}</button>`).join("");
+  return `<div class="row" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px">${ks}</div><div class="row">${ls}</div>`; }
+function posFila(){ const pend=posFiltrar(POS).filter(p=>!marcouPos(p.id)); const pulo=st.posPulo||[];
+  return pend.filter(p=>!pulo.includes(p.id)).concat(pulo.map(id=>pend.find(p=>p.id===id)).filter(Boolean)); }
 function renderPosLista(L){
-  const cats=POS_CATS.map(c=>`<button class="chip ${posFiltro.c===c?"on":""}" style="flex:none;min-width:0;padding:8px 12px" onclick="posFiltro.c='${c}';reRenderPos()">${c}</button>`).join("");
-  const nivs=[0,1,2,3].map(l=>`<button class="chip ${posFiltro.l===l?"on":""}" onclick="posFiltro.l=${l};reRenderPos()">${l?nivelTxt(l):"Todos"}</button>`).join("");
-  const lista=POS.filter(p=>(posFiltro.c==="Todas"||p.c===posFiltro.c)&&(!posFiltro.l||p.l===posFiltro.l));
-  L.innerHTML=`<div id="posBox"><div class="row" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px">${cats}</div><div class="row">${nivs}</div>
-   <div class="muted" style="margin-top:10px">${lista.length} posições</div>${legendaEsq}`+
-   lista.map(p=>`<div class="item ${st.pos[p.id]?"done":""}"><div style="display:flex;gap:12px;align-items:center">${esquema(p.id,96)}<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div class="t" style="font-family:Georgia,serif;font-size:19px">${p.n}</div>${dots(p.l)}</div>
-     <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">${p.c} · ${nivelTxt(p.l)} · ${ONDE_NOME[ONDE[p.id]]}</div></div></div>
-     <div style="margin-top:10px;padding:8px 10px;border-radius:8px;background:#0e0b0c;font-size:13px;line-height:1.45;color:var(--txt)">${ESQ_TXT[p.id]}</div>
-     <div style="margin-top:8px;line-height:1.45">${p.d}</div><div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${p.t}</div>
-     <div class="row"><button class="chip ${st.pos[p.id]?"on":""}" onclick="togglePos('${p.id}')">${st.pos[p.id]?"✓ Quero tentar":"Quero tentar"}</button>
-       <label class="chip" style="margin:0;display:flex;align-items:center;justify-content:center;cursor:pointer">${imgPropria(p.id)?"Trocar imagem":"Adicionar imagem"}<input type="file" accept="image/*" style="display:none" onchange="salvarImg('${p.id}',this)"></label>
-       ${imgPropria(p.id)?`<button class="chip pass" style="flex:0 0 auto;padding:9px 12px" onclick="removerImg('${p.id}')">Remover</button>`:""}</div></div>`).join("")+`</div>`;
+  const abas=`<div class="row" style="margin-top:0"><button class="chip ${posVista==="deslize"?"on":""}" onclick="posVista='deslize';reRenderPos()">Deslizar</button><button class="chip ${posVista==="lista"?"on":""}" onclick="posVista='lista';reRenderPos()">Minhas escolhas</button></div>`;
+  if(posVista==="lista"){ L.innerHTML=`<div id="posBox">${abas}${pacoteHtml()}${filtrosPosHtml(l=>l.filter(p=>marcouPos(p.id)).length)}${posListaHtml()}</div>`; return; }
+  const fila=posFila(), p=fila[0], tot=posFiltrar(POS).length, feitas=tot-fila.length;
+  let h=`<div id="posBox">${abas}${pacoteHtml()}${filtrosPosHtml(l=>l.filter(p=>!marcouPos(p.id)).length)}<div class="muted" style="margin-top:10px">${feitas} de ${tot} respondidas${posFiltro.k!=="todas"?" em "+DECK_NOME[posFiltro.k]:""}</div>`;
+  if(!p) h+=`<div class="match" style="text-align:center"><div class="t">Acabou este baralho 🎉</div><p class="muted">Escolha outra categoria ou veja suas escolhas.</p><button class="btn ghost" onclick="posVista='lista';reRenderPos()">Ver minhas escolhas</button></div>`;
+  else h+=`<div id="posCard" class="match" style="touch-action:none;user-select:none;-webkit-user-select:none;position:relative;transition:transform .2s;padding:12px">
+     <div id="posSelo" style="position:absolute;top:14px;left:14px;z-index:2;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:8px;opacity:0"></div>
+     <div style="display:flex;justify-content:center">${posImg(p.id,300,232)}</div>
+     <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-top:10px"><div class="t" style="font-family:Georgia,serif;font-size:22px">${esc(p.nome)}</div>${dots(p.l)}</div>
+     <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div>
+     <div style="margin-top:10px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${esc(p.t)}</div>`:""}
+     ${FOTO[p.id]?"":`<label class="chip" style="display:block;text-align:center;margin-top:10px;cursor:pointer">Adicionar foto<input type="file" accept="image/*" style="display:none" onchange="fotoDaGaleria('${p.id}',this)"></label>`}</div>
+   <div class="row" style="margin-top:12px"><button class="chip pass" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',0)">✕ Agora não</button><button class="chip" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',1)">↑ Tentar</button><button class="chip on" style="font-size:15px;padding:12px 4px" onclick="posMarcar('${p.id}',2)">♥ Topo</button></div>
+   <div class="row"><button class="chip" onclick="posPular('${p.id}')">Pular por enquanto</button><button class="chip" ${posHist.length?"":"disabled style='opacity:.4'"} onclick="posDesfazer()">Desfazer</button></div>
+   <p class="muted" style="font-size:13px">Deslize: <b class="w">direita</b> = Topo · <b class="w">para cima</b> = Tentar · <b class="w">esquerda</b> = Agora não. “Agora não” fica só com você: seu par nunca vê.</p>`;
+  L.innerHTML=h+`</div>`; if(p) posGestos(p.id);
 }
-function salvarImg(id,inp){
-  const f=inp.files&&inp.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=()=>{ const im=new Image(); im.onload=()=>{
-      const max=360, k=Math.min(1,max/Math.max(im.width,im.height)), c=document.createElement("canvas");
-      c.width=Math.round(im.width*k); c.height=Math.round(im.height*k); c.getContext("2d").drawImage(im,0,0,c.width,c.height);
-      try{ localStorage.setItem("nos2.img."+id, c.toDataURL("image/png")); toast("Imagem salva neste celular"); }
-      catch(e){ toast("Sem espaço para mais imagens"); }
-      const y=window.scrollY; reRenderPos(); window.scrollTo(0,y);
-    }; im.src=r.result; };
-  r.readAsDataURL(f);
-}
-function removerImg(id){ try{ localStorage.removeItem("nos2.img."+id); }catch(e){} const y=window.scrollY; reRenderPos(); window.scrollTo(0,y); }
-function reRenderPos(){ const box=$("posBox"); if(box) renderPosLista(box.parentElement); }
-function togglePos(id){ if(st.pos[id]) delete st.pos[id]; else st.pos[id]=1; editou(); salvar(); const y=window.scrollY; reRenderPos(); window.scrollTo(0,y); if(mResp==="pos") progresso(); }
-function posInit(){
-  const pp=new Set((st.par&&st.par.po)||[]), dosDois=POS.filter(p=>st.pos[p.id]&&pp.has(p.id));
-  const pool = dosDois.length?dosDois : Object.keys(st.pos).length?POS.filter(p=>st.pos[p.id]) : POS;
-  const origem = dosDois.length?"entre as que os dois querem tentar":Object.keys(st.pos).length?"entre as que você marcou":"entre todas";
-  $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Guia</div><h1>Posições</h1>${comoHtml("pos",false)}
-   <div class="game"><div class="gcard" id="posSorteio"><div class="k">Sortear ${origem}</div><div class="v">?</div></div>
-   <button class="btn primary" onclick="sortearPos()">Sortear posição</button></div><div id="posArea"></div>`;
-  window._posPool=pool; renderPosLista($("posArea"));
-}
-function sortearPos(){ const ok=new Set(window._posPool.map(x=>x.id)); const id=Nos2.deck.draw("nd.pos",POS.map(x=>x.id),i=>ok.has(i)); const p=POS.find(x=>x.id===id); $("posSorteio").innerHTML=`<div style="display:flex;justify-content:center;margin-bottom:6px">${esquema(p.id,220)}</div>${legendaEsq}<div class="k">${p.c} · ${nivelTxt(p.l)} · ${ONDE_NOME[ONDE[p.id]]}</div><div class="v">${p.n}</div><div style="margin-top:8px;font-size:14px;line-height:1.45">${ESQ_TXT[p.id]}</div><div class="muted" style="margin-top:6px">${p.d}</div>`; }
+function posListaHtml(){ const val=p=>st.pos[p.id]==null?"sem":String(st.pos[p.id]); const base=posFiltrar(POS);
+  const ops=[["todas","Todas",base.length],["2","♥ Topo",base.filter(p=>st.pos[p.id]===2).length],["1","↑ Tentar",base.filter(p=>st.pos[p.id]===1).length],["0","✕ Agora não",base.filter(p=>st.pos[p.id]===0).length],["sem","Sem resposta",base.filter(p=>st.pos[p.id]==null).length]];
+  const chips=chipsFiltro("respPos",ops); const lista=base.filter(p=>filtroOk("respPos",val(p)));
+  return chips+`<div class="muted" style="margin-top:8px">${lista.length} posições</div>`+verPos(lista); }
+let posLimite=40;
+function verPos(lista){ return lista.slice(0,posLimite).map(p=>`<div class="item"><div style="display:flex;gap:12px;align-items:center">${posImg(p.id,96)}<div style="flex:1;min-width:0"><div class="t" style="font-family:Georgia,serif;font-size:18px">${esc(p.nome)}</div>
+   <div class="d" style="color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div></div></div>
+   <details style="margin-top:8px"><summary class="muted">Como é</summary><div style="margin-top:6px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="d" style="margin-top:6px"><b class="w">Dica:</b> ${esc(p.t)}</div>`:""}</details>
+   <div class="row">${[2,1,0].map(v=>`<button class="chip ${st.pos[p.id]===v?"on":""} ${v===0?"pass":""}" style="padding:9px 4px" onclick="posMudar('${p.id}',${v})">${POS_OP[v]}</button>`).join("")}</div>
+   <div class="row"><label class="chip" style="margin:0;display:flex;align-items:center;justify-content:center;cursor:pointer">${FOTO[p.id]?"Trocar foto":"Adicionar foto"}<input type="file" accept="image/*" style="display:none" onchange="fotoDaGaleria('${p.id}',this)"></label>${FOTO[p.id]?`<button class="chip pass" style="flex:0 0 auto;padding:9px 12px" onclick="fotoRemover('${p.id}')">Remover foto</button>`:""}</div></div>`).join("")+
+  (lista.length>posLimite?`<button class="btn ghost" onclick="posLimite+=40;const y=window.scrollY;reRenderPos();window.scrollTo(0,y)">Ver mais (${lista.length-posLimite})</button>`:""); }
+function posMarcar(id,v){ posHist.push({id,ant:st.pos[id],pulo:[...(st.posPulo||[])]}); if(posHist.length>30) posHist.shift();
+  st.pos[id]=v; st.posPulo=(st.posPulo||[]).filter(x=>x!==id); editou(); salvar(); reRenderPos(); if(mResp==="pos") progresso(); }
+function posMudar(id,v){ if(st.pos[id]===v) delete st.pos[id]; else st.pos[id]=v; editou(); salvar(); const y=window.scrollY; reRenderPos(); window.scrollTo(0,y); if(mResp==="pos") progresso(); }
+function posPular(id){ posHist.push({id,ant:st.pos[id],pulo:[...(st.posPulo||[])]}); st.posPulo=(st.posPulo||[]).filter(x=>x!==id).concat(id); salvar(); reRenderPos(); }
+function posDesfazer(){ const h=posHist.pop(); if(!h) return; if(h.ant==null) delete st.pos[h.id]; else st.pos[h.id]=h.ant; st.posPulo=h.pulo; editou(); salvar(); reRenderPos(); if(mResp==="pos") progresso(); }
+function posGestos(id){ const c=$("posCard"), selo=$("posSelo"); if(!c) return; let x0=null,y0=null,dx=0,dy=0;
+  const sel=(t,cor,o)=>{ selo.textContent=t; selo.style.background=cor; selo.style.opacity=o; };
+  c.addEventListener("pointerdown",e=>{ if(e.target.closest("label,input,button")) return; x0=e.clientX; y0=e.clientY; c.style.transition="none"; c.setPointerCapture(e.pointerId); });
+  c.addEventListener("pointermove",e=>{ if(x0==null) return; dx=e.clientX-x0; dy=e.clientY-y0; c.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/20}deg)`;
+    const o=Math.min(1,Math.max(Math.abs(dx),-dy)/90);
+    if(-dy>Math.abs(dx)) sel("↑ TENTAR","#b8955a",o); else if(dx>0) sel("♥ TOPO","#9e2a3c",o); else sel("✕ AGORA NÃO","#444",o); });
+  const fim=()=>{ if(x0==null) return; x0=null; c.style.transition="transform .2s";
+    if(-dy>90&&-dy>Math.abs(dx)) return posMarcar(id,1); if(dx>90) return posMarcar(id,2); if(dx<-90) return posMarcar(id,0);
+    c.style.transform=""; selo.style.opacity=0; dx=dy=0; };
+  c.addEventListener("pointerup",fim); c.addEventListener("pointercancel",fim); }
+function reRenderPos(){ const box=$("posBox"); if(box) renderPosLista(box.parentElement); else if($("rolArea")) renderRoletaPos(); }
+
+/* Jogar › Posições: escolhe o nível e gira a roleta */
+let rolNivel=0, rolSorte=null;
+function posPool(){ const pp=new Set((st.par&&st.par.po)||[]), nv=p=>!rolNivel||p.l===rolNivel;
+  const dosDois=POS.filter(p=>nv(p)&&quer(p.id)&&pp.has(p.id)); if(dosDois.length) return [dosDois,"entre as que vocês dois marcaram"];
+  const minhas=POS.filter(p=>nv(p)&&quer(p.id)); if(minhas.length) return [minhas, st.par?"entre as suas (ainda não há em comum neste nível)":"entre as que você marcou (troquem os códigos para ver as em comum)"];
+  return [POS.filter(p=>nv(p)&&st.pos[p.id]!==0),"entre todas deste nível"]; }
+function posInit(){ rolSorte=null; $("jogoArea").innerHTML=`${voltar}<div class="eyebrow" style="margin-top:8px">Na hora</div><h1>Roleta das posições</h1>${comoHtml("pos",false)}<div id="rolArea"></div>`; renderRoletaPos(); }
+function renderRoletaPos(){ const [pool,origem]=posPool();
+  const ls=[0,1,2,3].map(l=>`<button class="chip ${rolNivel===l?"on":""}" onclick="rolNivel=${l};rolSorte=null;renderRoletaPos()">${l?nivelTxt(l):"Todos"}</button>`).join("");
+  const p=rolSorte&&POS_BY[rolSorte];
+  $("rolArea").innerHTML=`<p style="margin-bottom:4px">Escolha o nível:</p><div class="row" style="margin-top:0">${ls}</div>
+   <div class="game"><div class="gcard" id="rolCard">${p?`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(p.id,280,216)}</div><div class="k">Nº ${p.n} · ${nivelTxt(p.l)} · ${p.k.map(k=>DECK_NOME[k]).join(" · ")}</div><div class="v">${esc(p.nome)}</div><div style="margin-top:8px;font-size:14px;line-height:1.45">${esc(p.d)}</div>${p.t?`<div class="muted" style="margin-top:6px">${esc(p.t)}</div>`:""}`:`<div class="k">Sorteio ${origem}</div><div class="v">?</div><div class="muted">${pool.length} posições na roleta</div>`}</div>
+   <button class="btn primary" ${pool.length?"":"disabled"} onclick="girarRoleta()">${p?"Girar de novo":"Girar a roleta"}</button></div>`; }
+function girarRoleta(){ const [pool]=posPool(); if(!pool.length) return; const ok=new Set(pool.map(p=>p.id));
+  const fim=Nos2.deck.draw("nd.pos2",POS.map(p=>p.id),i=>ok.has(i)); let t=0; const c=$("rolCard");
+  const tick=()=>{ const q=pool[Nos2.randInt(pool.length)]; c.innerHTML=`<div style="display:flex;justify-content:center;margin-bottom:8px">${posImg(q.id,280,216)}</div><div class="v">${esc(q.nome)}</div>`;
+    t++; if(t<14) setTimeout(tick,60+t*14); else { rolSorte=fim; renderRoletaPos(); } }; tick(); }
 
 /* ---- Baralhos ---- */
 let K=null;
@@ -1828,7 +1898,7 @@ const COMO={
  pos:{svg:`${[0,1,2].map(i=>`<rect x="24" y="${18+i*44}" width="200" height="36" rx="8" fill="#1a1416" stroke="#3a2a2e"/><rect x="36" y="${28+i*44}" width="${[90,120,70][i]}" height="7" rx="3" fill="${C_T}" opacity=".8"/><rect x="36" y="${40+i*44}" width="${[140,100,120][i]}" height="5" rx="2" fill="${C_M}" opacity=".6"/>${[0,1,2].map(k=>`<circle cx="${190+k*9}" cy="${32+i*44}" r="3" fill="${k<=i?C_G:"#3a3134"}"/>`).join("")}`).join("")}
    <rect x="240" y="44" width="62" height="28" rx="14" fill="#2a2015" stroke="${C_G}"/><text x="271" y="62" text-anchor="middle" font-size="10" fill="${C_T}" ${fnt}>✓ Quero</text>
    <circle cx="271" cy="112" r="20" fill="${C_W}"/><path d="M262,112 h18 M275,106 l6,6 l-6,6" stroke="#fff" stroke-width="2.5" fill="none"/>`,
-  ex:`<b class="w">Como usar:</b> cada um marca “Quero tentar” no guia (em Responder › Posições). Depois da troca de códigos, o Plano da noite mostra só as que <b class="w">os dois</b> marcaram. Aqui dá para filtrar por tipo e nível e <b class="w">sortear</b> uma posição, de preferência entre as que os dois querem.`},
+  ex:`<b class="w">Como usar:</b> antes do encontro, cada um desliza as cartas em Responder › Posições (♥ Topo, ↑ Tentar ou ✕ Agora não). Depois da troca de códigos, a roleta sorteia entre as que <b class="w">os dois</b> marcaram. Na hora: escolha o nível e toque em <b class="w">Girar a roleta</b>.`},
  roleta:{svg:`<g transform="translate(160,80)">${Array.from({length:8},(_,i)=>{const a1=i*Math.PI/4,a2=(i+1)*Math.PI/4,r=62;return `<path d="M0,0 L${(r*Math.cos(a1)).toFixed(1)},${(r*Math.sin(a1)).toFixed(1)} A${r},${r} 0 0 1 ${(r*Math.cos(a2)).toFixed(1)},${(r*Math.sin(a2)).toFixed(1)}Z" fill="${i%2?C_W:C_G}" opacity="${i%2?.9:.85}"/>`}).join("")}<circle r="14" fill="#0e0b0c"/></g>
    <path d="M160,8 l-9,14 h18z" fill="${C_T}"/>`,
   ex:`<b class="w">Exemplo:</b> toque em <b class="w">Sortear a noite</b> e sai, por exemplo, “Noite de motel ou hotel”. Só aparecem fantasias que os dois marcaram na Interseção, depois da troca de códigos.`},
@@ -1839,6 +1909,7 @@ function renderThumbs(){ document.querySelectorAll("[data-thumb]").forEach(b=>{ 
 /* ======================= INIT ======================= */
 $("data").value=st.data||"";
 renderResp();
+fotosCarregar().then(()=>{ reRenderPos(); });
 renderPassos();
 renderThumbs();
 function porHash(){ const h=location.hash.slice(1);
